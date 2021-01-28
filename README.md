@@ -9,12 +9,12 @@ The app can be installed via Pip, Pipenv, or Docker depending upon your setup.
 ### Pip
 
 ```
-$ python3 -m venv djangox
-$ source djangox/bin/activate
-(djangox) $ pip install -r requirements.txt
-(djangox) $ python manage.py migrate
-(djangox) $ python manage.py createsuperuser
-(djangox) $ python manage.py runserver
+$ python3 -m venv csrs
+$ source csrs/bin/activate
+$ pip install -r requirements.txt
+$ python manage.py migrate
+$ python manage.py createsuperuser
+$ python manage.py runserver
 # Load the site at http://127.0.0.1:8000
 ```
 
@@ -23,9 +23,9 @@ $ source djangox/bin/activate
 ```
 $ pipenv install
 $ pipenv shell
-(djangox) $ python manage.py migrate
-(djangox) $ python manage.py createsuperuser
-(djangox) $ python manage.py runserver
+$ python manage.py migrate
+$ python manage.py createsuperuser
+$ python manage.py runserver
 # Load the site at http://127.0.0.1:8000
 ```
 
