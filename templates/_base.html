@@ -19,34 +19,7 @@
 
 <body>
 <main role="main">
-    <div>
-        <h5>
-            <a href="{% url 'home' %}">CSRS</a>
-        </h5>
-        <a href="{% url 'about' %}">About</a>
-        <nav>
-            {% if user.is_authenticated %}
-            <ul>
-                <li>
-                    <a href="#" id="userMenu" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        {{ user.email }}
-                    </a>
-                    <div aria-labelledby="userMenu">
-                        <a href="{% url 'account_change_password' %}">Change password</a>
-                        <div ></div>
-                        <a href="{% url 'account_logout' %}">Log out</a>
-                    </div>
-                </li>
-            </ul>
-            {% else %}
-            <form>
-                <a href="{% url 'account_login' %}">Log in</a>
-                <a href="{% url 'account_signup' %}">Sign up</a>
-            </form>
-            {% endif %}
-        </nav>
-    </div>
+    {% include "./components/navbar.html" %}
 </main>
 
 <div>
@@ -55,12 +28,7 @@
     {% endblock content %}
 </div>
 
-<footer>
-    <div>
-        <span>Footer...</span>
-    </div>
-</footer>
-
+{% include "./components/footer.html" %}
 
 {% block javascript %}
 <!-- 3rd party JavaScript -->
