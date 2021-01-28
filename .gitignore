@@ -133,3 +133,5 @@ dmypy.json
 
 # Node Modules
 /node_modules/
+
+/theme/static/css/styles.css
