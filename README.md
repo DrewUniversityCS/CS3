@@ -53,13 +53,19 @@ INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
 
 ```
 # Run Migrations
-(djangox) $ python manage.py migrate
+$ python manage.py migrate
 
 # Create a Superuser
-(djangox) $ python manage.py createsuperuser
+$ python manage.py createsuperuser
+
+# Run a command to install all necessary dependencies for tailwind css
+$ python manage.py tailwind install
+
+# Start tailwind in dev mode
+$ python manage.py tailwind start
 
 # Confirm everything is working:
-(djangox) $ python manage.py runserver
+$ python manage.py runserver
 
 # Load the site at http://127.0.0.1:8000
 ```
