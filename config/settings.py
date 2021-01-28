@@ -150,6 +150,13 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # https://docs.djangoproject.com/en/dev/ref/settings/#internal-ips
 INTERNAL_IPS = ['127.0.0.1']
 
+# DOCKER IP CONFIG
+# -------------------------------------------------------------------------------
+# import socket
+# hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+# INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
+
+
 # CUSTOM USER MODEL CONFIGS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/topics/auth/customizing/#substituting-a-custom-user-model
