@@ -1,5 +1,5 @@
 # CourseManager
-Capstone project by Mahmoud, Aaron, Luke and David
+Capstone project by Aaron, David, Luke and Mahmoud
 ----
 
 ## 📖 Installation
