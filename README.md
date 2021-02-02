@@ -55,7 +55,7 @@ INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
 # Run Migrations
 $ python manage.py migrate
 
-# Create a Superuser
+# Create a Superuser (Not necessary if not testing admin functionality)
 $ python manage.py createsuperuser
 
 # Run a command to install all necessary dependencies for tailwind css
