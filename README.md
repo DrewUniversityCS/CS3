@@ -1,4 +1,6 @@
-# CourseManager
+<img src="https://github.com/DrewUniversityCS/CS3/blob/main/static/images/cs3_logo_1.0.svg" width="128" height="128">  
+
+# CS3
 Capstone project by Aaron, David, Luke and Mahmoud
 ----
 
