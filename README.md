@@ -1,6 +1,5 @@
-<img src="https://github.com/DrewUniversityCS/CS3/blob/main/static/images/cs3_logo_1.0.svg" width="128" height="128">  
+<img src="https://github.com/DrewUniversityCS/CS3/blob/main/static/images/cs3_text_logo.svg" width="200" height="150">  
 
-# CS3
 Capstone project by Aaron, David, Luke and Mahmoud
 ----
 
