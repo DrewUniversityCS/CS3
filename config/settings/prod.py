@@ -1,6 +1,8 @@
 from .base import *
-
-# DOCKER IP CONFIG
 import socket
-hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
-INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
+import os
+
+# https://docs.djangoproject.com/en/dev/ref/settings/#debug
+DEBUG = False
+# https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-SECRET_KEY
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
