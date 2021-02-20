@@ -7,78 +7,89 @@
     <div class=" text-center font-sans">
         {% if user.is_authenticated %}
             <div class="flex gap-6 justify-center my-10" style="flex-flow: wrap;">
-		<div class="bg-white rounded shadow-lg w-full md:w-1/4 ">
-			<img src="https://www.independentmediators.co.uk/wp-content/uploads/2016/02/placeholder-image.jpg" alt="card_image"/>
-			<div class="p-4">
-				<p class="text-xl font-bold pb-3">Check Schedule</p>
-				<p style="min-height: 90px;">Use this interface to upload an appropriately formatted schedule file and analyze it for conflicts and constraint satisfaction</p>
-				<div class="flex my-4 gap-6" style="flex-flow: wrap;">
-					<button class="bg-gray-200 rounded px-3 py-1 font-medium" >
-						<i class="fa fa-search" aria-hidden="true"></i>
-						Choose file
-					</button>
-					<button class="bg-gray-200 rounded px-3 py-1 font-medium" >
-						<i class="fa fa-upload" aria-hidden="true"></i>
-						upload file
-					</button>
-				</div>
-			</div>
-		</div>
+                <div class="bg-white rounded shadow-lg w-full md:w-1/4 ">
+                    <div class="bg-red-600 flex text-3xl text-center" style="height: 250px;">
+                        <i class="-rotate-90 fa fa-puzzle-piece mx-auto my-auto text-white transform" aria-hidden="true" style=" font-size: 150px;"></i>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-xl font-bold pb-3">Check Schedule</p>
+                        <p style="min-height: 90px;">Use this interface to upload an appropriately formatted schedule
+                            file and analyze it for conflicts and constraint satisfaction</p>
+                        <div class="flex my-4 gap-6" style="flex-flow: wrap;">
+                            <button class="bg-gray-200 rounded px-3 py-1 font-medium">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                                Choose file
+                            </button>
+                            <button class="bg-gray-200 rounded px-3 py-1 font-medium">
+                                <i class="fa fa-upload" aria-hidden="true"></i>
+                                upload file
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-		<div class="bg-white rounded shadow-lg w-full md:w-1/4 ">
-			<img src="https://www.independentmediators.co.uk/wp-content/uploads/2016/02/placeholder-image.jpg" alt="card_image"/>
-			<div class="p-4">
-				<p class="text-xl font-bold pb-3">Input Data</p>
-				<p style="min-height: 90px;">Use this menu to input course and constraint data into the database, as well as send out interest forms to your students.</p>
-				<div class="flex my-4 gap-6">
-					<button class="bg-gray-200 font-medium px-3 py-1 rounded w-60" >
-						<i class="fa fa-database" aria-hidden="true"></i>
-						Open Input Interface
-					</button>
-				</div>
-			</div>
-		</div>
+                <div class="bg-white rounded shadow-lg w-full md:w-1/4 ">
+                    <div class="flex text-3xl text-center" style="height: 250px; background: limegreen">
+                        <i class="-rotate-90 fa fa-sliders mx-auto my-auto text-white transform" aria-hidden="true" style=" font-size: 150px;"></i>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-xl font-bold pb-3">Input Data</p>
+                        <p style="min-height: 90px;">Use this menu to input course and constraint data into the
+                            database, as well as send out interest forms to your students.</p>
+                        <div class="flex my-4 gap-6">
+                            <button class="bg-gray-200 font-medium px-3 py-1 rounded w-60">
+                                <i class="fa fa-database" aria-hidden="true"></i>
+                                Open Input Interface
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-		<div class="bg-white rounded shadow-lg w-full md:w-1/4 ">
-			<img src="https://www.independentmediators.co.uk/wp-content/uploads/2016/02/placeholder-image.jpg" alt="card_image"/>
-			<div class="p-4">
-				<p class="text-xl font-bold pb-3">Generate Schedule</p>
-				<p style="min-height: 90px;">Use this interface to generate and edit course schedules</p>
-				<div class="flex my-4 gap-6">
-					<button class="bg-gray-200 font-medium px-3 py-1 rounded w-60" >
-						<i class="fa fa-puzzle-piece" aria-hidden="true"></i>
-						Begin Scheduling Process
-					</button>
-				</div>
-			</div>
-		</div>
-	</div>
+                <div class="bg-white rounded shadow-lg w-full md:w-1/4 ">
+                    <div class="flex justify-center text-3xl text-center" style="height: 250px; background: blue">
+                        <img src="{% static 'images/add_image_right.png' %}" class="m-auto" style="height: 150px; width: 150px;"  >
+                    </div>
+                    <div class="p-4">
+                        <p class="text-xl font-bold pb-3">Generate Schedule</p>
+                        <p style="min-height: 90px;">Use this interface to generate and edit course schedules</p>
+                        <div class="flex my-4 gap-6">
+                            <button class="bg-gray-200 font-medium px-3 py-1 rounded w-60">
+                                <i class="fa fa-puzzle-piece" aria-hidden="true"></i>
+                                Begin Scheduling Process
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="w-full mb-10">
-		<div class="md:w-4/5 md:px-3 justify-center mx-auto shadow-lg rounded bg-white">
-			<div class="flex flex-col md:flex-row  justify-between gap-5 p-8">
-				<div class="md:w-1/2 bg-white ">
-					<div>
-						<p class="text-xl font-bold bg-white py-4 pb-7">
-							Student Data Collection Progress
-						</p>
-						<div class="flex gap-3 border-t-4 p-6 py-8 shadow-md bg-skyBlue_color" style="border-top-color:#00c4a8; height: fit-content;">
-							<img src="http://cdn.onlinewebfonts.com/svg/img_530054.png" class="h-6 w-6 my-auto" />
-							<p class="my-auto">
+                <div class="md:w-4/5 md:px-3 justify-center mx-auto shadow-lg rounded bg-white">
+                    <div class="flex flex-col md:flex-row  justify-between gap-5 p-8">
+                        <div class="md:w-1/2 bg-white ">
+                            <div>
+                                <p class="text-xl font-bold bg-white py-4 pb-7">
+                                    Student Data Collection Progress
+                                </p>
+                                <div class="flex gap-3 border-t-4 p-6 py-8 shadow-md bg-skyBlue_color"
+                                     style="border-top-color:#00c4a8; height: fit-content;">
+                                    <img src="http://cdn.onlinewebfonts.com/svg/img_530054.png"
+                                         class="h-6 w-6 my-auto"/>
+                                    <p class="my-auto">
 							<span class="teal_color">
 								You have not sent out the interest form yet.
 							</span>
-							<br/>
-							You can do so via the "Input Data" modal
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="md:w-1/2">
-					<img src="https://www.independentmediators.co.uk/wp-content/uploads/2016/02/placeholder-image.jpg" alt="card_image" class="w-full h-48"/>
-				</div>
-			</div>
-		</div>
-	</div>
+                                        <br/>
+                                        You can do so via the "Input Data" modal
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2">
+                            <img src="https://www.independentmediators.co.uk/wp-content/uploads/2016/02/placeholder-image.jpg"
+                                 alt="card_image" class="w-full h-48"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
         {% else %}
             <div class="pt-48">
                 <p class="text-4xl leading-7 font-bold text-purple-600">Hello world!</p>
