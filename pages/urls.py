@@ -8,6 +8,7 @@ urlpatterns = [
     path('invite/', InviteView.as_view(), name='invite'),
     path('invite-success/', TemplateView.as_view(template_name='account/newAdminRegistrationSuccess.html'), name='invite-success'),
     path('about/', AboutPageView.as_view(), name='about'),
+
 ]
 
 app_name = 'pages'

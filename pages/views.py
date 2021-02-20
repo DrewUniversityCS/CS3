@@ -13,9 +13,17 @@ class AboutPageView(TemplateView):
     template_name = 'pages/about.html'
 
 
+class GenerateScheduleView(LoginRequiredMixin, TemplateView):
+    template_name = 'pages/generate_schedule.html'
+
+
+class CheckScheduleView(LoginRequiredMixin, TemplateView):
+    template_name = 'pages/check_schedule.html'
+
+
 class InviteView(LoginRequiredMixin, FormView):
     form_class = SignupForm
-    template_name = "account/newAdminRegistrationForm.html"
+    template_name = "account/invite.html"
     success_url = reverse_lazy('pages:invite-success')
 
     def form_valid(self, form):
