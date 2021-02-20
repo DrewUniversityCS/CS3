@@ -1,12 +1,14 @@
 from django.urls import path
 from django.views.generic import TemplateView
+
 from pages import views as page_views
 from .views import HomePageView, AboutPageView, InviteView
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='home'),
     path('invite/', InviteView.as_view(), name='invite'),
-    path('invite-success/', TemplateView.as_view(template_name='account/newAdminRegistrationSuccess.html'), name='invite-success'),
+    path('invite-success/', TemplateView.as_view(template_name='account/newAdminRegistrationSuccess.html'),
+         name='invite-success'),
     path('about/', AboutPageView.as_view(), name='about'),
     path('generate-schedule', page_views.GenerateScheduleView.as_view(), name='generate-schedule'),
     path('check-schedule', page_views.CheckScheduleView.as_view(), name='check-schedule'),

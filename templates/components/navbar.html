@@ -1,18 +1,22 @@
 {% load static %}
 <nav class="bg-teal_color flex flex-col md:flex-row py-3 md:py-1">
-    <img src="{% static 'images/cs3_logo.svg' %}"
-         class="h-16 mx-4 w-16">
-    <ul class="flex flex-col md:flex-row justify-between mx-2 my-auto text-white w-full">
+    <a href="/" class="mr-8">
+        <img src="{% static 'images/cs3_text_logo.png' %}"
+             class="ml-8 w-32">
+    </a>
+
+    <ul class="flex flex-col md:flex-row justify-between mx-2 my-auto text-white w-full text-xl leading-7 font-bold">
         <li class="my-auto">
             <ul class="flex gap-3 my-auto text-white">
-                <li class="text-2xl">CS3</li>
-                <li class="my-auto opacity-80"><a href="/"> Home</a></li>
-                <li class="my-auto opacity-80"><a href="/about"> About</a></li>
-                <li class="my-auto opacity-80">Docs</li>
+                <li class="my-auto opacity-80 hover:text-blue-600"><a href="/"> Home</a></li>
+                <li class="my-auto opacity-80 hover:text-blue-600"><a href="/about"> About</a></li>
+                <li class="my-auto opacity-80 hover:text-blue-600"><a href="/docs"> Docs</a></li>
                 {% if user.is_authenticated %}
-                    <li class="my-auto opacity-80"><a href="{% url 'pages:generate-schedule' %}">Generate Schedule</a>
-                    <li class="my-auto opacity-80"><a href="{% url 'pages:check-schedule' %}">Check Schedule</a>
-                    <li class="my-auto opacity-80"><a href="{% url 'pages:invite' %}">Invite</a>
+                    <li class="my-auto opacity-80 hover:text-blue-600"><a href="{% url 'pages:generate-schedule' %}">Generate
+                        Schedule</a>
+                    <li class="my-auto opacity-80 hover:text-blue-600"><a href="{% url 'pages:check-schedule' %}">Check
+                        Schedule</a>
+                    <li class="my-auto opacity-80 hover:text-blue-600"><a href="{% url 'pages:invite' %}">Invite</a>
                 {% endif %}
             </ul>
         </li>
@@ -20,10 +24,12 @@
             <ul class="flex gap-3 mx-4 my-auto text-white">
                 {% if user.is_authenticated %}
                     <li class="my-auto opacity-80">{{ user.email }}</li>
-                    <li class="my-auto opacity-80"><a href="{% url 'account_change_password' %}">Change password</a>
+                    <li class="my-auto opacity-80 hover:text-blue-700"><a href="{% url 'account_change_password' %}">Change
+                        password</a>
                     </li>
-                    <li class="my-auto opacity-80"><a href="{% url 'account_logout' %}">Log out</a></li>
-                        {% else %}
+                    <li class="my-auto opacity-80 hover:text-red-600"><a href="{% url 'account_logout' %}">Log out</a>
+                    </li>
+                {% else %}
                     <li class="my-auto opacity-80"><a href="{% url 'account_login' %}">Login</a></li>
                 {% endif %}
             </ul>
