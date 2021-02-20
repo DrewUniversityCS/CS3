@@ -1,8 +1,7 @@
+from allauth.account.forms import SignupForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, FormView
-
-from allauth.account.forms import SignupForm
 
 
 class HomePageView(TemplateView):
@@ -27,6 +26,5 @@ class InviteView(LoginRequiredMixin, FormView):
     success_url = reverse_lazy('pages:invite-success')
 
     def form_valid(self, form):
-
         form.save(self.request)
         return super().form_valid(form)
