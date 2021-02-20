@@ -1,0 +1,72 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Home page{% endblock title %}
+
+{% block content %}
+<div class="p-8 md:p-16">
+    <div class="flex flex-col md:flex-row gap-10 md:gap-24 md:w-4/5">
+        <div class="md:w-1/2">
+            <p class="text-3xl text-blue-700 font-bold my-3 w-full">
+                Choose Constraint Sets
+            </p>
+            <div class="flex gap-4 mb-3 w-full">
+                <select class="my-auto py-1 px-2 md:w-1/2">
+                    <option value="1">Spring 2021 Constraints</option>
+                </select>
+                <button class="rounded-full my-auto h-8 w-8 text-green-500 border-4 border-green-500">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+            </div>
+            <p class="text-green-500 w-full text-xl">Chosen Constraints</p>
+            <div class="bg-blue-700 text-white my-3 w-full">
+                <p class="p-4"><i class="fa fa-angle-right mr-1" aria-hidden="true"></i> Standard Constraints</p>
+            </div>
+            <div class="bg-blue-700 text-white my-3">
+                <p class="p-4"><i class="fa fa-angle-right mr-1" aria-hidden="true"></i> Spring 2021 Math Instructor
+                    Preferences</p>
+            </div>
+        </div>
+
+        <div class="md:w-1/2">
+            <p class="w-full text-3xl text-blue-700 font-bold my-3">
+                Choose Classes
+            </p>
+            <div class="w-full flex gap-4 mb-3">
+                <select class="md:w-1/2 my-auto py-1 px-2 ">
+                    <option value="1">Spring 2021 Math 101's</option>
+                </select>
+                <button class=" rounded-full my-auto h-8 w-8 text-green-500 border-4 border-green-500">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+            </div>
+            <p class="w-full text-green-500 text-xl">Chosen Constraints</p>
+            <div class="w-full bg-blue-700 text-white my-3">
+                <p class="p-4"><i class="fa fa-angle-right mr-1" aria-hidden="true"></i> Spring 2021 Upper Level CSCI
+                </p>
+            </div>
+            <div class="w-full bg-blue-700 text-white my-3">
+                <p class="p-4"><i class="fa fa-angle-right mr-1" aria-hidden="true"></i> Spring 2021 CSCI 101's</p>
+            </div>
+        </div>
+
+    </div>
+
+    <button class="px-4 py-2 rounded-full bg-green-500 text-white my-8">
+        Start Generation Process
+    </button>
+
+    <div class="md:w-4/5 h-52 bg-black relative">
+        <div class="w-full text-white text-2xl font-bold bottom-0 absolute">
+            <p class="p-4">
+                Status Messages Will Appear Here
+            </p>
+            <div class="bg-gray-400 p-2">
+                <div class="w-6 h-6 text-center text-sm rounded bg-white text-black">
+                    <i class="fa fa-terminal" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
