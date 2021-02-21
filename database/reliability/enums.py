@@ -5,3 +5,10 @@ YEAR_STANDING_CHOICES = (
     ("4", "Senior"),
     ("5", "Post Graduate"),
 )
+
+SEASONS = (
+    ("1", "Fall"),
+    ("2", "Winter"),
+    ("3", "Spring"),
+    ("4", "Summer")
+)
