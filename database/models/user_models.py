@@ -4,7 +4,7 @@ from database.reliability.enums import YEAR_STANDING_CHOICES
 from database.reliability.validators import student_id_validator
 
 
-class StudentUser(models.Model):
+class Student(models.Model):
     user = models.ForeignKey("accounts.BaseUser", on_delete=models.CASCADE, blank=False, null=False)
     student_id = models.IntegerField(unique=True, validators=[student_id_validator])
     class_standing = models.CharField(max_length=2, choices=YEAR_STANDING_CHOICES)
@@ -13,7 +13,7 @@ class StudentUser(models.Model):
         return self.user.get_full_name() + ', ' + self.class_standing + ' : ' + str(self.student_id)
 
 
-class TeacherUser(models.Model):
+class Teacher(models.Model):
     user = models.ForeignKey("accounts.BaseUser", on_delete=models.CASCADE, blank=False, null=False)
     overseeing_department = models.ForeignKey("database.Department", on_delete=models.CASCADE)
 
