@@ -22,7 +22,7 @@ class CheckScheduleView(LoginRequiredMixin, TemplateView):
 
 class InviteView(LoginRequiredMixin, FormView):
     form_class = SignupForm
-    template_name = "account/invite.html"
+    template_name = "account/newAdminRegistrationForm.html"
     success_url = reverse_lazy('pages:invite-success')
 
     def form_valid(self, form):
