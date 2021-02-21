@@ -12,6 +12,8 @@ urlpatterns = [
     path('about/', AboutPageView.as_view(), name='about'),
     path('generate-schedule', page_views.GenerateScheduleView.as_view(), name='generate-schedule'),
     path('check-schedule', page_views.CheckScheduleView.as_view(), name='check-schedule'),
+    path('management', page_views.ManagementView.as_view(), name='management'),
+    path('student-form', page_views.StudentFormView.as_view(), name='student-form'),
 ]
 
 app_name = 'pages'

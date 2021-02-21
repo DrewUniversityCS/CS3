@@ -12,12 +12,20 @@ class AboutPageView(TemplateView):
     template_name = 'pages/about.html'
 
 
+class StudentFormView(TemplateView):
+    template_name = 'pages/student-form.html'
+
+
 class GenerateScheduleView(LoginRequiredMixin, TemplateView):
     template_name = 'pages/generate_schedule.html'
 
 
 class CheckScheduleView(LoginRequiredMixin, TemplateView):
     template_name = 'pages/check_schedule.html'
+
+
+class ManagementView(LoginRequiredMixin, TemplateView):
+    template_name = 'pages/management.html'
 
 
 class InviteView(LoginRequiredMixin, FormView):
