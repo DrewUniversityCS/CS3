@@ -4,6 +4,10 @@ from database.reliability.enums import SEASONS, POSSIBLE_HOURS, POSSIBLE_MINUTES
 
 
 class Course(models.Model):
+    """
+    Represents a specific course offering. Importantly, this is not something a student takes or an instructor teaches.
+    Rather, courses are instantiated in the form of sections.
+    """
     department = models.ForeignKey("database.Department", on_delete=models.CASCADE)
     name = models.CharField(max_length=256, blank=False, null=False)
     number = models.IntegerField(blank=False, null=False)
@@ -20,6 +24,9 @@ class Course(models.Model):
 
 
 class Section(models.Model):
+    """
+    An instantiated class offering. Has a particular time and space during which it happens.
+    """
     course = models.ForeignKey("database.Course", on_delete=models.CASCADE)
     section_id = models.CharField(max_length=4, blank=False, null=False)
     primary_instructor = models.ForeignKey("database.Teacher", on_delete=models.CASCADE,
@@ -37,6 +44,9 @@ class Section(models.Model):
 
 
 class Schedule(models.Model):
+    """
+    A structural model representing a week of classes.
+    """
     name = models.CharField(max_length=256, blank=True)
     monday = models.ForeignKey("database.Weekday", related_name="monday", on_delete=models.CASCADE)
     tuesday = models.ForeignKey("database.Weekday", related_name="tuesday", on_delete=models.CASCADE)
@@ -49,6 +59,9 @@ class Schedule(models.Model):
 
 
 class Weekday(models.Model):
+    """
+    A structural model to group multiple time blocks together and signify them as happening during a single day.
+    """
     name = models.CharField(max_length=256, blank=False, null=False, choices=WEEKDAYS)
 
     def __str__(self):
@@ -56,6 +69,9 @@ class Weekday(models.Model):
 
 
 class TimeBlock(models.Model):
+    """
+    A particular time block during which classes may happen. Signified by its week and starting time.
+    """
     weekday = models.ForeignKey("database.Weekday", on_delete=models.CASCADE)
     start_hour = models.IntegerField(choices=POSSIBLE_HOURS)
     start_minutes = models.IntegerField(choices=POSSIBLE_MINUTES)
