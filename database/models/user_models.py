@@ -5,6 +5,9 @@ from database.reliability.validators import student_id_validator
 
 
 class Student(models.Model):
+    """
+    The student data model.
+    """
     user = models.ForeignKey("accounts.BaseUser", on_delete=models.CASCADE, blank=False, null=False)
     student_id = models.IntegerField(unique=True, validators=[student_id_validator])
     class_standing = models.CharField(max_length=2, choices=YEAR_IN_SCHOOL_CHOICES,
@@ -21,6 +24,9 @@ class Student(models.Model):
 
 
 class Teacher(models.Model):
+    """
+    The teacher / instructor data model.
+    """
     user = models.ForeignKey("accounts.BaseUser", on_delete=models.CASCADE, blank=False, null=False)
     overseeing_department = models.ForeignKey("database.Department", on_delete=models.CASCADE)
 
