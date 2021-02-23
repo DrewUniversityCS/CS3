@@ -1,12 +1,66 @@
-<html>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<style>
+		.bg-skyBlue_color{
+			background:#b9d9fe;
+		}
+        #courses input, label {
+            cursor: pointer;
+        }
+        .frminp:focus {
+            outline: none;
+            border-bottom: 1px solid black;
+            border-radius: 0;
+        }
+		</style>
 </head>
-<body>
-<p>student form</p>
+<body class="bg-skyBlue_color">
+
+  <div class="md:w-1/2 my-8 mx-auto p-6 md:p-0">
+	  <div class="mt-5 md:mt-0 md:col-span-2">
+		<form action="#" method="POST">
+		  <div class="shadow overflow-hidden sm:rounded-md">
+			<div class="px-4 py-5 bg-white sm:p-6">
+                <img src="{% static 'images/cs3_text_logo.png' %}" class="mx-auto w-32" />
+				<h1 class="text-center text-3xl mt-2 mb-6" style="color:#053263;">Course <span style="color: #2f5a36">Preferences</span></h1>
+				<hr class="mx-auto" width="80%"/>
+				<div class="col-span-6 sm:col-span-3 my-2">
+					<label for="name" class="block text-sm font-medium text-gray-700">Student Name:</label>
+					<input type="text" name="name" id="name" autocomplete="family-name" class="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md frminp">
+				  </div>
+	
+
+			</div>
+			<div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+			  <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+				Save
+			  </button>
+			</div>
+		  </div>
+		</form>
+	  </div>
+  </div>
+  {% include "components/footer.html" %}
+
+{#  <script>#}
+{#	$("input:checkbox.js_subject_checkbox").click(function() {#}
+{#	    console.log($("input:checkbox:checked.js_subject_checkbox").length);#}
+{#        var bol = $("input:checkbox:checked.js_subject_checkbox").length >= 5;#}
+{#        $("input:checkbox.js_subject_checkbox").not(":checked").attr("disabled",bol);#}
+{#	});#}
+{#  </script>#}
+{#  #}
+
+  
+	
 </body>
 </html>
