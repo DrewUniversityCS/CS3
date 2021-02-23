@@ -59,7 +59,31 @@
 						  </div>
 						</div>
 
+                        <div class="flex items-start">
+							<div class="flex items-center h-5">
+							  <input id="CSCI350" name="CSCI350" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded js_subject_checkbox">
+							</div>
+							<div class="ml-3 text-sm">
+							  <label for="CSCI350" class="font-medium text-gray-700">CSCI350</label>
+							</div>
+						  </div>
+						  <div class="flex items-start">
+							<div class="flex items-center h-5">
+							  <input id="CSCI400" name="CSCI400" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded js_subject_checkbox">
+							</div>
+							<div class="ml-3 text-sm">
+							  <label for="CSCI400" class="font-medium text-gray-700">CSCI400</label>
+							</div>
+						  </div>
 
+						  <div class="flex items-start">
+							<div class="flex items-center h-5">
+							  <input id="CSCI150" name="CSCI150" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded js_subject_checkbox">
+							</div>
+							<div class="ml-3 text-sm">
+							  <label for="CSCI150" class="font-medium text-gray-700">CSCI150</label>
+							</div>
+						  </div>
 
 
 
@@ -68,7 +92,7 @@
 			</div>
 			<div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
 			  <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-				Save
+				Submit
 			  </button>
 			</div>
 		  </div>
@@ -77,10 +101,12 @@
   </div>
   {% include "components/footer.html" %}
 
+
+  {# making sure no more than 8 are selceted as no one can take more thsn 8 courses  #}
   <script>
 	$("input:checkbox.js_subject_checkbox").click(function() {
 	    console.log($("input:checkbox:checked.js_subject_checkbox").length);
-        var bol = $("input:checkbox:checked.js_subject_checkbox").length >= 5;
+        var bol = $("input:checkbox:checked.js_subject_checkbox").length >= 8;
         $("input:checkbox.js_subject_checkbox").not(":checked").attr("disabled",bol);
 	});
   </script>
