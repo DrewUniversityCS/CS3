@@ -5,7 +5,7 @@
              class="ml-8 w-32">
     </a>
 
-    <ul class="flex flex-col md:flex-row justify-between mx-2 my-auto text-white w-full text-xl leading-7 font-bold">
+    <ul class="flex flex-col md:flex-row justify-between mx-2 my-auto text-white w-full text-lg leading-7 font-bold">
         <li class="my-auto">
             <ul class="flex gap-3 my-auto text-white">
                 <li class="my-auto opacity-80 hover:text-blue-600"><a href="/"> Home</a></li>
@@ -16,6 +16,7 @@
                         Schedule</a>
                     <li class="my-auto opacity-80 hover:text-blue-600"><a href="{% url 'pages:check-schedule' %}">Check
                         Schedule</a>
+                    <li class="my-auto opacity-80 hover:text-blue-600"><a href="{% url 'pages:management' %}">Management</a>
                     <li class="my-auto opacity-80 hover:text-blue-600"><a href="{% url 'pages:invite' %}">Invite</a>
                 {% endif %}
             </ul>
