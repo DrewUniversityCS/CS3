@@ -38,6 +38,11 @@
 					<input type="text" name="name" id="name" autocomplete="family-name" class="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md frminp">
 				  </div>
 	
+				  <div class="col-span-6 sm:col-span-4 my-2">
+					<label for="email_address" class="block text-sm font-medium text-gray-700">Student Email:</label>
+					<input type="text" name="email_address" id="email_address" autocomplete="email" class="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md frminp">
+				  </div>
+
 
 			</div>
 			<div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
@@ -51,14 +56,14 @@
   </div>
   {% include "components/footer.html" %}
 
-{#  <script>#}
-{#	$("input:checkbox.js_subject_checkbox").click(function() {#}
-{#	    console.log($("input:checkbox:checked.js_subject_checkbox").length);#}
-{#        var bol = $("input:checkbox:checked.js_subject_checkbox").length >= 5;#}
-{#        $("input:checkbox.js_subject_checkbox").not(":checked").attr("disabled",bol);#}
-{#	});#}
-{#  </script>#}
-{#  #}
+  <script>
+	$("input:checkbox.js_subject_checkbox").click(function() {
+	    console.log($("input:checkbox:checked.js_subject_checkbox").length);
+        var bol = $("input:checkbox:checked.js_subject_checkbox").length >= 5;
+        $("input:checkbox.js_subject_checkbox").not(":checked").attr("disabled",bol);
+	});
+  </script>
+
 
   
 	
