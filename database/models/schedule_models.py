@@ -13,9 +13,9 @@ class Course(models.Model):
     number = models.IntegerField(blank=False, null=False)
     CRN = models.IntegerField(blank=False, null=False)
     max_enrollment = models.IntegerField(blank=False, null=True)
-    cross_listed_with = models.ManyToManyField("database.Course", related_name="cross listed with")
-    prereqs = models.ManyToManyField("database.Course", related_name="prerequirement_for")
-    coreqs = models.ManyToManyField("database.Course", related_name="corequirement_for")
+    cross_listed_with = models.ManyToManyField("database.Course", related_name="cross listed with +")
+    prereqs = models.ManyToManyField("database.Course", related_name="prerequirement_for +")
+    coreqs = models.ManyToManyField("database.Course", related_name="corequirement_for +")
     credit_hours = models.IntegerField()
     comments = models.TextField()
 
@@ -30,9 +30,9 @@ class Section(models.Model):
     course = models.ForeignKey("database.Course", on_delete=models.CASCADE)
     section_id = models.CharField(max_length=4, blank=False, null=False)
     primary_instructor = models.ForeignKey("database.Teacher", on_delete=models.CASCADE,
-                                           related_name="primary instructor")
+                                           related_name="primary instructor +")
     other_instructor = models.ForeignKey("database.Teacher", on_delete=models.CASCADE,
-                                         related_name="secondary instructor")
+                                         related_name="secondary instructor +")
     room = models.ForeignKey("database.Room", on_delete=models.CASCADE)
     year = models.IntegerField(blank=False, null=False)
     season = models.CharField(choices=SEASONS, max_length=50)
