@@ -13,11 +13,14 @@ class Course(models.Model):
     number = models.IntegerField(blank=False, null=False)
     CRN = models.IntegerField(blank=False, null=False)
     max_enrollment = models.IntegerField(blank=False, null=True)
-    cross_listed_with = models.ManyToManyField("database.Course", related_name="cross listed with +")
-    prereqs = models.ManyToManyField("database.Course", related_name="prerequirement_for +")
-    coreqs = models.ManyToManyField("database.Course", related_name="corequirement_for +")
     credit_hours = models.IntegerField()
     comments = models.TextField()
+
+    # Note: overlap preferences is how we express course (1) coreqs, (2) prereqs,
+    # (3) overlap blocks, (4) general preferences
+    overlap_preferences = models.ManyToManyField("database.Course", through="database.CourseOverlapPreference")
+    room_preferences = models.ManyToManyField("database.Room", through="database.CourseRoomPreference")
+    time_preferences = models.ManyToManyField("database.TimeBlock", through="database.CourseTimeBlockPreference")
 
     def __str__(self):
         return self.department.abbreviation + str(self.number)
@@ -39,7 +42,7 @@ class Section(models.Model):
     timeblock = models.ForeignKey("database.TimeBlock", on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.course.name + " " + self.course.department.abbreviation + "-" + str(self.course.number)\
+        return self.course.name + " " + self.course.department.abbreviation + "-" + str(self.course.number) \
                + " Section " + self.section_id
 
 
