@@ -5,6 +5,8 @@ from django.db import models
 class BaseUser(AbstractUser):
 
     class_preferences = models.ManyToManyField("database.Course", through="database.CoursePreference")
+    room_preferences = models.ManyToManyField("database.Room", through="database.RoomPreference")
+    time_preferences = models.ManyToManyField("database.TimeBlock", through="database.TimePreference")
 
     def __str__(self):
         return self.email
