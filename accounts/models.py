@@ -1,8 +1,10 @@
 from django.contrib.auth.models import AbstractUser
+from django.db import models
 
 
 class BaseUser(AbstractUser):
-    pass
+
+    class_preferences = models.ManyToManyField("database.Course", through="database.CoursePreference")
 
     def __str__(self):
         return self.email
