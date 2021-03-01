@@ -1,6 +1,6 @@
 from django.db import models
 
-from database.reliability.enums import SEASONS, POSSIBLE_HOURS, POSSIBLE_MINUTES, WEEKDAYS
+from database.enums import SEASONS, POSSIBLE_HOURS, POSSIBLE_MINUTES, WEEKDAYS
 
 
 class Course(models.Model):

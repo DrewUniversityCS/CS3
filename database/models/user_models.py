@@ -1,7 +1,7 @@
 from django.db import models
 
-from database.reliability.enums import YEAR_IN_SCHOOL_CHOICES
-from database.reliability.validators import student_id_validator
+from database.enums import YEAR_IN_SCHOOL_CHOICES
+from database.validators import student_id_validator
 
 
 class Student(models.Model):
