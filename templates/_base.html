@@ -10,7 +10,8 @@
     <meta name="author" content="">
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
 		.teal_color{
 			color:#00c4a8;
 		}
@@ -39,9 +40,11 @@
 />
 
 <body style="background: #c0defd">
-<main role="main">
-    {% include "./components/navbar.html" %}
-</main>
+{% block nav %}
+    <main role="main">
+        {% include "./components/navbar.html" %}
+    </main>
+{% endblock %}
 
 <div style="min-height: 100vh;">
     {% block content %}
