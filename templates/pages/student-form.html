@@ -1,60 +1,47 @@
+{% extends '_base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <style>
-        .bg-skyBlue_color {
-            background: #b9d9fe;
-        }
 
-        #courses input, label {
-            cursor: pointer;
-        }
+{% block title %}Student Form{% endblock title %}
+{% block content %}
+    <div class="md:w-1/2 my-8 mx-auto p-6 md:p-0">
+        <div class="mt-5 md:mt-0 md:col-span-2">
+            <form action="#" method="POST">
+                <div class="shadow overflow-hidden sm:rounded-md">
+                    <div class="px-4 py-5 bg-white sm:p-6">
+                        <img src="{% static 'images/cs3_text_logo.png' %}" class="mx-auto w-32"/>
+                        <h1 class="text-center text-3xl mt-2 mb-6" style="color:#053263;">Course <span
+                                style="color: #2f5a36">Preferences</span></h1>
+                        <hr class="mx-auto" width="80%"/>
+                        <div class="col-span-6 sm:col-span-3 my-2">
+                            <label for="name" class="block text-sm font-medium text-gray-700">Student Name:</label>
+                            <input type="text" name="name" id="name" autocomplete="family-name"
+                                   class="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
 
-        .frminp:focus {
-            outline: none;
-            border-bottom: 1px solid black;
-            border-radius: 0;
-        }
-    </style>
-</head>
-<body class="bg-skyBlue_color">
+                        <div class="col-span-6 sm:col-span-4 my-2">
+                            <label for="email_address" class="block text-sm font-medium text-gray-700">Student
+                                Email:</label>
+                            <input type="text" name="email_address" id="email_address" autocomplete="email"
+                                   class="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
 
-<div class="md:w-1/2 my-8 mx-auto p-6 md:p-0">
-    <div class="mt-5 md:mt-0 md:col-span-2">
-        <form action="#" method="POST">
-            <div class="shadow overflow-hidden sm:rounded-md">
-                <div class="px-4 py-5 bg-white sm:p-6">
-                    <img src="{% static 'images/cs3_text_logo.png' %}" class="mx-auto w-32"/>
-                    <h1 class="text-center text-3xl mt-2 mb-6" style="color:#053263;">Course <span
-                            style="color: #2f5a36">Preferences</span></h1>
-                    <hr class="mx-auto" width="80%"/>
-                    <div class="col-span-6 sm:col-span-3 my-2">
-                        <label for="name" class="block text-sm font-medium text-gray-700">Student Name:</label>
-                        <input type="text" name="name" id="name" autocomplete="family-name"
-                               class="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md frminp">
-                    </div>
+                        <div class="col-span-6 sm:col-span-3 my-2">
+                            <fieldset id="courses">
+                                <legend class="block text-sm font-medium text-gray-700">Courses:</legend>
+                                <div class="mt-4 space-y-4">
 
-                    <div class="col-span-6 sm:col-span-4 my-2">
-                        <label for="email_address" class="block text-sm font-medium text-gray-700">Student
-                            Email:</label>
-                        <input type="text" name="email_address" id="email_address" autocomplete="email"
-                               class="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md frminp">
-                    </div>
+                                    {#first checkbox#}
+                                    <div class="flex items-start">
+                                        <div class="flex items-center h-5">
+                                            <input id="CSCI350" name="CSCI350" type="checkbox"
+                                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded js_subject_checkbox">
+                                        </div>
+                                        <div class="ml-3 text-sm">
+                                            <label for="CSCI350" class="font-medium text-gray-700">CSCI350</label>
+                                        </div>
+                                    </div>
+                                </div>
 
-                    <div class="col-span-6 sm:col-span-3 my-2">
-                        <fieldset id="courses">
-                            <legend class="block text-sm font-medium text-gray-700">Courses:</legend>
-                            <div class="mt-4 space-y-4">
-
-                                {#first checkbox#}
                                 <div class="flex items-start">
                                     <div class="flex items-center h-5">
                                         <input id="CSCI350" name="CSCI350" type="checkbox"
@@ -64,63 +51,38 @@
                                         <label for="CSCI350" class="font-medium text-gray-700">CSCI350</label>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="flex items-start">
+                                    <div class="flex items-center h-5">
+                                        <input id="CSCI400" name="CSCI400" type="checkbox"
+                                               class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded js_subject_checkbox">
+                                    </div>
+                                    <div class="ml-3 text-sm">
+                                        <label for="CSCI400" class="font-medium text-gray-700">CSCI400</label>
+                                    </div>
+                                </div>
 
-                            <div class="flex items-start">
-                                <div class="flex items-center h-5">
-                                    <input id="CSCI350" name="CSCI350" type="checkbox"
-                                           class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded js_subject_checkbox">
+                                <div class="flex items-start">
+                                    <div class="flex items-center h-5">
+                                        <input id="CSCI150" name="CSCI150" type="checkbox"
+                                               class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded js_subject_checkbox">
+                                    </div>
+                                    <div class="ml-3 text-sm">
+                                        <label for="CSCI150" class="font-medium text-gray-700">CSCI150</label>
+                                    </div>
                                 </div>
-                                <div class="ml-3 text-sm">
-                                    <label for="CSCI350" class="font-medium text-gray-700">CSCI350</label>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="flex items-center h-5">
-                                    <input id="CSCI400" name="CSCI400" type="checkbox"
-                                           class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded js_subject_checkbox">
-                                </div>
-                                <div class="ml-3 text-sm">
-                                    <label for="CSCI400" class="font-medium text-gray-700">CSCI400</label>
-                                </div>
-                            </div>
-
-                            <div class="flex items-start">
-                                <div class="flex items-center h-5">
-                                    <input id="CSCI150" name="CSCI150" type="checkbox"
-                                           class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded js_subject_checkbox">
-                                </div>
-                                <div class="ml-3 text-sm">
-                                    <label for="CSCI150" class="font-medium text-gray-700">CSCI150</label>
-                                </div>
-                            </div>
 
 
-                        </fieldset>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                        <button type="submit"
+                                class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            Submit
+                        </button>
                     </div>
                 </div>
-                <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                    <button type="submit"
-                            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Submit
-                    </button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
-{% include "components/footer.html" %}
-
-
-{# making sure no more than 8 are selceted as no one can take more thsn 8 courses  #}
-<script>
-    $("input:checkbox.js_subject_checkbox").click(function () {
-        console.log($("input:checkbox:checked.js_subject_checkbox").length);
-        var bol = $("input:checkbox:checked.js_subject_checkbox").length >= 8;
-        $("input:checkbox.js_subject_checkbox").not(":checked").attr("disabled", bol);
-    });
-</script>
-
-
-</body>
-</html>
+{% endblock content %}
