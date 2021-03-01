@@ -1,6 +1,6 @@
 from django.db import models
 
-from database.enums import SEASONS, POSSIBLE_HOURS, POSSIBLE_MINUTES, WEEKDAYS
+from database.enums import SEASONS, POSSIBLE_HOURS, POSSIBLE_MINUTES
 
 
 class Course(models.Model):
@@ -40,6 +40,7 @@ class Section(models.Model):
     year = models.IntegerField(blank=False, null=False)
     season = models.CharField(choices=SEASONS, max_length=50)
     timeblock = models.ForeignKey("database.TimeBlock", on_delete=models.CASCADE)
+    schedule = models.ForeignKey("database.Schedule", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.course.name + " " + self.course.department.abbreviation + "-" + str(self.course.number) \
@@ -56,27 +57,55 @@ class Schedule(models.Model):
         return self.name
 
 
-class Weekday(models.Model):
+class Weekdays(models.Model):
     """
-    A structural model to group multiple time blocks together and signify them as happening during a single day.
+    A model to store data on what days a timeblock takes place during.
     """
-    name = models.CharField(max_length=256, blank=False, null=False, choices=WEEKDAYS)
-    schedule = models.ForeignKey("database.Schedule", on_delete=models.CASCADE)
+    monday = models.BooleanField(default=False)
+    tuesday = models.BooleanField(default=False)
+    wednesday = models.BooleanField(default=False)
+    thursday = models.BooleanField(default=False)
+    friday = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name
+        if self.monday:
+            m = "M"
+        else:
+            m = ""
+
+        if self.tuesday:
+            tu = "Tu"
+        else:
+            tu = ""
+
+        if self.wednesday:
+            w = "W"
+        else:
+            w = ""
+
+        if self.thursday:
+            th = "Th"
+        else:
+            th = ""
+
+        if self.friday:
+            f = "F"
+        else:
+            f = ""
+
+        return m + tu + w + th + f
 
 
 class TimeBlock(models.Model):
     """
-    A particular time block during which classes may happen. Signified by its weekday and starting time.
+    A particular time block during which classes may happen.
     """
     block_id = models.CharField(max_length=32, blank=False, null=False, primary_key=True)
-    weekday = models.ForeignKey("database.Weekday", on_delete=models.CASCADE)
+    weekdays = models.ForeignKey("database.Weekdays", on_delete=models.CASCADE)
     start_hour = models.IntegerField(choices=POSSIBLE_HOURS)
     start_minutes = models.IntegerField(choices=POSSIBLE_MINUTES)
     end_hour = models.IntegerField(choices=POSSIBLE_HOURS)
     end_minutes = models.IntegerField(choices=POSSIBLE_MINUTES)
 
     def __str__(self):
-        return self.weekday.name + str(self.start_hour) + ":" + str(self.start_minutes)
+        return self.block_id + " "
