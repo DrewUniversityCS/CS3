@@ -213,3 +213,4 @@ class Migration(migrations.Migration):
             field=models.ManyToManyField(through='database.TimePreference', to='database.TimeBlock'),
         ),
     ]
+
