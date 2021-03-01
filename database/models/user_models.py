@@ -1,7 +1,7 @@
 from django.db import models
 
-from database.reliability.enums import YEAR_IN_SCHOOL_CHOICES
-from database.reliability.validators import student_id_validator
+from database.enums import YEAR_IN_SCHOOL_CHOICES
+from database.validators import student_id_validator
 
 
 class Student(models.Model):
@@ -11,6 +11,7 @@ class Student(models.Model):
     user = models.ForeignKey("accounts.BaseUser", on_delete=models.CASCADE, blank=False, null=False)
     student_id = models.IntegerField(unique=True, validators=[student_id_validator])
     class_standing = models.CharField(max_length=2, choices=YEAR_IN_SCHOOL_CHOICES)
+    registrations = models.ManyToManyField("database.Section", through="database.Registration")
 
     def __str__(self):
         return self.user.get_full_name() + ', ' + self.class_standing + ' : ' + str(self.student_id)
