@@ -11,6 +11,8 @@ class HomePageView(TemplateView):
 class AboutPageView(TemplateView):
     template_name = 'pages/about.html'
 
+class DocsView(LoginRequiredMixin, TemplateView):
+    template_name = 'pages/docs.html'
 
 class StudentFormView(TemplateView):
     template_name = 'pages/student-form.html'
