@@ -18,6 +18,10 @@ class StudentFormView(TemplateView):
     template_name = 'pages/student-form.html'
 
 
+class StudentFormView(TemplateView):
+    template_name = 'pages/student-form.html'
+
+
 class GenerateScheduleView(LoginRequiredMixin, TemplateView):
     template_name = 'pages/generate_schedule.html'
 
