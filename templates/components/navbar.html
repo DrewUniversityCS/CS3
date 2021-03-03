@@ -4,31 +4,31 @@
         <img src="{% static 'images/cs3_text_logo.png' %}"
              class="ml-8 w-32">
     </a>
-
-    <ul class="flex flex-col md:flex-row justify-between mx-2 my-auto text-white w-full text-lg leading-7 font-bold">
+    <ul class="flex flex-col md:flex-row justify-between mx-5 my-auto text-white w-full text-base leading-7 font-medium">
         <li class="my-auto">
-            <ul class="flex gap-3 my-auto text-white">
-                <li class="my-auto opacity-80 hover:text-blue-600"><a href="/"> Home</a></li>
-                <li class="my-auto opacity-80 hover:text-blue-600"><a href="/about"> About</a></li>
-                <li class="my-auto opacity-80 hover:text-blue-600"><a href="/docs"> Docs</a></li>
+            <ul class="flex gap-7 my-auto text-white">
+                <li class="my-auto opacity-80 hover:text-gray-600"><a href="/"> Home</a></li>
+                <li class="my-auto opacity-80 hover:text-gray-600"><a href="/about"> About</a></li>
+                <li class="my-auto opacity-80 hover:text-gray-600"><a href="{% url 'pages:docs' %}"> Docs</a></li>
                 {% if user.is_authenticated %}
-                    <li class="my-auto opacity-80 hover:text-blue-600"><a href="{% url 'pages:generate-schedule' %}">Generate
+                    <li class="my-auto opacity-80 hover:text-gray-600"><a href="{% url 'pages:generate-schedule' %}">Generate
                         Schedule</a>
-                    <li class="my-auto opacity-80 hover:text-blue-600"><a href="{% url 'pages:check-schedule' %}">Check
+                    <li class="my-auto opacity-80 hover:text-gray-600"><a href="{% url 'pages:check-schedule' %}">Check
                         Schedule</a>
-                    <li class="my-auto opacity-80 hover:text-blue-600"><a href="{% url 'pages:crud' %}">CRUD</a>
-                    <li class="my-auto opacity-80 hover:text-blue-600"><a href="{% url 'pages:invite' %}">Invite</a>
+                    <li class="my-auto opacity-80 hover:text-gray-600"><a href="{% url 'pages:crud' %}">CRUD</a>
+                    <li class="my-auto opacity-80 hover:text-gray-600"><a href="{% url 'pages:invite' %}">Invite</a>
                 {% endif %}
             </ul>
         </li>
         <li class="my-auto">
-            <ul class="flex gap-3 mx-4 my-auto text-white">
+            <ul class="flex gap-3 mx-4 my-auto text-white text-sm font-normal">
                 {% if user.is_authenticated %}
+                    <!--I think we should get rid of the email on the navbar. nav seems cluttered-->
                     <li class="my-auto opacity-80">{{ user.email }}</li>
-                    <li class="my-auto opacity-80 hover:text-blue-700"><a href="{% url 'account_change_password' %}">Change
+                    <li class="my-auto opacity-80 hover:text-gray-600"><a href="{% url 'account_change_password' %}">Change
                         password</a>
                     </li>
-                    <li class="my-auto opacity-80 hover:text-red-600"><a href="{% url 'account_logout' %}">Log out</a>
+                    <li class="my-auto opacity-80 hover:text-gray-600"><a href="{% url 'account_logout' %}">Log out</a>
                     </li>
                 {% else %}
                     <li class="my-auto opacity-80"><a href="{% url 'account_login' %}">Login</a></li>
