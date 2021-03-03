@@ -11,6 +11,16 @@ class HomePageView(TemplateView):
 class AboutPageView(TemplateView):
     template_name = 'pages/about.html'
 
+class DocsView(LoginRequiredMixin, TemplateView):
+    template_name = 'pages/docs.html'
+
+class StudentFormView(TemplateView):
+    template_name = 'pages/student-form.html'
+
+
+class StudentFormView(TemplateView):
+    template_name = 'pages/student-form.html'
+
 
 class StudentFormView(TemplateView):
     template_name = 'pages/student-form.html'
@@ -25,6 +35,10 @@ class CheckScheduleView(LoginRequiredMixin, TemplateView):
 
 class CrudTestingView(LoginRequiredMixin, TemplateView):
     template_name = 'pages/crud_testing.html'
+
+class CrudView(LoginRequiredMixin, TemplateView):
+    template_name = 'pages/crud.html'
+
 
 class CrudView(LoginRequiredMixin, TemplateView):
     template_name = 'pages/crud.html'
