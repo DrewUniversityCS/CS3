@@ -11,3 +11,4 @@ models = [Department, Building, Room, Course, Section, Schedule, Weekdays, TimeB
 
 for model in models:
     admin.site.register(model)
+

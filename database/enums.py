@@ -12,10 +12,10 @@ YEAR_IN_SCHOOL_CHOICES = [
     (GRADUATE, 'Graduate'),
 ]
 
-FALL = 1
-WINTER = 2
-SPRING = 3
-SUMMER = 4
+FALL = 'FL'
+WINTER = 'WI'
+SPRING = 'SP'
+SUMMER = 'SU'
 
 SEASONS = (
     (FALL, "Fall"),
