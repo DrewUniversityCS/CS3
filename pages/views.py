@@ -19,6 +19,8 @@ class GenerateScheduleView(LoginRequiredMixin, TemplateView):
 class CheckScheduleView(LoginRequiredMixin, TemplateView):
     template_name = 'pages/check_schedule.html'
 
+class CrudTestingView(LoginRequiredMixin, TemplateView):
+    template_name = 'pages/crud_testing.html'
 
 class InviteView(LoginRequiredMixin, FormView):
     form_class = SignupForm

@@ -12,6 +12,7 @@ urlpatterns = [
     path('about/', AboutPageView.as_view(), name='about'),
     path('generate-schedule', page_views.GenerateScheduleView.as_view(), name='generate-schedule'),
     path('check-schedule', page_views.CheckScheduleView.as_view(), name='check-schedule'),
+    path('crud-testing', page_views.CrudTestingView.as_view(), name='crud testing')
 ]
 
 app_name = 'pages'
