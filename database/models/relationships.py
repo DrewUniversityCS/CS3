@@ -11,13 +11,28 @@ class Preference(models.Model):
                     MaxValueValidator(1.0)]
     )
 
+    class Meta:
+        abstract = True
+        verbose_name_plural = "preferences"
+
 
 class CoursePreference(Preference):
     """
     Base relationship to represent course preferences.
     """
-    course = models.ForeignKey("database.Course", on_delete=models.CASCADE, null=True)
-    user = models.ForeignKey("accounts.BaseUser", on_delete=models.CASCADE, null=True)
+    course = models.ForeignKey("database.Course", on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey("accounts.BaseUser", on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        if self.course is None:
+            return self.user.get_full_name() + " preference (partial)"
+        elif self.user is None:
+            return str(self.course) + " preference (partial)"
+        else:
+            return self.user.get_full_name() + " has a preference of " + str(self.weight) + " with " + str(self.course)
+
+    class Meta:
+        verbose_name_plural = "course preferences"
 
 
 class CourseOverlapPreference(Preference):
@@ -28,6 +43,12 @@ class CourseOverlapPreference(Preference):
     course = models.ForeignKey("database.Course", on_delete=models.CASCADE)
     other_course = models.ForeignKey("database.Course", on_delete=models.CASCADE, related_name="other course+")
 
+    def __str__(self):
+        return str(self.course) + " has a preference of " + str(self.weight) + " with " + str(self.other_course)
+
+    class Meta:
+        verbose_name_plural = "course overlap preferences"
+
 
 class RoomPreference(CoursePreference):
     """
@@ -36,6 +57,15 @@ class RoomPreference(CoursePreference):
     """
     room = models.ForeignKey("database.Room", on_delete=models.CASCADE)
 
+    def __str__(self):
+        if self.course is None:
+            return self.user.get_full_name() + " has a preference of " + str(self.weight) + " with " + str(self.room)
+        else:
+            return str(self.course) + " has a preference of " + str(self.weight) + " with " + str(self.room)
+
+    class Meta:
+        verbose_name_plural = "room preferences"
+
 
 class TimePreference(CoursePreference):
     """
@@ -43,6 +73,16 @@ class TimePreference(CoursePreference):
     the course is left blank, and if its a course-room, the user field is left blank.
     """
     timeblock = models.ForeignKey("database.TimeBlock", on_delete=models.CASCADE)
+
+    def __str__(self):
+        if self.course is None:
+            return self.user.get_full_name() + " has a preference of " + str(self.weight) + " with " + \
+                   str(self.timeblock)
+        else:
+            return str(self.course) + " has a preference of " + str(self.weight) + " with " + str(self.timeblock)
+
+    class Meta:
+        verbose_name_plural = "time preferences"
 
 
 class Registration(models.Model):

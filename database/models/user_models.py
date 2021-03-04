@@ -28,7 +28,9 @@ class Teacher(models.Model):
     The teacher / instructor data model.
     """
     user = models.ForeignKey("accounts.BaseUser", on_delete=models.CASCADE, blank=False, null=False)
-    overseeing_department = models.ForeignKey("database.Department", on_delete=models.CASCADE)
+    overseeing_department = models.ForeignKey("database.Department", on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
+        if self.overseeing_department is None:
+            return self.user.get_full_name()
         return self.user.get_full_name() + ', ' + self.overseeing_department.name
