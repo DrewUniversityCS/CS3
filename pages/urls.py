@@ -19,5 +19,3 @@ urlpatterns = [
 ]
 
 app_name = 'pages'
-
-
