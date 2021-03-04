@@ -1,12 +1,12 @@
 {% load static %}
-<nav class="bg-teal_color flex flex-col md:flex-row py-3 md:py-1">
+<nav class="flex flex-col py-3 bg-teal_color md:flex-row md:py-1">
     <a href="/" class="mr-8">
         <img src="{% static 'images/cs3_text_logo.png' %}"
-             class="ml-8 w-32">
+             class="w-32 ml-8">
     </a>
-    <ul class="flex flex-col md:flex-row justify-between mx-5 my-auto text-white w-full text-base leading-7 font-medium">
+    <ul class="flex flex-col justify-between w-full mx-5 my-auto text-base font-medium leading-7 text-white md:flex-row">
         <li class="my-auto">
-            <ul class="flex gap-7 my-auto text-white">
+            <ul class="flex my-auto text-white gap-7">
                 <li class="my-auto opacity-80 hover:text-gray-600"><a href="/"> Home</a></li>
                 <li class="my-auto opacity-80 hover:text-gray-600"><a href="/about"> About</a></li>
                 <li class="my-auto opacity-80 hover:text-gray-600"><a href="{% url 'pages:docs' %}"> Docs</a></li>
@@ -21,7 +21,7 @@
             </ul>
         </li>
         <li class="my-auto">
-            <ul class="flex gap-3 mx-4 my-auto text-white text-sm font-normal">
+            <ul class="flex gap-3 mx-4 my-auto text-sm font-normal text-white">
                 {% if user.is_authenticated %}
                     <!--I think we should get rid of the email on the navbar. nav seems cluttered-->
                     <li class="my-auto opacity-80">{{ user.email }}</li>
