@@ -6,6 +6,7 @@ class Command(BaseCommand):
     """
     This will create a simple admin user (for testing purposes).
     """
+
     def handle(self, *args, **options):
         self._create_test_admin()
 

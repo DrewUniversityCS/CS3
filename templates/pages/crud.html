@@ -18,46 +18,46 @@
             display: block;
         }
     </style>
-    <div class="p-8 flex flex-col gap-10" id="temp_Wrap">
-        <div class="flex justify-items-center justify-center gap-10">
+    <div class="flex flex-col gap-10 p-8" id="temp_Wrap">
+        <div class="flex justify-center gap-10 justify-items-center">
             <div>
-                <div class="bg-white h-80 hoverChange w-80 relative">
+                <div class="relative bg-white h-80 hoverChange w-80">
                     <img src="{% static 'icons/create.svg' %}" alt="create" class="absolute left-0"
                          style="height: 175px;">
                 </div>
                 {% include 'components/card.html' %}
-                <div class="text-right text-xl p-4 py-2 text-white" style="background-color: #ffc107;">
+                <div class="p-4 py-2 text-xl text-right text-white" style="background-color: #ffc107;">
                     <p>Create</p>
                 </div>
             </div>
             <div>
-                <div class="bg-white h-80 hoverChange w-80 relative">
+                <div class="relative bg-white h-80 hoverChange w-80">
                     <img src="{% static 'icons/search.svg' %}" alt="search" class="absolute right-0"
                          style="height: 175px;">
                 </div>
                 {% include 'components/card.html' %}
-                <div class="text-left text-xl p-4 py-2 text-white" style="background-color: #4040ff;">
+                <div class="p-4 py-2 text-xl text-left text-white" style="background-color: #4040ff;">
                     <p>Read</p>
                 </div>
             </div>
         </div>
-        <div class="flex justify-items-center justify-center gap-10">
+        <div class="flex justify-center gap-10 justify-items-center">
             <div>
-                <div class="text-right text-xl p-4 py-2 text-white" style="background-color: green;">
+                <div class="p-4 py-2 text-xl text-right text-white" style="background-color: green;">
                     <p>Update</p>
                 </div>
-                <div class="bg-white h-80 hoverChange w-80 relative">
-                    <img src="{% static 'icons/update.svg' %}" alt="update" class="absolute left-0 bottom-0"
+                <div class="relative bg-white h-80 hoverChange w-80">
+                    <img src="{% static 'icons/update.svg' %}" alt="update" class="absolute bottom-0 left-0"
                          style="height: 175px;">
                 </div>
                 {% include 'components/card.html' %}
             </div>
             <div>
-                <div class="text-left text-xl p-4 py-2 text-white" style="background-color: #dc0505;">
+                <div class="p-4 py-2 text-xl text-left text-white" style="background-color: #dc0505;">
                     <p>Delete</p>
                 </div>
-                <div class="bg-white h-80 hoverChange w-80 relative">
-                    <img src="{% static 'icons/delete.svg' %}" alt="delete" class="absolute right-0 bottom-0"
+                <div class="relative bg-white h-80 hoverChange w-80">
+                    <img src="{% static 'icons/delete.svg' %}" alt="delete" class="absolute bottom-0 right-0"
                          style="height: 175px;">
                 </div>
                 {% include 'components/card.html' %}
