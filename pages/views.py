@@ -20,24 +20,12 @@ class StudentFormView(TemplateView):
     template_name = 'pages/student-form.html'
 
 
-class StudentFormView(TemplateView):
-    template_name = 'pages/student-form.html'
-
-
-class StudentFormView(TemplateView):
-    template_name = 'pages/student-form.html'
-
-
 class GenerateScheduleView(LoginRequiredMixin, TemplateView):
     template_name = 'pages/generate_schedule.html'
 
 
 class CheckScheduleView(LoginRequiredMixin, TemplateView):
     template_name = 'pages/check_schedule.html'
-
-
-class CrudTestingView(LoginRequiredMixin, TemplateView):
-    template_name = 'pages/crud_testing.html'
 
 
 class CrudView(LoginRequiredMixin, TemplateView):

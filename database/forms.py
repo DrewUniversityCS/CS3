@@ -2,7 +2,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from django.forms import ModelForm
 
-from database.models.user_models import Student
+from database.models.structural_models import Department, Room, Building
 
 
 class CrispyModelForm(ModelForm):
@@ -17,11 +17,19 @@ class CrispyModelForm(ModelForm):
         self.helper.layout.append(Submit('save', 'save'))
 
 
-class StudentForm(CrispyModelForm):
+class DepartmentForm(CrispyModelForm):
     class Meta:
-        model = Student
-        fields = [
-            'user',
-            'student_id',
-            'class_standing'
-        ]
+        model = Department
+        fields = "__all__"
+
+
+class BuildingForm(CrispyModelForm):
+    class Meta:
+        model = Building
+        fields = "__all__"
+
+
+class RoomForm(CrispyModelForm):
+    class Meta:
+        model = Room
+        fields = "__all__"
