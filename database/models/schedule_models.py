@@ -18,12 +18,12 @@ class Course(models.Model):
 
     # Note: overlap preferences is how we express course (1) coreqs, (2) prereqs,
     # (3) overlap blocks, (4) general preferences
-    overlap_preferences = models.ManyToManyField("database.Course", through="database.CourseOverlapPreference",
+    overlap_preferences = models.ManyToManyField("database.Course", through="database.OverlapPreference",
                                                  related_name="overlap preferences+")
     room_preferences = models.ManyToManyField("database.Room", through="database.RoomPreference",
                                               related_name="room preferences+")
-    time_preferences = models.ManyToManyField("database.TimeBlock", through="database.TimePreference",
-                                              related_name="time preferences+")
+    time_preferences = models.ManyToManyField("database.Timeblock", through="database.TimeblockPreference",
+                                              related_name="timeblock preferences+")
 
     def __str__(self):
         return self.department.abbreviation + str(self.number)
@@ -42,7 +42,7 @@ class Section(models.Model):
     room = models.ForeignKey("database.Room", on_delete=models.CASCADE, related_name="sections+")
     year = models.IntegerField(null=False, blank=False)
     season = models.CharField(choices=SEASONS, max_length=50)
-    timeblock = models.ForeignKey("database.TimeBlock", on_delete=models.CASCADE, related_name="sections+")
+    timeblock = models.ForeignKey("database.Timeblock", on_delete=models.CASCADE, related_name="sections+")
     schedule = models.ForeignKey("database.Schedule", on_delete=models.CASCADE, related_name="sections+")
 
     def __str__(self):
@@ -60,7 +60,7 @@ class Schedule(models.Model):
         return self.name
 
 
-class Weekdays(models.Model):
+class WeekdaySet(models.Model):
     """
     A model to store data on what days a timeblock takes place during.
     """
@@ -102,12 +102,12 @@ class Weekdays(models.Model):
         verbose_name_plural = 'possible weekdays'
 
 
-class TimeBlock(models.Model):
+class Timeblock(models.Model):
     """
     A particular time block during which classes may happen.
     """
     block_id = models.CharField(max_length=32, blank=False, null=False, primary_key=True)
-    weekdays = models.ForeignKey("database.Weekdays", on_delete=models.CASCADE, related_name="timeblocks+")
+    weekdays = models.ForeignKey("database.WeekdaySet", on_delete=models.CASCADE, related_name="timeblocks+")
     start_hour = models.IntegerField(choices=POSSIBLE_HOURS)
     start_minutes = models.IntegerField(choices=POSSIBLE_MINUTES)
     end_hour = models.IntegerField(choices=POSSIBLE_HOURS)
