@@ -12,14 +12,18 @@
                         {{ object }}
                     </td>
                     <td class="font-bold text-red-500"><a href="{{ object.get_absolute_url }}">Edit</a></td>
-                    <td class="font-bold text-red-700"><a href="{{ object.get_delete_url }}"> Delete</a></td>
+                    <td class="font-bold text-red-700"><a
+                            href="{% url 'database:crud_delete' dynamic_model_name object.id %}">Delete</a></td>
                 </tr>
             {% endfor %}
         </table>
-        <form method="post" novalidate>
+        <form method="post">
             {% csrf_token %}
             {{ form|crispy }}
-            <button type="submit" class="mt-4 px-8 py-3 text-xs tracking-widest text-center text-white uppercase bg-indigo-600 rounded shadow hover:bg-indigo-700 focus:shadow-outline focus:outline-none">Save</button>
+            <button type="submit"
+                    class="mt-4 px-8 py-3 text-xs tracking-widest text-center text-white uppercase bg-indigo-600 rounded shadow hover:bg-indigo-700 focus:shadow-outline focus:outline-none">
+                Save
+            </button>
         </form>
     </div>
 {% endblock content %}
