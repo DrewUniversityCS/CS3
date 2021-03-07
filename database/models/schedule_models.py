@@ -106,7 +106,7 @@ class Timeblock(models.Model):
     """
     A particular time block during which classes may happen.
     """
-    block_id = models.CharField(max_length=32, blank=False, null=False, primary_key=True)
+    block_id = models.CharField(max_length=32, blank=False, null=False, unique=True)
     weekdays = models.ForeignKey("database.WeekdaySet", on_delete=models.CASCADE, related_name="timeblocks+")
     start_hour = models.IntegerField(choices=POSSIBLE_HOURS)
     start_minutes = models.IntegerField(choices=POSSIBLE_MINUTES)

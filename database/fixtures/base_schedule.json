@@ -78,8 +78,9 @@
   },
   {
     "model": "database.timeblock",
-    "pk": "A",
+    "pk": 1,
     "fields": {
+      "block_id": "A",
       "weekdays": 1,
       "start_hour": 7,
       "start_minutes": 45,
@@ -89,8 +90,9 @@
   },
   {
     "model": "database.timeblock",
-    "pk": "B",
+    "pk": 2,
     "fields": {
+      "block_id": "B",
       "weekdays": 2,
       "start_hour": 8,
       "start_minutes": 0,
@@ -100,8 +102,9 @@
   },
   {
     "model": "database.timeblock",
-    "pk": "C",
+    "pk": 3,
     "fields": {
+      "block_id": "C",
       "weekdays": 1,
       "start_hour": 9,
       "start_minutes": 0,
@@ -111,8 +114,9 @@
   },
   {
     "model": "database.timeblock",
-    "pk": "D",
+    "pk": 4,
     "fields": {
+      "block_id": "D",
       "weekdays": 2,
       "start_hour": 9,
       "start_minutes": 0,
@@ -122,8 +126,9 @@
   },
   {
     "model": "database.timeblock",
-    "pk": "E",
+    "pk": 5,
     "fields": {
+      "block_id": "E",
       "weekdays": 1,
       "start_hour": 10,
       "start_minutes": 25,
@@ -133,8 +138,9 @@
   },
   {
     "model": "database.timeblock",
-    "pk": "F",
+    "pk": 6,
     "fields": {
+      "block_id": "F",
       "weekdays": 2,
       "start_hour": 10,
       "start_minutes": 25,
@@ -144,8 +150,9 @@
   },
   {
     "model": "database.timeblock",
-    "pk": "G",
+    "pk": 7,
     "fields": {
+      "block_id": "G",
       "weekdays": 1,
       "start_hour": 11,
       "start_minutes": 50,
@@ -155,8 +162,9 @@
   },
   {
     "model": "database.timeblock",
-    "pk": "H",
+    "pk": 8,
     "fields": {
+      "block_id": "H",
       "weekdays": 2,
       "start_hour": 11,
       "start_minutes": 50,
@@ -166,8 +174,9 @@
   },
   {
     "model": "database.timeblock",
-    "pk": "J",
+    "pk": 9,
     "fields": {
+      "block_id": "J",
       "weekdays": 1,
       "start_hour": 1,
       "start_minutes": 15,
@@ -177,8 +186,9 @@
   },
   {
     "model": "database.timeblock",
-    "pk": "K",
+    "pk": 10,
     "fields": {
+      "block_id": "K",
       "weekdays": 2,
       "start_hour": 1,
       "start_minutes": 15,
@@ -188,8 +198,9 @@
   },
   {
     "model": "database.timeblock",
-    "pk": "L",
+    "pk": 11,
     "fields": {
+      "block_id": "L",
       "weekdays": 1,
       "start_hour": 4,
       "start_minutes": 30,
@@ -199,8 +210,9 @@
   },
   {
     "model": "database.timeblock",
-    "pk": "M",
+    "pk": 12,
     "fields": {
+      "block_id": "M",
       "weekdays": 2,
       "start_hour": 4,
       "start_minutes": 30,
@@ -210,8 +222,9 @@
   },
   {
     "model": "database.timeblock",
-    "pk": "P",
+    "pk": 13,
     "fields": {
+      "block_id": "P",
       "weekdays": 5,
       "start_hour": 7,
       "start_minutes": 0,
@@ -221,8 +234,9 @@
   },
   {
     "model": "database.timeblock",
-    "pk": "Q",
+    "pk": 14,
     "fields": {
+      "block_id": "Q",
       "weekdays": 6,
       "start_hour": 7,
       "start_minutes": 0,
@@ -232,8 +246,9 @@
   },
   {
     "model": "database.timeblock",
-    "pk": "R",
+    "pk": 15,
     "fields": {
+      "block_id": "R",
       "weekdays": 7,
       "start_hour": 7,
       "start_minutes": 0,
@@ -243,8 +258,9 @@
   },
   {
     "model": "database.timeblock",
-    "pk": "S",
+    "pk": 16,
     "fields": {
+      "block_id": "S",
       "weekdays": 8,
       "start_hour": 7,
       "start_minutes": 0,
@@ -254,8 +270,9 @@
   },
   {
     "model": "database.timeblock",
-    "pk": "T",
+    "pk": 17,
     "fields": {
+      "block_id": "T",
       "weekdays": 1,
       "start_hour": 2,
       "start_minutes": 40,
@@ -265,8 +282,9 @@
   },
   {
     "model": "database.timeblock",
-    "pk": "Z",
+    "pk": 18,
     "fields": {
+      "block_id": "Z",
       "weekdays": 2,
       "start_hour": 2,
       "start_minutes": 40,
