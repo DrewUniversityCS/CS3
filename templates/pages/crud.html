@@ -1,67 +1,100 @@
 {% extends '_base.html' %}
-{% load static %}
 
-{% block title %}Home page{% endblock title %}
+{% block title %}CRUD{% endblock title %}
 
 {% block content %}
-    <style>
-        #temp_Wrap img {
-            margin-top: 20px;
-            height: 100px;
-        }
-
-        .hoverChange + div, .hoverChange:hover {
-            display: none;
-        }
-
-        .hoverChange, .hoverChange:hover + div {
-            display: block;
-        }
-    </style>
-    <div class="flex flex-col gap-10 p-8" id="temp_Wrap">
-        <div class="flex justify-center gap-10 justify-items-center">
-            <div>
-                <div class="relative bg-white h-80 hoverChange w-80">
-                    <img src="{% static 'icons/create.svg' %}" alt="create" class="absolute left-0"
-                         style="height: 175px;">
-                </div>
-                {% include 'components/card.html' %}
-                <div class="p-4 py-2 text-xl text-right text-white" style="background-color: #ffc107;">
-                    <p>Create</p>
-                </div>
+    <div class="h-screen">
+        <div class="grid grid-cols-2 gap-2 pt-24 text-center">
+            <div class="w-full my-3 text-3xl font-bold text-blue-700">
+                Users
+                <ul>
+                    <li class="w-full mt-4 text-xl text-green-500">
+                        <a href="/crud/students">
+                            Students
+                        </a>
+                    </li>
+                    <li class="w-full mt-2 text-xl text-green-500">
+                        <a href="/crud/teachers">
+                            Teachers
+                        </a>
+                    </li>
+                    <li class="w-full mt-2 text-xl text-green-500">
+                        <a href="/crud/registrations">
+                            Registrations
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <div>
-                <div class="relative bg-white h-80 hoverChange w-80">
-                    <img src="{% static 'icons/search.svg' %}" alt="search" class="absolute right-0"
-                         style="height: 175px;">
-                </div>
-                {% include 'components/card.html' %}
-                <div class="p-4 py-2 text-xl text-left text-white" style="background-color: #4040ff;">
-                    <p>Read</p>
-                </div>
+            <div class="w-full my-3 text-3xl font-bold text-blue-700">
+                Constraints
+                <ul>
+                    <li class="w-full mt-4 text-xl text-green-500">
+                        <a href="/crud/course-preferences">
+                            Course Preferences
+                        </a>
+                    </li>
+                    <li class="w-full mt-2 text-xl text-green-500">
+                        <a href="/crud/overlap-preferences">
+                            Overlap Preferences
+                        </a>
+                    </li>
+                    <li class="w-full mt-2 text-xl text-green-500">
+                        <a href="/crud/room-preferences">
+                            Room Preferences
+                        </a>
+                    </li>
+                    <li class="w-full mt-2 text-xl text-green-500">
+                        <a href="/crud/timeblock-preferences">
+                            Timeblock Preferences
+                        </a>
+                    </li>
+                </ul>
             </div>
-        </div>
-        <div class="flex justify-center gap-10 justify-items-center">
-            <div>
-                <div class="p-4 py-2 text-xl text-right text-white" style="background-color: green;">
-                    <p>Update</p>
-                </div>
-                <div class="relative bg-white h-80 hoverChange w-80">
-                    <img src="{% static 'icons/update.svg' %}" alt="update" class="absolute bottom-0 left-0"
-                         style="height: 175px;">
-                </div>
-                {% include 'components/card.html' %}
+            <div class="w-full my-3 text-3xl font-bold text-blue-700">
+                Structural
+                <ul>
+                    <li class="w-full mt-4 text-xl text-green-500">
+                        <a href="/crud/departments">
+                            Departments
+                        </a>
+                    </li>
+                    <li class="w-full mt-2 text-xl text-green-500">
+                        <a href="/crud/buildings">
+                            Buildings
+                        </a>
+                    </li>
+                    <li class="w-full mt-2 text-xl text-green-500">
+                        <a href="/crud/rooms">
+                            Rooms
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <div>
-                <div class="p-4 py-2 text-xl text-left text-white" style="background-color: #dc0505;">
-                    <p>Delete</p>
-                </div>
-                <div class="relative bg-white h-80 hoverChange w-80">
-                    <img src="{% static 'icons/delete.svg' %}" alt="delete" class="absolute bottom-0 right-0"
-                         style="height: 175px;">
-                </div>
-                {% include 'components/card.html' %}
+            <div class="w-full my-3 text-3xl font-bold text-blue-700">
+                Scheduling
+                <ul>
+                    <li class="w-full mt-4 text-xl text-green-500">
+                        <a href="/crud/schedules">
+                            Schedules
+                        </a>
+                    </li>
+                    <li class="w-full mt-2 text-xl text-green-500">
+                        <a href="/crud/courses">
+                            Courses
+                        </a>
+                    </li>
+                    <li class="w-full mt-2 text-xl text-green-500">
+                        <a href="/crud/sections">
+                            Section
+                        </a>
+                    </li>
+                    <li class="w-full mt-2 text-xl text-green-500">
+                        <a href="/crud/timeblocks">
+                            Timeblocks
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
-{% endblock %}
+{% endblock content %}
