@@ -35,7 +35,7 @@ class CoursePreference(Preference):
         verbose_name_plural = "course preferences"
 
 
-class CourseOverlapPreference(Preference):
+class OverlapPreference(Preference):
     """
     Relationship for specifying if two classes can or cannot be offered at the same time.
     Also used to signify things like prereqs, coreqs and co-listed classes through the value of the preference weight.
@@ -67,12 +67,12 @@ class RoomPreference(CoursePreference):
         verbose_name_plural = "room preferences"
 
 
-class TimePreference(CoursePreference):
+class TimeblockPreference(CoursePreference):
     """
     Relationship for signifying time preferences for a course or teacher. If this is a teacher-room preference,
     the course is left blank, and if its a course-room, the user field is left blank.
     """
-    timeblock = models.ForeignKey("database.TimeBlock", on_delete=models.CASCADE)
+    timeblock = models.ForeignKey("database.Timeblock", on_delete=models.CASCADE)
 
     def __str__(self):
         if self.course is None:
@@ -82,7 +82,7 @@ class TimePreference(CoursePreference):
             return str(self.course) + " has a preference of " + str(self.weight) + " with " + str(self.timeblock)
 
     class Meta:
-        verbose_name_plural = "time preferences"
+        verbose_name_plural = "timeblock preferences"
 
 
 class Registration(models.Model):

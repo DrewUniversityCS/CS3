@@ -1,4 +1,5 @@
 from django.core.management.base import BaseCommand
+
 from accounts.models import BaseUser
 
 
@@ -12,3 +13,6 @@ class Command(BaseCommand):
 
     def _create_test_admin(self):
         BaseUser.objects.create_superuser('admin', 'admin@gmail.com', '123')
+        BaseUser.objects.filter(is_superuser=True).update(
+            first_name='Super', last_name='User'
+        )
