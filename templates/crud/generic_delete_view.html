@@ -8,8 +8,12 @@
         <form method="post">
             {% csrf_token %}
             <h2><b>Delete</b>{{ object }}?</h2>
-            <button type="submit" class="mt-4 px-8 py-3 text-xs tracking-widest text-center text-white uppercase bg-indigo-600 rounded shadow hover:bg-indigo-700 focus:shadow-outline focus:outline-none">Yes</button>
-            <a href="javascript:history.back()" class="mt-4 px-8 py-3 text-xs tracking-widest text-center text-white uppercase bg-indigo-600 rounded shadow hover:bg-indigo-700 focus:shadow-outline focus:outline-none">Cancel</a>
+            <button type="submit"
+                    class="px-8 py-3 mt-4 text-xs tracking-widest text-center text-white uppercase bg-indigo-600 rounded shadow hover:bg-indigo-700 focus:shadow-outline focus:outline-none">
+                Yes
+            </button>
+            <a href="javascript:history.back()"
+               class="px-8 py-3 mt-4 text-xs tracking-widest text-center text-white uppercase bg-indigo-600 rounded shadow hover:bg-indigo-700 focus:shadow-outline focus:outline-none">Cancel</a>
         </form>
     </div>
 {% endblock content %}
