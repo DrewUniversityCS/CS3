@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from .models.relationships import OverlapPreference, Registration, RoomPreference, TimeblockPreference, \
     CoursePreference
 from .models.schedule_models import Course, Section, Schedule, WeekdaySet, Timeblock
@@ -10,4 +11,3 @@ models = [Department, Building, Room, Course, Section, Schedule, WeekdaySet, Tim
 
 for model in models:
     admin.site.register(model)
-
