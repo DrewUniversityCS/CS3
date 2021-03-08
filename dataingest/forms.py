@@ -1,9 +1,8 @@
+import csv
 import io
+
 from django import forms
 
-from django.contrib.auth.models import User
-
-import csv
 
 class DataForm(forms.Form):
     data_file = forms.FileField()
@@ -12,5 +11,12 @@ class DataForm(forms.Form):
         f = io.TextIOWrapper(self.cleaned_data['data_file'].file)
         reader = csv.DictReader(f)
 
-        for user in reader:
-            User.objects.create_user(user['username'], email=user['email'])
+        for line in reader:
+            """
+            get line
+            get column values
+            create db model with column values
+            save db model
+            repeat      
+            """
+            print(line)
