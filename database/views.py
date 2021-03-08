@@ -1,7 +1,8 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
-from django.views.generic.edit import FormView, DeleteView
+from django.views.generic import TemplateView
+from django.views.generic.edit import FormView, DeleteView, UpdateView
 
 from database.forms import get_dynamic_model_form
 from database.models.relationships import CoursePreference, RoomPreference, TimeblockPreference, Registration, \
@@ -42,6 +43,27 @@ class DynamicModelMixin(object):
 
 class CrudDeleteView(DynamicModelMixin, DeleteView):
     template_name = "crud/generic_delete_view.html"
+
+    def get_object(self):
+        return get_object_or_404(self.dynamic_model, pk=self.kwargs.get('id'))
+
+    def get_success_url(self):
+        return reverse('database:crud_model', kwargs={'model': self.dynamic_model_name})
+
+
+class CrudInspectView(DynamicModelMixin, DeleteView):
+    template_name = "crud/generic_inspection_view.html"
+
+    def get_object(self):
+        return get_object_or_404(self.dynamic_model, pk=self.kwargs.get('id'))
+
+    def get_success_url(self):
+        return reverse('database:crud_model', kwargs={'model': self.dynamic_model_name})
+
+
+class CrudUpdateView(DynamicModelMixin, UpdateView):
+    template_name = "crud/generic_update_view.html"
+    fields = "__all__"
 
     def get_object(self):
         return get_object_or_404(self.dynamic_model, pk=self.kwargs.get('id'))
