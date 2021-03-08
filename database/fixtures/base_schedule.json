@@ -1,0 +1,295 @@
+[
+  {
+    "model": "database.weekdayset",
+    "pk": 1,
+    "fields": {
+      "monday": true,
+      "tuesday": false,
+      "wednesday": true,
+      "thursday": false,
+      "friday": true
+    }
+  },
+  {
+    "model": "database.weekdayset",
+    "pk": 2,
+    "fields": {
+      "monday": false,
+      "tuesday": true,
+      "wednesday": false,
+      "thursday": true,
+      "friday": false
+    }
+  },
+  {
+    "model": "database.weekdayset",
+    "pk": 4,
+    "fields": {
+      "monday": true,
+      "tuesday": false,
+      "wednesday": true,
+      "thursday": false,
+      "friday": false
+    }
+  },
+  {
+    "model": "database.weekdayset",
+    "pk": 5,
+    "fields": {
+      "monday": true,
+      "tuesday": false,
+      "wednesday": false,
+      "thursday": false,
+      "friday": false
+    }
+  },
+  {
+    "model": "database.weekdayset",
+    "pk": 6,
+    "fields": {
+      "monday": false,
+      "tuesday": true,
+      "wednesday": false,
+      "thursday": false,
+      "friday": false
+    }
+  },
+  {
+    "model": "database.weekdayset",
+    "pk": 7,
+    "fields": {
+      "monday": false,
+      "tuesday": false,
+      "wednesday": true,
+      "thursday": false,
+      "friday": false
+    }
+  },
+  {
+    "model": "database.weekdayset",
+    "pk": 8,
+    "fields": {
+      "monday": false,
+      "tuesday": false,
+      "wednesday": false,
+      "thursday": true,
+      "friday": false
+    }
+  },
+  {
+    "model": "database.timeblock",
+    "pk": 1,
+    "fields": {
+      "block_id": "A",
+      "weekdays": 1,
+      "start_hour": 7,
+      "start_minutes": 45,
+      "end_hour": 8,
+      "end_minutes": 50
+    }
+  },
+  {
+    "model": "database.timeblock",
+    "pk": 2,
+    "fields": {
+      "block_id": "B",
+      "weekdays": 2,
+      "start_hour": 8,
+      "start_minutes": 0,
+      "end_hour": 8,
+      "end_minutes": 50
+    }
+  },
+  {
+    "model": "database.timeblock",
+    "pk": 3,
+    "fields": {
+      "block_id": "C",
+      "weekdays": 1,
+      "start_hour": 9,
+      "start_minutes": 0,
+      "end_hour": 10,
+      "end_minutes": 15
+    }
+  },
+  {
+    "model": "database.timeblock",
+    "pk": 4,
+    "fields": {
+      "block_id": "D",
+      "weekdays": 2,
+      "start_hour": 9,
+      "start_minutes": 0,
+      "end_hour": 10,
+      "end_minutes": 15
+    }
+  },
+  {
+    "model": "database.timeblock",
+    "pk": 5,
+    "fields": {
+      "block_id": "E",
+      "weekdays": 1,
+      "start_hour": 10,
+      "start_minutes": 25,
+      "end_hour": 11,
+      "end_minutes": 40
+    }
+  },
+  {
+    "model": "database.timeblock",
+    "pk": 6,
+    "fields": {
+      "block_id": "F",
+      "weekdays": 2,
+      "start_hour": 10,
+      "start_minutes": 25,
+      "end_hour": 11,
+      "end_minutes": 40
+    }
+  },
+  {
+    "model": "database.timeblock",
+    "pk": 7,
+    "fields": {
+      "block_id": "G",
+      "weekdays": 1,
+      "start_hour": 11,
+      "start_minutes": 50,
+      "end_hour": 1,
+      "end_minutes": 5
+    }
+  },
+  {
+    "model": "database.timeblock",
+    "pk": 8,
+    "fields": {
+      "block_id": "H",
+      "weekdays": 2,
+      "start_hour": 11,
+      "start_minutes": 50,
+      "end_hour": 1,
+      "end_minutes": 5
+    }
+  },
+  {
+    "model": "database.timeblock",
+    "pk": 9,
+    "fields": {
+      "block_id": "J",
+      "weekdays": 1,
+      "start_hour": 1,
+      "start_minutes": 15,
+      "end_hour": 2,
+      "end_minutes": 30
+    }
+  },
+  {
+    "model": "database.timeblock",
+    "pk": 10,
+    "fields": {
+      "block_id": "K",
+      "weekdays": 2,
+      "start_hour": 1,
+      "start_minutes": 15,
+      "end_hour": 2,
+      "end_minutes": 30
+    }
+  },
+  {
+    "model": "database.timeblock",
+    "pk": 11,
+    "fields": {
+      "block_id": "L",
+      "weekdays": 1,
+      "start_hour": 4,
+      "start_minutes": 30,
+      "end_hour": 5,
+      "end_minutes": 45
+    }
+  },
+  {
+    "model": "database.timeblock",
+    "pk": 12,
+    "fields": {
+      "block_id": "M",
+      "weekdays": 2,
+      "start_hour": 4,
+      "start_minutes": 30,
+      "end_hour": 5,
+      "end_minutes": 45
+    }
+  },
+  {
+    "model": "database.timeblock",
+    "pk": 13,
+    "fields": {
+      "block_id": "P",
+      "weekdays": 5,
+      "start_hour": 7,
+      "start_minutes": 0,
+      "end_hour": 9,
+      "end_minutes": 30
+    }
+  },
+  {
+    "model": "database.timeblock",
+    "pk": 14,
+    "fields": {
+      "block_id": "Q",
+      "weekdays": 6,
+      "start_hour": 7,
+      "start_minutes": 0,
+      "end_hour": 9,
+      "end_minutes": 30
+    }
+  },
+  {
+    "model": "database.timeblock",
+    "pk": 15,
+    "fields": {
+      "block_id": "R",
+      "weekdays": 7,
+      "start_hour": 7,
+      "start_minutes": 0,
+      "end_hour": 9,
+      "end_minutes": 30
+    }
+  },
+  {
+    "model": "database.timeblock",
+    "pk": 16,
+    "fields": {
+      "block_id": "S",
+      "weekdays": 8,
+      "start_hour": 7,
+      "start_minutes": 0,
+      "end_hour": 9,
+      "end_minutes": 30
+    }
+  },
+  {
+    "model": "database.timeblock",
+    "pk": 17,
+    "fields": {
+      "block_id": "T",
+      "weekdays": 1,
+      "start_hour": 2,
+      "start_minutes": 40,
+      "end_hour": 3,
+      "end_minutes": 55
+    }
+  },
+  {
+    "model": "database.timeblock",
+    "pk": 18,
+    "fields": {
+      "block_id": "Z",
+      "weekdays": 2,
+      "start_hour": 2,
+      "start_minutes": 40,
+      "end_hour": 3,
+      "end_minutes": 55
+    }
+  }
+]

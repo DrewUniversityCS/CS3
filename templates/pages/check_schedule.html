@@ -1,0 +1,140 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Home page{% endblock title %}
+
+{% block content %}
+    <div class="p-4 bg-gray-100 rounded md:m-8 md:p-8 md:px-16">
+        <div class="my-3">
+            <p class="w-full my-3 text-3xl font-bold text-green-700">
+                (1) Choose Constraint Sets
+            </p>
+            <div class="flex flex-col md:flex-row">
+                <select class="py-1 pl-2 pr-20 my-auto border-2 border-black rounded border-1 md:w-1/4">
+                    <option value="1">Existing Schedule 1</option>
+                </select>
+                <p class="mx-6 my-auto font-bold text-black">
+                    OR
+                </p>
+                <button class="px-3 py-2 font-bold text-black bg-gray-200 rounded">
+                    <i class="mr-1 fa fa-plus" aria-hidden="true"></i>
+                    Create New Schedule
+                </button>
+            </div>
+        </div>
+        <div class="my-3 md:w-1/2">
+            <p class="w-full my-3 text-3xl font-bold text-green-700">
+                (1) Choose Constraint Sets
+            </p>
+            <div class="flex">
+                <select class="w-2/3 py-1 pl-2 pr-20 my-auto border-2 border-black rounded md:w-full">
+                    <option value="1">Spring 2021 Constraints 1</option>
+                </select>
+                <button class="w-8 h-8 my-auto ml-4 text-green-500 border-4 border-green-500 rounded-full">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="my-3 md:w-1/2">
+            <p class="w-full text-xl text-green-500">Chosen Constraints</p>
+            <div class="w-full my-3 text-white bg-blue-700">
+                <p class="p-4"><i class="mr-1 fa fa-angle-right" aria-hidden="true"></i> Standard Constraints</p>
+            </div>
+            <div class="w-full my-3 text-white bg-blue-700">
+                <p class="p-4"><i class="mr-1 fa fa-angle-right" aria-hidden="true"></i> Standard Constraints</p>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row">
+            <div class="md:w-1/2">
+                <div class="my-3">
+                    <p class="w-full my-3 text-3xl font-bold text-green-700">
+                        (3) Analyze Schedule
+                    </p>
+                    <button class="p-4 text-3xl text-white bg-blue-600 rounded">
+                        <span class="my-auto mr-2 text-2xl">Run</span> <i class="fa fa-mouse-pointer"
+                                                                          style="transform: rotate(-16deg);"
+                                                                          aria-hidden="true"></i>
+                    </button>
+                </div>
+
+                <div class="relative w-full bg-black" style="height: calc(100% - 165px);    min-height: 220px;">
+                    <div class="absolute bottom-0 w-full text-xl text-white">
+                        <p class="px-4 text-green-200">
+                            Standard Constraints Evaluation Complete.
+                        </p>
+                        <p class="px-4">
+                            Processing...
+                        </p>
+                        <p class="py-2">
+                        </p>
+                        <div class="p-2 bg-gray-400">
+                            <div class="w-6 h-6 text-sm text-center text-black bg-white rounded">
+                                <i class="fa fa-terminal" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="px-4 md:w-1/2 md:px-10">
+                <div>
+                    <p class="mb-5 text-2xl text-green-500">Results:</p>
+
+                    <div class="w-full my-6 rounded shadow-lg">
+                        <div class="flex gap-3 p-4 border-t-4 shadow-md bg-skyBlue_color"
+                             style="border-top-color:#00c4a8; color:#038f7a;">
+							<span class="border-2 w-8 h-8 px-3 mt-2.5 rounded-full"
+                                  style="border-color:#038f7a;place-self: flex-start;">
+								<i class="fa fa-exclamation mt-1.5" aria-hidden="true"></i>
+							</span>
+                            <p class="my-auto text-sm">
+								<span class="font-bold">
+									Standard Constraints Are Satisfied
+								</span>
+                                <br/>
+                                The provided schedule fully satisfies each constraint in this set.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="w-full my-6 rounded shadow-lg">
+                        <div class="flex gap-3 p-4 border-t-4 shadow-md bg-skyBlue_color"
+                             style="border-top-color:rgb(246 125 11); color:rgb(246 125 11); background-color: rgb(251 249 158)">
+							<span class="border-2 w-8 h-8 px-3 mt-2.5 rounded-full"
+                                  style="border-color:rgb(246 125 11);place-self: flex-start;">
+								<i class="fa fa-exclamation mt-1.5" aria-hidden="true"></i>
+							</span>
+                            <p class="my-auto text-sm">
+								<span class="font-bold">
+									Spring 2021 Math Instructor Preference Are Not Fully Met 
+								</span>
+                                <br/>
+                                Although a majority of constraints are satisfied. some are not.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="w-full my-6 rounded shadow-lg">
+                        <div class="flex gap-3 border-t-4 p-4 shadow-md bg-red-600
+						text-white border-red-900">
+							<span class="border-2 w-8 h-8 px-3 mt-2.5 rounded-full"
+                                  style="border-color:white;place-self: flex-start;">
+								<i class="fa fa-exclamation mt-1.5" aria-hidden="true"></i>
+							</span>
+                            <p class="my-auto text-sm">
+								<span class="font-bold">
+									Spring 2021 Constraints Are Not Sufficiently Satisfied 
+								</span>
+                                <br/>
+                                The provided schedule has many conflicts with the constraints in this set.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

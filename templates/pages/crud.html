@@ -1,0 +1,100 @@
+{% extends '_base.html' %}
+
+{% block title %}CRUD{% endblock title %}
+
+{% block content %}
+    <div class="h-screen">
+        <div class="grid grid-cols-2 gap-2 pt-24 text-center">
+            <div class="w-full my-3 text-3xl font-bold text-blue-700">
+                Users
+                <ul>
+                    <li class="w-full mt-4 text-xl text-green-500">
+                        <a href="/crud/students">
+                            Students
+                        </a>
+                    </li>
+                    <li class="w-full mt-2 text-xl text-green-500">
+                        <a href="/crud/teachers">
+                            Teachers
+                        </a>
+                    </li>
+                    <li class="w-full mt-2 text-xl text-green-500">
+                        <a href="/crud/registrations">
+                            Registrations
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="w-full my-3 text-3xl font-bold text-blue-700">
+                Constraints
+                <ul>
+                    <li class="w-full mt-4 text-xl text-green-500">
+                        <a href="/crud/course-preferences">
+                            Course Preferences
+                        </a>
+                    </li>
+                    <li class="w-full mt-2 text-xl text-green-500">
+                        <a href="/crud/overlap-preferences">
+                            Overlap Preferences
+                        </a>
+                    </li>
+                    <li class="w-full mt-2 text-xl text-green-500">
+                        <a href="/crud/room-preferences">
+                            Room Preferences
+                        </a>
+                    </li>
+                    <li class="w-full mt-2 text-xl text-green-500">
+                        <a href="/crud/timeblock-preferences">
+                            Timeblock Preferences
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="w-full my-3 text-3xl font-bold text-blue-700">
+                Structural
+                <ul>
+                    <li class="w-full mt-4 text-xl text-green-500">
+                        <a href="/crud/departments">
+                            Departments
+                        </a>
+                    </li>
+                    <li class="w-full mt-2 text-xl text-green-500">
+                        <a href="/crud/buildings">
+                            Buildings
+                        </a>
+                    </li>
+                    <li class="w-full mt-2 text-xl text-green-500">
+                        <a href="/crud/rooms">
+                            Rooms
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="w-full my-3 text-3xl font-bold text-blue-700">
+                Scheduling
+                <ul>
+                    <li class="w-full mt-4 text-xl text-green-500">
+                        <a href="/crud/schedules">
+                            Schedules
+                        </a>
+                    </li>
+                    <li class="w-full mt-2 text-xl text-green-500">
+                        <a href="/crud/courses">
+                            Courses
+                        </a>
+                    </li>
+                    <li class="w-full mt-2 text-xl text-green-500">
+                        <a href="/crud/sections">
+                            Section
+                        </a>
+                    </li>
+                    <li class="w-full mt-2 text-xl text-green-500">
+                        <a href="/crud/timeblocks">
+                            Timeblocks
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

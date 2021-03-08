@@ -9,6 +9,33 @@
     <meta name="description" content="Course scheduling and registration.">
     <meta name="author" content="">
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .teal_color {
+            color: #00c4a8;
+        }
+
+        .bg-teal_color {
+            background: #00c4a8;
+        }
+
+        .blue_color {
+            color: #86bffc;
+        }
+
+        .bg-blue_color {
+            background: #86bffc;
+        }
+
+        .skyBlue_color {
+            color: #b9d9fe;
+        }
+
+        .bg-skyBlue_color {
+            background: #b9d9fe;
+        }
+    </style>
 </head>
 
 <link
@@ -17,24 +44,26 @@
         type="text/css"
 />
 
-<body>
-<main role="main">
-    {% include "./components/navbar.html" %}
-</main>
+<body style="background: #c0defd">
+{% block nav %}
+    <main role="main">
+        {% include "./components/navbar.html" %}
+    </main>
+{% endblock %}
 
-<div>
+<div style="min-height: 100vh;">
     {% block content %}
-    <p>Default content...</p>
+        <p>Default content...</p>
     {% endblock content %}
 </div>
 
 {% include "./components/footer.html" %}
 
 {% block javascript %}
-<!-- 3rd party JavaScript -->
+    <!-- 3rd party JavaScript -->
 
-<!-- Project JS -->
-<script src="{% static 'js/base.js' %}"></script>
+    <!-- Project JS -->
+    <script src="{% static 'js/base.js' %}"></script>
 
 {% endblock javascript %}
 

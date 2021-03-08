@@ -1,0 +1,13 @@
+{% extends '_base.html' %}
+
+{% block content %}
+    <div class="flex flex-col items-center justify-center w-full pt-12 pb-12">
+        <h2 class="mb-2 text-2xl font-semibold tracking-wide text-gray-700">Invite Success!</h2>
+        <a
+                href="{% url 'pages:invite' %}"
+                class="block px-10 py-3 text-xs tracking-widest text-center text-white uppercase bg-indigo-600 rounded shadow hover:bg-indigo-700 focus:shadow-outline focus:outline-none"
+        >
+            Invite More
+        </a>
+    </div>
+{% endblock content %}

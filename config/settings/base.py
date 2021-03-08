@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'theme',
     'accounts',
     'pages',
+    'database'
 ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -152,7 +153,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # CUSTOM USER MODEL CONFIGS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/topics/auth/customizing/#substituting-a-custom-user-model
-AUTH_USER_MODEL = 'accounts.CustomUser'
+AUTH_USER_MODEL = 'accounts.BaseUser'
 
 # DJANGO-ALLAUTH CONFIGS
 # ------------------------------------------------------------------------------

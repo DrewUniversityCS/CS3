@@ -13,8 +13,7 @@ The app can be installed via Pip or Pipenv depending upon your setup.
 $ python3 -m venv csrs
 $ source csrs/bin/activate
 $ pip install -r requirements.txt
-$ python manage.py migrate
-$ python manage.py createsuperuser
+$ python manage.py prepdb
 $ python manage.py runserver
 # Load the site at http://127.0.0.1:8000
 ```
@@ -24,8 +23,7 @@ $ python manage.py runserver
 ```
 $ pipenv install
 $ pipenv shell
-$ python manage.py migrate
-$ python manage.py createsuperuser
+$ python manage.py prepdb
 $ python manage.py runserver
 # Load the site at http://127.0.0.1:8000
 ```
@@ -33,11 +31,8 @@ $ python manage.py runserver
 ## Setup
 
 ```
-# Run Migrations
-$ python manage.py migrate
-
-# Create a Superuser (Not necessary if not testing admin functionality)
-$ python manage.py createsuperuser
+# Run migrations, install fixtures and create test admin (email: admin@gmail.com pwd: 123)
+$ python manage.py prepdb
 
 # Run a command to install all necessary dependencies for tailwind css
 $ python manage.py tailwind install

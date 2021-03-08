@@ -5,20 +5,18 @@
 
 
 {% block content %}
-<div class="w-full flex flex-col justify-center items-center pt-12 pb-12">
-    <h1 class="text-gray-700 font-semibold text-2xl tracking-wide mb-2">Sign Out</h1>
-
-    <p class="text-gray-500 text-base font-semibold pb-12">Are you sure you want to sign out?</p>
-
-    <form method="post" class="max-w-lg bg-white shadow-lg rounded-lg overflow-hidden mx-auto"
-          action="{% url 'account_logout' %}">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <button class="block tracking-widest uppercase text-center shadow bg-indigo-600 hover:bg-indigo-700 focus:shadow-outline focus:outline-none text-white text-xs py-3 px-10 rounded"
-                type="submit">Sign Out
-        </button>
-    </form>
-</div>
+    <div class="flex flex-col items-center justify-center w-full pt-12 pb-12">
+        <h1 class="mb-2 text-2xl font-semibold tracking-wide text-gray-700">Sign Out</h1>
+        <p class="pb-12 text-base font-semibold text-gray-500">Are you sure you want to sign out?</p>
+        <form method="post" class="max-w-lg mx-auto overflow-hidden bg-white rounded-lg shadow-lg"
+              action="{% url 'account_logout' %}">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button class="block px-10 py-3 text-xs tracking-widest text-center text-white uppercase bg-indigo-600 rounded shadow hover:bg-indigo-700 focus:shadow-outline focus:outline-none"
+                    type="submit">Sign Out
+            </button>
+        </form>
+    </div>
 
 
 {% endblock content %}
