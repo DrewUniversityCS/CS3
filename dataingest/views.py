@@ -5,7 +5,7 @@ from django.views.generic import FormView
 from .forms import DataForm
 
 class DataView(FormView):
-    template_name = 'base.html'
+    template_name = 'profile_upload.html'
     form_class = DataForm
     success_url = '/upload'
 

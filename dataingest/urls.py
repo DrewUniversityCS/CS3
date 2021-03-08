@@ -7,4 +7,4 @@ urlpatterns = [
     path("upload/",views.DataView.as_view())
 ]
 
-app_name = 'pages'
+app_name = 'dataingest'
