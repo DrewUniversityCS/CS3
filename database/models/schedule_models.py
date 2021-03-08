@@ -28,6 +28,9 @@ class Course(models.Model):
     def __str__(self):
         return self.department.abbreviation + str(self.number)
 
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Course._meta.fields]
+
 
 class Section(models.Model):
     """
@@ -49,6 +52,9 @@ class Section(models.Model):
         return self.course.name + " " + self.course.department.abbreviation + "-" + str(self.course.number) \
                + " Section " + self.section_id
 
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Section._meta.fields]
+
 
 class Schedule(models.Model):
     """
@@ -58,6 +64,9 @@ class Schedule(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Schedule._meta.fields]
 
 
 class WeekdaySet(models.Model):
@@ -101,6 +110,9 @@ class WeekdaySet(models.Model):
     class Meta:
         verbose_name_plural = 'possible weekdays'
 
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in WeekdaySet._meta.fields]
+
 
 class Timeblock(models.Model):
     """
@@ -115,3 +127,6 @@ class Timeblock(models.Model):
 
     def __str__(self):
         return self.block_id + " " + "(" + str(self.weekdays) + ")"
+
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Timeblock._meta.fields]

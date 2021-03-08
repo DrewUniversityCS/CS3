@@ -13,6 +13,9 @@ class Department(models.Model):
     def __str__(self):
         return self.name + ": " + self.abbreviation
 
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Department._meta.fields]
+
 
 class Building(models.Model):
     """
@@ -22,6 +25,9 @@ class Building(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Building._meta.fields]
 
 
 class Room(models.Model):
@@ -34,3 +40,6 @@ class Room(models.Model):
 
     def __str__(self):
         return self.building.name + " " + str(self.number)
+
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Room._meta.fields]

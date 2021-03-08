@@ -6,10 +6,19 @@
 {% block content %}
     <div class="pt-24 text-center">
         <div class="w-1/2 py-24 mx-auto bg-white rounded-lg">
-            <form method="post">
+            <form method="post" class="pb-12">
                 {% csrf_token %}
                 <div class="text-lg">Inspecting the following object</div>
                 <div class="py-8 text-xl"><b>{{ object }}</b></div>
+                <div>
+                    {% for name, value in object.get_fields %}
+                        {% if value %}
+                            <div>
+                                {{ name }} : {{ value }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
             </form>
             <a href="javascript:history.back()"
                class="px-8 py-3 mt-4 text-xs tracking-widest text-center text-white uppercase bg-red-600 rounded shadow hover:bg-red-400 focus:shadow-outline focus:outline-none">Go
