@@ -1,29 +1,56 @@
 {% extends '_base.html' %}
+{% load static %}
 
-{% block title %}About page{% endblock %}
-{% load crispy_forms_tags %}
+{% block title %}CRUD View{% endblock %}
+{% load tailwind_filters %}
 
 {% block content %}
-    <div class="grid grid-cols-2 gap-2 pt-24 text-center">
-        <table>
-            {% for object in all_objects %}
-                <tr>
-                    <td>
-                        {{ object }}
-                    </td>
-                    <td class="font-bold text-red-500"><a href="{{ object.get_absolute_url }}">Edit</a></td>
-                    <td class="font-bold text-red-700"><a
-                            href="{% url 'database:crud_delete' dynamic_model_name object.id %}">Delete</a></td>
+    <div class="grid items-center grid-cols-2 gap-2 pb-24">
+        <div class="flex flex-col justify-center w-2/3 mx-auto">
+            <div class="py-12 text-xl text-center text-gray-800">
+                Database Items
+            </div>
+            <table class="w-full bg-white rounded shadow-md table-auto min-w-max">
+                <thead>
+                <tr class="text-gray-600 uppercase bg-gray-200">
+                    <th class="px-6 py-3 text-left">Object</th>
+                    <th class="px-6 py-3 text-center">Actions</th>
                 </tr>
-            {% endfor %}
-        </table>
-        <form method="post">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <button type="submit"
-                    class="px-8 py-3 mt-4 text-xs tracking-widest text-center text-white uppercase bg-indigo-600 rounded shadow hover:bg-indigo-700 focus:shadow-outline focus:outline-none">
-                Save
-            </button>
-        </form>
+                </thead>
+                <tbody class="text-sm font-light text-gray-600">
+                {% for object in all_objects %}
+                    <tr class="border-b border-gray-200 hover:bg-gray-100">
+                        <td class="px-6 py-3 text-left whitespace-nowrap">
+                            {{ object }}
+                        </td>
+                        <td class="px-6 py-3 text-xl text-center">
+                            <a href="{% url 'database:crud_inspect' dynamic_model_name object.id %}"><i
+                                    class="py-2 mr-2 transform fa fa-eye hover:text-blue-500 hover:scale-125"
+                                    aria-hidden="true"></i></a>
+                            <a href="{% url 'database:crud_update' dynamic_model_name object.id %}"><i
+                                    class="py-2 mr-2 transform fa fa-edit hover:text-yellow-500 hover:scale-125"
+                                    aria-hidden="true"></i></a>
+                            <a href="{% url 'database:crud_delete' dynamic_model_name object.id %}"><i
+                                    class="py-2 mr-2 transform fa fa-trash hover:text-red-500 hover:scale-125"
+                                    aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="flex flex-col w-2/3 h-full">
+            <div class="py-12 text-xl text-center text-gray-800">
+                Input Form
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit"
+                        class="px-8 py-3 mt-4 text-xs tracking-widest text-center text-white uppercase bg-indigo-600 rounded shadow hover:bg-indigo-700 focus:shadow-outline focus:outline-none">
+                    Save
+                </button>
+            </form>
+        </div>
     </div>
 {% endblock content %}
