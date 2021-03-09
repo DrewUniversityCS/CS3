@@ -4,6 +4,8 @@
 {% block title %}CRUD View{% endblock %}
 {% load tailwind_filters %}
 
+
+
 {% block content %}
     <div class="grid items-center grid-cols-2 gap-2 pb-24">
         <div class="flex flex-col justify-center w-2/3 mx-auto">
@@ -17,25 +19,37 @@
                     <th class="px-6 py-3 text-center">Actions</th>
                 </tr>
                 </thead>
-                <tbody class="text-sm font-light text-gray-600">
-                {% for object in all_objects %}
-                    <tr class="border-b border-gray-200 hover:bg-gray-100">
-                        <td class="px-6 py-3 text-left whitespace-nowrap">
-                            {{ object }}
+                <tbody class="text-sm font-light text-gray-600 overflow-scroll">
+                {% if all_objects %}
+                    {% for object in all_objects %}
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="px-6 py-3 text-left whitespace-nowrap">
+                                {{ object }}
+                            </td>
+                            <td class="px-6 py-3 text-xl text-center">
+                                <a href="{% url 'database:crud_inspect' dynamic_model_name object.id %}"><i
+                                        class="py-2 mr-2 transform fa fa-eye hover:text-blue-500 hover:scale-125"
+                                        aria-hidden="true"></i></a>
+                                <a href="{% url 'database:crud_update' dynamic_model_name object.id %}"><i
+                                        class="py-2 mr-2 transform fa fa-edit hover:text-yellow-500 hover:scale-125"
+                                        aria-hidden="true"></i></a>
+                                <a href="{% url 'database:crud_delete' dynamic_model_name object.id %}"><i
+                                        class="py-2 mr-2 transform fa fa-trash hover:text-red-500 hover:scale-125"
+                                        aria-hidden="true"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr class="bg-red-300 border-b border-gray-200 text-4xl bg-no-data">
+                        <td class="text-center text-white">
+                            <b>NO DATA</b>
                         </td>
-                        <td class="px-6 py-3 text-xl text-center">
-                            <a href="{% url 'database:crud_inspect' dynamic_model_name object.id %}"><i
-                                    class="py-2 mr-2 transform fa fa-eye hover:text-blue-500 hover:scale-125"
-                                    aria-hidden="true"></i></a>
-                            <a href="{% url 'database:crud_update' dynamic_model_name object.id %}"><i
-                                    class="py-2 mr-2 transform fa fa-edit hover:text-yellow-500 hover:scale-125"
-                                    aria-hidden="true"></i></a>
-                            <a href="{% url 'database:crud_delete' dynamic_model_name object.id %}"><i
-                                    class="py-2 mr-2 transform fa fa-trash hover:text-red-500 hover:scale-125"
-                                    aria-hidden="true"></i></a>
+                        <td class="py-48 text-center text-white ">
+                            <i class="fa fa-exclamation-circle"
+                               aria-hidden="true"></i>
                         </td>
                     </tr>
-                {% endfor %}
+                {% endif %}
                 </tbody>
             </table>
         </div>
