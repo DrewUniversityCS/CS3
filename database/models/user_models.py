@@ -22,6 +22,9 @@ class Student(models.Model):
     def is_senior(self):
         return self.class_standing == YEAR_IN_SCHOOL_CHOICES.SENIOR
 
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Student._meta.fields]
+
 
 class Teacher(models.Model):
     """
@@ -34,3 +37,6 @@ class Teacher(models.Model):
         if self.overseeing_department is None:
             return self.user.get_full_name()
         return self.user.get_full_name() + ', ' + self.overseeing_department.name
+
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Teacher._meta.fields]

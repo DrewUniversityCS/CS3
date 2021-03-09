@@ -14,6 +14,7 @@ whitenoise = "*"
 django-tailwind = "*"
 gunicorn = "*"
 cryptography = "==3.3.2"
+crispy-tailwind = "*"
 
 [requires]
 python_version = "3.8"
