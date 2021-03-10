@@ -1,12 +1,12 @@
 {% extends '_base.html' %}
 {% block content %}
     <div class="h-screen font-sans text-center bg-gray-300">
+        <h2> Upload </h2>
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <label for="file1"> Upload a file</label>
-            <input type="file" id="file1" name="file">
-            <small>Only accepts CSV files</small>
-            <button type="submit">Upload</button>
+            <input type="file" name="document">
+
+            <button type="submit">Upload File</button>
         </form>
     </div>
 {% endblock content %}
