@@ -15,6 +15,7 @@ django-tailwind = "*"
 gunicorn = "*"
 cryptography = "==3.3.2"
 crispy-tailwind = "*"
+mysqlclient = "*"
 
 [requires]
 python_version = "3.8"
