@@ -19,7 +19,7 @@
                     <th class="px-6 py-3 text-center">Actions</th>
                 </tr>
                 </thead>
-                <tbody class="text-sm font-light text-gray-600 overflow-scroll">
+                <tbody class="overflow-scroll text-sm font-light text-gray-600">
                 {% if all_objects %}
                     {% for object in all_objects %}
                         <tr class="border-b border-gray-200 hover:bg-gray-100">
@@ -40,11 +40,11 @@
                         </tr>
                     {% endfor %}
                 {% else %}
-                    <tr class="bg-red-300 border-b border-gray-200 text-4xl bg-no-data">
+                    <tr class="text-4xl bg-red-300 border-b border-gray-200 bg-no-data">
                         <td class="text-center text-white">
                             <b>NO DATA</b>
                         </td>
-                        <td class="py-48 text-center text-white ">
+                        <td class="py-48 text-center text-white">
                             <i class="fa fa-exclamation-circle"
                                aria-hidden="true"></i>
                         </td>
