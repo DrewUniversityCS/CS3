@@ -1,20 +1,18 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
+from csv import reader
+from io import TextIOWrapper
 
 from .forms import CSVForm
 from .models import CSV
 
-class Home(TemplateView):
-    template_name = 'home.html'
-
 
 def upload(request):
     if request.method == 'POST':
-        uploaded_file = request.FILES['document']
-        print(uploaded_file.name)
-        print(uploaded_file.size)
-        print(uploaded_file.read)
-        print("doing something")
+        f = TextIOWrapper(request.FILES['document'].file, encoding=request.encoding)
+        r = reader(f, delimiter=',')
+        for row in r:
+            print(row)
     return render(request, 'upload.html')
 
 
@@ -36,4 +34,3 @@ def upload_csv(request):
     return render(request, 'upload_csv.html', {
         'form': form
     })
-

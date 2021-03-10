@@ -13,7 +13,7 @@ class Command(BaseCommand):
     This will make migrations for all the apps and then runs migrate.
     """
 
-    apps_to_migrate = ['accounts', 'database']
+    apps_to_migrate = ['accounts', 'database', 'dataingest']
 
     def handle(self, *args, **options):
         self._load_data()

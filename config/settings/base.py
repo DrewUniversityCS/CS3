@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'theme',
     'accounts',
     'pages',
-    'database'
+    'database',
+    'dataingest'
 ]
 
 TAILWIND_APP_NAME = 'theme'
