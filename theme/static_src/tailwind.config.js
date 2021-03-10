@@ -11,7 +11,13 @@ module.exports = {
     ],
     darkMode: false, // or 'media' or 'class'
     theme: {
-        extend: {},
+        extend: {
+            backgroundImage: theme => ({
+                'no-data': "url('/static/images/signal_heropattern.svg')",
+                'endlessclouds': "url('/static/images/endless-clouds_heropattern.svg')",
+                'foundation': "url('/static/images/aztec_heropattern.svg')"
+            })
+        },
     },
     variants: {
         extend: {},
