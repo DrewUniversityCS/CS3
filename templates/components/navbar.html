@@ -25,8 +25,6 @@
             {% if user.is_authenticated %}
                 <a class="px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 md:ml-4 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
                    href="/">Home</a>
-                <a class="px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 md:ml-4 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
-                   href="{% url 'pages:docs' %}">Docs</a>
                 <div @click.away="open = false" class="relative" x-data="{ open: false }">
                     <button @click="open = !open"
                             class="flex flex-row items-center w-full px-4 py-2 mt-2 text-lg font-semibold text-left bg-transparent rounded-lg md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline">
@@ -45,7 +43,7 @@
                          x-transition:leave-start="transform opacity-100 scale-100"
                          x-transition:leave-end="transform opacity-0 scale-95"
                          class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
-                        <div class="px-2 py-2 bg-green-400 rounded-md shadow">
+                        <div class="px-2 py-2 bg-green-400 rounded-md shadow-2xl">
                             <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
                                href="{% url 'pages:generate-schedule' %}">Create Schedule</a>
                             <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
@@ -57,8 +55,6 @@
                         </div>
                     </div>
                 </div>
-                <a class="px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 md:ml-4 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
-                   href="{% url 'account_change_password' %}">Change Password</a>
                 <a class="px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 md:ml-4 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
                    href="{% url 'account_logout' %}">Log out</a>
             {% else %}
