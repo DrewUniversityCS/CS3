@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'debug_toolbar',
     'tailwind',
+    'crispy_tailwind',
 
     # Local
     'theme',
@@ -43,6 +44,8 @@ INSTALLED_APPS = [
 
 TAILWIND_APP_NAME = 'theme'
 NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+CRISPY_TEMPLATE_PACK = "tailwind"
 
 # MIDDLEWARE
 # ------------------------------------------------------------------------------
@@ -140,11 +143,6 @@ STATICFILES_DIRS = [
 ]
 # http://whitenoise.evans.io/en/stable/django.html#add-compression-and-caching-support
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
-# DJANGO-CRISPY-FORMS CONFIGS
-# ------------------------------------------------------------------------------
-# https://django-crispy-forms.readthedocs.io/en/latest/install.html#template-packs
-CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # EMAIL
 # ------------------------------------------------------------------------------

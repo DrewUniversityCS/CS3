@@ -1,19 +1,23 @@
 {% extends '_base.html' %}
 
-{% block title %}About page{% endblock %}
+{% block title %}CRUD Delete{% endblock %}
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <div class="grid grid-cols-2 gap-2 pt-24 text-center">
-        <form method="post">
-            {% csrf_token %}
-            <h2><b>Delete</b>{{ object }}?</h2>
-            <button type="submit"
-                    class="px-8 py-3 mt-4 text-xs tracking-widest text-center text-white uppercase bg-indigo-600 rounded shadow hover:bg-indigo-700 focus:shadow-outline focus:outline-none">
-                Yes
-            </button>
-            <a href="javascript:history.back()"
-               class="px-8 py-3 mt-4 text-xs tracking-widest text-center text-white uppercase bg-indigo-600 rounded shadow hover:bg-indigo-700 focus:shadow-outline focus:outline-none">Cancel</a>
-        </form>
+    <div class="pt-24 text-center">
+        <div class="w-1/2 py-24 mx-auto bg-white rounded-lg">
+            <form method="post">
+                {% csrf_token %}
+                <div class="text-lg">Are you sure you want to delete the following object?</div>
+                <div class="py-8 text-xl"><b>{{ object }}</b></div>
+                <button type="submit"
+                        class="px-8 py-3 mt-4 mb-8 mr-8 text-xs tracking-widest text-center text-white uppercase bg-green-600 rounded shadow hover:bg-green-400 focus:shadow-outline focus:outline-none">
+                    Ok
+                </button>
+                <a href="javascript:history.back()"
+                   class="px-8 py-3 mt-4 text-xs tracking-widest text-center text-white uppercase bg-red-600 rounded shadow hover:bg-red-400 focus:shadow-outline focus:outline-none">Cancel</a>
+            </form>
+        </div>
+
     </div>
 {% endblock content %}

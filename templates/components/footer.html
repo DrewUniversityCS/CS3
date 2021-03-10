@@ -1,11 +1,36 @@
-<footer class="relative pt-1 bg-white border-b-2 border-blue-700 footer">
-    <div class="container px-6 mx-auto">
-        <div class="flex flex-col items-center mt-16 border-t-2 border-gray-300">
-            <div class="py-6 text-center sm:w-2/3">
-                <p class="mb-2 text-sm font-bold text-blue-700">
-                    © 2021 by DrewUniversityCS
-                </p>
+<footer class="bg-teal_color">
+    <div class="container pt-4 pb-4 align-center mx-auto">
+        <div class="flex flex-wrap pt-4 ">
+            {% if user.is_authenticated %}
+                <div class="w-full text-center md:w-1/2 md:text-center">
+                    <h5 class="mb-6 font-bold uppercase">Help</h5>
+                    <ul class="mb-4">
+                        <li class="mt-1">
+                            <a href="/" class="text-gray-800 hover:text-gray-100">Home</a>
+                        </li>
+                        <li class="mt-1">
+                            <a href="{% url 'pages:docs' %}" class="text-gray-800 hover:text-gray-100">Docs</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="w-full text-center md:w-1/2 md:text-center">
+                    <h5 class="mb-6 font-bold uppercase">Account</h5>
+                    <ul class="mb-4">
+                        <li class="mt-1">
+                            <a href="{% url 'account_change_password' %}" class="text-gray-800 hover:text-gray-100">Change
+                                Password</a>
+                        </li>
+                        <li class="mt-1">
+                            <a href="{% url 'account_logout' %}" class="text-gray-800 hover:text-gray-100">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
+            <div class="w-full pt-4 text-center border-gray-600 md:border-t md:text-center">
+                <h5 class="mt-4 text-gray-800">© 2021 by DrewUniversityCS</h5>
             </div>
         </div>
+    </div>
+    <div class="h-24 bg-foundation w-full">
     </div>
 </footer>
