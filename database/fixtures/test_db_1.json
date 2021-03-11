@@ -1,0 +1,419 @@
+[
+  {
+    "model": "accounts.baseuser",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$216000$COeTEEKTwH9n$k9Ed+mu6BWCh1a34WYecPxlYe6qIXYdPht89kfaNP38=",
+      "last_login": "2021-03-11T21:33:00.671Z",
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "Super",
+      "last_name": "User",
+      "email": "admin@gmail.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2021-03-11T21:32:42.104Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.baseuser",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$216000$Nq7PiHT5Nj7g$3K0igFxqSYdR0ieZw1JB5nls55NHbgRbcXQP50svPAI=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "testUser1",
+      "first_name": "Jeremy",
+      "last_name": "Lorem",
+      "email": "jlorem@drew.edu",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-03-11T21:38:20Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.baseuser",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$216000$lYQvegBRhUno$Me/G5av+9iS+5crbN0z6sD9Urpc2Nn3Mw7NrBHgsuiM=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "testUser2",
+      "first_name": "Steven",
+      "last_name": "Ipsum",
+      "email": "sipsum@drew.edu",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-03-11T21:38:50Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.baseuser",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$216000$I86NGI1fUI1G$Wxgx34I21k+7+PY9geiR9H4aZv/1rx6/MQu5fpl31g8=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "testUser3",
+      "first_name": "Bob",
+      "last_name": "Vance",
+      "email": "bvance@drew.edu",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-03-11T21:39:14Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.baseuser",
+    "pk": 6,
+    "fields": {
+      "password": "pbkdf2_sha256$216000$e1gjmpovLmXp$7mWrNcE7PLdy4Vk0TOsMPbst6rIRL3J6yXCdv7AyMys=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "testUser4",
+      "first_name": "Anna",
+      "last_name": "Foobar",
+      "email": "afoobar@drew.edu",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-03-11T21:39:43Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "database.coursepreference",
+    "pk": 1,
+    "fields": {
+      "weight": 1.0,
+      "course": 1,
+      "user": 6
+    }
+  },
+  {
+    "model": "database.coursepreference",
+    "pk": 2,
+    "fields": {
+      "weight": 0.2,
+      "course": 2,
+      "user": null
+    }
+  },
+  {
+    "model": "database.overlappreference",
+    "pk": 1,
+    "fields": {
+      "weight": -0.5,
+      "course": 1,
+      "other_course": 2
+    }
+  },
+  {
+    "model": "database.roompreference",
+    "pk": 2,
+    "fields": {
+      "room": 11
+    }
+  },
+  {
+    "model": "database.course",
+    "pk": 1,
+    "fields": {
+      "department": 1,
+      "name": "Crazy Computer Stuff",
+      "number": 240,
+      "CRN": 334589,
+      "max_enrollment": 32,
+      "credit_hours": 4,
+      "comments": "Very crazy computer stuff!"
+    }
+  },
+  {
+    "model": "database.course",
+    "pk": 2,
+    "fields": {
+      "department": 1,
+      "name": "Fancy Bits and Big O",
+      "number": 230,
+      "CRN": 234555,
+      "max_enrollment": 42,
+      "credit_hours": 4,
+      "comments": "Wacky bit stuff! Whoa"
+    }
+  },
+  {
+    "model": "database.section",
+    "pk": 1,
+    "fields": {
+      "course": 1,
+      "section_id": "X1",
+      "primary_instructor": 1,
+      "other_instructor": 2,
+      "room": 12,
+      "year": 2021,
+      "season": "SP",
+      "timeblock": 3,
+      "schedule": 1
+    }
+  },
+  {
+    "model": "database.section",
+    "pk": 2,
+    "fields": {
+      "course": 1,
+      "section_id": "X2",
+      "primary_instructor": 1,
+      "other_instructor": 2,
+      "room": 14,
+      "year": 2021,
+      "season": "SP",
+      "timeblock": 18,
+      "schedule": 1
+    }
+  },
+  {
+    "model": "database.section",
+    "pk": 3,
+    "fields": {
+      "course": 2,
+      "section_id": "A",
+      "primary_instructor": 2,
+      "other_instructor": null,
+      "room": 2,
+      "year": 2021,
+      "season": "SP",
+      "timeblock": 9,
+      "schedule": 1
+    }
+  },
+  {
+    "model": "database.schedule",
+    "pk": 1,
+    "fields": {
+      "name": "Spring 2021 Classes"
+    }
+  },
+  {
+    "model": "database.modelset",
+    "pk": 1,
+    "fields": {
+      "name": "2021 Spring Classes"
+    }
+  },
+  {
+    "model": "database.setmembership",
+    "pk": 1,
+    "fields": {
+      "set": 1,
+      "content_type": 11,
+      "object_id": 1
+    }
+  },
+  {
+    "model": "database.setmembership",
+    "pk": 2,
+    "fields": {
+      "set": 1,
+      "content_type": 11,
+      "object_id": 2
+    }
+  },
+  {
+    "model": "database.department",
+    "pk": 1,
+    "fields": {
+      "abbreviation": "CSCI",
+      "name": "Computer Science",
+      "department_head": 1
+    }
+  },
+  {
+    "model": "database.building",
+    "pk": 1,
+    "fields": {
+      "name": "Brothers College"
+    }
+  },
+  {
+    "model": "database.building",
+    "pk": 2,
+    "fields": {
+      "name": "Hall of Sciences"
+    }
+  },
+  {
+    "model": "database.building",
+    "pk": 3,
+    "fields": {
+      "name": "DOYO"
+    }
+  },
+  {
+    "model": "database.room",
+    "pk": 1,
+    "fields": {
+      "number": 120,
+      "building": 1,
+      "max_occupancy": 24
+    }
+  },
+  {
+    "model": "database.room",
+    "pk": 2,
+    "fields": {
+      "number": 145,
+      "building": 1,
+      "max_occupancy": 18
+    }
+  },
+  {
+    "model": "database.room",
+    "pk": 3,
+    "fields": {
+      "number": 230,
+      "building": 1,
+      "max_occupancy": 24
+    }
+  },
+  {
+    "model": "database.room",
+    "pk": 4,
+    "fields": {
+      "number": 245,
+      "building": 1,
+      "max_occupancy": 24
+    }
+  },
+  {
+    "model": "database.room",
+    "pk": 5,
+    "fields": {
+      "number": 1,
+      "building": 3,
+      "max_occupancy": 32
+    }
+  },
+  {
+    "model": "database.room",
+    "pk": 6,
+    "fields": {
+      "number": 2,
+      "building": 3,
+      "max_occupancy": 32
+    }
+  },
+  {
+    "model": "database.room",
+    "pk": 7,
+    "fields": {
+      "number": 3,
+      "building": 3,
+      "max_occupancy": 32
+    }
+  },
+  {
+    "model": "database.room",
+    "pk": 8,
+    "fields": {
+      "number": 4,
+      "building": 3,
+      "max_occupancy": 42
+    }
+  },
+  {
+    "model": "database.room",
+    "pk": 9,
+    "fields": {
+      "number": 5,
+      "building": 3,
+      "max_occupancy": 38
+    }
+  },
+  {
+    "model": "database.room",
+    "pk": 10,
+    "fields": {
+      "number": 10,
+      "building": 2,
+      "max_occupancy": 42
+    }
+  },
+  {
+    "model": "database.room",
+    "pk": 11,
+    "fields": {
+      "number": 25,
+      "building": 2,
+      "max_occupancy": 245
+    }
+  },
+  {
+    "model": "database.room",
+    "pk": 12,
+    "fields": {
+      "number": 35,
+      "building": 2,
+      "max_occupancy": 32
+    }
+  },
+  {
+    "model": "database.room",
+    "pk": 13,
+    "fields": {
+      "number": 53,
+      "building": 2,
+      "max_occupancy": 65
+    }
+  },
+  {
+    "model": "database.room",
+    "pk": 14,
+    "fields": {
+      "number": 31,
+      "building": 2,
+      "max_occupancy": 24
+    }
+  },
+  {
+    "model": "database.student",
+    "pk": 1,
+    "fields": {
+      "user": 3,
+      "student_id": 1234567,
+      "class_standing": "FR"
+    }
+  },
+  {
+    "model": "database.student",
+    "pk": 2,
+    "fields": {
+      "user": 4,
+      "student_id": 1234568,
+      "class_standing": "JR"
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 1,
+    "fields": {
+      "user": 6,
+      "overseeing_department": null
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 2,
+    "fields": {
+      "user": 5,
+      "overseeing_department": 1
+    }
+  }
+]
