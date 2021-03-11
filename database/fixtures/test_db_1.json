@@ -1,24 +1,6 @@
 [
   {
     "model": "accounts.baseuser",
-    "pk": 1,
-    "fields": {
-      "password": "pbkdf2_sha256$216000$COeTEEKTwH9n$k9Ed+mu6BWCh1a34WYecPxlYe6qIXYdPht89kfaNP38=",
-      "last_login": "2021-03-11T21:33:00.671Z",
-      "is_superuser": true,
-      "username": "admin",
-      "first_name": "Super",
-      "last_name": "User",
-      "email": "admin@gmail.com",
-      "is_staff": true,
-      "is_active": true,
-      "date_joined": "2021-03-11T21:32:42.104Z",
-      "groups": [],
-      "user_permissions": []
-    }
-  },
-  {
-    "model": "accounts.baseuser",
     "pk": 3,
     "fields": {
       "password": "pbkdf2_sha256$216000$Nq7PiHT5Nj7g$3K0igFxqSYdR0ieZw1JB5nls55NHbgRbcXQP50svPAI=",
@@ -108,6 +90,15 @@
     }
   },
   {
+    "model": "database.coursepreference",
+    "pk": 3,
+    "fields": {
+      "weight": 0.2,
+      "course": null,
+      "user": 5
+    }
+  },
+  {
     "model": "database.overlappreference",
     "pk": 1,
     "fields": {
@@ -121,6 +112,13 @@
     "pk": 2,
     "fields": {
       "room": 11
+    }
+  },
+  {
+    "model": "database.timeblockpreference",
+    "pk": 3,
+    "fields": {
+      "timeblock": 9
     }
   },
   {
