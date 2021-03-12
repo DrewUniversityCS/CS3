@@ -1,14 +1,13 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
-from django.views.generic import TemplateView
 from django.views.generic.edit import FormView, DeleteView, UpdateView
 
 from database.forms import get_dynamic_model_form
 from database.models.relationships import CoursePreference, RoomPreference, TimeblockPreference, Registration, \
     OverlapPreference
 from database.models.schedule_models import Course, Section, Schedule, Timeblock
-from database.models.structural_models import Department, Room, Building
+from database.models.structural_models import Department, Room, Building, ModelSet
 from database.models.user_models import Student, Teacher
 
 
@@ -30,6 +29,7 @@ class DynamicModelMixin(object):
         'courses': Course,
         'sections': Section,
         'timeblocks': Timeblock,
+        'model-set': ModelSet,
     }
 
     def dispatch(self, request, *args, **kwargs):
