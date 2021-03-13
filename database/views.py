@@ -1,3 +1,4 @@
+from django.core.serializers import serialize
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
@@ -53,6 +54,12 @@ class CrudDeleteView(DynamicModelMixin, DeleteView):
 
 class CrudInspectView(DynamicModelMixin, DeleteView):
     template_name = "crud/generic_inspection_view.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['field_data'] = serialize("python", [self.object], use_natural_foreign_keys=True)
+        print(context)
+        return context
 
     def get_object(self):
         return get_object_or_404(self.dynamic_model, pk=self.kwargs.get('id'))

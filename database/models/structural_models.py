@@ -45,6 +45,9 @@ class Department(models.Model):
     def get_fields(self):
         return [(field.name, field.value_to_string(self)) for field in Department._meta.fields]
 
+    def natural_key(self):
+        return self.name
+
 
 class Building(models.Model):
     """

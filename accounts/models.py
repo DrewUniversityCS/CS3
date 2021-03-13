@@ -15,3 +15,10 @@ class BaseUser(AbstractUser):
 
     def get_full_name(self):
         return self.first_name + " " + self.last_name
+
+    def natural_key(self):
+        return {
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'email': self.email
+        }
