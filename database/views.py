@@ -65,6 +65,9 @@ class CrudUpdateView(DynamicModelMixin, UpdateView):
     template_name = "crud/generic_update_view.html"
     fields = "__all__"
 
+    def get_form_class(self):
+        return get_dynamic_model_form(self.dynamic_model)
+
     def get_object(self):
         return get_object_or_404(self.dynamic_model, pk=self.kwargs.get('id'))
 
