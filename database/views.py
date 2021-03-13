@@ -58,10 +58,9 @@ class CrudInspectView(DynamicModelMixin, DeleteView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['field_data'] = serialize("python", [self.object], use_natural_foreign_keys=True)
-        print(context)
         return context
 
-    def get_object(self):
+    def get_object(self, **kwargs):
         return get_object_or_404(self.dynamic_model, pk=self.kwargs.get('id'))
 
     def get_success_url(self):
@@ -75,7 +74,7 @@ class CrudUpdateView(DynamicModelMixin, UpdateView):
     def get_form_class(self):
         return get_dynamic_model_form(self.dynamic_model)
 
-    def get_object(self):
+    def get_object(self, **kwargs):
         return get_object_or_404(self.dynamic_model, pk=self.kwargs.get('id'))
 
     def get_success_url(self):
