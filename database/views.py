@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.views.generic.edit import FormView, DeleteView, UpdateView
 
+from accounts.models import BaseUser
 from database.forms import get_dynamic_model_form
 from database.models.relationships import CoursePreference, RoomPreference, TimeblockPreference, Registration, \
     OverlapPreference
@@ -70,6 +71,19 @@ class CrudInspectView(DynamicModelMixin, DeleteView):
 class CrudUpdateView(DynamicModelMixin, UpdateView):
     template_name = "crud/generic_update_view.html"
     fields = "__all__"
+
+    def get_context_data(self, **kwargs):
+        context = super(CrudUpdateView, self).get_context_data(**kwargs)
+        if self.dynamic_model in [Student, Teacher]:
+            user_object = BaseUser.objects.filter(pk=self.object.user_id)[0]
+            context['form'] = self.get_form_class()(
+                instance=self.object,
+                initial={
+                    'first_name': user_object.first_name,
+                    'last_name': user_object.last_name,
+                    'email': user_object.email
+                })
+        return context
 
     def get_form_class(self):
         return get_dynamic_model_form(self.dynamic_model)
