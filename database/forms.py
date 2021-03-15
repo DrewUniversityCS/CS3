@@ -68,6 +68,18 @@ def make_user_form(dynamic_model):
                         student_id=cleaned_data["student_id"],
                         class_standing=cleaned_data["class_standing"],
                     )
+                elif dynamic_model == Teacher:
+                    teacher = Teacher.objects.filter(pk=self.instance.id)
+                    user_object = BaseUser.objects.filter(pk=teacher[0].user_id)
+                    user_object.update(
+                        username=cleaned_data["email"].split("@")[0],
+                        email=cleaned_data["email"],
+                        first_name=cleaned_data["first_name"],
+                        last_name=cleaned_data["last_name"]
+                    )
+                    teacher.update(
+                        department=cleaned_data["department"]
+                    )
             else:
                 user_object = BaseUser(
                     username=cleaned_data["email"].split("@")[0],
@@ -76,7 +88,6 @@ def make_user_form(dynamic_model):
                     first_name=cleaned_data["first_name"],
                     last_name=cleaned_data["last_name"]
                 )
-
                 if dynamic_model == Student:
                     student = Student(
                         student_id=cleaned_data["student_id"],
@@ -88,9 +99,9 @@ def make_user_form(dynamic_model):
                     student.save()
                 else:
                     teacher = Teacher(
-                        overseeing_department=cleaned_data["overseeing_department"],
                         user=user_object,
-                        user_id=user_object.id
+                        user_id=user_object.id,
+                        department=cleaned_data["department"]
                     )
                     user_object.save()
                     teacher.save()

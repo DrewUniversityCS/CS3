@@ -18,11 +18,11 @@ class Course(models.Model):
     # Note: overlap preferences is how we express course (1) coreqs, (2) prereqs,
     # (3) overlap blocks, (4) general preferences
     overlap_preferences = models.ManyToManyField("database.Course", through="database.OverlapPreference",
-                                                 related_name="overlap preferences+")
+                                                 related_name="overlap preferences+", blank=True, null=True)
     room_preferences = models.ManyToManyField("database.Room", through="database.RoomPreference",
-                                              related_name="room preferences+")
+                                              related_name="room preferences+", blank=True, null=True)
     time_preferences = models.ManyToManyField("database.Timeblock", through="database.TimeblockPreference",
-                                              related_name="timeblock preferences+")
+                                              related_name="timeblock preferences+", blank=True, null=True)
 
     def __str__(self):
         return self.department.abbreviation + str(self.number)
