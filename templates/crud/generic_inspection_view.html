@@ -19,7 +19,6 @@
                                 <th class="px-4 py-3">Value</th>
                             </tr>
                             {% for field, value in instance.fields.items %}
-
                                 {% if not value.items %}
                                     <tr class="bg-gray-100 border-b border-gray-400">
                                         <th class="px-4 py-3">{{ field|parse_var }}</th>
@@ -33,7 +32,6 @@
                                         </tr>
                                     {% endfor %}
                                 {% endif %}
-
                             {% endfor %}
                         </table>
                     {% endfor %}

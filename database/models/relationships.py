@@ -31,9 +31,6 @@ class CoursePreference(Preference):
         else:
             return self.user.get_full_name() + " has a preference of " + str(self.weight) + " with " + str(self.course)
 
-    def get_fields(self):
-        return [(field.name, field.value_to_string(self)) for field in CoursePreference._meta.fields]
-
     class Meta:
         verbose_name_plural = "course preferences"
 
@@ -48,9 +45,6 @@ class OverlapPreference(Preference):
 
     def __str__(self):
         return str(self.course) + " has a preference of " + str(self.weight) + " with " + str(self.other_course)
-
-    def get_fields(self):
-        return [(field.name, field.value_to_string(self)) for field in OverlapPreference._meta.fields]
 
     class Meta:
         verbose_name_plural = "course overlap preferences"
@@ -68,9 +62,6 @@ class RoomPreference(CoursePreference):
             return self.user.get_full_name() + " has a preference of " + str(self.weight) + " with " + str(self.room)
         else:
             return str(self.course) + " has a preference of " + str(self.weight) + " with " + str(self.room)
-
-    def get_fields(self):
-        return [(field.name, field.value_to_string(self)) for field in RoomPreference._meta.fields]
 
     class Meta:
         verbose_name_plural = "room preferences"
@@ -90,9 +81,6 @@ class TimeblockPreference(CoursePreference):
         else:
             return str(self.course) + " has a preference of " + str(self.weight) + " with " + str(self.timeblock)
 
-    def get_fields(self):
-        return [(field.name, field.value_to_string(self)) for field in TimeblockPreference._meta.fields]
-
     class Meta:
         verbose_name_plural = "timeblock preferences"
 
@@ -108,9 +96,6 @@ class Registration(models.Model):
 
     def __str__(self):
         return self.student.user.get_full_name() + " registration for " + self.section.__str__()
-
-    def get_fields(self):
-        return [(field.name, field.value_to_string(self)) for field in Registration._meta.fields]
 
     class Meta:
         verbose_name_plural = "registrations"

@@ -36,14 +36,9 @@ class Department(models.Model):
     """
     abbreviation = models.CharField(max_length=4, blank=False, null=False)
     name = models.CharField(max_length=256, blank=False, null=False, unique=True)
-    department_head = models.ForeignKey("database.Teacher", on_delete=models.CASCADE,
-                                        related_name="department supervised+")
 
     def __str__(self):
         return self.name + ": " + self.abbreviation
-
-    def get_fields(self):
-        return [(field.name, field.value_to_string(self)) for field in Department._meta.fields]
 
     def natural_key(self):
         return self.name
@@ -58,8 +53,8 @@ class Building(models.Model):
     def __str__(self):
         return self.name
 
-    def get_fields(self):
-        return [(field.name, field.value_to_string(self)) for field in Building._meta.fields]
+    def natural_key(self):
+        return self.name
 
 
 class Room(models.Model):
@@ -68,10 +63,6 @@ class Room(models.Model):
     """
     number = models.IntegerField(blank=True, null=True)
     building = models.ForeignKey("database.Building", on_delete=models.CASCADE, related_name="rooms+")
-    max_occupancy = models.IntegerField(blank=False, null=True)
 
     def __str__(self):
         return self.building.name + " " + str(self.number)
-
-    def get_fields(self):
-        return [(field.name, field.value_to_string(self)) for field in Room._meta.fields]
