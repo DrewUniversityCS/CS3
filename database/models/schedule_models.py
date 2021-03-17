@@ -11,7 +11,6 @@ class Course(models.Model):
     department = models.ForeignKey("database.Department", on_delete=models.CASCADE, related_name="courses offered+")
     name = models.CharField(max_length=256, blank=False, null=False)
     number = models.IntegerField(blank=False, null=False)
-    CRN = models.IntegerField(blank=False, null=False)
     max_enrollment = models.IntegerField(blank=False, null=True)
     credit_hours = models.IntegerField(default=4)
     comments = models.TextField()
@@ -19,17 +18,17 @@ class Course(models.Model):
     # Note: overlap preferences is how we express course (1) coreqs, (2) prereqs,
     # (3) overlap blocks, (4) general preferences
     overlap_preferences = models.ManyToManyField("database.Course", through="database.OverlapPreference",
-                                                 related_name="overlap preferences+")
+                                                 related_name="overlap preferences+", blank=True)
     room_preferences = models.ManyToManyField("database.Room", through="database.RoomPreference",
-                                              related_name="room preferences+")
+                                              related_name="room preferences+", blank=True)
     time_preferences = models.ManyToManyField("database.Timeblock", through="database.TimeblockPreference",
-                                              related_name="timeblock preferences+")
+                                              related_name="timeblock preferences+", blank=True)
 
     def __str__(self):
         return self.department.abbreviation + str(self.number)
 
-    def get_fields(self):
-        return [(field.name, field.value_to_string(self)) for field in Course._meta.fields]
+    def natural_key(self):
+        return self.__str__()
 
 
 class Section(models.Model):
@@ -42,18 +41,17 @@ class Section(models.Model):
                                            related_name="sections taught+")
     other_instructor = models.ForeignKey("database.Teacher", on_delete=models.CASCADE,
                                          related_name="sections assisted with+", null=True, blank=True)
-    room = models.ForeignKey("database.Room", on_delete=models.CASCADE, related_name="sections+")
+    room = models.ForeignKey("database.Room", on_delete=models.CASCADE, related_name="sections+", blank=True, null=True)
     year = models.IntegerField(null=False, blank=False)
     season = models.CharField(choices=SEASONS, max_length=50)
-    timeblock = models.ForeignKey("database.Timeblock", on_delete=models.CASCADE, related_name="sections+")
+    offered_annually = models.BooleanField(default=True)
+    timeblock = models.ForeignKey("database.Timeblock", on_delete=models.CASCADE, related_name="sections+", blank=True,
+                                  null=True)
     schedule = models.ForeignKey("database.Schedule", on_delete=models.CASCADE, related_name="sections+")
 
     def __str__(self):
         return self.course.name + " " + self.course.department.abbreviation + "-" + str(self.course.number) \
                + " Section " + self.section_id
-
-    def get_fields(self):
-        return [(field.name, field.value_to_string(self)) for field in Section._meta.fields]
 
 
 class Schedule(models.Model):
@@ -64,9 +62,6 @@ class Schedule(models.Model):
 
     def __str__(self):
         return self.name
-
-    def get_fields(self):
-        return [(field.name, field.value_to_string(self)) for field in Schedule._meta.fields]
 
 
 class WeekdaySet(models.Model):
@@ -110,8 +105,8 @@ class WeekdaySet(models.Model):
     class Meta:
         verbose_name_plural = 'possible weekdays'
 
-    def get_fields(self):
-        return [(field.name, field.value_to_string(self)) for field in WeekdaySet._meta.fields]
+    def natural_key(self):
+        return self.__str__()
 
 
 class Timeblock(models.Model):
@@ -126,7 +121,6 @@ class Timeblock(models.Model):
     end_minutes = models.IntegerField(choices=POSSIBLE_MINUTES)
 
     def __str__(self):
-        return self.block_id + " " + "(" + str(self.weekdays) + ")"
-
-    def get_fields(self):
-        return [(field.name, field.value_to_string(self)) for field in Timeblock._meta.fields]
+        return self.block_id + " " + "(" + str(self.weekdays) + ")" \
+               + " " + str(self.start_hour) + ":" + str(self.start_minutes) + \
+               " - " + str(self.end_hour) + ":" + str(self.end_minutes)

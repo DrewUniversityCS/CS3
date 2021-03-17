@@ -1,13 +1,13 @@
 {% extends '_base.html' %}
 
 {% block title %}CRUD Update{% endblock %}
-{% load crispy_forms_tags %}
+{% load tailwind_filters %}
 
 {% block content %}
     <div class="pt-12 text-center">
         <div class="w-1/2 pt-8 mx-auto bg-white rounded-lg">
             <div class="w-2/3 mx-auto text-center">
-                <form method="put">
+                <form method="post">
                     {% csrf_token %}
                     <div class="text-lg">Editing the following object</div>
                     <div class="py-8 text-xl"><b>{{ object }}</b></div>

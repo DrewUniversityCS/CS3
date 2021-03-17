@@ -1,6 +1,10 @@
-from crispy_forms.layout import Layout, Submit
-from django.forms import ModelForm, CheckboxSelectMultiple, Textarea
 from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Submit
+from django.forms import ModelForm, CheckboxSelectMultiple, Textarea, CharField, \
+    EmailField
+
+from accounts.models import BaseUser
+from database.models.user_models import Teacher, Student
 
 widget_dict = {
     "comments": Textarea(attrs={'rows': 5, 'cols': 20}),
@@ -39,16 +43,98 @@ class CrispyModelForm(ModelForm):
         super(CrispyModelForm, self).__init__(*args, **kwargs)
 
 
+def make_user_form(dynamic_model):
+    class UserForm(CrispyModelForm):
+        first_name = CharField(max_length=256)
+        last_name = CharField(max_length=256)
+        email = EmailField()
+
+        def save(self, **kwargs):
+            cleaned_data = self.cleaned_data
+            """
+            The instance ID exists only in an edit form, so this way we know we are updating and not creating an object
+            """
+            if self.instance.id is not None:
+                if dynamic_model == Student:
+                    student = Student.objects.filter(pk=self.instance.id)
+                    user_object = BaseUser.objects.filter(pk=student[0].user_id)
+                    user_object.update(
+                        username=cleaned_data["email"].split("@")[0],
+                        email=cleaned_data["email"],
+                        first_name=cleaned_data["first_name"],
+                        last_name=cleaned_data["last_name"]
+                    )
+                    student.update(
+                        student_id=cleaned_data["student_id"],
+                        class_standing=cleaned_data["class_standing"],
+                    )
+                elif dynamic_model == Teacher:
+                    teacher = Teacher.objects.filter(pk=self.instance.id)
+                    user_object = BaseUser.objects.filter(pk=teacher[0].user_id)
+                    user_object.update(
+                        username=cleaned_data["email"].split("@")[0],
+                        email=cleaned_data["email"],
+                        first_name=cleaned_data["first_name"],
+                        last_name=cleaned_data["last_name"]
+                    )
+                    teacher.update(
+                        department=cleaned_data["department"]
+                    )
+            else:
+                user_object = BaseUser(
+                    username=cleaned_data["email"].split("@")[0],
+                    email=cleaned_data["email"],
+                    password=BaseUser.objects.make_random_password(),
+                    first_name=cleaned_data["first_name"],
+                    last_name=cleaned_data["last_name"]
+                )
+                if dynamic_model == Student:
+                    student = Student(
+                        student_id=cleaned_data["student_id"],
+                        class_standing=cleaned_data["class_standing"],
+                        user=user_object,
+                        user_id=user_object.id
+                    )
+                    user_object.save()
+                    student.save()
+                else:
+                    teacher = Teacher(
+                        user=user_object,
+                        user_id=user_object.id,
+                        department=cleaned_data["department"]
+                    )
+                    user_object.save()
+                    teacher.save()
+
+        class Meta:
+            model = dynamic_model
+            exclude = ['user', 'registrations']
+            field_order = [
+                'first_name',
+                'last_name',
+                'email',
+                'class_standing',
+                'student_id',
+                'registrations',
+                'overseeing_department'
+            ]
+
+    return UserForm
+
+
 def get_dynamic_model_form(dynamic_model):
     """
     Return a form class based on dynamic_model
     """
 
-    class DynamicModelForm(CrispyModelForm):
-        class Meta:
-            model = dynamic_model
-            fields = "__all__"
-            widgets = widget_dict
-            labels = label_dict
+    if dynamic_model not in [Teacher, Student]:
+        class DynamicModelForm(CrispyModelForm):
+            class Meta:
+                model = dynamic_model
+                fields = "__all__"
+                widgets = widget_dict
+                labels = label_dict
+    else:
+        return make_user_form(dynamic_model)
 
     return DynamicModelForm
