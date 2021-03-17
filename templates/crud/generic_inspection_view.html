@@ -1,22 +1,39 @@
 {% extends '_base.html' %}
 
 {% block title %}CRUD Inspect{% endblock %}
-{% load crispy_forms_tags %}
+{% load tailwind_filters %}
+{% load parse_var %}
 
 {% block content %}
-    <div class="pt-24 text-center">
-        <div class="w-1/2 py-24 mx-auto bg-white rounded-lg">
+    <div class="pt-12 text-center">
+        <div class="w-1/2 py-12 mx-auto bg-white rounded-lg">
             <form method="post" class="pb-12">
                 {% csrf_token %}
                 <div class="text-lg">Inspecting the following object</div>
                 <div class="py-8 text-xl"><b>{{ object }}</b></div>
                 <div>
-                    {% for name, value in object.get_fields %}
-                        {% if value %}
-                            <div>
-                                {{ name }} : {{ value }}
-                            </div>
-                        {% endif %}
+                    {% for instance in field_data %}
+                        <table class="w-5/6 m-5 mx-auto text-gray-800 bg-gray-400 rounded-lg shadow-lg">
+                            <tr class="text-center border-b border-gray-300">
+                                <th class="px-4 py-3">Field</th>
+                                <th class="px-4 py-3">Value</th>
+                            </tr>
+                            {% for field, value in instance.fields.items %}
+                                {% if not value.items %}
+                                    <tr class="bg-gray-100 border-b border-gray-400">
+                                        <th class="px-4 py-3">{{ field|parse_var }}</th>
+                                        <th class="px-4 py-3">{{ value }}</th>
+                                    </tr>
+                                {% else %}
+                                    {% for key, item in value.items %}
+                                        <tr class="bg-gray-100 border-b border-gray-400">
+                                            <th class="px-4 py-3">{{ key|parse_var }}</th>
+                                            <th class="px-4 py-3">{{ item }}</th>
+                                        </tr>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        </table>
                     {% endfor %}
                 </div>
             </form>
