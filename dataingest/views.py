@@ -13,12 +13,12 @@ def upload(request):
         r = reader(f, delimiter=',')
         for row in r:
             print(row)
-    return render(request, 'upload.html')
+    return render(request, 'dataingest/upload.html')
 
 
 def csv_list(request):
     csvs = CSV.objects.all()
-    return render(request, 'csv_list.html', {
+    return render(request, 'dataingest/csv_list.html', {
         'csvs': csvs
     })
 
@@ -31,6 +31,6 @@ def upload_csv(request):
             return redirect('csv_list')
     else:
         form = CSVForm()
-    return render(request, 'upload_csv.html', {
+    return render(request, 'dataingest/upload_csv.html', {
         'form': form
     })
