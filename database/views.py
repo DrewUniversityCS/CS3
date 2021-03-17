@@ -1,14 +1,15 @@
+from django.core.serializers import serialize
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
-from django.views.generic import TemplateView
 from django.views.generic.edit import FormView, DeleteView, UpdateView
 
+from accounts.models import BaseUser
 from database.forms import get_dynamic_model_form
 from database.models.relationships import CoursePreference, RoomPreference, TimeblockPreference, Registration, \
     OverlapPreference
 from database.models.schedule_models import Course, Section, Schedule, Timeblock
-from database.models.structural_models import Department, Room, Building
+from database.models.structural_models import Department, Room, Building, ModelSet
 from database.models.user_models import Student, Teacher
 
 
@@ -30,6 +31,7 @@ class DynamicModelMixin(object):
         'courses': Course,
         'sections': Section,
         'timeblocks': Timeblock,
+        'model-set': ModelSet,
     }
 
     def dispatch(self, request, *args, **kwargs):
@@ -54,7 +56,12 @@ class CrudDeleteView(DynamicModelMixin, DeleteView):
 class CrudInspectView(DynamicModelMixin, DeleteView):
     template_name = "crud/generic_inspection_view.html"
 
-    def get_object(self):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['field_data'] = serialize("python", [self.object], use_natural_foreign_keys=True)
+        return context
+
+    def get_object(self, **kwargs):
         return get_object_or_404(self.dynamic_model, pk=self.kwargs.get('id'))
 
     def get_success_url(self):
@@ -65,7 +72,23 @@ class CrudUpdateView(DynamicModelMixin, UpdateView):
     template_name = "crud/generic_update_view.html"
     fields = "__all__"
 
-    def get_object(self):
+    def get_context_data(self, **kwargs):
+        context = super(CrudUpdateView, self).get_context_data(**kwargs)
+        if self.dynamic_model in [Student, Teacher]:
+            user_object = BaseUser.objects.filter(pk=self.object.user_id)[0]
+            context['form'] = self.get_form_class()(
+                instance=self.object,
+                initial={
+                    'first_name': user_object.first_name,
+                    'last_name': user_object.last_name,
+                    'email': user_object.email
+                })
+        return context
+
+    def get_form_class(self):
+        return get_dynamic_model_form(self.dynamic_model)
+
+    def get_object(self, **kwargs):
         return get_object_or_404(self.dynamic_model, pk=self.kwargs.get('id'))
 
     def get_success_url(self):

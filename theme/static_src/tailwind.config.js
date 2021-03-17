@@ -16,7 +16,12 @@ module.exports = {
                 'no-data': "url('/static/images/signal_heropattern.svg')",
                 'endlessclouds': "url('/static/images/endless-clouds_heropattern.svg')",
                 'foundation': "url('/static/images/aztec_heropattern.svg')"
-            })
+            }),
+            animation: {
+                'spin-1': 'spin 3s linear infinite',
+                'spin-2': 'spin 4s linear infinite',
+                'spin-3': 'spin 5s linear infinite',
+            }
         },
     },
     variants: {
