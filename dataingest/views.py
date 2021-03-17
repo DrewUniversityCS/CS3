@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
-from django.views.generic import TemplateView
 from csv import reader
 from io import TextIOWrapper
+
+from django.shortcuts import render, redirect
 
 from .forms import CSVForm
 from .models import CSV

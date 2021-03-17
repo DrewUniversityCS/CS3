@@ -1,4 +1,5 @@
 from django.urls import path
+
 from dataingest import views
 
 urlpatterns = [
@@ -6,6 +7,3 @@ urlpatterns = [
 ]
 
 app_name = 'dataingest'
-
-
-# path('', include('dataingest.urls', namespace='dataingest'))

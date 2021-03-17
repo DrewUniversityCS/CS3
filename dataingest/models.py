@@ -7,6 +7,3 @@ class CSV(models.Model):
 
     def __str__(self):
         return self.CSV_File_Name
-
-
-
