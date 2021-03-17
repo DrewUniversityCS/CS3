@@ -1,12 +1,17 @@
 {% extends '_base.html' %}
+{% load crispy_forms_tags %}
+
 {% block content %}
     <div class="h-screen font-sans text-center ">
-        <h2> Upload </h2>
-        <form action="" method="POST" enctype="multipart/form-data">
+        <div class="flex flex-col items-center justify-center w-full pt-12 pb-12">
+        <h2 class="mb-2 pb-4 text-5xl font-bold tracking-wide text-blue-600 ">Upload</h2>
+
+        <form action="" method="POST" enctype="multipart/form-data" class="max-w-lg p-12 mx-auto overflow-hidden bg-white rounded-lg shadow-lg">
             {% csrf_token %}
             <input type="file" name="document">
 
-            <button type="submit">Upload File</button>
+            <button type="submit" class=" px-3 py-1 bg-blue-400 rounded shadow hover:bg-blue-500">Upload File</button>
         </form>
+    </div>
     </div>
 {% endblock content %}
