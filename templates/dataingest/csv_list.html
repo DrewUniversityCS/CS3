@@ -1,0 +1,23 @@
+{% extends '_base.html' %}
+
+{% block content %}
+    <div class="h-screen font-sans text-center bg-gray-300">
+         <h2>All CSVs</h2>
+        <table class="table">
+            <thead>
+              <tr>
+                <th>CSV Title</th>
+                <th>CSV File Download</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for csv in csv %}
+                <tr>
+                  <td> {{ csv.CSV_File_Name }}</td>
+                  <td> {{ csv.CSV_File }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
