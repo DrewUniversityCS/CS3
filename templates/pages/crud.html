@@ -3,8 +3,8 @@
 {% block title %}CRUD{% endblock title %}
 
 {% block content %}
-    <div class="h-screen">
-        <div class="grid grid-cols-2 gap-2 pt-24 text-center">
+    <div class="min-h-screen pt-12">
+        <div class="grid grid-cols-1 text-center sm:grid-cols-4">
             <div class="w-full my-3 text-3xl font-bold text-blue-700">
                 Users
                 <ul>
@@ -48,6 +48,11 @@
                             Timeblock Preferences
                         </a>
                     </li>
+                    <li class="w-full mt-2 text-xl text-green-500">
+                        <a href="/crud/model-set">
+                            Constraint Sets
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="w-full my-3 text-3xl font-bold text-blue-700">
@@ -84,8 +89,13 @@
                         </a>
                     </li>
                     <li class="w-full mt-2 text-xl text-green-500">
+                        <a href="/crud/model-set">
+                            Course Sets
+                        </a>
+                    </li>
+                    <li class="w-full mt-2 text-xl text-green-500">
                         <a href="/crud/sections">
-                            Section
+                            Sections
                         </a>
                     </li>
                     <li class="w-full mt-2 text-xl text-green-500">
