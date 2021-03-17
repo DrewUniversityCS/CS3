@@ -7,12 +7,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts\
 INTERNAL_IPS = ['127.0.0.1']
-ALLOWED_HOSTS = ["localhost",
-                 "0.0.0.0",
-                 "127.0.0.1",
-                 "http://cs3-drew.herokuapp.com",
-                 "https://cs3-drew.herokuapp.com",
-                 "cs3-drew.herokuapp.com"]
+ALLOWED_HOSTS = ["*"]
 # APPS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
