@@ -16,6 +16,7 @@ gunicorn = "*"
 cryptography = "==3.3.2"
 crispy-tailwind = "*"
 mysqlclient = "*"
+pymysql = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.9"

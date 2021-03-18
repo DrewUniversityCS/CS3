@@ -1,9 +1,7 @@
-runtime: python
-env: flex
-entrypoint: gunicorn config.wsgi :$PORT main:app
+runtime: python39
+env: standard
+entrypoint: gunicorn -b :$PORT config.wsgi
 
-runtime_config:
-  python_version: 3.7
 
 handlers:
 # This configures Google App Engine to serve the files in the app's static
