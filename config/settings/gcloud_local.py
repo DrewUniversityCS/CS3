@@ -20,3 +20,10 @@ DATABASES = {
         'NAME': 'django_data',
     }
 }
+
+"""
+To run the proxy:
+cloud_sql_proxy.exe -instances="rapid-league-302721:us-east1:my-sql-db"=tcp:3306
+
+dont forget to change manage.py settings to this file
+"""
