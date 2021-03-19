@@ -135,5 +135,4 @@ dmypy.json
 /node_modules/
 /csrs/
 
-staticfiles/
 /staticfiles/
