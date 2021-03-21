@@ -1,7 +1,7 @@
 from django.db import models
-
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from database.enums import SEASONS, POSSIBLE_HOURS, POSSIBLE_MINUTES
-
+from database.models.structural_models import SetMembership
 
 class Course(models.Model):
     """
@@ -23,7 +23,7 @@ class Course(models.Model):
                                               related_name="room preferences+", blank=True)
     time_preferences = models.ManyToManyField("database.Timeblock", through="database.TimeblockPreference",
                                               related_name="timeblock preferences+", blank=True)
-
+    sets = GenericRelation(SetMembership, related_query_name='course')
     def __str__(self):
         return self.department.abbreviation + str(self.number)
 
