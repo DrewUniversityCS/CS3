@@ -1,9 +1,11 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
 from django.forms import ModelForm, CheckboxSelectMultiple, Textarea, CharField, \
-    EmailField
+    EmailField, ModelChoiceField, Form, ModelMultipleChoiceField
 
 from accounts.models import BaseUser
+from database.models.schedule_models import Course
+from database.models.structural_models import ModelSet
 from database.models.user_models import Teacher, Student
 
 widget_dict = {
@@ -131,7 +133,7 @@ def get_dynamic_model_form(dynamic_model):
         class DynamicModelForm(CrispyModelForm):
             class Meta:
                 model = dynamic_model
-                exclude = ['overlap_preferences', 'room_preferences', 'time_preferences']
+                # exclude = ['overlap_preferences', 'room_preferences', 'time_preferences']
                 fields = "__all__"
                 widgets = widget_dict
                 labels = label_dict
@@ -139,3 +141,20 @@ def get_dynamic_model_form(dynamic_model):
         return make_user_form(dynamic_model)
 
     return DynamicModelForm
+
+def get_dynamic_model_choice_set_form(dynamic_model):
+    class DynamicModelSetForm(Form):
+        set = ModelChoiceField(queryset=ModelSet.objects.filter())
+        choices = ModelMultipleChoiceField(
+            queryset=dynamic_model.objects.all(), widget=CheckboxSelectMultiple,
+            label=f'{dynamic_model.__name__}s'
+        )
+        def __init__(self, *args, **kwargs):
+            remove_set = kwargs.pop('remove_set', False)
+            super(DynamicModelSetForm, self).__init__(*args, **kwargs)
+            if remove_set:
+                self.fields['set'].widget.attrs['disabled'] = True
+                self.fields['set'].initial = kwargs['initial']['set'].id
+            else:
+                self.fields['set'].queryset = ModelSet.objects.filter(setmembership__isnull=True)
+    return DynamicModelSetForm

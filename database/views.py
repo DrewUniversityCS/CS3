@@ -1,15 +1,15 @@
 from django.core.serializers import serialize
 from django.http import Http404
 from django.shortcuts import get_object_or_404
-from django.urls import reverse
+from django.urls import reverse, resolve
 from django.views.generic.edit import FormView, DeleteView, UpdateView
 
 from accounts.models import BaseUser
-from database.forms import get_dynamic_model_form
+from database.forms import get_dynamic_model_form, get_dynamic_model_choice_set_form
 from database.models.relationships import CoursePreference, RoomPreference, TimeblockPreference, Registration, \
     OverlapPreference
 from database.models.schedule_models import Course, Section, Schedule, Timeblock
-from database.models.structural_models import Department, Room, Building, ModelSet
+from database.models.structural_models import Department, Room, Building, ModelSet, SetMembership
 from database.models.user_models import Student, Teacher
 
 
@@ -115,4 +115,99 @@ class CrudView(DynamicModelMixin, FormView):
 
     def form_valid(self, form):
         form.save()
+        return super().form_valid(form)
+
+
+class DynamicModelSetCreateView(DynamicModelMixin, FormView):
+    template_name = "crud/generic_crud_view.html"
+    context_object_name = 'all_objects'
+
+    def get_form_class(self):
+        return get_dynamic_model_choice_set_form(self.dynamic_model)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'all_objects': ModelSet.objects.filter(
+                setmembership__content_type__model=self.dynamic_model.__name__.lower()
+            ).distinct(),
+            'dynamic_model_name': self.dynamic_model_name,
+            'url_name': resolve(self.request.path_info).url_name
+        })
+
+        return context
+
+    def get_success_url(self):
+        return self.request.path
+
+    def form_valid(self, form):
+        SetMembership.objects.bulk_create([
+            SetMembership(
+                set=form.cleaned_data['set'],
+                member_object=choice
+            )
+            for choice in form.cleaned_data['choices']
+        ])
+        return super().form_valid(form)
+
+
+class DynamicModelSetUpdateView(DynamicModelMixin, FormView):
+    template_name = "crud/generic_update_view.html"
+    context_object_name = 'all_objects'
+    object = None
+
+    def get_form_class(self):
+        print('JHello')
+        return get_dynamic_model_choice_set_form(self.dynamic_model)
+
+    def get_initial(self):
+        self.object = get_object_or_404(ModelSet, pk=self.kwargs.get('id'))
+        return {
+            'set': self.object,
+            'choices': self.dynamic_model.objects.filter(sets__set=self.object)
+        }
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({
+            'remove_set': True,
+        })
+        if self.request.method in ('POST', 'PUT'):
+            kwargs.update({
+                'data': self.request.POST.copy().update({'set': self.object.id}),
+            })
+
+        return kwargs
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     print(self.dynamic_model.__name__)
+    #     context.update({
+    #         'all_objects': ModelSet.objects.filter(
+    #             setmembership__content_type__model=self.dynamic_model.__name__.lower()
+    #         ).distinct(),
+    #         'dynamic_model_name': self.dynamic_model_name
+    #     })
+    #
+    #     return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['object'] = get_object_or_404(ModelSet, pk=self.kwargs.get('id'))
+        return context
+
+    def get_success_url(self):
+        return reverse('database:set_crud', kwargs={'model': self.dynamic_model_name})
+
+    def form_valid(self, form):
+
+        SetMembership.objects.filter(
+            set=form.cleaned_data['set'], content_type__model=self.dynamic_model.__name__.lower()
+        ).delete()
+        SetMembership.objects.bulk_create([
+            SetMembership(
+                set=form.cleaned_data['set'],
+                member_object=choice
+            )
+            for choice in form.cleaned_data['choices']
+        ])
         return super().form_valid(form)
