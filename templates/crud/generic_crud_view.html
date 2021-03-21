@@ -41,7 +41,18 @@
                                 {{ object }}
                             </td>
                             <td class="w-1/2 py-3 text-xl text-center pl-7">
-                                <a href="{% url 'database:crud_inspect' dynamic_model_name object.id %}"><i
+                                {% if url_name == 'set_crud' %}
+                                <a href="{% url 'database:set_crud_inspect' dynamic_model_name object.id %}"><i
+                                        class="mr-2 transform fa fa-eye hover:text-blue-500 hover:scale-125"
+                                        aria-hidden="true"></i></a>
+                                <a href="{% url 'database:set_crud_update' dynamic_model_name object.id %}"><i
+                                        class="mr-2 transform fa fa-edit hover:text-yellow-500 hover:scale-125"
+                                        aria-hidden="true"></i></a>
+                                <a href="{% url 'database:set_crud_delete' dynamic_model_name object.id %}"><i
+                                        class="mr-2 transform fa fa-trash hover:text-red-500 hover:scale-125"
+                                        aria-hidden="true"></i></a>
+                                {% else %}
+                                    <a href="{% url 'database:crud_inspect' dynamic_model_name object.id %}"><i
                                         class="mr-2 transform fa fa-eye hover:text-blue-500 hover:scale-125"
                                         aria-hidden="true"></i></a>
                                 <a href="{% url 'database:crud_update' dynamic_model_name object.id %}"><i
@@ -50,6 +61,7 @@
                                 <a href="{% url 'database:crud_delete' dynamic_model_name object.id %}"><i
                                         class="mr-2 transform fa fa-trash hover:text-red-500 hover:scale-125"
                                         aria-hidden="true"></i></a>
+                                {% endif %}
                             </td>
                         </tr>
                     {% endfor %}
