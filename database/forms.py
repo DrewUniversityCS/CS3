@@ -1,11 +1,12 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
 from django.forms import ModelForm, CheckboxSelectMultiple, Textarea, CharField, \
-    EmailField, ModelChoiceField, Form, ModelMultipleChoiceField
+    EmailField, ModelChoiceField, Form, ModelMultipleChoiceField, ValidationError
+from django.contrib.contenttypes.models import ContentType
 
 from accounts.models import BaseUser
 from database.models.schedule_models import Course
-from database.models.structural_models import ModelSet
+from database.models.structural_models import ModelSet, PreferenceFormEntry, SetMembership
 from database.models.user_models import Teacher, Student
 
 widget_dict = {
@@ -162,3 +163,24 @@ def get_dynamic_model_choice_set_form(dynamic_model):
                 )
 
     return DynamicModelSetForm
+
+
+class PreferenceFormEntryForm(CrispyModelForm):
+    prefernce_form = None
+
+    class Meta:
+        model = PreferenceFormEntry
+        fields = ('student_name', 'email', 'courses')
+
+    def __init__(self, prefernce_form, *args, **kwargs):
+        super(PreferenceFormEntryForm, self).__init__(*args, **kwargs)
+        self.prefernce_form = prefernce_form
+        self.fields['courses'] = ModelMultipleChoiceField(
+            queryset=Course.objects.filter(sets__set=prefernce_form.set), widget=CheckboxSelectMultiple
+        )
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if not Student.objects.filter(sets__set=self.prefernce_form.set, user__email=email).exists():
+            raise ValidationError('You are not allowed to fill the form!')
+        return email

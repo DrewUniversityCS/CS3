@@ -1,4 +1,5 @@
 {% extends '_base.html' %}
+{% load crispy_forms_tags %}
 {% load static %}
 
 {% block title %}Student Form{% endblock title %}
@@ -6,73 +7,14 @@
     <div class="p-6 mx-auto my-8 md:w-1/2 md:p-0">
         <div class="mt-5 md:mt-0 md:col-span-2">
             <form action="#" method="POST">
+                {% csrf_token %}
                 <div class="overflow-hidden shadow sm:rounded-md">
                     <div class="px-4 py-5 bg-white sm:p-6">
                         <img src="{% static 'images/cs3_text_logo.png' %}" class="w-32 mx-auto"/>
                         <h1 class="mt-2 mb-6 text-3xl text-center" style="color:#053263;">Course <span
                                 style="color: #2f5a36">Preferences</span></h1>
                         <hr class="mx-auto" width="80%"/>
-                        <div class="col-span-6 my-2 sm:col-span-3">
-                            <label for="name" class="block text-sm font-medium text-gray-700">Student Name:</label>
-                            <input type="text" name="name" id="name" autocomplete="family-name"
-                                   class="block w-full p-2 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                        </div>
-
-                        <div class="col-span-6 my-2 sm:col-span-4">
-                            <label for="email_address" class="block text-sm font-medium text-gray-700">Student
-                                Email:</label>
-                            <input type="text" name="email_address" id="email_address" autocomplete="email"
-                                   class="block w-full p-2 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                        </div>
-
-                        <div class="col-span-6 my-2 sm:col-span-3">
-                            <fieldset id="courses">
-                                <legend class="block text-sm font-medium text-gray-700">Courses:</legend>
-                                <div class="mt-4 space-y-4">
-
-                                    {#first checkbox#}
-                                    <div class="flex items-start">
-                                        <div class="flex items-center h-5">
-                                            <input id="CSCI350" name="CSCI350" type="checkbox"
-                                                   class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 js_subject_checkbox">
-                                        </div>
-                                        <div class="ml-3 text-sm">
-                                            <label for="CSCI350" class="font-medium text-gray-700">CSCI350</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex items-start">
-                                    <div class="flex items-center h-5">
-                                        <input id="CSCI350" name="CSCI350" type="checkbox"
-                                               class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 js_subject_checkbox">
-                                    </div>
-                                    <div class="ml-3 text-sm">
-                                        <label for="CSCI350" class="font-medium text-gray-700">CSCI350</label>
-                                    </div>
-                                </div>
-                                <div class="flex items-start">
-                                    <div class="flex items-center h-5">
-                                        <input id="CSCI400" name="CSCI400" type="checkbox"
-                                               class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 js_subject_checkbox">
-                                    </div>
-                                    <div class="ml-3 text-sm">
-                                        <label for="CSCI400" class="font-medium text-gray-700">CSCI400</label>
-                                    </div>
-                                </div>
-
-                                <div class="flex items-start">
-                                    <div class="flex items-center h-5">
-                                        <input id="CSCI150" name="CSCI150" type="checkbox"
-                                               class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 js_subject_checkbox">
-                                    </div>
-                                    <div class="ml-3 text-sm">
-                                        <label for="CSCI150" class="font-medium text-gray-700">CSCI150</label>
-                                    </div>
-                                </div>
-
-
-                            </fieldset>
-                        </div>
+                        {{ form|crispy }}
                     </div>
                     <div class="px-4 py-3 text-right bg-gray-50 sm:px-6">
                         <button type="submit"

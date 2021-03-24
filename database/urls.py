@@ -1,7 +1,7 @@
 from django.urls import path, re_path
 
 from database.views import CrudView, CrudDeleteView, CrudUpdateView, CrudInspectView, DynamicModelSetCreateView, \
-    DynamicModelSetUpdateView, DynamicModelSetInspectView, DynamicModelSetDeleteView
+    DynamicModelSetUpdateView, DynamicModelSetInspectView, DynamicModelSetDeleteView, PreferenceFormEntryView
 
 urlpatterns = [
     path('crud/<slug:model>/', CrudView.as_view(), name='crud_model'),
@@ -13,6 +13,8 @@ urlpatterns = [
     path('set-inspect/<slug:model>/<slug:id>/', DynamicModelSetInspectView.as_view(), name='set_crud_inspect'),
     path('set-delete/<slug:model>/<slug:id>/', DynamicModelSetDeleteView.as_view(), name='set_crud_delete'),
     path('set-update/<slug:model>/<slug:id>/', DynamicModelSetUpdateView.as_view(), name='set_crud_update'),
+
+    path('student-form/<slug:form_id>/', PreferenceFormEntryView.as_view(), name='student_preference_form'),
 ]
 
 app_name = 'database'

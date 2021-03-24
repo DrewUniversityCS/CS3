@@ -30,6 +30,30 @@ class SetMembership(models.Model):
         return str(self.member_object) + " is member of " + str(self.set)
 
 
+class PreferenceForm(models.Model):
+    """
+    Keeps Track of preference form Open for a set.
+    """
+    set = models.ForeignKey(ModelSet, on_delete=models.CASCADE)
+    is_taking_responses = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.set} --> {self.is_taking_responses}'
+
+
+class PreferenceFormEntry(models.Model):
+    """
+    Keeps Student preference entries
+    """
+    preference_form = models.ForeignKey(PreferenceForm, on_delete=models.CASCADE)
+    student_name = models.CharField('Student Name', max_length=100)
+    email = models.EmailField('Student Email')
+    courses = models.ManyToManyField('Course')
+
+    def __str__(self):
+        return f'{self.student_name}({self.email}) - {self.preference_form.set}'
+
+
 class Department(models.Model):
     """
     An academic department.

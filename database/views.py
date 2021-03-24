@@ -1,16 +1,18 @@
 from django.core.serializers import serialize
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from django.urls import reverse, resolve
+from django.urls import reverse, resolve, reverse_lazy
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView, DeleteView, UpdateView
+from django.db import transaction
 
 from accounts.models import BaseUser
-from database.forms import get_dynamic_model_form, get_dynamic_model_choice_set_form
+from database.forms import get_dynamic_model_form, get_dynamic_model_choice_set_form, PreferenceFormEntryForm
 from database.models.relationships import CoursePreference, RoomPreference, TimeblockPreference, Registration, \
     OverlapPreference
 from database.models.schedule_models import Course, Section, Schedule, Timeblock
-from database.models.structural_models import Department, Room, Building, ModelSet, SetMembership
+from database.models.structural_models import Department, Room, Building, ModelSet, SetMembership, PreferenceForm, \
+    PreferenceFormEntry
 from database.models.user_models import Student, Teacher
 
 
@@ -183,7 +185,6 @@ class DynamicModelSetUpdateView(DynamicModelMixin, FormView):
         return reverse('database:set_crud', kwargs={'model': self.dynamic_model_name})
 
     def form_valid(self, form):
-
         SetMembership.objects.filter(
             set=form.cleaned_data['set'], content_type__model=self.dynamic_model.__name__.lower()
         ).delete()
@@ -206,11 +207,12 @@ class DynamicModelSetInspectView(DynamicModelMixin, TemplateView):
 
     def get_context_data_(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
-        objects = SetMembership.objects.filter(set__id=args[1]['id'], content_type__model=self.dynamic_model.__name__.lower())
+        objects = SetMembership.objects.filter(set__id=args[1]['id'],
+                                               content_type__model=self.dynamic_model.__name__.lower())
         objs = []
         for obj in objects:
             objs.append(obj.member_object)
-        context['field_data'] = serialize("python", objs,  use_natural_foreign_keys=True)
+        context['field_data'] = serialize("python", objs, use_natural_foreign_keys=True)
         context['object'] = f"{ModelSet.objects.get(id=args[1]['id'])} - {self.dynamic_model.__name__}s"
         return context
 
@@ -229,3 +231,31 @@ class DynamicModelSetDeleteView(DynamicModelMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('database:set_crud', kwargs={'model': self.dynamic_model_name})
+
+
+class PreferenceFormEntryView(FormView):
+    template_name = 'pages/student-form.html'
+    success_url = reverse_lazy('pages:student-form-success')
+    prefernce_form = None
+
+    def dispatch(self, request, *args, **kwargs):
+        self.prefernce_form = get_object_or_404(PreferenceForm, pk=self.kwargs.get('form_id'))
+        return super().dispatch(request, args, kwargs)
+
+    def get_form(self, form_class=None):
+        return PreferenceFormEntryForm(self.prefernce_form, **self.get_form_kwargs())
+
+    def form_valid(self, form):
+        entry = form.save(commit=False)
+        entry.preference_form = self.prefernce_form
+        with transaction.atomic():
+            entry.save()
+            entry_to_course_link = []
+            for course in form.cleaned_data['courses']:
+                prefernce_entry_course = PreferenceFormEntry.courses.through(
+                    preferenceformentry_id=entry.id, course_id=course.id
+                )
+                entry_to_course_link.append(prefernce_entry_course)
+
+            PreferenceFormEntry.courses.through.objects.bulk_create(entry_to_course_link, batch_size=7000)
+        return super().form_valid(form)
