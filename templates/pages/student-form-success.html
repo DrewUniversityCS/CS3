@@ -1,0 +1,24 @@
+
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}Student Form Success{% endblock title %}
+{% block content %}
+    <div class="p-6 mx-auto my-8 md:w-1/2 md:p-0">
+        <div class="mt-5 md:mt-0 md:col-span-2">
+            <form action="#" method="POST">
+                {% csrf_token %}
+                <div class="overflow-hidden shadow sm:rounded-md">
+                    <div class="px-4 py-5 bg-white sm:p-6">
+                        <img src="{% static 'images/cs3_text_logo.png' %}" class="w-32 mx-auto"/>
+                        <h1 class="mt-2 mb-6 text-3xl text-center" style="color:#053263;">Course <span
+                                style="color: #2f5a36">Preferences</span></h1>
+                        <hr class="mx-auto" width="80%"/>
+                        Successfully Saved the Preference!
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock content %}
