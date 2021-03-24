@@ -12,8 +12,8 @@ class DocsView(LoginRequiredMixin, TemplateView):
     template_name = 'pages/docs.html'
 
 
-class StudentFormView(TemplateView):
-    template_name = 'pages/student-form.html'
+class StudentFormSuccessView(TemplateView):
+    template_name = 'pages/student-form-success.html'
 
 
 class GenerateScheduleView(LoginRequiredMixin, TemplateView):
