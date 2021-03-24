@@ -1,7 +1,8 @@
 from django.core.serializers import serialize
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse, resolve
+from django.views.generic import TemplateView
 from django.views.generic.edit import FormView, DeleteView, UpdateView
 
 from accounts.models import BaseUser
@@ -157,7 +158,6 @@ class DynamicModelSetUpdateView(DynamicModelMixin, FormView):
     object = None
 
     def get_form_class(self):
-        print('JHello')
         return get_dynamic_model_choice_set_form(self.dynamic_model)
 
     def get_initial(self):
@@ -172,24 +172,8 @@ class DynamicModelSetUpdateView(DynamicModelMixin, FormView):
         kwargs.update({
             'remove_set': True,
         })
-        if self.request.method in ('POST', 'PUT'):
-            kwargs.update({
-                'data': self.request.POST.copy().update({'set': self.object.id}),
-            })
-
         return kwargs
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     print(self.dynamic_model.__name__)
-    #     context.update({
-    #         'all_objects': ModelSet.objects.filter(
-    #             setmembership__content_type__model=self.dynamic_model.__name__.lower()
-    #         ).distinct(),
-    #         'dynamic_model_name': self.dynamic_model_name
-    #     })
-    #
-    #     return context
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['object'] = get_object_or_404(ModelSet, pk=self.kwargs.get('id'))
@@ -211,3 +195,37 @@ class DynamicModelSetUpdateView(DynamicModelMixin, FormView):
             for choice in form.cleaned_data['choices']
         ])
         return super().form_valid(form)
+
+
+class DynamicModelSetInspectView(DynamicModelMixin, TemplateView):
+    template_name = "crud/generic_inspection_view.html"
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data_(*args, **kwargs)
+        return self.render_to_response(context)
+
+    def get_context_data_(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        objects = SetMembership.objects.filter(set__id=args[1]['id'], content_type__model=self.dynamic_model.__name__.lower())
+        objs = []
+        for obj in objects:
+            objs.append(obj.member_object)
+        context['field_data'] = serialize("python", objs,  use_natural_foreign_keys=True)
+        context['object'] = f"{ModelSet.objects.get(id=args[1]['id'])} - {self.dynamic_model.__name__}s"
+        return context
+
+
+class DynamicModelSetDeleteView(DynamicModelMixin, DeleteView):
+    template_name = "crud/generic_delete_view.html"
+
+    def get_object(self):
+        return ModelSet.objects.get(id=self.kwargs.get('id'))
+
+    def delete(self, request, *args, **kwargs):
+        SetMembership.objects.filter(
+            set=self.get_object(), content_type__model=self.dynamic_model.__name__.lower()
+        ).delete()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse('database:set_crud', kwargs={'model': self.dynamic_model_name})
