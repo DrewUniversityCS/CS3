@@ -2,12 +2,13 @@ from django.core.serializers import serialize
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse, resolve, reverse_lazy
-from django.views.generic import TemplateView
+from django.views.generic import View, TemplateView
 from django.views.generic.edit import FormView, DeleteView, UpdateView
 from django.db import transaction
 
 from accounts.models import BaseUser
-from database.forms import get_dynamic_model_form, get_dynamic_model_choice_set_form, PreferenceFormEntryForm
+from database.forms import get_dynamic_model_form, get_dynamic_model_choice_set_form, PreferenceFormEntryForm, \
+    PreferencesFormForm
 from database.models.relationships import CoursePreference, RoomPreference, TimeblockPreference, Registration, \
     OverlapPreference
 from database.models.schedule_models import Course, Section, Schedule, Timeblock
@@ -240,6 +241,8 @@ class PreferenceFormEntryView(FormView):
 
     def dispatch(self, request, *args, **kwargs):
         self.prefernce_form = get_object_or_404(PreferenceForm, pk=self.kwargs.get('form_id'))
+        if not self.prefernce_form.is_taking_responses:
+            raise Http404
         return super().dispatch(request, args, kwargs)
 
     def get_form(self, form_class=None):
@@ -259,3 +262,23 @@ class PreferenceFormEntryView(FormView):
 
             PreferenceFormEntry.courses.through.objects.bulk_create(entry_to_course_link, batch_size=7000)
         return super().form_valid(form)
+
+
+class OpenPreferenceSetView(FormView):
+    form_class = PreferencesFormForm
+    success_url = reverse_lazy('pages:home')
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+
+class OpenClosePrefernceSetFormView(View):
+    template_name = 'pages/home.html'
+
+    def post(self, request, *args, **kwargs):
+        PreferenceForm.objects.filter(id=kwargs.get('id')).update(
+            is_taking_responses=True if kwargs.get('type') == 'open' else False
+        )
+        return HttpResponseRedirect(reverse('pages:home'))
+
