@@ -49,7 +49,7 @@ class PreferenceForm(models.Model):
     def response_entries(self):
         response_entries = PreferenceFormEntry.objects.filter(preference_form=self).values('email').annotate(n=Count('pk')).count()
         print(PreferenceFormEntry.objects.filter(preference_form=self).values('email').annotate(n=Count('pk')))
-        return response_entries, response_entries/self.total_students*100.0
+        return response_entries, response_entries/self.total_students
 
     def no_response_entries(self):
         return self.total_students - self.response_entries[0], 100 - self.response_entries[1]
