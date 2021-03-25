@@ -3,9 +3,20 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, FormView
 
+from database.forms import PreferencesFormForm
+from database.models.structural_models import PreferenceForm
+
 
 class HomePageView(TemplateView):
     template_name = 'pages/home.html'
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data.update({
+            'open_new_prefernce_form': PreferencesFormForm(),
+            'all_preference_forms': PreferenceForm.objects.all()
+        })
+        return context_data
 
 
 class DocsView(LoginRequiredMixin, TemplateView):
