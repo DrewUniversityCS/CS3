@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Count
+from django.urls import reverse
 
 
 class ModelSet(models.Model):
@@ -37,6 +38,7 @@ class PreferenceForm(models.Model):
     """
     set = models.OneToOneField(ModelSet, on_delete=models.CASCADE, related_name='preference_form')
     is_taking_responses = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return f'{self.set} --> {self.is_taking_responses}'
@@ -49,10 +51,15 @@ class PreferenceForm(models.Model):
     def response_entries(self):
         response_entries = PreferenceFormEntry.objects.filter(preference_form=self).values('email').annotate(n=Count('pk')).count()
         print(PreferenceFormEntry.objects.filter(preference_form=self).values('email').annotate(n=Count('pk')))
-        return response_entries, response_entries/self.total_students
+        return response_entries, response_entries/self.total_students*100.0
 
+    @property
     def no_response_entries(self):
         return self.total_students - self.response_entries[0], 100 - self.response_entries[1]
+
+    @property
+    def form_link(self):
+        return reverse('database:student_preference_form', kwargs={'form_id': self.id})
 
 
 class PreferenceFormEntry(models.Model):

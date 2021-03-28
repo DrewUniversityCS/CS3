@@ -1,3 +1,4 @@
+from django.core.mail import send_mail
 from django.core.serializers import serialize
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
@@ -5,6 +6,7 @@ from django.urls import reverse, resolve, reverse_lazy
 from django.views.generic import View, TemplateView
 from django.views.generic.edit import FormView, DeleteView, UpdateView
 from django.db import transaction
+from django.conf import settings
 
 from accounts.models import BaseUser
 from database.forms import get_dynamic_model_form, get_dynamic_model_choice_set_form, PreferenceFormEntryForm, \
@@ -269,7 +271,11 @@ class OpenPreferenceSetView(FormView):
     success_url = reverse_lazy('pages:home')
 
     def form_valid(self, form):
-        form.save()
+        preference_form = form.save()
+        email_ids = Student.objects.filter(sets__set=preference_form.set).values_list('user__email', flat=True)
+        send_mail('Preference Form',
+                  f'Fill Course prefernces for {preference_form.set} here:\n\nhttp://{settings.DOMAIN}{preference_form.form_link}\n\nTeam CS3',
+                  settings.FROM_EMAIL, email_ids, fail_silently=False)
         return super().form_valid(form)
 
 
@@ -277,8 +283,13 @@ class OpenClosePrefernceSetFormView(View):
     template_name = 'pages/home.html'
 
     def post(self, request, *args, **kwargs):
-        PreferenceForm.objects.filter(id=kwargs.get('id')).update(
-            is_taking_responses=True if kwargs.get('type') == 'open' else False
-        )
+        update = {}
+        if kwargs.get('type') == 'remove':
+            update['is_active'] = False
+        elif kwargs.get('type') == 'open':
+            update['is_taking_responses'] = True
+        elif kwargs.get('type') == 'close':
+            update['is_taking_responses'] = False
+        PreferenceForm.objects.filter(id=kwargs.get('id')).update(**update)
         return HttpResponseRedirect(reverse('pages:home'))
 
