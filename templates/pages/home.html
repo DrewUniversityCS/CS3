@@ -1,6 +1,7 @@
 {% extends '_base.html' %}
 {% load crispy_forms_tags %}
 {% load static %}
+{% load parse_var %}
 
 {% block title %}Home page{% endblock title %}
 
@@ -84,72 +85,83 @@
                         </form>
                     </div>
                     {% for preference_form in all_preference_forms %}
-                        <div class="flex flex-col justify-between gap-5 p-8 md:flex-row">
-                            <div class="bg-white md:w-1/2">
-                                <div>
-                                    <div class="flex gap-3 p-6 py-8 border-t-4 shadow-md bg-skyBlue_color"
-                                         style="border-top-color:#00c4a8; height: fit-content;">
-                                        <p class="my-auto">
-                                            <span class="teal_color">
-                                                {{ preference_form.set }}
-                                            </span>
-                                            <br/>
-                                            You can see the Overview on the right.
-                                        </p>
-                                        {% if preference_form.is_taking_responses %}
-                                        <form action="{% url 'database:preference_set_form_open_close' preference_form.id 'close' %}" method="POST">
-                                            {% csrf_token %}
-                                            <button class="h-10 px-5 m-2 text-red-100 transition-colors duration-150 bg-red-700 rounded-lg focus:shadow-outline hover:bg-red-800">Close</button>
-                                        </form>
-                                        {% else %}
-                                            <form action="{% url 'database:preference_set_form_open_close' preference_form.id 'open' %}" method="POST">
-                                            {% csrf_token %}
-                                            <button class="h-10 px-5 m-2 text-green-100 transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800">Open</button>
-                                        </form>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
+                        {% if preference_form.is_active %}
+                            <div class="flex flex-col justify-between gap-5 p-8 md:flex-row">
+                                <div class="bg-white md:w-1/2">
+                                    <div>
+                                        <div class="flex gap-3 p-6 py-8 border-t-4 shadow-md bg-skyBlue_color"
+                                             style="border-top-color:#00c4a8; height: fit-content;">
+                                            <p class="my-auto">
+                                                <span class="teal_color">
+                                                    <a href="{{ preference_form.form_link }}">{{ preference_form.set }}</a>
+                                                    {% get_course_stats preference_form as stat_list %}
 
-                            <div class="md:w-1/2">
-                                <div class="sm:grid sm:h-32 sm:grid-flow-row sm:gap-4 sm:grid-cols-3">
-                                    <div class="flex flex-col justify-center px-4 py-4 bg-white border border-gray-300 rounded">
-                                        <div>
-                                            <div>
-                                                <p class="flex items-center justify-end text-green-500 text-md">
-                                                    <span class="font-bold">{{ preference_form.response_entries.1 }}%</span>
-                                                    <i class="ml-2 fa fa-thumbs-up"></i>
-                                                </p>
-                                            </div>
-                                            <p class="text-3xl font-semibold text-center text-gray-800">{{ preference_form.response_entries.0 }}</p>
-                                            <p class="text-lg text-center text-gray-500">Responses</p>
-                                        </div>
-                                    </div>
-
-                                    <div id="jh-stats-negative"
-                                         class="flex flex-col justify-center px-4 py-4 mt-4 bg-white border border-gray-300 rounded sm:mt-0">
-                                        <div>
-                                            <div>
-                                                <p class="flex items-center justify-end text-red-500 text-md">
-                                                    <span class="font-bold">{{ preference_form.no_response_entries.1 }}%</span>
-                                                    <i class="ml-2 fa fa-ban"></i>
-                                                </p>
-                                            </div>
-                                            <p class="text-3xl font-semibold text-center text-gray-800">{{ preference_form.no_response_entries.0 }}</p>
-                                            <p class="text-lg text-center text-gray-500">No Response</p>
-                                        </div>
-                                    </div>
-
-                                    <div id="jh-stats-neutral"
-                                         class="flex flex-col justify-center px-4 py-4 mt-4 bg-white border border-gray-300 rounded sm:mt-0">
-                                        <div>
-                                            <p class="pt-6 text-3xl font-semibold text-center text-gray-800">{{ preference_form.total_students }}</p>
-                                            <p class="text-lg text-center text-gray-500">Total</p>
+                                                </span>
+                                                <ul>
+                                                    {% for stat in stat_list %}
+                                                        <li>{{ stat.course }}: {{ stat.count }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </p>
+                                            {% if preference_form.is_taking_responses %}
+                                            <form action="{% url 'database:preference_set_form_open_close' preference_form.id 'close' %}" method="POST">
+                                                {% csrf_token %}
+                                                <button class="h-10 px-5 m-2 text-red-100 transition-colors duration-150 bg-red-700 rounded-lg focus:shadow-outline hover:bg-red-800">Close</button>
+                                            </form>
+                                            {% else %}
+                                                <form action="{% url 'database:preference_set_form_open_close' preference_form.id 'open' %}" method="POST">
+                                                {% csrf_token %}
+                                                <button class="h-10 px-5 m-2 text-green-100 transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800">Open</button>
+                                            </form>
+                                            {% endif %}
+                                            <form action="{% url 'database:preference_set_form_open_close' preference_form.id 'remove' %}" method="POST">
+                                                {% csrf_token %}
+                                                <button class="h-10 px-5 m-2 text-gray-100 transition-colors duration-150 bg-gray-700 rounded-lg focus:shadow-outline hover:bg-gray-800">Remove</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="md:w-1/2">
+                                    <div class="sm:grid sm:h-32 sm:grid-flow-row sm:gap-4 sm:grid-cols-3">
+                                        <div class="flex flex-col justify-center px-4 py-4 bg-white border border-gray-300 rounded">
+                                            <div>
+                                                <div>
+                                                    <p class="flex items-center justify-end text-green-500 text-md">
+                                                        <span class="font-bold">{{ preference_form.response_entries.1 }}%</span>
+                                                        <i class="ml-2 fa fa-thumbs-up"></i>
+                                                    </p>
+                                                </div>
+                                                <p class="text-3xl font-semibold text-center text-gray-800">{{ preference_form.response_entries.0 }}</p>
+                                                <p class="text-lg text-center text-gray-500">Responses</p>
+                                            </div>
+                                        </div>
+
+                                        <div id="jh-stats-negative"
+                                             class="flex flex-col justify-center px-4 py-4 mt-4 bg-white border border-gray-300 rounded sm:mt-0">
+                                            <div>
+                                                <div>
+                                                    <p class="flex items-center justify-end text-red-500 text-md">
+                                                        <span class="font-bold">{{ preference_form.no_response_entries.1 }}%</span>
+                                                        <i class="ml-2 fa fa-ban"></i>
+                                                    </p>
+                                                </div>
+                                                <p class="text-3xl font-semibold text-center text-gray-800">{{ preference_form.no_response_entries.0 }}</p>
+                                                <p class="text-lg text-center text-gray-500">No Response</p>
+                                            </div>
+                                        </div>
+
+                                        <div id="jh-stats-neutral"
+                                             class="flex flex-col justify-center px-4 py-4 mt-4 bg-white border border-gray-300 rounded sm:mt-0">
+                                            <div>
+                                                <p class="pt-6 text-3xl font-semibold text-center text-gray-800">{{ preference_form.total_students }}</p>
+                                                <p class="text-lg text-center text-gray-500">Total</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div>
