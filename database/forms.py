@@ -1,8 +1,8 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
+from django.db.models import Count, Q
 from django.forms import ModelForm, CheckboxSelectMultiple, Textarea, CharField, \
     EmailField, ModelChoiceField, Form, ModelMultipleChoiceField, ValidationError
-from django.db.models import Count, Q
 
 from accounts.models import BaseUser
 from database.models.schedule_models import Course
@@ -166,28 +166,27 @@ def get_dynamic_model_choice_set_form(dynamic_model):
 
 
 class PreferenceFormEntryForm(CrispyModelForm):
-    prefernce_form = None
+    preference_form = None
 
     class Meta:
         model = PreferenceFormEntry
         fields = ('student_name', 'email', 'courses')
 
-    def __init__(self, prefernce_form, *args, **kwargs):
+    def __init__(self, preference_form, *args, **kwargs):
         super(PreferenceFormEntryForm, self).__init__(*args, **kwargs)
-        self.prefernce_form = prefernce_form
+        self.preference_form = preference_form
         self.fields['courses'] = ModelMultipleChoiceField(
-            queryset=Course.objects.filter(sets__set=prefernce_form.set), widget=CheckboxSelectMultiple
+            queryset=Course.objects.filter(sets__set=preference_form.set), widget=CheckboxSelectMultiple
         )
 
     def clean_email(self):
         email = self.cleaned_data['email']
-        if not Student.objects.filter(sets__set=self.prefernce_form.set, user__email=email).exists():
+        if not Student.objects.filter(sets__set=self.preference_form.set, user__email=email).exists():
             raise ValidationError('You are not allowed to fill the form!')
         return email
 
 
 class PreferencesFormForm(CrispyModelForm):
-
     set = ModelChoiceField(
         queryset=ModelSet.objects.filter(preference_form__isnull=True).annotate(
             no_of_courses=Count('setmembership__course'),
@@ -197,4 +196,4 @@ class PreferencesFormForm(CrispyModelForm):
 
     class Meta:
         model = PreferenceForm
-        fields = ('set', )
+        fields = ('set',)

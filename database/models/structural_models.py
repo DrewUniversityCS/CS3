@@ -1,6 +1,6 @@
-from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+from django.db import models
 from django.db.models import Count
 from django.urls import reverse
 
@@ -47,11 +47,13 @@ class PreferenceForm(models.Model):
     def total_students(self):
         from database.models.user_models import Student
         return Student.objects.filter(sets__set=self.set).count()
+
     @property
     def response_entries(self):
-        response_entries = PreferenceFormEntry.objects.filter(preference_form=self).values('email').annotate(n=Count('pk')).count()
+        response_entries = PreferenceFormEntry.objects.filter(preference_form=self).values('email').annotate(
+            n=Count('pk')).count()
         print(PreferenceFormEntry.objects.filter(preference_form=self).values('email').annotate(n=Count('pk')))
-        return response_entries, response_entries/self.total_students*100.0
+        return response_entries, response_entries / self.total_students * 100.0
 
     @property
     def no_response_entries(self):
@@ -87,27 +89,3 @@ class Department(models.Model):
 
     def natural_key(self):
         return self.name
-
-
-class Building(models.Model):
-    """
-    A building classes may be offered in.
-    """
-    name = models.CharField(max_length=256, blank=False, null=False, unique=True)
-
-    def __str__(self):
-        return self.name
-
-    def natural_key(self):
-        return self.name
-
-
-class Room(models.Model):
-    """
-    A specific room a class can be offered in. Contained in a building.
-    """
-    number = models.IntegerField(blank=True, null=True)
-    building = models.ForeignKey("database.Building", on_delete=models.CASCADE, related_name="rooms+")
-
-    def __str__(self):
-        return self.building.name + " " + str(self.number)

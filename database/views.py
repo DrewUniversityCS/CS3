@@ -1,20 +1,19 @@
+from django.conf import settings
 from django.core.mail import send_mail
 from django.core.serializers import serialize
+from django.db import transaction
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse, resolve, reverse_lazy
 from django.views.generic import View, TemplateView
 from django.views.generic.edit import FormView, DeleteView, UpdateView
-from django.db import transaction
-from django.conf import settings
 
 from accounts.models import BaseUser
 from database.forms import get_dynamic_model_form, get_dynamic_model_choice_set_form, PreferenceFormEntryForm, \
     PreferencesFormForm
-from database.models.relationships import CoursePreference, RoomPreference, TimeblockPreference, Registration, \
-    OverlapPreference
+from database.models.relationships import Registration, Preference
 from database.models.schedule_models import Course, Section, Schedule, Timeblock
-from database.models.structural_models import Department, Room, Building, ModelSet, SetMembership, PreferenceForm, \
+from database.models.structural_models import Department, ModelSet, SetMembership, PreferenceForm, \
     PreferenceFormEntry
 from database.models.user_models import Student, Teacher
 
@@ -26,13 +25,8 @@ class DynamicModelMixin(object):
         'students': Student,
         'teachers': Teacher,
         'registrations': Registration,
-        'course-preferences': CoursePreference,
-        'overlap-preferences': OverlapPreference,
-        'room-preferences': RoomPreference,
-        'timeblock-preferences': TimeblockPreference,
+        'preferences': Preference,
         'departments': Department,
-        'buildings': Building,
-        'rooms': Room,
         'schedules': Schedule,
         'courses': Course,
         'sections': Section,
@@ -239,28 +233,28 @@ class DynamicModelSetDeleteView(DynamicModelMixin, DeleteView):
 class PreferenceFormEntryView(FormView):
     template_name = 'pages/student-form.html'
     success_url = reverse_lazy('pages:student-form-success')
-    prefernce_form = None
+    preference_form = None
 
     def dispatch(self, request, *args, **kwargs):
-        self.prefernce_form = get_object_or_404(PreferenceForm, pk=self.kwargs.get('form_id'))
-        if not self.prefernce_form.is_taking_responses:
+        self.preference_form = get_object_or_404(PreferenceForm, pk=self.kwargs.get('form_id'))
+        if not self.preference_form.is_taking_responses:
             raise Http404
         return super().dispatch(request, args, kwargs)
 
     def get_form(self, form_class=None):
-        return PreferenceFormEntryForm(self.prefernce_form, **self.get_form_kwargs())
+        return PreferenceFormEntryForm(self.preference_form, **self.get_form_kwargs())
 
     def form_valid(self, form):
         entry = form.save(commit=False)
-        entry.preference_form = self.prefernce_form
+        entry.preference_form = self.preference_form
         with transaction.atomic():
             entry.save()
             entry_to_course_link = []
             for course in form.cleaned_data['courses']:
-                prefernce_entry_course = PreferenceFormEntry.courses.through(
+                preference_entry_course = PreferenceFormEntry.courses.through(
                     preferenceformentry_id=entry.id, course_id=course.id
                 )
-                entry_to_course_link.append(prefernce_entry_course)
+                entry_to_course_link.append(preference_entry_course)
 
             PreferenceFormEntry.courses.through.objects.bulk_create(entry_to_course_link, batch_size=7000)
         return super().form_valid(form)
@@ -274,12 +268,12 @@ class OpenPreferenceSetView(FormView):
         preference_form = form.save()
         email_ids = Student.objects.filter(sets__set=preference_form.set).values_list('user__email', flat=True)
         send_mail('Preference Form',
-                  f'Fill Course prefernces for {preference_form.set} here:\n\nhttp://{settings.DOMAIN}{preference_form.form_link}\n\nTeam CS3',
+                  f'Fill Course preferences for {preference_form.set} here:\n\nhttp://{settings.DOMAIN}{preference_form.form_link}\n\nTeam CS3',
                   settings.FROM_EMAIL, email_ids, fail_silently=False)
         return super().form_valid(form)
 
 
-class OpenClosePrefernceSetFormView(View):
+class OpenClosePreferenceSetFormView(View):
     template_name = 'pages/home.html'
 
     def post(self, request, *args, **kwargs):
@@ -292,4 +286,3 @@ class OpenClosePrefernceSetFormView(View):
             update['is_taking_responses'] = False
         PreferenceForm.objects.filter(id=kwargs.get('id')).update(**update)
         return HttpResponseRedirect(reverse('pages:home'))
-
