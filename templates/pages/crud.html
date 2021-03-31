@@ -13,17 +13,18 @@
                     <img src="{% static 'icons/card.svg' %}" class="m-auto"
                          style="height: 150px; width: 150px;">
                 </button>
-                <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                <div x-show="open"
+                     x-transition:enter="transition ease-out duration-100"
                      x-transition:enter-start="transform opacity-0 scale-95"
                      x-transition:enter-end="transform opacity-100 scale-100"
                      x-transition:leave="transition ease-in duration-75"
                      x-transition:leave-start="transform opacity-100 scale-100"
                      x-transition:leave-end="transform opacity-0 scale-95"
-                     class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
-                    <div class="px-2 py-2 bg-green-400 rounded-md shadow-2xl">
-                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                     class="absolute inset-0 w-full rounded-md shadow-lg">
+                    <div class="px-2 py-2 mx-4 mt-6 bg-green-400 rounded-md shadow-2xl h-5/6 bg-foundation">
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
                            href="/crud/students">Students</a>
-                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
                            href="/crud/teachers">Teachers</a>
                     </div>
                 </div>
@@ -41,13 +42,13 @@
                      x-transition:leave="transition ease-in duration-75"
                      x-transition:leave-start="transform opacity-100 scale-100"
                      x-transition:leave-end="transform opacity-0 scale-95"
-                     class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
-                    <div class="px-2 py-2 bg-green-400 rounded-md shadow-2xl">
-                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                     class="absolute inset-0 w-full rounded-md shadow-lg">
+                    <div class="px-2 py-2 mx-4 mt-6 bg-green-400 rounded-md shadow-2xl h-5/6 bg-foundation">
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
                            href="/crud/schedules">Schedules</a>
-                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
                            href="/crud/courses">Courses</a>
-                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
                            href="/crud/sections">Sections</a>
                     </div>
                 </div>
@@ -65,13 +66,13 @@
                      x-transition:leave="transition ease-in duration-75"
                      x-transition:leave-start="transform opacity-100 scale-100"
                      x-transition:leave-end="transform opacity-0 scale-95"
-                     class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
-                    <div class="px-2 py-2 bg-green-400 rounded-md shadow-2xl">
-                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                     class="absolute inset-0 w-full rounded-md shadow-lg">
+                    <div class="px-2 py-2 mx-4 mt-6 bg-green-400 rounded-md shadow-2xl h-5/6 bg-foundation">
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
                            href="/">Create Constraint</a>
-                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
                            href="/">View Saved Constraints</a>
-                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
                            href="/">Manage Constraint Sets</a>
                     </div>
                 </div>
@@ -89,13 +90,13 @@
                      x-transition:leave="transition ease-in duration-75"
                      x-transition:leave-start="transform opacity-100 scale-100"
                      x-transition:leave-end="transform opacity-0 scale-95"
-                     class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
-                    <div class="px-2 py-2 bg-green-400 rounded-md shadow-2xl">
-                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                     class="absolute inset-0 w-full rounded-md shadow-lg">
+                    <div class="px-2 py-2 mx-4 mt-6 bg-green-400 rounded-md shadow-2xl h-5/6 bg-foundation">
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
                            href="/set-crud/courses">Course Sets</a>
-                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
                            href="/set-crud/students">Student Sets</a>
-                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
                            href="/set-crud/constraints">Constraint Sets</a>
                     </div>
                 </div>
