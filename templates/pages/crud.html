@@ -6,34 +6,100 @@
 {% block content %}
     <div class="min-h-screen sm:pt-12 xl:pt-36">
         <div class="flex flex-wrap justify-center gap-6 text-2xl text-white">
-            <a href="{% url 'database:crud_users' %}">
-                <button class="bg-blue-400 rounded-xl w-96 h-96">
+
+            <div @click.away="open = false" class="relative" x-data="{ open: false }">
+                <button class="bg-blue-400 rounded-xl w-96 h-96" @click="open = !open">
                     Users
                     <img src="{% static 'icons/card.svg' %}" class="m-auto"
                          style="height: 150px; width: 150px;">
                 </button>
-            </a>
-            <a href="{% url 'database:crud_scheduling' %}">
-                <button class="bg-blue-400 rounded-xl w-96 h-96">
+                <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                     x-transition:enter-start="transform opacity-0 scale-95"
+                     x-transition:enter-end="transform opacity-100 scale-100"
+                     x-transition:leave="transition ease-in duration-75"
+                     x-transition:leave-start="transform opacity-100 scale-100"
+                     x-transition:leave-end="transform opacity-0 scale-95"
+                     class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
+                    <div class="px-2 py-2 bg-green-400 rounded-md shadow-2xl">
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                           href="/crud/students">Students</a>
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                           href="/crud/teachers">Teachers</a>
+                    </div>
+                </div>
+            </div>
+
+            <div @click.away="open = false" class="relative" x-data="{ open: false }">
+                <button class="bg-blue-400 rounded-xl w-96 h-96" @click="open = !open">
                     Scheduling
                     <img src="{% static 'icons/calendar.svg' %}" class="m-auto"
                          style="height: 150px; width: 150px;">
                 </button>
-            </a>
-            <a href="{% url 'database:crud_constraints' %}">
-                <button class="bg-blue-400 rounded-xl w-96 h-96">
+                <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                     x-transition:enter-start="transform opacity-0 scale-95"
+                     x-transition:enter-end="transform opacity-100 scale-100"
+                     x-transition:leave="transition ease-in duration-75"
+                     x-transition:leave-start="transform opacity-100 scale-100"
+                     x-transition:leave-end="transform opacity-0 scale-95"
+                     class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
+                    <div class="px-2 py-2 bg-green-400 rounded-md shadow-2xl">
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                           href="/crud/schedules">Schedules</a>
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                           href="/crud/courses">Courses</a>
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                           href="/crud/sections">Sections</a>
+                    </div>
+                </div>
+            </div>
+
+            <div @click.away="open = false" class="relative" x-data="{ open: false }">
+                <button class="bg-blue-400 rounded-xl w-96 h-96" @click="open = !open">
                     Constraints
                     <img src="{% static 'icons/puzzle_icon.svg' %}" class="m-auto"
                          style="height: 150px; width: 150px;">
                 </button>
-            </a>
-            <a href="{% url 'database:crud_sets' %}">
-                <button class="bg-blue-400 rounded-xl w-96 h-96">
+                <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                     x-transition:enter-start="transform opacity-0 scale-95"
+                     x-transition:enter-end="transform opacity-100 scale-100"
+                     x-transition:leave="transition ease-in duration-75"
+                     x-transition:leave-start="transform opacity-100 scale-100"
+                     x-transition:leave-end="transform opacity-0 scale-95"
+                     class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
+                    <div class="px-2 py-2 bg-green-400 rounded-md shadow-2xl">
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                           href="/">Create Constraint</a>
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                           href="/">View Saved Constraints</a>
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                           href="/">Manage Constraint Sets</a>
+                    </div>
+                </div>
+            </div>
+
+            <div @click.away="open = false" class="relative" x-data="{ open: false }">
+                <button class="bg-blue-400 rounded-xl w-96 h-96" @click="open = !open">
                     Object Sets
                     <img src="{% static 'icons/collection.svg' %}" class="m-auto"
                          style="height: 150px; width: 150px;">
                 </button>
-            </a>
+                <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                     x-transition:enter-start="transform opacity-0 scale-95"
+                     x-transition:enter-end="transform opacity-100 scale-100"
+                     x-transition:leave="transition ease-in duration-75"
+                     x-transition:leave-start="transform opacity-100 scale-100"
+                     x-transition:leave-end="transform opacity-0 scale-95"
+                     class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
+                    <div class="px-2 py-2 bg-green-400 rounded-md shadow-2xl">
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                           href="/set-crud/courses">Course Sets</a>
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                           href="/set-crud/students">Student Sets</a>
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                           href="/set-crud/constraints">Constraint Sets</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock content %}
