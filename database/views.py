@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 from django.core.serializers import serialize
 from django.db import transaction
@@ -11,7 +12,7 @@ from django.views.generic.edit import FormView, DeleteView, UpdateView
 from accounts.models import BaseUser
 from database.forms import get_dynamic_model_form, get_dynamic_model_choice_set_form, PreferenceFormEntryForm, \
     PreferencesFormForm
-from database.models.relationships import Registration, Preference
+from database.models.relationships import Preference
 from database.models.schedule_models import Course, Section, Schedule, Timeblock
 from database.models.structural_models import Department, ModelSet, SetMembership, PreferenceForm, \
     PreferenceFormEntry
@@ -24,7 +25,6 @@ class DynamicModelMixin(object):
     model_map_dict = {
         'students': Student,
         'teachers': Teacher,
-        'registrations': Registration,
         'preferences': Preference,
         'departments': Department,
         'schedules': Schedule,
@@ -43,7 +43,23 @@ class DynamicModelMixin(object):
         raise Http404
 
 
-class CrudDeleteView(DynamicModelMixin, DeleteView):
+class CrudUsersView(LoginRequiredMixin, TemplateView):
+    template_name = 'crud/crud_users.html'
+
+
+class CrudSetsView(LoginRequiredMixin, TemplateView):
+    template_name = 'crud/crud_sets.html'
+
+
+class CrudConstraintsView(LoginRequiredMixin, TemplateView):
+    template_name = 'crud/crud_constraints.html'
+
+
+class CrudSchedulingView(LoginRequiredMixin, TemplateView):
+    template_name = 'crud/crud_scheduling.html'
+
+
+class CrudDeleteView(LoginRequiredMixin, DynamicModelMixin, DeleteView):
     template_name = "crud/generic_delete_view.html"
 
     def get_object(self):
@@ -53,7 +69,7 @@ class CrudDeleteView(DynamicModelMixin, DeleteView):
         return reverse('database:crud_model', kwargs={'model': self.dynamic_model_name})
 
 
-class CrudInspectView(DynamicModelMixin, DeleteView):
+class CrudInspectView(LoginRequiredMixin, DynamicModelMixin, DeleteView):
     template_name = "crud/generic_inspection_view.html"
 
     def get_context_data(self, **kwargs):
@@ -68,7 +84,7 @@ class CrudInspectView(DynamicModelMixin, DeleteView):
         return reverse('database:crud_model', kwargs={'model': self.dynamic_model_name})
 
 
-class CrudUpdateView(DynamicModelMixin, UpdateView):
+class CrudUpdateView(LoginRequiredMixin, DynamicModelMixin, UpdateView):
     template_name = "crud/generic_update_view.html"
     fields = "__all__"
 
@@ -95,7 +111,7 @@ class CrudUpdateView(DynamicModelMixin, UpdateView):
         return reverse('database:crud_model', kwargs={'model': self.dynamic_model_name})
 
 
-class CrudView(DynamicModelMixin, FormView):
+class CrudView(LoginRequiredMixin, DynamicModelMixin, FormView):
     template_name = "crud/generic_crud_view.html"
     context_object_name = 'all_objects'
 
@@ -118,7 +134,7 @@ class CrudView(DynamicModelMixin, FormView):
         return super().form_valid(form)
 
 
-class DynamicModelSetCreateView(DynamicModelMixin, FormView):
+class DynamicModelSetCreateView(LoginRequiredMixin, DynamicModelMixin, FormView):
     template_name = "crud/generic_crud_view.html"
     context_object_name = 'all_objects'
 
@@ -151,7 +167,7 @@ class DynamicModelSetCreateView(DynamicModelMixin, FormView):
         return super().form_valid(form)
 
 
-class DynamicModelSetUpdateView(DynamicModelMixin, FormView):
+class DynamicModelSetUpdateView(LoginRequiredMixin, DynamicModelMixin, FormView):
     template_name = "crud/generic_update_view.html"
     context_object_name = 'all_objects'
     object = None
@@ -195,7 +211,7 @@ class DynamicModelSetUpdateView(DynamicModelMixin, FormView):
         return super().form_valid(form)
 
 
-class DynamicModelSetInspectView(DynamicModelMixin, TemplateView):
+class DynamicModelSetInspectView(LoginRequiredMixin, DynamicModelMixin, TemplateView):
     template_name = "crud/generic_inspection_view.html"
 
     def get(self, request, *args, **kwargs):
@@ -214,7 +230,7 @@ class DynamicModelSetInspectView(DynamicModelMixin, TemplateView):
         return context
 
 
-class DynamicModelSetDeleteView(DynamicModelMixin, DeleteView):
+class DynamicModelSetDeleteView(LoginRequiredMixin, DynamicModelMixin, DeleteView):
     template_name = "crud/generic_delete_view.html"
 
     def get_object(self):
@@ -230,7 +246,7 @@ class DynamicModelSetDeleteView(DynamicModelMixin, DeleteView):
         return reverse('database:set_crud', kwargs={'model': self.dynamic_model_name})
 
 
-class PreferenceFormEntryView(FormView):
+class PreferenceFormEntryView(LoginRequiredMixin, FormView):
     template_name = 'pages/student-form.html'
     success_url = reverse_lazy('pages:student-form-success')
     preference_form = None
@@ -260,7 +276,7 @@ class PreferenceFormEntryView(FormView):
         return super().form_valid(form)
 
 
-class OpenPreferenceSetView(FormView):
+class OpenPreferenceSetView(LoginRequiredMixin, FormView):
     form_class = PreferencesFormForm
     success_url = reverse_lazy('pages:home')
 
@@ -273,7 +289,7 @@ class OpenPreferenceSetView(FormView):
         return super().form_valid(form)
 
 
-class OpenClosePreferenceSetFormView(View):
+class OpenClosePreferenceSetFormView(LoginRequiredMixin, View):
     template_name = 'pages/home.html'
 
     def post(self, request, *args, **kwargs):

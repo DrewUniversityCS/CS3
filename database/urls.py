@@ -1,10 +1,16 @@
-from django.urls import path, re_path
+from django.urls import path
 
 from database.views import CrudView, CrudDeleteView, CrudUpdateView, CrudInspectView, DynamicModelSetCreateView, \
     DynamicModelSetUpdateView, DynamicModelSetInspectView, DynamicModelSetDeleteView, PreferenceFormEntryView, \
-    OpenPreferenceSetView, OpenClosePreferenceSetFormView
+    OpenPreferenceSetView, OpenClosePreferenceSetFormView, CrudUsersView, CrudSetsView, CrudConstraintsView, \
+    CrudSchedulingView
 
 urlpatterns = [
+    path('crud/users', CrudUsersView.as_view(), name='crud_users'),
+    path('crud/sets', CrudSetsView.as_view(), name='crud_sets'),
+    path('crud/constraints', CrudConstraintsView.as_view(), name='crud_constraints'),
+    path('crud/scheduling', CrudSchedulingView.as_view(), name='crud_scheduling'),
+
     path('crud/<slug:model>/', CrudView.as_view(), name='crud_model'),
     path('crud-inspect/<slug:model>/<slug:id>/', CrudInspectView.as_view(), name='crud_inspect'),
     path('crud-delete/<slug:model>/<slug:id>/', CrudDeleteView.as_view(), name='crud_delete'),

@@ -10,40 +10,25 @@
         {% if user.is_authenticated %}
             <div class="flex flex-wrap justify-center gap-6 my-10">
                 <div class="w-3/4 bg-white shadow-lg rounded-2xl md:w-1/4">
-                    <div class="flex text-3xl text-center bg-red-600" style="height: 250px;">
-                        <img src="{% static 'icons/upload.svg' %}" class="m-auto"
+                    <div class="flex text-3xl text-center bg-red-500" style="height: 250px;">
+                        <img src="{% static 'icons/table.svg' %}" class="m-auto"
                              style="height: 150px; width: 150px;">
                     </div>
                     <div class="p-4">
-                        <p class="pb-3 text-xl font-bold">Upload</p>
-                        <p style="min-height: 90px;" class="text-left">Use this interface to upload an appropriately
-                            formatted csv file and ingest its contents into the database.</p>
-                        <div class="flex gap-6 my-4" style="flex-flow: wrap;">
+                        <p class="pb-3 text-2xl font-bold">Data Sheets</p>
+                        <p style="min-height: 90px;" class="text-xl">Upload Excel or Google
+                            Sheets files, or download application data for later use.</p>
+                        <div class="flex gap-6 my-4">
                             <a href="{% url 'dataingest:upload' %}">
                                 <button class="px-3 py-2 font-medium bg-gray-200 rounded">
                                     <i class="mr-2 fa fa-upload" aria-hidden="true"></i>
                                     Upload New File
                                 </button>
                             </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="w-3/4 bg-white shadow-lg rounded-2xl md:w-1/4">
-                    <div class="flex text-3xl text-center" style="height: 250px; background: blue;">
-                        <img src="{% static 'icons/manage_data_icon.svg' %}" class="m-auto"
-                             style="height: 150px; width: 150px;">
-                    </div>
-                    <div class="p-4">
-                        <p class="pb-3 text-xl font-bold">Database</p>
-                        <p style="min-height: 90px;" class="text-left">Use this menu to input course and constraint data
-                            into the
-                            database, as well as send out interest forms to your students.</p>
-                        <div class="flex gap-6 my-4">
-                            <a href="{% url 'pages:crud' %}">
-                                <button class="px-3 py-1 font-medium bg-gray-200 rounded w-60">
-                                    <i class="py-2 mr-2 fa fa-database" aria-hidden="true"></i>
-                                    Open Input Interface
+                            <a href="/">
+                                <button class="px-3 py-2 font-medium bg-gray-200 rounded">
+                                    <i class="mr-2 fa fa-tasks" aria-hidden="true"></i>
+                                    Manage Data
                                 </button>
                             </a>
                         </div>
@@ -51,14 +36,34 @@
                 </div>
 
                 <div class="w-3/4 bg-white shadow-lg rounded-2xl md:w-1/4">
-                    <div class="flex justify-center text-3xl text-center" style="height: 250px; background: limegreen;">
+                    <div class="flex text-3xl text-center bg-blue-500" style="height: 250px;">
+                        <img src="{% static 'icons/manage_data_icon.svg' %}" class="m-auto"
+                             style="height: 150px; width: 150px;">
+                    </div>
+                    <div class="p-4">
+                        <p class="pb-3 text-2xl font-bold">Database</p>
+                        <p style="min-height: 90px;" class="text-xl">Input data
+                            into the database, then manage and query it.</p>
+                        <div class="flex gap-6 my-4">
+                            <a href="{% url 'pages:crud' %}">
+                                <button class="px-3 py-1 font-medium bg-gray-200 rounded w-60">
+                                    <i class="py-2 mr-2 fa fa-database" aria-hidden="true"></i>
+                                    Open Database Interface
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-3/4 bg-white shadow-lg rounded-2xl md:w-1/4">
+                    <div class="flex justify-center text-3xl text-center bg-green-500" style="height: 250px;">
                         <img src="{% static 'icons/generate_schedule_icon.svg' %}" class="m-auto"
                              style="height: 150px; width: 150px;">
                     </div>
                     <div class="p-4">
-                        <p class="pb-3 text-xl font-bold">Schedules</p>
-                        <p style="min-height: 90px;" class="text-left">Use this interface to create and edit course
-                            schedules.</p>
+                        <p class="pb-3 text-2xl font-bold">Schedules</p>
+                        <p style="min-height: 90px;" class="text-xl">Create and edit course schedules, as well as check
+                            them for constraint integrity.</p>
                         <div class="flex gap-6 my-4">
                             <a href="{% url 'pages:generate-schedule' %}">
                                 <button class="px-3 py-1 font-medium bg-gray-200 rounded w-60">
@@ -75,10 +80,10 @@
                     <p class="py-4 text-xl font-bold bg-white pb-7">
                         Student Data Collection Progress
                     </p>
-                    <div class="w-3/4 mx-auto">
+                    <div class="w-3/4 mx-auto pb-7">
                         <form action="{% url 'database:preference_set_form_open' %}" method="POST">
                             {% csrf_token %}
-                            {{ open_new_prefernce_form|crispy }}
+                            {{ open_new_preference_form|crispy }}
                             <button class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                 Open
                             </button>
@@ -97,26 +102,35 @@
                                                     {% get_course_stats preference_form as stat_list %}
 
                                                 </span>
-                                                <ul>
-                                                    {% for stat in stat_list %}
-                                                        <li>{{ stat.course }}: {{ stat.count }}</li>
-                                                    {% endfor %}
-                                                </ul>
+                                            <ul>
+                                                {% for stat in stat_list %}
+                                                    <li>{{ stat.course }}: {{ stat.count }}</li>
+                                                {% endfor %}
+                                            </ul>
                                             </p>
                                             {% if preference_form.is_taking_responses %}
-                                            <form action="{% url 'database:preference_set_form_open_close' preference_form.id 'close' %}" method="POST">
-                                                {% csrf_token %}
-                                                <button class="h-10 px-5 m-2 text-red-100 transition-colors duration-150 bg-red-700 rounded-lg focus:shadow-outline hover:bg-red-800">Close</button>
-                                            </form>
+                                                <form action="{% url 'database:preference_set_form_open_close' preference_form.id 'close' %}"
+                                                      method="POST">
+                                                    {% csrf_token %}
+                                                    <button class="h-10 px-5 m-2 text-red-100 transition-colors duration-150 bg-red-700 rounded-lg focus:shadow-outline hover:bg-red-800">
+                                                        Close
+                                                    </button>
+                                                </form>
                                             {% else %}
-                                                <form action="{% url 'database:preference_set_form_open_close' preference_form.id 'open' %}" method="POST">
-                                                {% csrf_token %}
-                                                <button class="h-10 px-5 m-2 text-green-100 transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800">Open</button>
-                                            </form>
+                                                <form action="{% url 'database:preference_set_form_open_close' preference_form.id 'open' %}"
+                                                      method="POST">
+                                                    {% csrf_token %}
+                                                    <button class="h-10 px-5 m-2 text-green-100 transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800">
+                                                        Open
+                                                    </button>
+                                                </form>
                                             {% endif %}
-                                            <form action="{% url 'database:preference_set_form_open_close' preference_form.id 'remove' %}" method="POST">
+                                            <form action="{% url 'database:preference_set_form_open_close' preference_form.id 'remove' %}"
+                                                  method="POST">
                                                 {% csrf_token %}
-                                                <button class="h-10 px-5 m-2 text-gray-100 transition-colors duration-150 bg-gray-700 rounded-lg focus:shadow-outline hover:bg-gray-800">Remove</button>
+                                                <button class="h-10 px-5 m-2 text-gray-100 transition-colors duration-150 bg-gray-700 rounded-lg focus:shadow-outline hover:bg-gray-800">
+                                                    Remove
+                                                </button>
                                             </form>
                                         </div>
                                     </div>

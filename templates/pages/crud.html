@@ -1,95 +1,39 @@
 {% extends '_base.html' %}
+{% load static %}
 
 {% block title %}CRUD{% endblock title %}
 
 {% block content %}
-    <div class="min-h-screen pt-12">
-        <div class="grid grid-cols-1 text-center sm:grid-cols-4">
-            <div class="w-full my-3 text-3xl font-bold text-blue-700">
-                Users
-                <ul>
-                    <li class="w-full mt-4 text-xl text-green-500">
-                        <a href="/crud/students">
-                            Students
-                        </a>
-                    </li>
-                    <li class="w-full mt-2 text-xl text-green-500">
-                        <a href="/crud/teachers">
-                            Teachers
-                        </a>
-                    </li>
-                    <li class="w-full mt-2 text-xl text-green-500">
-                        <a href="/crud/registrations">
-                            Registrations
-                        </a>
-                    </li>
-                    <li class="w-full mt-2 text-xl text-green-500">
-                        <a href="/set-crud/students">
-                            Student Set Create
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="w-full my-3 text-3xl font-bold text-blue-700">
-                Constraints
-                <ul>
-                    <li class="w-full mt-4 text-xl text-green-500">
-                        <a href="/crud/preferences">
-                            Preferences
-                        </a>
-                    </li>
-                    <li class="w-full mt-2 text-xl text-green-500">
-                        <a href="/crud/model-set">
-                            Constraint Sets
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="w-full my-3 text-3xl font-bold text-blue-700">
-                Structural
-                <ul>
-                    <li class="w-full mt-4 text-xl text-green-500">
-                        <a href="/crud/departments">
-                            Departments
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="w-full my-3 text-3xl font-bold text-blue-700">
-                Scheduling
-                <ul>
-                    <li class="w-full mt-4 text-xl text-green-500">
-                        <a href="/crud/schedules">
-                            Schedules
-                        </a>
-                    </li>
-                    <li class="w-full mt-2 text-xl text-green-500">
-                        <a href="/crud/courses">
-                            Courses
-                        </a>
-                    </li>
-                    <li class="w-full mt-2 text-xl text-green-500">
-                        <a href="/crud/model-set">
-                            Set Create
-                        </a>
-                    </li>
-                    <li class="w-full mt-2 text-xl text-green-500">
-                        <a href="/set-crud/courses">
-                            Course Set Create
-                        </a>
-                    </li>
-                    <li class="w-full mt-2 text-xl text-green-500">
-                        <a href="/crud/sections">
-                            Sections
-                        </a>
-                    </li>
-                    <li class="w-full mt-2 text-xl text-green-500">
-                        <a href="/crud/timeblocks">
-                            Timeblocks
-                        </a>
-                    </li>
-                </ul>
-            </div>
+    <div class="min-h-screen sm:pt-12 xl:pt-36">
+        <div class="flex flex-wrap justify-center gap-6 text-2xl text-white">
+            <a href="{% url 'database:crud_users' %}">
+                <button class="bg-blue-400 rounded-xl w-96 h-96">
+                    Users
+                    <img src="{% static 'icons/card.svg' %}" class="m-auto"
+                         style="height: 150px; width: 150px;">
+                </button>
+            </a>
+            <a href="{% url 'database:crud_scheduling' %}">
+                <button class="bg-indigo-400 rounded-xl w-96 h-96">
+                    Scheduling
+                    <img src="{% static 'icons/calendar.svg' %}" class="m-auto"
+                         style="height: 150px; width: 150px;">
+                </button>
+            </a>
+            <a href="{% url 'database:crud_constraints' %}">
+                <button class="bg-purple-400 rounded-xl w-96 h-96">
+                    Constraints
+                    <img src="{% static 'icons/puzzle_icon.svg' %}" class="m-auto"
+                         style="height: 150px; width: 150px;">
+                </button>
+            </a>
+            <a href="{% url 'database:crud_sets' %}">
+                <button class="bg-blue-600 rounded-xl w-96 h-96">
+                    Object Sets
+                    <img src="{% static 'icons/collection.svg' %}" class="m-auto"
+                         style="height: 150px; width: 150px;">
+                </button>
+            </a>
         </div>
     </div>
 {% endblock content %}

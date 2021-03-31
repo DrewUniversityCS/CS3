@@ -13,7 +13,6 @@ class Student(models.Model):
     user = models.ForeignKey("accounts.BaseUser", on_delete=models.CASCADE, blank=False, null=False)
     student_id = models.IntegerField(unique=True, validators=[student_id_validator])
     class_standing = models.CharField(max_length=2, choices=YEAR_IN_SCHOOL_CHOICES)
-    registrations = models.ManyToManyField("database.Section", through="database.Registration", blank=True)
 
     sets = GenericRelation(SetMembership, related_query_name='student')
 
