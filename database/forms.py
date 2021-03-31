@@ -2,10 +2,11 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
 from django.db.models import Count, Q
 from django.forms import ModelForm, CheckboxSelectMultiple, Textarea, CharField, \
-    EmailField, ModelChoiceField, Form, ModelMultipleChoiceField, ValidationError
+    EmailField, ModelChoiceField, Form, ModelMultipleChoiceField, ValidationError, ChoiceField, IntegerField
 
 from accounts.models import BaseUser
-from database.models.schedule_models import Course
+from database.enums import SEASONS
+from database.models.schedule_models import Course, Schedule
 from database.models.structural_models import ModelSet, PreferenceFormEntry, PreferenceForm
 from database.models.user_models import Teacher, Student
 
@@ -197,3 +198,9 @@ class PreferencesFormForm(CrispyModelForm):
     class Meta:
         model = PreferenceForm
         fields = ('set',)
+
+
+class CreateBulkSectionsForm(Form):
+    schedule = ModelChoiceField(queryset=Schedule.objects.all())
+    courses = ModelMultipleChoiceField(queryset=Course.objects.all())
+

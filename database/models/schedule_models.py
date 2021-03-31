@@ -36,8 +36,6 @@ class Section(models.Model):
                                            related_name="sections taught+")
     other_instructor = models.ForeignKey("database.Teacher", on_delete=models.CASCADE,
                                          related_name="sections assisted with+", null=True, blank=True)
-    year = models.IntegerField(null=False, blank=False)
-    season = models.CharField(choices=SEASONS, max_length=50)
 
     timeblock = models.ForeignKey("database.Timeblock", on_delete=models.CASCADE, related_name="sections+", blank=True,
                                   null=True)
@@ -50,9 +48,11 @@ class Section(models.Model):
 
 class Schedule(models.Model):
     """
-    A structural model representing a week of classes.
+    A structural model representing a week's schedule of classes.
     """
     name = models.CharField(max_length=256, blank=True)
+    year = models.IntegerField(null=False, blank=False)
+    season = models.CharField(choices=SEASONS, max_length=50)
 
     def __str__(self):
         return self.name

@@ -11,7 +11,7 @@ from django.views.generic.edit import FormView, DeleteView, UpdateView
 
 from accounts.models import BaseUser
 from database.forms import get_dynamic_model_form, get_dynamic_model_choice_set_form, PreferenceFormEntryForm, \
-    PreferencesFormForm
+    PreferencesFormForm, CreateBulkSectionsForm
 from database.models.relationships import Preference
 from database.models.schedule_models import Course, Section, Schedule, Timeblock
 from database.models.structural_models import Department, ModelSet, SetMembership, PreferenceForm, \
@@ -43,20 +43,9 @@ class DynamicModelMixin(object):
         raise Http404
 
 
-class CrudUsersView(LoginRequiredMixin, TemplateView):
-    template_name = 'crud/crud_users.html'
-
-
-class CrudSetsView(LoginRequiredMixin, TemplateView):
-    template_name = 'crud/crud_sets.html'
-
-
-class CrudConstraintsView(LoginRequiredMixin, TemplateView):
-    template_name = 'crud/crud_constraints.html'
-
-
-class CrudSchedulingView(LoginRequiredMixin, TemplateView):
-    template_name = 'crud/crud_scheduling.html'
+class CreateBulkSectionsView(LoginRequiredMixin, FormView):
+    template_name = 'crud/sections_bulk_create.html'
+    form_class = CreateBulkSectionsForm
 
 
 class CrudDeleteView(LoginRequiredMixin, DynamicModelMixin, DeleteView):
