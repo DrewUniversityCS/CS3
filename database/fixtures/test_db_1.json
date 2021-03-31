@@ -1,0 +1,355 @@
+[
+  {
+    "model": "database.department",
+    "pk": 1,
+    "fields": {
+      "abbreviation": "CSCI",
+      "name": "Computer Science"
+    }
+  },
+  {
+    "model": "database.department",
+    "pk": 2,
+    "fields": {
+      "abbreviation": "MATH",
+      "name": "Mathematics"
+    }
+  },
+  {
+    "model": "database.department",
+    "pk": 3,
+    "fields": {
+      "abbreviation": "STAT",
+      "name": "Statistics"
+    }
+  },
+  {
+    "model": "database.department",
+    "pk": 4,
+    "fields": {
+      "abbreviation": "DSCI",
+      "name": "Data Science"
+    }
+  },
+  {
+    "model": "database.department",
+    "pk": 5,
+    "fields": {
+      "abbreviation": "PHYS",
+      "name": "Physics"
+    }
+  },
+  {
+    "model": "database.department",
+    "pk": 6,
+    "fields": {
+      "abbreviation": "CSEC",
+      "name": "Cybersecurity"
+    }
+  },
+  {
+    "model": "database.course",
+    "pk": 1,
+    "fields": {
+      "department": 1,
+      "name": "Python 101",
+      "number": 150,
+      "credit_hours": 4,
+      "comments": "def hello_world():\r\n    print(\"Hello world!\")",
+      "offered_annually": true
+    }
+  },
+  {
+    "model": "database.course",
+    "pk": 2,
+    "fields": {
+      "department": 2,
+      "name": "Crazy Calculus",
+      "number": 360,
+      "credit_hours": 4,
+      "comments": "The craziest of equations!",
+      "offered_annually": true
+    }
+  },
+  {
+    "model": "database.course",
+    "pk": 3,
+    "fields": {
+      "department": 4,
+      "name": "Data Visualization with Microsoft Paint",
+      "number": 400,
+      "credit_hours": 4,
+      "comments": "The class is taught entirely in microsoft paint.",
+      "offered_annually": true
+    }
+  },
+  {
+    "model": "database.schedule",
+    "pk": 1,
+    "fields": {
+      "name": "Fall 2021"
+    }
+  },
+  {
+    "model": "database.schedule",
+    "pk": 2,
+    "fields": {
+      "name": "2021 Spring Classes"
+    }
+  },
+  {
+    "model": "database.weekdayset",
+    "pk": 1,
+    "fields": {
+      "monday": true,
+      "tuesday": false,
+      "wednesday": true,
+      "thursday": false,
+      "friday": true
+    }
+  },
+  {
+    "model": "database.weekdayset",
+    "pk": 2,
+    "fields": {
+      "monday": false,
+      "tuesday": true,
+      "wednesday": false,
+      "thursday": true,
+      "friday": false
+    }
+  },
+  {
+    "model": "database.weekdayset",
+    "pk": 4,
+    "fields": {
+      "monday": true,
+      "tuesday": false,
+      "wednesday": true,
+      "thursday": false,
+      "friday": false
+    }
+  },
+  {
+    "model": "database.weekdayset",
+    "pk": 5,
+    "fields": {
+      "monday": true,
+      "tuesday": false,
+      "wednesday": false,
+      "thursday": false,
+      "friday": false
+    }
+  },
+  {
+    "model": "database.weekdayset",
+    "pk": 6,
+    "fields": {
+      "monday": false,
+      "tuesday": true,
+      "wednesday": false,
+      "thursday": false,
+      "friday": false
+    }
+  },
+  {
+    "model": "database.weekdayset",
+    "pk": 7,
+    "fields": {
+      "monday": false,
+      "tuesday": false,
+      "wednesday": true,
+      "thursday": false,
+      "friday": false
+    }
+  },
+  {
+    "model": "database.weekdayset",
+    "pk": 8,
+    "fields": {
+      "monday": false,
+      "tuesday": false,
+      "wednesday": false,
+      "thursday": true,
+      "friday": false
+    }
+  },
+  {
+    "model": "database.student",
+    "pk": 1,
+    "fields": {
+      "user": 2,
+      "student_id": 1234567,
+      "class_standing": "FR"
+    }
+  },
+  {
+    "model": "database.student",
+    "pk": 2,
+    "fields": {
+      "user": 3,
+      "student_id": 2312314,
+      "class_standing": "SO"
+    }
+  },
+  {
+    "model": "database.student",
+    "pk": 3,
+    "fields": {
+      "user": 4,
+      "student_id": 4829284,
+      "class_standing": "JR"
+    }
+  },
+  {
+    "model": "database.student",
+    "pk": 4,
+    "fields": {
+      "user": 5,
+      "student_id": 2512395,
+      "class_standing": "SR"
+    }
+  },
+  {
+    "model": "database.student",
+    "pk": 5,
+    "fields": {
+      "user": 6,
+      "student_id": 5322532,
+      "class_standing": "GR"
+    }
+  },
+  {
+    "model": "database.student",
+    "pk": 6,
+    "fields": {
+      "user": 7,
+      "student_id": 2834572,
+      "class_standing": "FR"
+    }
+  },
+  {
+    "model": "database.student",
+    "pk": 7,
+    "fields": {
+      "user": 8,
+      "student_id": 2452135,
+      "class_standing": "JR"
+    }
+  },
+  {
+    "model": "database.student",
+    "pk": 8,
+    "fields": {
+      "user": 9,
+      "student_id": 1530731,
+      "class_standing": "JR"
+    }
+  },
+  {
+    "model": "database.student",
+    "pk": 9,
+    "fields": {
+      "user": 10,
+      "student_id": 2305899,
+      "class_standing": "SR"
+    }
+  },
+  {
+    "model": "database.student",
+    "pk": 10,
+    "fields": {
+      "user": 11,
+      "student_id": 5230893,
+      "class_standing": "JR"
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 1,
+    "fields": {
+      "user": 12,
+      "department": 1
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 2,
+    "fields": {
+      "user": 13,
+      "department": 1
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 3,
+    "fields": {
+      "user": 14,
+      "department": 2
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 4,
+    "fields": {
+      "user": 15,
+      "department": 6
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 5,
+    "fields": {
+      "user": 16,
+      "department": null
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 6,
+    "fields": {
+      "user": 17,
+      "department": 2
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 7,
+    "fields": {
+      "user": 18,
+      "department": 2
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 8,
+    "fields": {
+      "user": 19,
+      "department": 1
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 9,
+    "fields": {
+      "user": 20,
+      "department": 4
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 10,
+    "fields": {
+      "user": 21,
+      "department": 6
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 11,
+    "fields": {
+      "user": 22,
+      "department": 4
+    }
+  }
+]
