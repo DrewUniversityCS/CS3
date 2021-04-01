@@ -2,17 +2,15 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
 from django.db.models import Count, Q
 from django.forms import ModelForm, CheckboxSelectMultiple, Textarea, CharField, \
-    EmailField, ModelChoiceField, Form, ModelMultipleChoiceField, ValidationError, ChoiceField, IntegerField
+    EmailField, ModelChoiceField, Form, ModelMultipleChoiceField, ValidationError
 
 from accounts.models import BaseUser
-from database.enums import SEASONS
 from database.models.schedule_models import Course, Schedule
 from database.models.structural_models import ModelSet, PreferenceFormEntry, PreferenceForm
 from database.models.user_models import Teacher, Student
 
 widget_dict = {
     "comments": Textarea(attrs={'rows': 5, 'cols': 20}),
-    "registrations": CheckboxSelectMultiple()
 }
 
 label_dict = {
@@ -202,5 +200,5 @@ class PreferencesFormForm(CrispyModelForm):
 
 class CreateBulkSectionsForm(Form):
     schedule = ModelChoiceField(queryset=Schedule.objects.all())
-    courses = ModelMultipleChoiceField(queryset=Course.objects.all())
+    courses = ModelMultipleChoiceField(queryset=ModelSet.objects.filter())
 
