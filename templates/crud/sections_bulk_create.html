@@ -4,13 +4,13 @@
 
 {% block content %}
     <div class="min-h-screen w-full text-center">
-        <div class="w-1/2 mx-auto">
+        <form method="post" class="w-1/2 mx-auto">
             {% csrf_token %}
             {% crispy form %}
             <button type="submit"
                     class="px-8 py-3 mt-4 mb-8 text-sm tracking-widest text-center text-white uppercase bg-green-600 rounded shadow hover:bg-green-400 focus:shadow-outline focus:outline-none">
                 Create Sections
             </button>
-        </div>
+        </form>
     </div>
 {% endblock content %}

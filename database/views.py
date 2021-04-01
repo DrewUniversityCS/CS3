@@ -47,6 +47,10 @@ class CreateBulkSectionsView(LoginRequiredMixin, FormView):
     template_name = 'crud/sections_bulk_create.html'
     form_class = CreateBulkSectionsForm
 
+    def form_valid(self, form):
+        # do stuff
+        return super().form_valid(form)
+
 
 class CrudDeleteView(LoginRequiredMixin, DynamicModelMixin, DeleteView):
     template_name = "crud/generic_delete_view.html"
