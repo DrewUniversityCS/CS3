@@ -40,9 +40,19 @@ class DynamicModelMixin(object):
 class CreateBulkSectionsView(LoginRequiredMixin, FormView):
     template_name = 'crud/sections_bulk_create.html'
     form_class = CreateBulkSectionsForm
+    success_url = '/crud/create-bulk-sections'
 
     def form_valid(self, form):
-        # do stuff
+        schedule = Schedule.objects.get(pk=form.data['schedule'])
+        course_set = ModelSet.objects.get(pk=form.data['courses'])
+        set_memberships = SetMembership.objects.filter(set=course_set)
+        courses = Course.objects.filter(sets__in=set_memberships)
+
+        sections = []
+        for course in courses.iterator():
+            section = Section.create(course, schedule)
+            sections.append(section)
+
         return super().form_valid(form)
 
 

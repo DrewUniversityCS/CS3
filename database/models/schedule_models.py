@@ -1,5 +1,8 @@
-from django.db import models
+import string
+
 from django.contrib.contenttypes.fields import GenericRelation
+from django.db import models
+from django.utils.crypto import get_random_string
 
 from database.enums import SEASONS, POSSIBLE_HOURS, POSSIBLE_MINUTES
 from database.models.structural_models import SetMembership
@@ -33,13 +36,22 @@ class Section(models.Model):
     course = models.ForeignKey("database.Course", on_delete=models.CASCADE, related_name="sections+")
     section_id = models.CharField(max_length=4)
     primary_instructor = models.ForeignKey("database.Teacher", on_delete=models.CASCADE,
-                                           related_name="sections taught+")
+                                           related_name="sections taught+", null=True, blank=True)
     other_instructor = models.ForeignKey("database.Teacher", on_delete=models.CASCADE,
                                          related_name="sections assisted with+", null=True, blank=True)
 
     timeblock = models.ForeignKey("database.Timeblock", on_delete=models.CASCADE, related_name="sections+", blank=True,
                                   null=True)
     schedule = models.ForeignKey("database.Schedule", on_delete=models.CASCADE, related_name="sections+")
+
+    @classmethod
+    def create(cls, course, schedule):
+        def make_section_id():
+            return get_random_string(4, allowed_chars=string.ascii_uppercase + string.digits)
+
+        section = cls(course=course, schedule=schedule, section_id=make_section_id())
+
+        return section
 
     def __str__(self):
         return self.course.name + " " + self.course.department.abbreviation + "-" + str(self.course.number) \
