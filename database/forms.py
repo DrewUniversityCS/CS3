@@ -1,11 +1,12 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
+from django.core.exceptions import ValidationError
 from django.db.models import Count, Q
 from django.forms import ModelForm, CheckboxSelectMultiple, Textarea, CharField, \
     EmailField, ModelChoiceField, Form, ModelMultipleChoiceField
 
 from accounts.models import BaseUser
-from database.models.schedule_models import Schedule, Course
+from database.models.schedule_models import Schedule
 from database.models.structural_models import ModelSet
 from database.models.user_models import Teacher, Student
 
@@ -166,4 +167,10 @@ def get_dynamic_model_choice_set_form(dynamic_model):
 
 class CreateBulkSectionsForm(Form):
     schedule = ModelChoiceField(queryset=Schedule.objects.all())
-    courses = ModelMultipleChoiceField(queryset=Course.objects.all())
+    courses = ModelMultipleChoiceField(queryset=ModelSet.objects.annotate(
+        no_of_courses=Count('setmembership__course'),
+        no_of_preferences=Count('setmembership__preference'),
+        no_of_students=Count('setmembership__student')
+    ).exclude(
+        Q(no_of_preferences=0), Q(no_of_students=0), Q(no_of_courses=0)
+    ))
