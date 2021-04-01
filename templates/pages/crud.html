@@ -58,7 +58,7 @@
 
             <div @click.away="open = false" class="relative" x-data="{ open: false }">
                 <button class="bg-blue-400 rounded-xl w-96 h-96" @click="open = !open">
-                    Constraints
+                    Preferences
                     <img src="{% static 'icons/puzzle_icon.svg' %}" class="m-auto"
                          style="height: 150px; width: 150px;">
                 </button>
@@ -71,11 +71,9 @@
                      class="absolute inset-0 w-full rounded-md shadow-lg">
                     <div class="px-2 py-2 mx-4 mt-6 bg-green-400 rounded-md shadow-2xl h-5/6 bg-foundation">
                         <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
-                           href="/">Create Constraint</a>
+                           href="/">Create Preference</a>
                         <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
-                           href="/">View Saved Constraints</a>
-                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
-                           href="/">Manage Constraint Sets</a>
+                           href="/">View Saved Preferences</a>
                     </div>
                 </div>
             </div>
@@ -99,7 +97,7 @@
                         <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
                            href="/set-crud/students">Student Sets</a>
                         <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
-                           href="/set-crud/constraints">Constraint Sets</a>
+                           href="/set-crud/preferences">Preference Sets</a>
                     </div>
                 </div>
             </div>
