@@ -1,12 +1,10 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
-from django.db.models import Count, Q
 from django.forms import ModelForm, CheckboxSelectMultiple, Textarea, CharField, \
-    EmailField, ModelChoiceField, Form, ModelMultipleChoiceField, ValidationError
+    EmailField, ModelChoiceField, Form, ModelMultipleChoiceField
 
 from accounts.models import BaseUser
-from database.models.schedule_models import Course
-from database.models.structural_models import ModelSet, PreferenceFormEntry, PreferenceForm
+from database.models.structural_models import ModelSet
 from database.models.user_models import Teacher, Student
 
 widget_dict = {
@@ -163,37 +161,3 @@ def get_dynamic_model_choice_set_form(dynamic_model):
                 )
 
     return DynamicModelSetForm
-
-
-class PreferenceFormEntryForm(CrispyModelForm):
-    preference_form = None
-
-    class Meta:
-        model = PreferenceFormEntry
-        fields = ('student_name', 'email', 'courses')
-
-    def __init__(self, preference_form, *args, **kwargs):
-        super(PreferenceFormEntryForm, self).__init__(*args, **kwargs)
-        self.preference_form = preference_form
-        self.fields['courses'] = ModelMultipleChoiceField(
-            queryset=Course.objects.filter(sets__set=preference_form.set), widget=CheckboxSelectMultiple
-        )
-
-    def clean_email(self):
-        email = self.cleaned_data['email']
-        if not Student.objects.filter(sets__set=self.preference_form.set, user__email=email).exists():
-            raise ValidationError('You are not allowed to fill the form!')
-        return email
-
-
-class PreferencesFormForm(CrispyModelForm):
-    set = ModelChoiceField(
-        queryset=ModelSet.objects.filter(preference_form__isnull=True).annotate(
-            no_of_courses=Count('setmembership__course'),
-            no_of_students=Count('setmembership__student')
-        ).exclude(Q(no_of_courses=0) | Q(no_of_students=0))
-    )
-
-    class Meta:
-        model = PreferenceForm
-        fields = ('set',)
