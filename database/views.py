@@ -8,9 +8,8 @@ from django.views.generic.edit import FormView, DeleteView, UpdateView
 
 from accounts.models import BaseUser
 from database.forms import get_dynamic_model_form, get_dynamic_model_choice_set_form, CreateBulkSectionsForm
-from database.models.relationships import Preference
 from database.models.schedule_models import Course, Section, Schedule, Timeblock
-from database.models.structural_models import Department, ModelSet, SetMembership
+from database.models.structural_models import Department, ModelSet, SetMembership, Preference
 from database.models.user_models import Student, Teacher
 
 
