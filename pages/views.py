@@ -3,8 +3,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, FormView
 
-from database.forms import PreferencesFormForm
-from database.models.structural_models import PreferenceForm
+from datacollection.forms import PreferencesFormForm
+from datacollection.models import PreferenceForm
 
 
 class HomePageView(LoginRequiredMixin, TemplateView):

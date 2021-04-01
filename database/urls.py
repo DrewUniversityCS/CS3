@@ -1,9 +1,9 @@
 from django.urls import path
 
 from database.views import CrudView, CrudDeleteView, CrudUpdateView, CrudInspectView, DynamicModelSetCreateView, \
-    DynamicModelSetUpdateView, DynamicModelSetInspectView, DynamicModelSetDeleteView, PreferenceFormEntryView, \
-    OpenPreferenceSetView, OpenClosePreferenceSetFormView, CrudUsersView, CrudSetsView, CrudConstraintsView, \
+    DynamicModelSetUpdateView, DynamicModelSetInspectView, DynamicModelSetDeleteView, CrudUsersView, CrudSetsView, CrudConstraintsView, \
     CrudSchedulingView
+from datacollection.views import PreferenceFormEntryView, OpenPreferenceSetView, OpenClosePreferenceSetFormView
 
 urlpatterns = [
     path('crud/users', CrudUsersView.as_view(), name='crud_users'),
@@ -21,11 +21,6 @@ urlpatterns = [
     path('set-delete/<slug:model>/<slug:id>/', DynamicModelSetDeleteView.as_view(), name='set_crud_delete'),
     path('set-update/<slug:model>/<slug:id>/', DynamicModelSetUpdateView.as_view(), name='set_crud_update'),
 
-    path('student-form/<slug:form_id>/', PreferenceFormEntryView.as_view(), name='student_preference_form'),
-
-    path('preference-set-form-open/', OpenPreferenceSetView.as_view(), name='preference_set_form_open'),
-    path('preference-set-form/<slug:id>/<slug:type>/', OpenClosePreferenceSetFormView.as_view(),
-         name='preference_set_form_open_close'),
 ]
 
 app_name = 'database'
