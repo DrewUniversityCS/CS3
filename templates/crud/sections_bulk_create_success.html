@@ -1,0 +1,42 @@
+{% extends '_base.html' %}
+{% load tailwind_filters %}
+
+{% block title %}Confirm Sections Creation{% endblock title %}
+
+{% block content %}
+    <div class="w-full min-h-screen text-center">
+        <table class="w-5/6 mx-auto bg-white rounded shadow-md table-auto">
+            <thead>
+            <tr class="w-full text-gray-600 uppercase bg-gray-300">
+                <th class="px-6 py-3" colspan="2">Sections To Create</th>
+            </tr>
+            <tr class="w-full text-gray-600 uppercase bg-gray-200 text-center">
+                <th class="px-6 py-3">Course</th>
+                <th class="px-6 py-3">Section ID</th>
+            </tr>
+            </thead>
+            <tbody class="w-full overflow-y-scroll text-sm font-light text-gray-600">
+            {% for section in sections %}
+                <tr class="justify-around w-full h-24 border-b border-gray-200 hover:bg-gray-100">
+                    <td class="w-1/2">
+                        {{ section.course }}
+                    </td>
+                    <td class="w-1/2">
+                        {{ section.section_id }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <form method="post" class="mx-auto w-96">
+            <button type="submit"
+                    class="px-8 py-3 mt-8 text-sm tracking-widest text-center text-white uppercase bg-green-600 rounded shadow hover:bg-green-400 focus:shadow-outline focus:outline-none">
+                Confirm
+            </button>
+            <button type="submit"
+                    class="px-8 py-3 mt-8 text-sm tracking-widest text-center text-white uppercase bg-red-600 rounded shadow hover:bg-green-400 focus:shadow-outline focus:outline-none">
+                Cancel
+            </button>
+        </form>
+    </div>
+{% endblock content %}

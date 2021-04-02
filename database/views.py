@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.serializers import serialize
+from django.core.serializers import serialize, deserialize
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse, resolve
@@ -40,7 +40,7 @@ class DynamicModelMixin(object):
 class CreateBulkSectionsView(LoginRequiredMixin, FormView):
     template_name = 'crud/sections_bulk_create.html'
     form_class = CreateBulkSectionsForm
-    success_url = '/crud/create-bulk-sections'
+    success_url = '/crud/create-bulk-sections/success'
 
     def form_valid(self, form):
         schedule = Schedule.objects.get(pk=form.data['schedule'])
@@ -53,7 +53,22 @@ class CreateBulkSectionsView(LoginRequiredMixin, FormView):
             section = Section.create(course, schedule)
             sections.append(section)
 
+        self.request.session['sections'] = serialize('json', sections)
+
         return super().form_valid(form)
+
+
+class CreateBulkSectionsSuccessView(LoginRequiredMixin, TemplateView):
+    template_name = "crud/sections_bulk_create_success.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        sections = []
+        for obj in deserialize("json", self.request.session.get('sections')):
+            sections.append(obj.object)
+
+        context['sections'] = sections
+        return context
 
 
 class CrudDeleteView(LoginRequiredMixin, DynamicModelMixin, DeleteView):
