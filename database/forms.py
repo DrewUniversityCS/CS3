@@ -3,7 +3,7 @@ from crispy_forms.layout import Layout, Submit
 from django.core.exceptions import ValidationError
 from django.db.models import Count, Q
 from django.forms import ModelForm, CheckboxSelectMultiple, Textarea, CharField, \
-    EmailField, ModelChoiceField, Form, ModelMultipleChoiceField
+    EmailField, ModelChoiceField, Form, ModelMultipleChoiceField, HiddenInput
 
 from accounts.models import BaseUser
 from database.models.schedule_models import Schedule
@@ -174,3 +174,10 @@ class CreateBulkSectionsForm(Form):
     ).exclude(
         Q(no_of_preferences=0), Q(no_of_students=0), Q(no_of_courses=0)
     ))
+
+
+class CreateBulkSectionsConfirmationForm(Form):
+    placeholder_field = CharField(widget=HiddenInput(), required=False)
+
+    def clean(self):
+        return super().clean()

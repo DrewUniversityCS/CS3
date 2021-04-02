@@ -28,12 +28,15 @@
             {% endfor %}
             </tbody>
         </table>
-        <form method="post" class="mx-auto w-96">
+        <form method="POST" class="mx-auto w-96">
+            {% csrf_token %}
             <button type="submit"
+                    name="confirm"
                     class="px-8 py-3 mt-8 text-sm tracking-widest text-center text-white uppercase bg-green-600 rounded shadow hover:bg-green-400 focus:shadow-outline focus:outline-none">
                 Confirm
             </button>
             <button type="submit"
+                    name="cancel"
                     class="px-8 py-3 mt-8 text-sm tracking-widest text-center text-white uppercase bg-red-600 rounded shadow hover:bg-green-400 focus:shadow-outline focus:outline-none">
                 Cancel
             </button>

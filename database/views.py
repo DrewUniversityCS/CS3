@@ -1,13 +1,14 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.serializers import serialize, deserialize
 from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, resolve
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView, DeleteView, UpdateView
 
 from accounts.models import BaseUser
-from database.forms import get_dynamic_model_form, get_dynamic_model_choice_set_form, CreateBulkSectionsForm
+from database.forms import get_dynamic_model_form, get_dynamic_model_choice_set_form, CreateBulkSectionsForm, \
+    CreateBulkSectionsConfirmationForm
 from database.models.schedule_models import Course, Section, Schedule, Timeblock
 from database.models.structural_models import Department, ModelSet, SetMembership, Preference
 from database.models.user_models import Student, Teacher
@@ -53,13 +54,16 @@ class CreateBulkSectionsView(LoginRequiredMixin, FormView):
             section = Section.create(course, schedule)
             sections.append(section)
 
+        # we save the sections in the request for later use
         self.request.session['sections'] = serialize('json', sections)
 
         return super().form_valid(form)
 
 
-class CreateBulkSectionsSuccessView(LoginRequiredMixin, TemplateView):
+class CreateBulkSectionsSuccessView(LoginRequiredMixin, FormView):
     template_name = "crud/sections_bulk_create_success.html"
+    form_class = CreateBulkSectionsConfirmationForm
+    success_url = "/crud/create-bulk-sections"
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -69,6 +73,13 @@ class CreateBulkSectionsSuccessView(LoginRequiredMixin, TemplateView):
 
         context['sections'] = sections
         return context
+
+    def form_valid(self, form):
+        if 'confirm' in self.request.POST:
+            for obj in deserialize("json", self.request.session.get('sections')):
+                obj.object.save()
+
+        return redirect(self.success_url)
 
 
 class CrudDeleteView(LoginRequiredMixin, DynamicModelMixin, DeleteView):
