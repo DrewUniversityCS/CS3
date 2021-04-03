@@ -1,5 +1,6 @@
 from django.db import models
 
+# Create your models here.
 from django.db.models import Count
 from django.urls import reverse
 
@@ -10,7 +11,8 @@ class PreferenceForm(models.Model):
     """
     Keeps Track of preference form Open for a set.
     """
-    set = models.OneToOneField(ModelSet, on_delete=models.CASCADE, related_name='preference_form')
+    set = models.ForeignKey(ModelSet, on_delete=models.CASCADE, related_name='preference_form')
+    name = models.CharField('Form Name', max_length=100)
     is_taking_responses = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
 
