@@ -32,7 +32,7 @@ class PreferenceFormEntryForm(CrispyModelForm):
 
 class PreferencesFormForm(CrispyModelForm):
     set = ModelChoiceField(
-        queryset=ModelSet.objects.filter(preference_form__isnull=True).annotate(
+        queryset=ModelSet.objects.annotate(
             no_of_courses=Count('setmembership__course'),
             no_of_students=Count('setmembership__student')
         ).exclude(Q(no_of_courses=0) | Q(no_of_students=0))
@@ -40,4 +40,4 @@ class PreferencesFormForm(CrispyModelForm):
 
     class Meta:
         model = PreferenceForm
-        fields = ('set',)
+        fields = ('set', 'name', )

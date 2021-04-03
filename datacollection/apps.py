@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class DataCollectionConfig(AppConfig):
+class DatacollectionConfig(AppConfig):
     name = 'datacollection'
