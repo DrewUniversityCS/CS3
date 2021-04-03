@@ -12,6 +12,7 @@ from database.models.user_models import Teacher, Student
 
 widget_dict = {
     "comments": Textarea(attrs={'rows': 5, 'cols': 20}),
+"registrations": CheckboxSelectMultiple()
 }
 
 label_dict = {
