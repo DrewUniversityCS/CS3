@@ -1,5 +1,6 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
+from django.core.exceptions import ValidationError
 from django.db.models import Count, Q, Exists, OuterRef
 from django.forms import ModelForm, CheckboxSelectMultiple, Textarea, CharField, \
     EmailField, ModelChoiceField, Form, ModelMultipleChoiceField, HiddenInput
@@ -146,7 +147,7 @@ def get_dynamic_model_form(dynamic_model):
 
 def get_dynamic_model_choice_set_form(dynamic_model, crud_type):
     class DynamicModelSetForm(Form):
-        set = ModelChoiceField(queryset=ModelSet.objects.all())
+        set = ModelChoiceField(queryset=ModelSet.objects.all(), required=False)
 
         if crud_type == "create":
             new_set_name = CharField(max_length=256, required=False)
@@ -155,6 +156,17 @@ def get_dynamic_model_choice_set_form(dynamic_model, crud_type):
             queryset=dynamic_model.objects.all(), widget=CheckboxSelectMultiple,
             label=f'{dynamic_model.__name__}s'
         )
+
+        def clean(self):
+            cleaned_data = super().clean()
+            if crud_type == "create":
+                chosen_set = cleaned_data.get("set")
+                new_set = cleaned_data.get("new_set_name")
+                if chosen_set is None and new_set == "":
+                    raise ValidationError("Please specify either a new or existing set.")
+                elif chosen_set is not None and new_set != "":
+                    raise ValidationError("You cannot specify both an existing and new set at the same time.")
+            return cleaned_data
 
         def __init__(self, *args, **kwargs):
             remove_set = kwargs.pop('remove_set', False)
