@@ -185,13 +185,7 @@ def get_dynamic_model_choice_set_form(dynamic_model, crud_type):
 
 class CreateBulkSectionsForm(Form):
     schedule = ModelChoiceField(queryset=Schedule.objects.all())
-    courses = ModelMultipleChoiceField(queryset=ModelSet.objects.annotate(
-        no_of_courses=Count('setmembership__course'),
-        no_of_preferences=Count('setmembership__preference'),
-        no_of_students=Count('setmembership__student')
-    ).exclude(
-        Q(no_of_preferences=0), Q(no_of_students=0), Q(no_of_courses=0)
-    ))
+    courses = ModelMultipleChoiceField(queryset=ModelSet.objects.filter(obj_type__model='course'))
 
 
 class CreateBulkSectionsConfirmationForm(Form):
