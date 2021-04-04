@@ -32,7 +32,8 @@ label_dict = {
     "start_hour": "Starting Hour",
     "start_minutes": "Starting Minutes",
     "end_hour": "Ending Hour",
-    "end_minutes": "Ending Minutes"
+    "end_minutes": "Ending Minutes",
+    "obj_type": "Object Type"
 }
 
 
@@ -143,9 +144,13 @@ def get_dynamic_model_form(dynamic_model):
     return DynamicModelForm
 
 
-def get_dynamic_model_choice_set_form(dynamic_model):
+def get_dynamic_model_choice_set_form(dynamic_model, crud_type):
     class DynamicModelSetForm(Form):
         set = ModelChoiceField(queryset=ModelSet.objects.all())
+
+        if crud_type == "create":
+            new_set_name = CharField(max_length=256, required=False)
+
         choices = ModelMultipleChoiceField(
             queryset=dynamic_model.objects.all(), widget=CheckboxSelectMultiple,
             label=f'{dynamic_model.__name__}s'

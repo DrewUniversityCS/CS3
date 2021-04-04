@@ -1,9 +1,8 @@
 {% extends '_base.html' %}
+{% load crispy_forms_filters %}
 {% load static %}
 
-{% block title %}CRUD{% endblock %}
-{% load tailwind_filters %}
-
+{% block title %}Set CRUD{% endblock %}
 
 {% block content %}
     <div class="grid items-center grid-cols-1 gap-2 pb-24 lg:grid-cols-2">
@@ -13,7 +12,7 @@
             </div>
             <form method="post">
                 {% csrf_token %}
-                {{ form|crispy }}
+                {{ form | crispy }}
                 <button type="submit"
                         class="px-8 py-3 mt-4 text-xs tracking-widest text-center text-white uppercase bg-indigo-600 rounded shadow hover:bg-indigo-700 focus:shadow-outline focus:outline-none">
                     Save
