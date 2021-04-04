@@ -1,12 +1,12 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
-from django.db.models import Count, Q
+from django.db.models import Count, Q, Exists, OuterRef
 from django.forms import ModelForm, CheckboxSelectMultiple, Textarea, CharField, \
     EmailField, ModelChoiceField, Form, ModelMultipleChoiceField, HiddenInput
 
 from accounts.models import BaseUser
 from database.models.schedule_models import Schedule
-from database.models.structural_models import ModelSet
+from database.models.structural_models import ModelSet, SetMembership
 from database.models.user_models import Teacher, Student
 
 widget_dict = {
@@ -164,6 +164,7 @@ def get_dynamic_model_choice_set_form(dynamic_model, crud_type):
                 self.fields['set'].initial = kwargs['initial']['set'].id
             else:
                 self.fields['set'].queryset = ModelSet.objects.filter(
+                    ~Exists(SetMembership.objects.filter(set=OuterRef('pk'))),
                     obj_type__model=dynamic_model.__name__.lower()
                 )
 
