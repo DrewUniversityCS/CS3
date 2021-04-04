@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.contenttypes.models import ContentType
 from django.core.serializers import serialize, deserialize
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect
@@ -180,13 +181,24 @@ class DynamicModelSetCreateView(LoginRequiredMixin, DynamicModelMixin, FormView)
         return self.request.path
 
     def form_valid(self, form):
-        SetMembership.objects.bulk_create([
-            SetMembership(
-                set=form.cleaned_data['set'],
-                member_object=choice
-            )
-            for choice in form.cleaned_data['choices']
-        ])
+        if form.cleaned_data['new_set_name'] != "":
+            new_set = ModelSet.objects.create(name=form.cleaned_data['new_set_name'],
+                                              obj_type=ContentType.objects.get(model=self.dynamic_model.__name__.lower()))
+            SetMembership.objects.bulk_create([
+                SetMembership(
+                    set=new_set,
+                    member_object=choice
+                )
+                for choice in form.cleaned_data['choices']
+            ])
+        else:
+            SetMembership.objects.bulk_create([
+                SetMembership(
+                    set=form.cleaned_data['set'],
+                    member_object=choice
+                )
+                for choice in form.cleaned_data['choices']
+            ])
         return super().form_valid(form)
 
 
@@ -263,6 +275,7 @@ class DynamicModelSetDeleteView(LoginRequiredMixin, DynamicModelMixin, DeleteVie
         SetMembership.objects.filter(
             set=self.get_object(), content_type__model=self.dynamic_model.__name__.lower()
         ).delete()
+        ModelSet.objects.filter(id=self.kwargs.get('id')).delete()
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
