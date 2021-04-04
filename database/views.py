@@ -158,11 +158,11 @@ class CrudView(LoginRequiredMixin, DynamicModelMixin, FormView):
 
 
 class DynamicModelSetCreateView(LoginRequiredMixin, DynamicModelMixin, FormView):
-    template_name = "crud/generic_crud_view.html"
+    template_name = "crud/set_crud_view.html"
     context_object_name = 'all_objects'
 
     def get_form_class(self):
-        return get_dynamic_model_choice_set_form(self.dynamic_model)
+        return get_dynamic_model_choice_set_form(self.dynamic_model, "create")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -196,7 +196,7 @@ class DynamicModelSetUpdateView(LoginRequiredMixin, DynamicModelMixin, FormView)
     object = None
 
     def get_form_class(self):
-        return get_dynamic_model_choice_set_form(self.dynamic_model)
+        return get_dynamic_model_choice_set_form(self.dynamic_model, "update")
 
     def get_initial(self):
         self.object = get_object_or_404(ModelSet, pk=self.kwargs.get('id'))
