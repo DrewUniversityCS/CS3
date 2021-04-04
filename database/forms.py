@@ -1,6 +1,5 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
-from django.core.exceptions import ValidationError
 from django.db.models import Count, Q
 from django.forms import ModelForm, CheckboxSelectMultiple, Textarea, CharField, \
     EmailField, ModelChoiceField, Form, ModelMultipleChoiceField, HiddenInput
@@ -12,7 +11,7 @@ from database.models.user_models import Teacher, Student
 
 widget_dict = {
     "comments": Textarea(attrs={'rows': 5, 'cols': 20}),
-"registrations": CheckboxSelectMultiple()
+    "registrations": CheckboxSelectMultiple()
 }
 
 label_dict = {
@@ -146,7 +145,7 @@ def get_dynamic_model_form(dynamic_model):
 
 def get_dynamic_model_choice_set_form(dynamic_model):
     class DynamicModelSetForm(Form):
-        set = ModelChoiceField(queryset=ModelSet.objects.filter())
+        set = ModelChoiceField(queryset=ModelSet.objects.all())
         choices = ModelMultipleChoiceField(
             queryset=dynamic_model.objects.all(), widget=CheckboxSelectMultiple,
             label=f'{dynamic_model.__name__}s'
@@ -159,8 +158,8 @@ def get_dynamic_model_choice_set_form(dynamic_model):
                 self.fields['set'].widget.attrs['style'] = 'pointer-events:none; background:#d3d3d3;'
                 self.fields['set'].initial = kwargs['initial']['set'].id
             else:
-                self.fields['set'].queryset = ModelSet.objects.exclude(
-                    setmembership__content_type__model=dynamic_model.__name__.lower()
+                self.fields['set'].queryset = ModelSet.objects.filter(
+                    obj_type__model=dynamic_model.__name__.lower()
                 )
 
     return DynamicModelSetForm

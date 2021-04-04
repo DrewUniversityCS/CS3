@@ -13,6 +13,13 @@ class ModelSet(models.Model):
     """
     name = models.CharField(max_length=256, blank=False, null=False, unique=True)
 
+    # this limits the obj_type selections
+    limit = models.Q(app_label='database', model='course') | \
+            models.Q(app_label='database', model='student') | \
+            models.Q(app_label='database', model='preference')
+
+    obj_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, limit_choices_to=limit)
+
     def __str__(self):
         return self.name
 
