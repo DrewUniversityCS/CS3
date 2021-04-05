@@ -26,7 +26,7 @@ class PreferenceFormEntryForm(CrispyModelForm):
     def clean_email(self):
         email = self.cleaned_data['email']
         if not Student.objects.filter(sets__set=self.preference_form.set, user__email=email).exists():
-            raise ValidationError('You are not allowed to fill the form!')
+            raise ValidationError('You are not allowed to fill out the form!')
         return email
 
 
