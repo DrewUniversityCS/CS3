@@ -200,22 +200,11 @@ class CreatePreferenceForm(Form):
     object_1_type = ModelChoiceField(
         queryset=ContentType.objects.filter(model__in=['course', 'baseuser']),
         label="Member A Type")
-    object_1 = ModelChoiceField(queryset=Course.objects.none(), label="Preference Member A")
+    object_1 = ModelChoiceField(queryset=Course.objects.none())
     object_2_type = ModelChoiceField(
         queryset=ContentType.objects.filter(model__in=['course', 'timeblock']),
         label="Member B Type")
-    object_2 = ModelChoiceField(queryset=Course.objects.none(), label="Preference Member B")
-
-    class Meta:
-        widgets = {
-
-        }
-        labels = {
-            "object_1": "Preference Member A",
-            "object_1_type": "Member A Type",
-            "object_2": "Preference Member B",
-            "object_2_type": "Member B Type"
-        }
+    object_2 = ModelChoiceField(queryset=Course.objects.none())
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
