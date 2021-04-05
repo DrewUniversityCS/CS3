@@ -4,12 +4,9 @@ from django.core.mail import send_mail
 from django.db import transaction
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-
-# Create your views here.
 from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import FormView
-
 from datacollection.forms import PreferencesFormForm, PreferenceFormEntryForm
 from database.models.user_models import Student
 from datacollection.models import PreferenceForm, PreferenceFormEntry
