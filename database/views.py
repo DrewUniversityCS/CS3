@@ -9,7 +9,7 @@ from django.views.generic.edit import FormView, DeleteView, UpdateView
 
 from accounts.models import BaseUser
 from database.forms import get_dynamic_model_form, get_dynamic_model_choice_set_form, CreateBulkSectionsForm, \
-    CreateBulkSectionsConfirmationForm
+    CreateBulkSectionsConfirmationForm, CreatePreferenceForm
 from database.models.schedule_models import Course, Section, Schedule, Timeblock
 from database.models.structural_models import Department, ModelSet, SetMembership, Preference
 from database.models.user_models import Student, Teacher
@@ -280,3 +280,9 @@ class DynamicModelSetDeleteView(LoginRequiredMixin, DynamicModelMixin, DeleteVie
 
     def get_success_url(self):
         return reverse('database:set_crud', kwargs={'model': self.dynamic_model_name})
+
+
+class CreatePreferenceView(LoginRequiredMixin, FormView):
+    template_name = 'crud/create_preference.html'
+    form_class = CreatePreferenceForm
+    success_url = '/crud/create-preference'

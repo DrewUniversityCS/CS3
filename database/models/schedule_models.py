@@ -17,7 +17,7 @@ class Course(models.Model):
     name = models.CharField(max_length=256, blank=False, null=False)
     number = models.IntegerField(blank=False, null=False)
     credit_hours = models.IntegerField(default=4)
-    comments = models.TextField()
+    comments = models.TextField(blank=True, null=True)
     offered_annually = models.BooleanField(default=True)
 
     sets = GenericRelation(SetMembership, related_query_name='course')

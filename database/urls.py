@@ -2,7 +2,7 @@ from django.urls import path
 
 from database.views import CrudView, CrudDeleteView, CrudUpdateView, CrudInspectView, DynamicModelSetCreateView, \
     DynamicModelSetUpdateView, DynamicModelSetInspectView, DynamicModelSetDeleteView, CreateBulkSectionsView, \
-    CreateBulkSectionsSuccessView
+    CreateBulkSectionsSuccessView, CreatePreferenceView
 
 urlpatterns = [
     path('crud/<slug:model>/', CrudView.as_view(), name='crud_model'),
@@ -12,6 +12,7 @@ urlpatterns = [
 
     path('crud/create-bulk-sections', CreateBulkSectionsView.as_view(), name='sections_bulk'),
     path('crud/create-bulk-sections/success', CreateBulkSectionsSuccessView.as_view(), name='sections_bulk_success'),
+    path('crud/create-preference', CreatePreferenceView.as_view(), name='create_preference'),
 
     path('set-crud/<slug:model>/', DynamicModelSetCreateView.as_view(), name='set_crud'),
     path('set-inspect/<slug:model>/<slug:id>/', DynamicModelSetInspectView.as_view(), name='set_crud_inspect'),

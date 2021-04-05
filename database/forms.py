@@ -1,12 +1,13 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
+from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
-from django.db.models import Count, Q, Exists, OuterRef
+from django.db.models import Exists, OuterRef
 from django.forms import ModelForm, CheckboxSelectMultiple, Textarea, CharField, \
-    EmailField, ModelChoiceField, Form, ModelMultipleChoiceField, HiddenInput
+    EmailField, ModelChoiceField, Form, ModelMultipleChoiceField, HiddenInput, BooleanField
 
 from accounts.models import BaseUser
-from database.models.schedule_models import Schedule
+from database.models.schedule_models import Schedule, Course
 from database.models.structural_models import ModelSet, SetMembership
 from database.models.user_models import Teacher, Student
 
@@ -193,3 +194,12 @@ class CreateBulkSectionsConfirmationForm(Form):
 
     def clean(self):
         return super().clean()
+
+
+class CreatePreferenceForm(Form):
+    object_1_type = ModelChoiceField(queryset=ContentType.objects.filter(model__in=['course', 'baseuser']))
+    object_1 = ModelChoiceField(queryset=Course.objects.all())
+    object_2_type = ModelChoiceField(queryset=ContentType.objects.filter(model__in=['course', 'timeblock']))
+    object_2 = ModelChoiceField(queryset=Course.objects.all())
+
+
