@@ -1,6 +1,6 @@
 from django.db import models
+from database.models.user_models import Student
 
-# Create your models here.
 from django.db.models import Count
 from django.urls import reverse
 
@@ -21,14 +21,12 @@ class PreferenceForm(models.Model):
 
     @property
     def total_students(self):
-        from database.models.user_models import Student
         return Student.objects.filter(sets__set=self.set).count()
 
     @property
     def response_entries(self):
         response_entries = PreferenceFormEntry.objects.filter(preference_form=self).values('email').annotate(
             n=Count('pk')).count()
-        print(PreferenceFormEntry.objects.filter(preference_form=self).values('email').annotate(n=Count('pk')))
         return response_entries, response_entries / self.total_students * 100.0
 
     @property
