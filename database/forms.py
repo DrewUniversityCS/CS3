@@ -197,9 +197,45 @@ class CreateBulkSectionsConfirmationForm(Form):
 
 
 class CreatePreferenceForm(Form):
-    object_1_type = ModelChoiceField(queryset=ContentType.objects.filter(model__in=['course', 'baseuser']))
-    object_1 = ModelChoiceField(queryset=Course.objects.all())
-    object_2_type = ModelChoiceField(queryset=ContentType.objects.filter(model__in=['course', 'timeblock']))
-    object_2 = ModelChoiceField(queryset=Course.objects.all())
+    object_1_type = ModelChoiceField(
+        queryset=ContentType.objects.filter(model__in=['course', 'baseuser']),
+        label="Member A Type")
+    object_1 = ModelChoiceField(queryset=Course.objects.none(), label="Preference Member A")
+    object_2_type = ModelChoiceField(
+        queryset=ContentType.objects.filter(model__in=['course', 'timeblock']),
+        label="Member B Type")
+    object_2 = ModelChoiceField(queryset=Course.objects.none(), label="Preference Member B")
+
+    class Meta:
+        widgets = {
+
+        }
+        labels = {
+            "object_1": "Preference Member A",
+            "object_1_type": "Member A Type",
+            "object_2": "Preference Member B",
+            "object_2_type": "Member B Type"
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['object_1'].queryset = BaseUser.objects.all()
+        self.fields['object_2'].queryset = Course.objects.all()
+
+        if 'object_1_type' in self.data:
+            try:
+                object_1_type_id = int(self.data.get('object_1_type'))
+                object_1_type = ContentType.objects.get_for_id(object_1_type_id)
+                self.fields['object_1'].queryset = object_1_type.get_all_objects_for_this_type()
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty queryset
+
+        if 'object_2_type' in self.data:
+            try:
+                object_2_type_id = int(self.data.get('object_2_type'))
+                object_2_type = ContentType.objects.get_for_id(object_2_type_id)
+                self.fields['object_2'].queryset = object_2_type.get_all_objects_for_this_type()
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty queryset
 
 

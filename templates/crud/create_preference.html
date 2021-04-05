@@ -1,13 +1,45 @@
 {% extends '_base.html' %}
-{% load tailwind_filters %}
 
 {% block title %}Create Preference{% endblock title %}
 
 {% block content %}
+    <script>
+        $(document).ready(function () {
+            $("#id_object_1_type").change(function () {
+                const url = $("#preference-form").attr("dropdown-data-url");
+                const objectId = $(this).val();
+                $.ajax({
+                    url: url,
+                    data: {
+                        'content_type_id': objectId
+                    },
+                    success: function (data) {
+                        $("#id_object_1").html(data);
+                    }
+                });
+            });
+
+            $("#id_object_2_type").change(function () {
+                const url = $("#preference-form").attr("dropdown-data-url");
+                const objectId = $(this).val();
+                $.ajax({
+                    url: url,
+                    data: {
+                        'content_type_id': objectId
+                    },
+                    success: function (data) {
+                        $("#id_object_2").html(data);
+                    }
+                });
+            });
+        });
+    </script>
+
     <div class="min-h-screen w-full text-center">
-        <form method="post" class="w-96 mx-auto">
+        <form method="post" class="w-96 mx-auto" id="preference-form"
+              dropdown-data-url="{% url 'database:ajax_load_dropdown_options' %}">
             {% csrf_token %}
-            {{ form|crispy }}
+            {{ form.as_p  }}
             <button type="submit"
                     class="px-8 py-3 mt-8 text-sm tracking-widest text-center text-white uppercase bg-green-600 rounded shadow hover:bg-green-400 focus:shadow-outline focus:outline-none">
                 Create Preference
