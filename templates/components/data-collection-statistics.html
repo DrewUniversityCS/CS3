@@ -52,7 +52,9 @@
                                     <a
                                             href="{{ preference_form.form_link }}">{{ preference_form.name.capitalize }}
                                         |
-                                        <span class="text-gray-600">{{ preference_form.set }}</span>
+                                        <span class="text-gray-600">{{ preference_form.course_set }}</span>
+                                        |
+                                        <span class="text-gray-600">{{ preference_form.student_set }}</span>
                                     </a>
                                     {% if preference_form.is_taking_responses %}
                                         <form action="{% url 'datacollection:preference_set_form_open_close' preference_form.id 'close' %}"

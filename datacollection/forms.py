@@ -20,24 +20,28 @@ class PreferenceFormEntryForm(CrispyModelForm):
         super(PreferenceFormEntryForm, self).__init__(*args, **kwargs)
         self.preference_form = preference_form
         self.fields['courses'] = ModelMultipleChoiceField(
-            queryset=Course.objects.filter(sets__set=preference_form.set), widget=CheckboxSelectMultiple
+            queryset=Course.objects.filter(sets__set=preference_form.course_set), widget=CheckboxSelectMultiple
         )
 
     def clean_email(self):
         email = self.cleaned_data['email']
-        if not Student.objects.filter(sets__set=self.preference_form.set, user__email=email).exists():
+        if not Student.objects.filter(sets__set=self.preference_form.student_set, user__email=email).exists():
             raise ValidationError('You are not allowed to fill out the form!')
         return email
 
 
 class PreferencesFormForm(CrispyModelForm):
-    set = ModelChoiceField(
-        queryset=ModelSet.objects.annotate(
-            no_of_courses=Count('setmembership__course'),
-            no_of_students=Count('setmembership__student')
-        ).exclude(Q(no_of_courses=0) | Q(no_of_students=0))
+    course_set = ModelChoiceField(
+        queryset=ModelSet.objects.filter(obj_type__model='course').annotate(
+            no_of_courses=Count('setmembership__course')
+        ).exclude(Q(no_of_courses=0))
+    )
+    student_set = ModelChoiceField(
+        queryset=ModelSet.objects.filter(obj_type__model='student').annotate(
+            no_of_students=Count('setmembership__student'),
+        ).exclude(Q(no_of_students=0))
     )
 
     class Meta:
         model = PreferenceForm
-        fields = ('set', 'name', )
+        fields = ('course_set', 'student_set', 'name', )

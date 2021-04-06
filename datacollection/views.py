@@ -48,9 +48,9 @@ class OpenPreferenceSetView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         preference_form = form.save()
-        email_ids = Student.objects.filter(sets__set=preference_form.set).values_list('user__email', flat=True)
+        email_ids = Student.objects.filter(sets__set=preference_form.student_set).values_list('user__email', flat=True)
         send_mail('Preference Form',
-                  f'Fill Course preferences for {preference_form.set} here:\n\nhttp://{settings.DOMAIN}{preference_form.form_link}\n\nTeam CS3',
+                  f'Fill Course preferences for {preference_form.name} here:\n\nhttp://{settings.DOMAIN}{preference_form.form_link}\n\nTeam CS3',
                   settings.FROM_EMAIL, email_ids, fail_silently=False)
         return super().form_valid(form)
 
