@@ -285,4 +285,14 @@ class DynamicModelSetDeleteView(LoginRequiredMixin, DynamicModelMixin, DeleteVie
 class CreatePreferenceView(LoginRequiredMixin, FormView):
     template_name = 'crud/create_preference.html'
     form_class = CreatePreferenceForm
-    success_url = '/crud/create-preference'
+    success_url = '/crud/preferences'
+
+    def form_valid(self, form):
+        Preference.objects.create(
+            object_1_id=form.data['object_1'][0],
+            object_1_content_type=form.cleaned_data['object_1_type'],
+            object_2_id=form.data['object_2'][0],
+            object_2_content_type=form.cleaned_data['object_2_type'],
+            weight=form.cleaned_data['weight']
+        ).save()
+        return HttpResponseRedirect(self.get_success_url())

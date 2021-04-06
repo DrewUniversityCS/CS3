@@ -41,24 +41,24 @@
             {% csrf_token %}
 
             {{ form.non_field_errors }}
-            <div class="my-6 text-xl fieldWrapper">
+            <div class="my-6 text-xl fieldWrapper w-full">
                 {{ form.object_1_type.errors }}
                 <label for="{{ form.object_1_type.id_for_label }}">First Member Type:</label>
-                <div class="block w-full px-4 py-2 mt-4 leading-normal text-gray-700 bg-white b order border-gray-300 rounded-lg appearance-none focus:outline-none">
+                <div class="block px-4 py-2 mt-4 leading-normal text-gray-700 bg-white border border-gray-300 rounded-lg">
                     {{ form.object_1_type }}
                 </div>
             </div>
             <div class="my-6 text-xl fieldWrapper">
                 {{ form.object_1.errors }}
                 <label for="{{ form.object_1.id_for_label }}">First Preference Member:</label>
-                <div class="block w-full px-4 py-2 mt-4 leading-normal text-gray-700 bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none">
+                <div class="block px-4 py-2 mt-4 leading-normal text-gray-700 bg-white border border-gray-300 rounded-lg">
                     {{ form.object_1 }}
                 </div>
             </div>
             <div class="my-6 text-xl fieldWrapper">
                 {{ form.object_2_type.errors }}
                 <label for="{{ form.object_2_type.id_for_label }}">Second Member Type:</label>
-                <div class="block w-full px-4 py-2 mt-4 leading-normal text-gray-700 bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none">
+                <div class="block px-4 py-2 mt-4 leading-normal text-gray-700 bg-white border border-gray-300 rounded-lg">
                     {{ form.object_2_type }}
                 </div>
 
@@ -66,8 +66,15 @@
             <div class="my-6 text-xl fieldWrapper">
                 {{ form.object_2.errors }}
                 <label for="{{ form.object_2.id_for_label }}">Second Preference Member:</label>
-                <div class="block w-full px-4 py-2 mt-4 leading-normal text-gray-700 bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none">
+                <div class="block px-4 py-2 mt-4 leading-normal text-gray-700 bg-white border border-gray-300 rounded-lg">
                     {{ form.object_2 }}
+                </div>
+            </div>
+            <div class="my-6 text-xl fieldWrapper switch">
+                {{ form.weight.errors }}
+                <label for="{{ form.weight.id_for_label }}">Weight is Positive:</label>
+                <div>
+                    {{ form.weight }}
                 </div>
             </div>
 
