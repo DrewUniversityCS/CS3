@@ -1,9 +1,10 @@
-from django import forms
-
-from .models import CSV
+from django.forms import Form, ChoiceField, FileField
 
 
-class CSVForm(forms.ModelForm):
-    class Meta:
-        model = CSV
-        fields = ('CSV_File_Name', 'CSV_File')
+class UploadCSVFileForm(Form):
+    category = ChoiceField(choices=(
+        ('course', "Courses"),
+        ('student', "Students"),
+        ('preference', "Preferences"),
+    ))
+    file = FileField()

@@ -1,9 +1,9 @@
 from django.urls import path
 
-from dataingest import views
+from dataingest.views import UploadCSVFileView
 
 urlpatterns = [
-    path("upload/", views.upload, name="upload")
+    path("dataingest/upload/", UploadCSVFileView.as_view(), name="upload_csv")
 ]
 
 app_name = 'dataingest'

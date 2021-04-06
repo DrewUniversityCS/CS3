@@ -1,10 +1,12 @@
 from csv import reader
 from io import TextIOWrapper
 
-from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from django.views.generic import FormView
 
-from .forms import CSVForm
-from .models import CSV
+from dataingest.forms import UploadCSVFileForm
 
 
 def upload(request):
@@ -13,24 +15,14 @@ def upload(request):
         r = reader(f, delimiter=',')
         for row in r:
             print(row)
-    return render(request, 'dataingest/upload.html')
+    return render(request, 'dataingest/upload_csv_file.html')
 
 
-def csv_list(request):
-    csvs = CSV.objects.all()
-    return render(request, 'dataingest/csv_list.html', {
-        'csvs': csvs
-    })
+class UploadCSVFileView(LoginRequiredMixin, FormView):
+    template_name = 'dataingest/upload_csv_file.html'
+    form_class = UploadCSVFileForm
+    success_url = '/dataingest/manage'
 
+    def form_valid(self, form):
 
-def upload_csv(request):
-    if request.method == 'POST':
-        form = CSVForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('csv_list')
-    else:
-        form = CSVForm()
-    return render(request, 'dataingest/upload_csv.html', {
-        'form': form
-    })
+        return HttpResponseRedirect(self.get_success_url())
