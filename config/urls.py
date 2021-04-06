@@ -7,7 +7,6 @@ from dataingest import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    path('upload/', views.upload, name='upload'),
     path('', include('pages.urls', namespace='pages')),
     path('', include('database.urls', namespace='database')),
     path('', include('dataingest.urls', namespace='dataingest')),
