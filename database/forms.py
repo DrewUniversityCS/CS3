@@ -192,9 +192,6 @@ class CreateBulkSectionsForm(Form):
 class CreateBulkSectionsConfirmationForm(Form):
     placeholder_field = CharField(widget=HiddenInput(), required=False)
 
-    def clean(self):
-        return super().clean()
-
 
 tailwind_dropdown = Select(attrs={'class': 'w-full inset-y-0 right-0 flex items-center text-gray-700'})
 

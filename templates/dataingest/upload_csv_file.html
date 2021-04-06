@@ -1,20 +1,19 @@
 {% extends '_base.html' %}
-{% load crispy_forms_tags %}
+{% load tailwind_filters %}
 
 {% block content %}
     <div class="h-screen font-sans text-center ">
         <div class="flex flex-col items-center justify-center w-full pt-12 pb-12">
             <h2 class="mb-2 pb-4 text-5xl font-bold tracking-wide text-blue-600 ">Upload</h2>
             <div class="bg-white p-8 rounded-lg">
-                <form method="post" enctype="multipart/form-data">
+                <form method="post" action="." enctype="multipart/form-data">
                     {% csrf_token %}
-                    {% crispy form %}
+                    {{ form | crispy }}
+                    <button type="submit" class="px-3 py-2 mt-6 bg-blue-400 rounded shadow hover:bg-blue-500">
+                        Upload File
+                    </button>
                 </form>
-                <button type="submit" class="px-3 py-2 mt-6 bg-blue-400 rounded shadow hover:bg-blue-500">
-                    Upload File
-                </button>
             </div>
-
         </div>
     </div>
 {% endblock content %}

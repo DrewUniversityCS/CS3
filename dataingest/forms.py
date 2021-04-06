@@ -6,5 +6,5 @@ class UploadCSVFileForm(Form):
         ('course', "Courses"),
         ('student', "Students"),
         ('preference', "Preferences"),
-    ))
-    file = FileField()
+    ), required=True)
+    file = FileField(required=True)
