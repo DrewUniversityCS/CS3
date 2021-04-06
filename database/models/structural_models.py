@@ -70,6 +70,13 @@ class Preference(models.Model):
 
     sets = GenericRelation(SetMembership, related_query_name='preference')
 
+    def __str__(self):
+        weight_sentiment = " - Negative"
+        if self.weight:
+            weight_sentiment = " - Positive"
+
+        return str(self.object_1) + " & " + str(self.object_2) + weight_sentiment
+
     class Meta:
         verbose_name_plural = "preferences"
 

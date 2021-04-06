@@ -4,7 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.db.models import Exists, OuterRef
 from django.forms import ModelForm, CheckboxSelectMultiple, Textarea, CharField, \
-    EmailField, ModelChoiceField, Form, ModelMultipleChoiceField, HiddenInput, BooleanField
+    EmailField, ModelChoiceField, Form, ModelMultipleChoiceField, HiddenInput, Select, BooleanField
 
 from accounts.models import BaseUser
 from database.models.schedule_models import Schedule, Course
@@ -196,15 +196,21 @@ class CreateBulkSectionsConfirmationForm(Form):
         return super().clean()
 
 
+tailwind_dropdown = Select(attrs={'class': 'w-full inset-y-0 right-0 flex items-center text-gray-700'})
+
+
 class CreatePreferenceForm(Form):
     object_1_type = ModelChoiceField(
-        queryset=ContentType.objects.filter(model__in=['course', 'baseuser']),
-        label="Member A Type")
-    object_1 = ModelChoiceField(queryset=Course.objects.none())
-    object_2_type = ModelChoiceField(
-        queryset=ContentType.objects.filter(model__in=['course', 'timeblock']),
-        label="Member B Type")
-    object_2 = ModelChoiceField(queryset=Course.objects.none())
+        queryset=ContentType.objects.filter(model__in=['course', 'baseuser']), label="Member A Type",
+        widget=tailwind_dropdown, initial='accounts | user')
+    object_1 = ModelChoiceField(queryset=Course.objects.none(), widget=tailwind_dropdown)
+    object_2_type = ModelChoiceField(queryset=ContentType.objects.filter(model__in=['course', 'timeblock']),
+                                     label="Member B Type",
+                                     widget=tailwind_dropdown, initial='database | course')
+    object_2 = ModelChoiceField(queryset=Course.objects.none(),
+                                widget=tailwind_dropdown)
+
+    weight = BooleanField(required=False, initial=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -226,5 +232,4 @@ class CreatePreferenceForm(Form):
                 self.fields['object_2'].queryset = object_2_type.get_all_objects_for_this_type()
             except (ValueError, TypeError):
                 pass  # invalid input from the client; ignore and fallback to empty queryset
-
 
