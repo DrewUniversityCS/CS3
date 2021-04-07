@@ -189,7 +189,7 @@ class CreateBulkSectionsForm(Form):
     courses = ModelMultipleChoiceField(queryset=ModelSet.objects.filter(obj_type__model='course'))
 
 
-class CreateBulkSectionsConfirmationForm(Form):
+class EmptyForm(Form):
     placeholder_field = CharField(widget=HiddenInput(), required=False)
 
 
