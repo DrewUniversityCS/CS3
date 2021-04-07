@@ -10,6 +10,7 @@ def validate_csv_columns(col_names, category):
 
         for field in required_course_fields:
             if field not in col_names:
+                # TODO: Are any of the field synonyms in the col_names?
                 print(field)
                 return False
         return True

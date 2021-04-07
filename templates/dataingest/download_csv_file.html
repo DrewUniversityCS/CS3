@@ -1,0 +1,51 @@
+{% extends '_base.html' %}
+
+{% block title %}Download CSV{% endblock %}
+{% load tailwind_filters %}
+{% load parse_var %}
+
+{% block content %}
+    <div class="pt-12 text-center">
+        <div class="w-1/2 py-12 mx-auto bg-white rounded-lg">
+            <form method="post" class="pb-12">
+                {% csrf_token %}
+                <div class="text-lg">Downloading the following set of objects:</div>
+                <div class="py-8 text-xl"><b>{{ object }}</b></div>
+                <div>
+                    {% for instance in field_data %}
+                        <table class="w-5/6 m-5 mx-auto text-gray-800 bg-gray-400 rounded-lg shadow-lg">
+                            <tr class="text-center border-b border-gray-300">
+                                <th class="px-4 py-3">Field</th>
+                                <th class="px-4 py-3">Value</th>
+                            </tr>
+                            {% for field, value in instance.fields.items %}
+                                {% if not value.items %}
+                                    <tr class="bg-gray-100 border-b border-gray-400">
+                                        <th class="px-4 py-3">{{ field|parse_var }}</th>
+                                        <th class="px-4 py-3">{{ value }}</th>
+                                    </tr>
+                                {% else %}
+                                    {% for key, item in value.items %}
+                                        <tr class="bg-gray-100 border-b border-gray-400">
+                                            <th class="px-4 py-3">{{ key|parse_var }}</th>
+                                            <th class="px-4 py-3">{{ item }}</th>
+                                        </tr>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        </table>
+                    {% endfor %}
+                </div>
+                <button type="submit"
+                        class="px-8 py-3 mt-16 text-md tracking-widest text-center text-white uppercase bg-green-600 rounded shadow hover:bg-green-700 focus:shadow-outline focus:outline-none">
+                    Download CSV
+                    <i class="ml-2 text-xl fa fa-download"></i>
+                </button>
+            </form>
+            <a href="javascript:history.back()"
+               class="px-8 py-3 mt-4 text-xs tracking-widest text-center text-white uppercase bg-red-600 rounded shadow hover:bg-red-400 focus:shadow-outline focus:outline-none">Go
+                Back</a>
+        </div>
+
+    </div>
+{% endblock content %}
