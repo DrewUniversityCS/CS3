@@ -189,7 +189,8 @@ class DynamicModelSetCreateView(LoginRequiredMixin, DynamicModelMixin, FormView)
     def form_valid(self, form):
         if form.cleaned_data['new_set_name'] != "":
             new_set = ModelSet.objects.create(name=form.cleaned_data['new_set_name'],
-                                              obj_type=ContentType.objects.get(model=self.dynamic_model.__name__.lower()))
+                                              obj_type=ContentType.objects.get(
+                                                  model=self.dynamic_model.__name__.lower()))
             SetMembership.objects.bulk_create([
                 SetMembership(
                     set=new_set,

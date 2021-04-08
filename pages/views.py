@@ -3,11 +3,10 @@ from collections import defaultdict
 from allauth.account.forms import SignupForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
-from django.urls import reverse,reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView, FormView
 
 from database.models.schedule_models import Section, Timeblock
-
 from datacollection.forms import PreferencesFormForm
 from datacollection.models import PreferenceForm
 from pages.forms import CheckScheduleForm
@@ -52,7 +51,8 @@ class ScheduleRedirectView(LoginRequiredMixin, FormView):
     form_class = CheckScheduleForm
 
     def form_valid(self, form):
-        return HttpResponseRedirect(reverse('pages:schedule-view', kwargs={'schedule_id': form.cleaned_data['schedule'].id}))
+        return HttpResponseRedirect(
+            reverse('pages:schedule-view', kwargs={'schedule_id': form.cleaned_data['schedule'].id}))
 
 
 class CrudView(LoginRequiredMixin, TemplateView):
@@ -77,7 +77,7 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
 
         sections = Section.objects.filter(schedule_id=kwargs.get('schedule_id'))
         section_time_block_dict = defaultdict(list)
-        for section in  sections:
+        for section in sections:
             section_time_block_dict[section.timeblock.id].append(section)
 
         timeblock_day_dict = defaultdict(dict)
@@ -95,8 +95,6 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
         })
 
         # section.timeblock.weekdays.monday == True
-
-
 
         # di[time_block.id]['monday']
 

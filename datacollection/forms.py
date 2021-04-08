@@ -44,4 +44,4 @@ class PreferencesFormForm(CrispyModelForm):
 
     class Meta:
         model = PreferenceForm
-        fields = ('course_set', 'student_set', 'name', )
+        fields = ('course_set', 'student_set', 'name',)
