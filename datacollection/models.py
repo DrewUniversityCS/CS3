@@ -11,17 +11,18 @@ class PreferenceForm(models.Model):
     """
     Keeps Track of preference form Open for a set.
     """
-    set = models.ForeignKey(ModelSet, on_delete=models.CASCADE, related_name='preference_form')
+    course_set = models.ForeignKey(ModelSet, on_delete=models.CASCADE, related_name='course_form')
+    student_set = models.ForeignKey(ModelSet, on_delete=models.CASCADE, related_name='student_form')
     name = models.CharField('Form Name', max_length=100)
     is_taking_responses = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return f'{self.set} --> {self.is_taking_responses}'
+        return f'{self.course_set}-{self.student_set} --> {self.is_taking_responses}'
 
     @property
     def total_students(self):
-        return Student.objects.filter(sets__set=self.set).count()
+        return Student.objects.filter(sets__set=self.student_set).count()
 
     @property
     def response_entries(self):

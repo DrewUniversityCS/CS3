@@ -1,0 +1,55 @@
+{% extends '_base.html' %}
+{% load parse_var %}
+
+{% block title %}Calendar{% endblock title %}
+
+{% block content %}
+    <style>
+        #calTable td{
+            height:9.5vh;
+            text-align: center;
+            border-color:#c8c7c7;
+            border-width: 1px;
+        }
+        #calTable{
+            border-color:#c8c7c7;
+            min-width: 685px;
+        }
+        .filltd{
+            background: linear-gradient(45deg, #91b3ee,#9c99ef);
+        }
+        .w_td{
+            width: 130px;
+        }
+    </style>
+    <div>
+		<table width="100%" border="1" style="border-collapse: collapse;" id="calTable">
+			<thead>
+				<tr class="font-bold text-center uppercase">
+					<td class="w_td"></td>
+					<td>Monday</td>
+					<td>tuesday</td>
+					<td>wednesday</td>
+					<td>thurasday</td>
+					<td>friday</td>
+				</tr>
+                {% for time_block in time_blocks %}
+                    <tr>
+                        <td class="w_td">{{ time_block }}</td>
+                        {% for day in day_list %}
+                            <td class="filltd">
+                                {% for section in timeblock_day_dict|get_item:time_block.id|get_item:day %}
+                                    <p>{{ section }}</p>
+                                {% endfor %}
+                            </td>
+                        {% endfor %}
+
+                    </tr>
+
+                {% endfor %}
+			</thead>
+		</table>
+		<button class="font-bold text-center uppercase px-6 py-4 border-2 border-black m-4">Generate PDF</button>
+	</div>
+
+{% endblock %}
