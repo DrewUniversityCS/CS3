@@ -9,7 +9,7 @@ from django.views.generic.edit import FormView, DeleteView, UpdateView
 
 from accounts.models import BaseUser
 from database.forms import get_dynamic_model_form, get_dynamic_model_choice_set_form, CreateBulkSectionsForm, \
-    CreateBulkSectionsConfirmationForm, CreatePreferenceForm
+    EmptyForm, CreatePreferenceForm
 from database.models.schedule_models import Course, Section, Schedule, Timeblock
 from database.models.structural_models import Department, ModelSet, SetMembership, Preference
 from database.models.user_models import Student, Teacher
@@ -63,7 +63,7 @@ class CreateBulkSectionsView(LoginRequiredMixin, FormView):
 
 class CreateBulkSectionsSuccessView(LoginRequiredMixin, FormView):
     template_name = "crud/sections_bulk_create_success.html"
-    form_class = CreateBulkSectionsConfirmationForm
+    form_class = EmptyForm
     success_url = "/crud/create-bulk-sections"
 
     def get_context_data(self, *args, **kwargs):

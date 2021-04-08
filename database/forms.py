@@ -190,11 +190,8 @@ class CreateBulkSectionsForm(Form):
     courses = ModelMultipleChoiceField(queryset=ModelSet.objects.filter(obj_type__model='course'))
 
 
-class CreateBulkSectionsConfirmationForm(Form):
+class EmptyForm(Form):
     placeholder_field = CharField(widget=HiddenInput(), required=False)
-
-    def clean(self):
-        return super().clean()
 
 
 tailwind_dropdown = Select(attrs={'class': 'w-full inset-y-0 right-0 flex items-center text-gray-700'})
@@ -233,4 +230,3 @@ class CreatePreferenceForm(Form):
                 self.fields['object_2'].queryset = object_2_type.get_all_objects_for_this_type()
             except (ValueError, TypeError):
                 pass  # invalid input from the client; ignore and fallback to empty queryset
-
