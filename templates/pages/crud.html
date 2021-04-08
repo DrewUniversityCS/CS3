@@ -7,8 +7,8 @@
     <div class="min-h-screen sm:pt-12 xl:pt-36">
         <div class="flex flex-wrap justify-center gap-6 text-2xl text-white">
 
-            <div @click.away="open = false" class="relative" x-data="{ open: false }">
-                <button class="bg-blue-400 rounded-xl w-96 h-96" @click="open = !open">
+            <div @mouseover.away="open = false" class="relative" x-data="{ open: false }">
+                <button class="bg-blue-400 rounded-xl w-96 h-96" @mouseover="open = !open">
                     Users
                     <img src="{% static 'icons/card.svg' %}" class="m-auto"
                          style="height: 150px; width: 150px;">
@@ -30,8 +30,8 @@
                 </div>
             </div>
 
-            <div @click.away="open = false" class="relative" x-data="{ open: false }">
-                <button class="bg-blue-400 rounded-xl w-96 h-96" @click="open = !open">
+            <div @mouseover.away="open = false" class="relative" x-data="{ open: false }">
+                <button class="bg-blue-400 rounded-xl w-96 h-96" @mouseover="open = !open">
                     Scheduling
                     <img src="{% static 'icons/calendar.svg' %}" class="m-auto"
                          style="height: 150px; width: 150px;">
@@ -56,8 +56,8 @@
                 </div>
             </div>
 
-            <div @click.away="open = false" class="relative" x-data="{ open: false }">
-                <button class="bg-blue-400 rounded-xl w-96 h-96" @click="open = !open">
+            <div @mouseover.away="open = false" class="relative" x-data="{ open: false }">
+                <button class="bg-blue-400 rounded-xl w-96 h-96" @mouseover="open = !open">
                     Preferences
                     <img src="{% static 'icons/puzzle_icon.svg' %}" class="m-auto"
                          style="height: 150px; width: 150px;">
@@ -78,8 +78,8 @@
                 </div>
             </div>
 
-            <div @click.away="open = false" class="relative" x-data="{ open: false }">
-                <button class="bg-blue-400 rounded-xl w-96 h-96" @click="open = !open">
+            <div @mouseover.away="open = false" class="relative" x-data="{ open: false }">
+                <button class="bg-blue-400 rounded-xl w-96 h-96" @mouseover="open = !open">
                     Object Sets
                     <img src="{% static 'icons/collection.svg' %}" class="m-auto"
                          style="height: 150px; width: 150px;">
