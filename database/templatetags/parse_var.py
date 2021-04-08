@@ -17,7 +17,7 @@ def parse_var(value):
 @register.simple_tag()
 def get_course_stats(form):
     stats_list = []
-    courses = Course.objects.filter(sets__set=form.set)
+    courses = Course.objects.filter(sets__set=form.course_set)
     for course in courses:
         stats_list.append({
             'course': course,
@@ -25,3 +25,10 @@ def get_course_stats(form):
         })
 
     return stats_list
+
+
+@register.filter
+def get_item(dictionary, key):
+    print(key)
+    print(dictionary)
+    return dictionary.get(key)
