@@ -9,7 +9,7 @@ from database.forms import EmptyForm
 from database.models.structural_models import SetMembership, ModelSet
 from database.views import DynamicModelMixin
 from dataingest.forms import UploadCSVFileForm
-from dataingest.logistics import create_courses, create_students, create_preferences
+from dataingest.logistics import create_courses, create_students, create_preferences, write_to_csv
 
 
 class UploadCSVFileView(LoginRequiredMixin, FormView):
@@ -55,14 +55,36 @@ class DownloadCSVFileView(LoginRequiredMixin, DynamicModelMixin, FormView):
         for obj in objects:
             objs.append(obj.member_object)
 
-        context['field_data'] = serialize("python", objs, use_natural_foreign_keys=True)
+        serialized_objs = serialize("python", objs, use_natural_foreign_keys=True)
+
+        context['field_data'] = serialized_objs
         context['object'] = f"{ModelSet.objects.get(id=set_id)} - {self.dynamic_model.__name__}s"
+
+        self.request.session['objects'] = serialized_objs
         return context
 
 
 def download_as_csv(request):
-    # TODO
-    file = ''
-    response = HttpResponse(file, content_type='text/csv')
+    deserialized_objs = request.session['objects']
+    cols = list(deserialized_objs[0]['fields'].keys())
+
+    if 'user' in cols:
+        cols.remove('user')
+        cols.append('first_name')
+        cols.append('last_name')
+        cols.append('email')
+
+    rows = []
+    for obj in deserialized_objs:
+        dict = obj['fields']
+        if 'user' in dict:
+            user_data = list(dict['user'].values())
+            row_data = [dict['student_id'], dict['class_standing']]
+            row_data.extend(user_data)
+            rows.append(row_data)
+        else:
+            rows.append(list(obj['fields'].values()))
+
+    response = write_to_csv(rows, cols, HttpResponse(content_type='text/csv'))
     response['Content-Disposition'] = u'attachment; filename="{0}"'.format('export.csv')
     return response
