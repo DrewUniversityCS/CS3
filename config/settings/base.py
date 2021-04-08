@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'tailwind',
     'crispy_tailwind',
+    'django_tables2',
 
     # Local
     'theme',

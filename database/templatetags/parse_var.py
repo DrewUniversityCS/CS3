@@ -25,3 +25,10 @@ def get_course_stats(form):
         })
 
     return stats_list
+
+
+@register.filter
+def get_item(dictionary, key):
+    print(key)
+    print(dictionary)
+    return dictionary.get(key)
