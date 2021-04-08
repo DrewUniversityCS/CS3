@@ -71,8 +71,8 @@ class InviteView(LoginRequiredMixin, FormView):
         return super().form_valid(form)
 
 
-class CalendarView(LoginRequiredMixin, TemplateView):
-    template_name = "pages/calendar.html"
+class ScheduleView(LoginRequiredMixin, TemplateView):
+    template_name = "pages/final_schedule.html"
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
