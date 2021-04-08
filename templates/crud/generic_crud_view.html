@@ -6,7 +6,8 @@
 
 
 {% block content %}
-    <div class="grid items-center grid-cols-1 gap-2 pb-24 lg:grid-cols-2">
+    {% if render_form %}
+    <div class="grid grid-cols-1 gap-2 pb-24 lg:grid-cols-2">
         <div class="flex flex-col w-2/3 h-full mx-auto">
             <div class="py-12 text-xl text-center text-gray-800">
                 Input Form
@@ -20,6 +21,13 @@
                 </button>
             </form>
         </div>
-        {% include "./database_table_view.html" %}
+        <div class="w-full pr-12">
+            {% include "./database_table_view.html" %}
+        </div>
     </div>
+    {% else %}
+        <div class="grid-cols-1 mx-auto md:w-11/12">
+            {% include "./database_table_view.html" %}
+        </div>
+    {% endif %}
 {% endblock content %}

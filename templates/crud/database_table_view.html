@@ -1,4 +1,4 @@
-<div class="flex flex-col w-2/3 h-full mx-auto">
+<div class="flex flex-col w-full h-full mx-auto">
     <div class="py-12 text-xl text-center text-gray-800">
         Database Items
     </div>
@@ -44,12 +44,11 @@
             {% endfor %}
         {% else %}
             <tr class="w-full h-full text-4xl bg-red-300 border-b border-gray-200 bg-no-data">
-                <td class="pl-16 text-center text-white md:pl-36 2xl:pl-56">
-                    <b>NO DATA</b>
-                </td>
-                <td class="py-12 text-center text-white md:py-48">
-                    <i class="fa fa-exclamation-circle"
-                       aria-hidden="true"></i>
+                <td class="text-center text-white h-42">
+                    <th  class="w-full text-white" colspan="2">
+                        <b>NO DATA</b>
+                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                    </th>
                 </td>
             </tr>
         {% endif %}
