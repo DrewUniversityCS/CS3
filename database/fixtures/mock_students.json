@@ -1,0 +1,137 @@
+[
+  {
+    "model": "accounts.baseuser",
+    "pk": 2,
+    "fields": {
+      "password": "3uPHxAqx6m",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "ckelly",
+      "first_name": "Charlie",
+      "last_name": "Kelly",
+      "email": "ckelly@drew.edu",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-04-04T19:56:49.478Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.baseuser",
+    "pk": 3,
+    "fields": {
+      "password": "JGzdbcaajS",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "rmcdonald",
+      "first_name": "Ronald",
+      "last_name": "McDonald",
+      "email": "rmcdonald@drew.edu",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-04-04T19:57:13.867Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.baseuser",
+    "pk": 4,
+    "fields": {
+      "password": "mXeBvWPMV8",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "dreynolds",
+      "first_name": "Dennis",
+      "last_name": "Reynolds",
+      "email": "dreynolds@drew.edu",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-04-04T19:57:30.570Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.baseuser",
+    "pk": 5,
+    "fields": {
+      "password": "sT9EpU8cuK",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "dreynolds2",
+      "first_name": "Dee",
+      "last_name": "Reynolds",
+      "email": "dreynolds2@drew.edu",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-04-04T19:57:45.527Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.baseuser",
+    "pk": 6,
+    "fields": {
+      "password": "eabRuByXHd",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "freynolds",
+      "first_name": "Frank",
+      "last_name": "Reynolds",
+      "email": "freynolds@drew.edu",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-04-04T19:58:00.579Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "database.student",
+    "pk": 1,
+    "fields": {
+      "user": 2,
+      "student_id": 1000001,
+      "class_standing": "FR"
+    }
+  },
+  {
+    "model": "database.student",
+    "pk": 2,
+    "fields": {
+      "user": 3,
+      "student_id": 1000002,
+      "class_standing": "SO"
+    }
+  },
+  {
+    "model": "database.student",
+    "pk": 3,
+    "fields": {
+      "user": 4,
+      "student_id": 1000003,
+      "class_standing": "JR"
+    }
+  },
+  {
+    "model": "database.student",
+    "pk": 4,
+    "fields": {
+      "user": 5,
+      "student_id": 1000004,
+      "class_standing": "SR"
+    }
+  },
+  {
+    "model": "database.student",
+    "pk": 5,
+    "fields": {
+      "user": 6,
+      "student_id": 1000005,
+      "class_standing": "GR"
+    }
+  }
+]

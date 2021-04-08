@@ -1,109 +1,105 @@
 {% extends '_base.html' %}
+{% load static %}
 
 {% block title %}CRUD{% endblock title %}
 
 {% block content %}
-    <div class="min-h-screen pt-12">
-        <div class="grid grid-cols-1 text-center sm:grid-cols-4">
-            <div class="w-full my-3 text-3xl font-bold text-blue-700">
-                Users
-                <ul>
-                    <li class="w-full mt-4 text-xl text-green-500">
-                        <a href="/crud/students">
-                            Students
-                        </a>
-                    </li>
-                    <li class="w-full mt-2 text-xl text-green-500">
-                        <a href="/crud/teachers">
-                            Teachers
-                        </a>
-                    </li>
-                    <li class="w-full mt-2 text-xl text-green-500">
-                        <a href="/crud/registrations">
-                            Registrations
-                        </a>
-                    </li>
-                </ul>
+    <div class="min-h-screen sm:pt-12 xl:pt-36">
+        <div class="flex flex-wrap justify-center gap-6 text-2xl text-white">
+
+            <div @click.away="open = false" class="relative" x-data="{ open: false }">
+                <button class="bg-blue-400 rounded-xl w-96 h-96" @click="open = !open">
+                    Users
+                    <img src="{% static 'icons/card.svg' %}" class="m-auto"
+                         style="height: 150px; width: 150px;">
+                </button>
+                <div x-show="open"
+                     x-transition:enter="transition ease-out duration-100"
+                     x-transition:enter-start="transform opacity-0 scale-95"
+                     x-transition:enter-end="transform opacity-100 scale-100"
+                     x-transition:leave="transition ease-in duration-75"
+                     x-transition:leave-start="transform opacity-100 scale-100"
+                     x-transition:leave-end="transform opacity-0 scale-95"
+                     class="absolute inset-0 w-full rounded-md shadow-lg">
+                    <div class="px-2 py-2 mx-4 mt-6 bg-green-400 rounded-md shadow-2xl h-5/6 bg-foundation">
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
+                           href="/crud/students">Students</a>
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
+                           href="/crud/teachers">Teachers</a>
+                    </div>
+                </div>
             </div>
-            <div class="w-full my-3 text-3xl font-bold text-blue-700">
-                Constraints
-                <ul>
-                    <li class="w-full mt-4 text-xl text-green-500">
-                        <a href="/crud/course-preferences">
-                            Course Preferences
-                        </a>
-                    </li>
-                    <li class="w-full mt-2 text-xl text-green-500">
-                        <a href="/crud/overlap-preferences">
-                            Overlap Preferences
-                        </a>
-                    </li>
-                    <li class="w-full mt-2 text-xl text-green-500">
-                        <a href="/crud/room-preferences">
-                            Room Preferences
-                        </a>
-                    </li>
-                    <li class="w-full mt-2 text-xl text-green-500">
-                        <a href="/crud/timeblock-preferences">
-                            Timeblock Preferences
-                        </a>
-                    </li>
-                    <li class="w-full mt-2 text-xl text-green-500">
-                        <a href="/crud/model-set">
-                            Constraint Sets
-                        </a>
-                    </li>
-                </ul>
+
+            <div @click.away="open = false" class="relative" x-data="{ open: false }">
+                <button class="bg-blue-400 rounded-xl w-96 h-96" @click="open = !open">
+                    Scheduling
+                    <img src="{% static 'icons/calendar.svg' %}" class="m-auto"
+                         style="height: 150px; width: 150px;">
+                </button>
+                <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                     x-transition:enter-start="transform opacity-0 scale-95"
+                     x-transition:enter-end="transform opacity-100 scale-100"
+                     x-transition:leave="transition ease-in duration-75"
+                     x-transition:leave-start="transform opacity-100 scale-100"
+                     x-transition:leave-end="transform opacity-0 scale-95"
+                     class="absolute inset-0 w-full rounded-md shadow-lg">
+                    <div class="px-2 py-2 mx-4 mt-6 bg-green-400 rounded-md shadow-2xl h-5/6 bg-foundation">
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
+                           href="/crud/schedules">Schedules</a>
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
+                           href="/crud/courses">Courses</a>
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
+                           href="/crud/sections">Sections</a>
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
+                           href="crud/create-bulk-sections">Create Sections in Bulk</a>
+                    </div>
+                </div>
             </div>
-            <div class="w-full my-3 text-3xl font-bold text-blue-700">
-                Structural
-                <ul>
-                    <li class="w-full mt-4 text-xl text-green-500">
-                        <a href="/crud/departments">
-                            Departments
-                        </a>
-                    </li>
-                    <li class="w-full mt-2 text-xl text-green-500">
-                        <a href="/crud/buildings">
-                            Buildings
-                        </a>
-                    </li>
-                    <li class="w-full mt-2 text-xl text-green-500">
-                        <a href="/crud/rooms">
-                            Rooms
-                        </a>
-                    </li>
-                </ul>
+
+            <div @click.away="open = false" class="relative" x-data="{ open: false }">
+                <button class="bg-blue-400 rounded-xl w-96 h-96" @click="open = !open">
+                    Preferences
+                    <img src="{% static 'icons/puzzle_icon.svg' %}" class="m-auto"
+                         style="height: 150px; width: 150px;">
+                </button>
+                <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                     x-transition:enter-start="transform opacity-0 scale-95"
+                     x-transition:enter-end="transform opacity-100 scale-100"
+                     x-transition:leave="transition ease-in duration-75"
+                     x-transition:leave-start="transform opacity-100 scale-100"
+                     x-transition:leave-end="transform opacity-0 scale-95"
+                     class="absolute inset-0 w-full rounded-md shadow-lg">
+                    <div class="px-2 py-2 mx-4 mt-6 bg-green-400 rounded-md shadow-2xl h-5/6 bg-foundation">
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
+                           href="/crud/create-preference">Create Preference</a>
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
+                           href="/crud/preferences">View Saved Preferences</a>
+                    </div>
+                </div>
             </div>
-            <div class="w-full my-3 text-3xl font-bold text-blue-700">
-                Scheduling
-                <ul>
-                    <li class="w-full mt-4 text-xl text-green-500">
-                        <a href="/crud/schedules">
-                            Schedules
-                        </a>
-                    </li>
-                    <li class="w-full mt-2 text-xl text-green-500">
-                        <a href="/crud/courses">
-                            Courses
-                        </a>
-                    </li>
-                    <li class="w-full mt-2 text-xl text-green-500">
-                        <a href="/crud/model-set">
-                            Course Sets
-                        </a>
-                    </li>
-                    <li class="w-full mt-2 text-xl text-green-500">
-                        <a href="/crud/sections">
-                            Sections
-                        </a>
-                    </li>
-                    <li class="w-full mt-2 text-xl text-green-500">
-                        <a href="/crud/timeblocks">
-                            Timeblocks
-                        </a>
-                    </li>
-                </ul>
+
+            <div @click.away="open = false" class="relative" x-data="{ open: false }">
+                <button class="bg-blue-400 rounded-xl w-96 h-96" @click="open = !open">
+                    Object Sets
+                    <img src="{% static 'icons/collection.svg' %}" class="m-auto"
+                         style="height: 150px; width: 150px;">
+                </button>
+                <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                     x-transition:enter-start="transform opacity-0 scale-95"
+                     x-transition:enter-end="transform opacity-100 scale-100"
+                     x-transition:leave="transition ease-in duration-75"
+                     x-transition:leave-start="transform opacity-100 scale-100"
+                     x-transition:leave-end="transform opacity-0 scale-95"
+                     class="absolute inset-0 w-full rounded-md shadow-lg">
+                    <div class="px-2 py-2 mx-4 mt-6 bg-green-400 rounded-md shadow-2xl h-5/6 bg-foundation">
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
+                           href="/set-crud/courses">Course Sets</a>
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
+                           href="/set-crud/students">Student Sets</a>
+                        <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent bg-green-400 border-2 border-white rounded-md hover:border-yellow-200"
+                           href="/set-crud/preferences">Preference Sets</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

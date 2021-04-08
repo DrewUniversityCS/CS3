@@ -1,9 +1,14 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
+from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import ValidationError
+from django.db.models import Exists, OuterRef
 from django.forms import ModelForm, CheckboxSelectMultiple, Textarea, CharField, \
-    EmailField
+    EmailField, ModelChoiceField, Form, ModelMultipleChoiceField, HiddenInput, Select, BooleanField
 
 from accounts.models import BaseUser
+from database.models.schedule_models import Schedule, Course
+from database.models.structural_models import ModelSet, SetMembership
 from database.models.user_models import Teacher, Student
 
 widget_dict = {
@@ -29,7 +34,8 @@ label_dict = {
     "start_hour": "Starting Hour",
     "start_minutes": "Starting Minutes",
     "end_hour": "Ending Hour",
-    "end_minutes": "Ending Minutes"
+    "end_minutes": "Ending Minutes",
+    "obj_type": "Object Type"
 }
 
 
@@ -139,3 +145,92 @@ def get_dynamic_model_form(dynamic_model):
         return make_user_form(dynamic_model)
 
     return DynamicModelForm
+
+
+def get_dynamic_model_choice_set_form(dynamic_model, crud_type):
+    class DynamicModelSetForm(Form):
+        set = ModelChoiceField(queryset=ModelSet.objects.all(), required=False)
+
+        if crud_type == "create":
+            new_set_name = CharField(max_length=256, required=False)
+
+        choices = ModelMultipleChoiceField(
+            queryset=dynamic_model.objects.all(), widget=CheckboxSelectMultiple,
+            label=f'{dynamic_model.__name__}s'
+        )
+
+        def clean(self):
+            cleaned_data = super().clean()
+            if crud_type == "create":
+                chosen_set = cleaned_data.get("set")
+                new_set = cleaned_data.get("new_set_name")
+                if chosen_set is None and new_set == "":
+                    raise ValidationError("Please specify either a new or existing set.")
+                elif chosen_set is not None and new_set != "":
+                    raise ValidationError("You cannot specify both an existing and new set at the same time.")
+            return cleaned_data
+
+        def __init__(self, *args, **kwargs):
+            remove_set = kwargs.pop('remove_set', False)
+            super(DynamicModelSetForm, self).__init__(*args, **kwargs)
+            if remove_set:
+                self.fields['set'].widget.attrs['style'] = 'pointer-events:none; background:#d3d3d3;'
+                self.fields['set'].initial = kwargs['initial']['set'].id
+            else:
+                self.fields['set'].queryset = ModelSet.objects.filter(
+                    ~Exists(SetMembership.objects.filter(set=OuterRef('pk'))),
+                    obj_type__model=dynamic_model.__name__.lower()
+                )
+
+    return DynamicModelSetForm
+
+
+class CreateBulkSectionsForm(Form):
+    schedule = ModelChoiceField(queryset=Schedule.objects.all())
+    courses = ModelMultipleChoiceField(queryset=ModelSet.objects.filter(obj_type__model='course'))
+
+
+class CreateBulkSectionsConfirmationForm(Form):
+    placeholder_field = CharField(widget=HiddenInput(), required=False)
+
+    def clean(self):
+        return super().clean()
+
+
+tailwind_dropdown = Select(attrs={'class': 'w-full inset-y-0 right-0 flex items-center text-gray-700'})
+
+
+class CreatePreferenceForm(Form):
+    object_1_type = ModelChoiceField(
+        queryset=ContentType.objects.filter(model__in=['course', 'baseuser']), label="Member A Type",
+        widget=tailwind_dropdown, initial='accounts | user')
+    object_1 = ModelChoiceField(queryset=Course.objects.none(), widget=tailwind_dropdown)
+    object_2_type = ModelChoiceField(queryset=ContentType.objects.filter(model__in=['course', 'timeblock']),
+                                     label="Member B Type",
+                                     widget=tailwind_dropdown, initial='database | course')
+    object_2 = ModelChoiceField(queryset=Course.objects.none(),
+                                widget=tailwind_dropdown)
+
+    weight = BooleanField(required=False, initial=False)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['object_1'].queryset = BaseUser.objects.all()
+        self.fields['object_2'].queryset = Course.objects.all()
+
+        if 'object_1_type' in self.data:
+            try:
+                object_1_type_id = int(self.data.get('object_1_type'))
+                object_1_type = ContentType.objects.get_for_id(object_1_type_id)
+                self.fields['object_1'].queryset = object_1_type.get_all_objects_for_this_type()
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty queryset
+
+        if 'object_2_type' in self.data:
+            try:
+                object_2_type_id = int(self.data.get('object_2_type'))
+                object_2_type = ContentType.objects.get_for_id(object_2_type_id)
+                self.fields['object_2'].queryset = object_2_type.get_all_objects_for_this_type()
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty queryset
+

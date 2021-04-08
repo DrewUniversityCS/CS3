@@ -13,7 +13,7 @@ class Command(BaseCommand):
     Loads necessary fixtures
     """
 
-    fixtures = ["base_schedule.json"]
+    fixtures = ["base_schedule.json", "departments.json"]
 
     def handle(self, *args, **options):
         self._load_data()

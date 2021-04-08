@@ -1,0 +1,17 @@
+{% extends '_base.html' %}
+{% load tailwind_filters %}
+
+{% block title %}Create Sections in Bulk{% endblock title %}
+
+{% block content %}
+    <div class="min-h-screen w-full text-center">
+        <form method="post" class="w-96 mx-auto">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit"
+                    class="px-8 py-3 mt-8 text-sm tracking-widest text-center text-white uppercase bg-green-600 rounded shadow hover:bg-green-400 focus:shadow-outline focus:outline-none">
+                Create Sections
+            </button>
+        </form>
+    </div>
+{% endblock content %}

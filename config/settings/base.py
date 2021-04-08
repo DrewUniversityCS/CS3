@@ -33,7 +33,8 @@ INSTALLED_APPS = [
     'accounts',
     'pages',
     'database',
-    'dataingest'
+    'dataingest',
+    'datacollection'
 ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -130,7 +131,15 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 # EMAIL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+FROM_EMAIL = 'CS3 <malminawi7@gmail.com>'
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
+EMAIL_HOST_PASSWORD = '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'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 # CUSTOM USER MODEL CONFIGS
 # ------------------------------------------------------------------------------
@@ -157,3 +166,5 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
+
+DOMAIN = 'localhost:8000'

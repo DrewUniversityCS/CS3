@@ -13,6 +13,7 @@ urlpatterns = [
     path('', include('pages.urls', namespace='pages')),
     path('', include('database.urls', namespace='database')),
     path('', include('dataingest.urls', namespace='dataingest')),
+    path('', include('datacollection.urls', namespace='datacollection')),
 
 ]
 

@@ -1,6 +1,11 @@
+import string
+
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
+from django.utils.crypto import get_random_string
 
 from database.enums import SEASONS, POSSIBLE_HOURS, POSSIBLE_MINUTES
+from database.models.structural_models import SetMembership
 
 
 class Course(models.Model):
@@ -11,18 +16,11 @@ class Course(models.Model):
     department = models.ForeignKey("database.Department", on_delete=models.CASCADE, related_name="courses offered+")
     name = models.CharField(max_length=256, blank=False, null=False)
     number = models.IntegerField(blank=False, null=False)
-    max_enrollment = models.IntegerField(blank=False, null=True)
     credit_hours = models.IntegerField(default=4)
-    comments = models.TextField()
+    comments = models.TextField(blank=True, null=True)
+    offered_annually = models.BooleanField(default=True)
 
-    # Note: overlap preferences is how we express course (1) coreqs, (2) prereqs,
-    # (3) overlap blocks, (4) general preferences
-    overlap_preferences = models.ManyToManyField("database.Course", through="database.OverlapPreference",
-                                                 related_name="overlap preferences+", blank=True)
-    room_preferences = models.ManyToManyField("database.Room", through="database.RoomPreference",
-                                              related_name="room preferences+", blank=True)
-    time_preferences = models.ManyToManyField("database.Timeblock", through="database.TimeblockPreference",
-                                              related_name="timeblock preferences+", blank=True)
+    sets = GenericRelation(SetMembership, related_query_name='course')
 
     def __str__(self):
         return self.department.abbreviation + str(self.number)
@@ -38,16 +36,22 @@ class Section(models.Model):
     course = models.ForeignKey("database.Course", on_delete=models.CASCADE, related_name="sections+")
     section_id = models.CharField(max_length=4)
     primary_instructor = models.ForeignKey("database.Teacher", on_delete=models.CASCADE,
-                                           related_name="sections taught+")
+                                           related_name="sections taught+", null=True, blank=True)
     other_instructor = models.ForeignKey("database.Teacher", on_delete=models.CASCADE,
                                          related_name="sections assisted with+", null=True, blank=True)
-    room = models.ForeignKey("database.Room", on_delete=models.CASCADE, related_name="sections+", blank=True, null=True)
-    year = models.IntegerField(null=False, blank=False)
-    season = models.CharField(choices=SEASONS, max_length=50)
-    offered_annually = models.BooleanField(default=True)
+
     timeblock = models.ForeignKey("database.Timeblock", on_delete=models.CASCADE, related_name="sections+", blank=True,
                                   null=True)
     schedule = models.ForeignKey("database.Schedule", on_delete=models.CASCADE, related_name="sections+")
+
+    @classmethod
+    def create(cls, course, schedule):
+        def make_section_id():
+            return get_random_string(4, allowed_chars=string.ascii_uppercase + string.digits)
+
+        section = cls(course=course, schedule=schedule, section_id=make_section_id())
+
+        return section
 
     def __str__(self):
         return self.course.name + " " + self.course.department.abbreviation + "-" + str(self.course.number) \
@@ -56,9 +60,11 @@ class Section(models.Model):
 
 class Schedule(models.Model):
     """
-    A structural model representing a week of classes.
+    A structural model representing a week's schedule of classes.
     """
     name = models.CharField(max_length=256, blank=True)
+    year = models.IntegerField(null=False, blank=False)
+    season = models.CharField(choices=SEASONS, max_length=50)
 
     def __str__(self):
         return self.name
