@@ -1,0 +1,50 @@
+[
+  {
+    "model": "database.department",
+    "pk": 1,
+    "fields": {
+      "abbreviation": "CSCI",
+      "name": "Computer Science"
+    }
+  },
+  {
+    "model": "database.department",
+    "pk": 2,
+    "fields": {
+      "abbreviation": "MATH",
+      "name": "Mathematics"
+    }
+  },
+  {
+    "model": "database.department",
+    "pk": 3,
+    "fields": {
+      "abbreviation": "PHYS",
+      "name": "Physics"
+    }
+  },
+  {
+    "model": "database.department",
+    "pk": 4,
+    "fields": {
+      "abbreviation": "DATA",
+      "name": "Data Science"
+    }
+  },
+  {
+    "model": "database.department",
+    "pk": 5,
+    "fields": {
+      "abbreviation": "CSEC",
+      "name": "Cybersecurity"
+    }
+  },
+  {
+    "model": "database.department",
+    "pk": 6,
+    "fields": {
+      "abbreviation": "STAT",
+      "name": "Statistics"
+    }
+  }
+]
