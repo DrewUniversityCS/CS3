@@ -1,10 +1,9 @@
 from django.db import models
-from database.models.user_models import Student
-
 from django.db.models import Count
 from django.urls import reverse
 
 from database.models.structural_models import ModelSet
+from database.models.user_models import Student
 
 
 class PreferenceForm(models.Model):
