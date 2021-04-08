@@ -5,57 +5,65 @@
 
 {% block content %}
     <div class="p-4 rounded md:m-8 md:p-8 md:px-16">
-        <div class="my-3">
-            <p class="w-full my-3 text-3xl font-bold text-green-700">
-                (1) Choose Schedule
-            </p>
-            <div class="flex flex-col md:flex-row">
-                <select class="py-1 pl-2 pr-20 my-auto border-2 border-black rounded border-1 md:w-1/4">
-                    <option value="1">Existing Schedule 1</option>
-                </select>
-                <p class="mx-6 my-auto font-bold text-black">
-                    OR
+        <form method="POST" action="{% url 'pages:schedule-redirect' %}">
+            {% csrf_token %}
+            <div class="my-3">
+                <p class="w-full my-3 text-3xl font-bold text-green-700">
+                    (1) Choose Schedule
                 </p>
-                <button class="px-3 py-2 font-bold text-black bg-gray-200 rounded">
-                    <i class="mr-1 fa fa-plus" aria-hidden="true"></i>
-                    Create New Schedule
-                </button>
+                <div class="flex flex-col md:flex-row">
+                    <select
+                            name="{{ check_schedule_form.schedule.name }}"
+                            class="py-1 pl-2 pr-20 my-auto border-2 border-black rounded border-1 md:w-1/4"
+                    >
+                        {% for choice in check_schedule_form.schedule.field.choices %}
+                            <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                        {% endfor %}
+                    </select>
+                    <p class="mx-6 my-auto font-bold text-black">
+                        OR
+                    </p>
+                    <a href="/crud/schedules">
+                        <button type="button" class="px-3 py-2 font-bold text-black bg-gray-200 rounded">
+                        <i class="mr-1 fa fa-plus" aria-hidden="true"></i>
+                        Create New Schedule
+                        </button>
+                    </a>
+                </div>
             </div>
-        </div>
-        <div class="my-3 md:w-1/2">
-            <p class="w-full my-3 text-3xl font-bold text-green-700">
-                (2) Choose Constraint Sets
-            </p>
-            <div class="flex">
-                <select class="w-2/3 py-1 pl-2 pr-20 my-auto border-2 border-black rounded md:w-full">
-                    <option value="1">Spring 2021 Constraints 1</option>
-                </select>
-                <button class="w-8 h-8 my-auto ml-4 text-green-500 border-4 border-green-500 rounded-full">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                </button>
+            <div class="my-3 md:w-1/2">
+                <p class="w-full my-3 text-3xl font-bold text-green-700">
+                    (2) Choose Constraint Sets
+                </p>
+                <div class="flex">
+                    <select class="w-2/3 py-1 pl-2 pr-20 my-auto border-2 border-black rounded md:w-full">
+                        <option value="1">Spring 2021 Constraints 1</option>
+                    </select>
+                    <button type="button" class="w-8 h-8 my-auto ml-4 text-green-500 border-4 border-green-500 rounded-full">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                    </button>
+                </div>
             </div>
-        </div>
 
-        <div class="my-3 md:w-1/2">
-            <p class="w-full text-xl text-green-500">Chosen Constraints</p>
-            <div class="w-full my-3 text-white bg-blue-700">
-                <p class="p-4"><i class="mr-1 fa fa-angle-right" aria-hidden="true"></i> Standard Constraints</p>
+            <div class="my-3 md:w-1/2">
+                <p class="w-full text-xl text-green-500">Chosen Constraints</p>
+                <div class="w-full my-3 text-white bg-blue-700">
+                    <p class="p-4"><i class="mr-1 fa fa-angle-right" aria-hidden="true"></i> Standard Constraints</p>
+                </div>
+                <div class="w-full my-3 text-white bg-blue-700">
+                    <p class="p-4"><i class="mr-1 fa fa-angle-right" aria-hidden="true"></i> Standard Constraints</p>
+                </div>
             </div>
-            <div class="w-full my-3 text-white bg-blue-700">
-                <p class="p-4"><i class="mr-1 fa fa-angle-right" aria-hidden="true"></i> Standard Constraints</p>
-            </div>
-        </div>
 
-        <div class="flex flex-col md:flex-row">
+            <div class="flex flex-col md:flex-row">
             <div class="md:w-1/2">
                 <div class="my-3">
                     <p class="w-full my-3 text-3xl font-bold text-green-700">
                         (3) Analyze Schedule
                     </p>
-                    <button class="p-4 text-3xl text-white bg-blue-600 rounded">
-                        <span class="my-auto mr-2 text-2xl">Run</span> <i class="fa fa-mouse-pointer"
-                                                                          style="transform: rotate(-16deg);"
-                                                                          aria-hidden="true"></i>
+                    <button type="submit" class="p-4 text-3xl text-white bg-blue-600 rounded">
+                        <span class="my-auto mr-2 text-2xl">Run</span>
+                        <i class="fa fa-mouse-pointer" style="transform: rotate(-16deg);" aria-hidden="true"></i>
                     </button>
                 </div>
 
@@ -108,7 +116,7 @@
 							</span>
                             <p class="my-auto text-sm">
 								<span class="font-bold">
-									Spring 2021 Math Instructor Preference Are Not Fully Met 
+									Spring 2021 Math Instructor Preference Are Not Fully Met
 								</span>
                                 <br/>
                                 Although a majority of constraints are satisfied. some are not.
@@ -125,7 +133,7 @@
 							</span>
                             <p class="my-auto text-sm">
 								<span class="font-bold">
-									Spring 2021 Constraints Are Not Sufficiently Satisfied 
+									Spring 2021 Constraints Are Not Sufficiently Satisfied
 								</span>
                                 <br/>
                                 The provided schedule has many conflicts with the constraints in this set.
@@ -136,5 +144,6 @@
             </div>
 
         </div>
+        </form>
     </div>
 {% endblock %}
