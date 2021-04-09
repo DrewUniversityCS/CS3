@@ -18,7 +18,7 @@
                         {{ object }}
                     </td>
                     <td class="w-1/2 py-3 text-xl text-center pl-7">
-                        {% if url_name == 'set_crud' %}
+                        {% if url_name == 'set_crud' or dynamic_model_name == 'model-set' %}
                             <a href="{% url 'database:set_crud_inspect' dynamic_model_name object.id %}"><i
                                     class="mr-2 transform fa fa-eye hover:text-blue-500 hover:scale-125"
                                     aria-hidden="true"></i></a>
