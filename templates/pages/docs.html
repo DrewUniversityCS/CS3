@@ -3,12 +3,22 @@
 {% block title %}Docs page{% endblock %}
 
 {% block content %}
-    <div class="h-screen font-sans text-center">
+    <div class="h-screen font-sans">
         <div class="pt-48">
             <p class="text-4xl font-bold leading-7 text-purple-600 pb-12">Docs Page</p>
-            <div style="margin-left:43.5%">
-                {% include "../components/animated_logo.html" %}
-            </div>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'referencing:home-ref' %}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'referencing:db-ref' %}">Database</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'referencing:admin-ref' %}">Admin</a></li>
+                </ol>
+            </nav>
+            <ul>
+                <li><a href="{% url 'referencing:home-ref' %}">Home</a> </li>
+                <li><a href="{% url 'referencing:db-ref' %}">Database</a> </li>
+                <li><a href="{% url 'referencing:admin-ref' %}">Admin</a> </li>
+
+            </ul>
         </div>
     </div>
 {% endblock content %}
