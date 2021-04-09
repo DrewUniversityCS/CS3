@@ -3,6 +3,7 @@ import os
 # GENERAL
 # ------------------------------------------------------------------------------
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts\
 INTERNAL_IPS = ['127.0.0.1']
@@ -137,7 +138,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 FROM_EMAIL = 'CS3 <malminawi7@gmail.com>'
 
 EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
+EMAIL_HOST_USER = 'apikey'  # this is exactly the value 'apikey'
 EMAIL_HOST_PASSWORD = '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'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
@@ -169,3 +170,5 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 
 DOMAIN = 'localhost:8000'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
