@@ -14,6 +14,19 @@ def parse_var(value):
     return value
 
 
+@register.filter
+@stringfilter
+def obj_to_dynamic_model_name(value):
+    if value == 'database | course':
+        return 'courses'
+    elif value == 'database | student':
+        return 'students'
+    elif value == 'database | preference':
+        return 'preferences'
+    return value
+
+
+
 @register.simple_tag()
 def get_course_stats(form):
     stats_list = []
@@ -29,6 +42,4 @@ def get_course_stats(form):
 
 @register.filter
 def get_item(dictionary, key):
-    print(key)
-    print(dictionary)
     return dictionary.get(key)
