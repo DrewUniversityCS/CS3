@@ -1,6 +1,6 @@
 {% extends '_base.html' %}
 
-{% block title %}CRUD Inspect{% endblock %}
+{% block title %}Download CSV{% endblock %}
 {% load tailwind_filters %}
 {% load tags %}
 
@@ -9,7 +9,7 @@
         <div class="w-1/2 py-12 mx-auto bg-white rounded-lg">
             <form method="post" class="pb-12">
                 {% csrf_token %}
-                <div class="text-lg">Inspecting the following object</div>
+                <div class="text-lg">Downloading the following set of objects:</div>
                 <div class="py-8 text-xl"><b>{{ object }}</b></div>
                 <div>
                     {% for instance in field_data %}
@@ -36,6 +36,11 @@
                         </table>
                     {% endfor %}
                 </div>
+                <button type="submit"
+                        class="px-8 py-3 mt-16 text-md tracking-widest text-center text-white uppercase bg-green-600 rounded shadow hover:bg-green-700 focus:shadow-outline focus:outline-none">
+                    Download CSV
+                    <i class="ml-2 text-xl fa fa-download"></i>
+                </button>
             </form>
             <a href="javascript:history.back()"
                class="px-8 py-3 mt-4 text-xs tracking-widest text-center text-white uppercase bg-red-600 rounded shadow hover:bg-red-400 focus:shadow-outline focus:outline-none">Go

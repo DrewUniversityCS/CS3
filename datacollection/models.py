@@ -1,34 +1,32 @@
 from django.db import models
-
-# Create your models here.
 from django.db.models import Count
 from django.urls import reverse
 
 from database.models.structural_models import ModelSet
+from database.models.user_models import Student
 
 
 class PreferenceForm(models.Model):
     """
     Keeps Track of preference form Open for a set.
     """
-    set = models.ForeignKey(ModelSet, on_delete=models.CASCADE, related_name='preference_form')
+    course_set = models.ForeignKey(ModelSet, on_delete=models.CASCADE, related_name='course_form')
+    student_set = models.ForeignKey(ModelSet, on_delete=models.CASCADE, related_name='student_form')
     name = models.CharField('Form Name', max_length=100)
     is_taking_responses = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return f'{self.set} --> {self.is_taking_responses}'
+        return f'{self.course_set}-{self.student_set} --> {self.is_taking_responses}'
 
     @property
     def total_students(self):
-        from database.models.user_models import Student
-        return Student.objects.filter(sets__set=self.set).count()
+        return Student.objects.filter(sets__set=self.student_set).count()
 
     @property
     def response_entries(self):
         response_entries = PreferenceFormEntry.objects.filter(preference_form=self).values('email').annotate(
             n=Count('pk')).count()
-        print(PreferenceFormEntry.objects.filter(preference_form=self).values('email').annotate(n=Count('pk')))
         return response_entries, response_entries / self.total_students * 100.0
 
     @property

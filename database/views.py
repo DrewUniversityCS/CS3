@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.contenttypes.models import ContentType
 from django.core.serializers import serialize, deserialize
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect
@@ -8,7 +9,7 @@ from django.views.generic.edit import FormView, DeleteView, UpdateView
 
 from accounts.models import BaseUser
 from database.forms import get_dynamic_model_form, get_dynamic_model_choice_set_form, CreateBulkSectionsForm, \
-    CreateBulkSectionsConfirmationForm
+    EmptyForm, CreatePreferenceForm
 from database.models.schedule_models import Course, Section, Schedule, Timeblock
 from database.models.structural_models import Department, ModelSet, SetMembership, Preference
 from database.models.user_models import Student, Teacher
@@ -62,7 +63,7 @@ class CreateBulkSectionsView(LoginRequiredMixin, FormView):
 
 class CreateBulkSectionsSuccessView(LoginRequiredMixin, FormView):
     template_name = "crud/sections_bulk_create_success.html"
-    form_class = CreateBulkSectionsConfirmationForm
+    form_class = EmptyForm
     success_url = "/crud/create-bulk-sections"
 
     def get_context_data(self, *args, **kwargs):
@@ -143,9 +144,15 @@ class CrudView(LoginRequiredMixin, DynamicModelMixin, FormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        render_form = True
+        if self.dynamic_model_name == 'preferences' or self.dynamic_model_name == 'model-set':
+            render_form = False
+
         context.update({
+            'render_form': render_form,
             'all_objects': self.dynamic_model.objects.all(),
-            'dynamic_model_name': self.dynamic_model_name
+            'dynamic_model_name': self.dynamic_model_name,
         })
         return context
 
@@ -158,11 +165,11 @@ class CrudView(LoginRequiredMixin, DynamicModelMixin, FormView):
 
 
 class DynamicModelSetCreateView(LoginRequiredMixin, DynamicModelMixin, FormView):
-    template_name = "crud/generic_crud_view.html"
+    template_name = "crud/set_crud_view.html"
     context_object_name = 'all_objects'
 
     def get_form_class(self):
-        return get_dynamic_model_choice_set_form(self.dynamic_model)
+        return get_dynamic_model_choice_set_form(self.dynamic_model, "create")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -180,13 +187,25 @@ class DynamicModelSetCreateView(LoginRequiredMixin, DynamicModelMixin, FormView)
         return self.request.path
 
     def form_valid(self, form):
-        SetMembership.objects.bulk_create([
-            SetMembership(
-                set=form.cleaned_data['set'],
-                member_object=choice
-            )
-            for choice in form.cleaned_data['choices']
-        ])
+        if form.cleaned_data['new_set_name'] != "":
+            new_set = ModelSet.objects.create(name=form.cleaned_data['new_set_name'],
+                                              obj_type=ContentType.objects.get(
+                                                  model=self.dynamic_model.__name__.lower()))
+            SetMembership.objects.bulk_create([
+                SetMembership(
+                    set=new_set,
+                    member_object=choice
+                )
+                for choice in form.cleaned_data['choices']
+            ])
+        else:
+            SetMembership.objects.bulk_create([
+                SetMembership(
+                    set=form.cleaned_data['set'],
+                    member_object=choice
+                )
+                for choice in form.cleaned_data['choices']
+            ])
         return super().form_valid(form)
 
 
@@ -196,9 +215,10 @@ class DynamicModelSetUpdateView(LoginRequiredMixin, DynamicModelMixin, FormView)
     object = None
 
     def get_form_class(self):
-        return get_dynamic_model_choice_set_form(self.dynamic_model)
+        return get_dynamic_model_choice_set_form(self.dynamic_model, "update")
 
     def get_initial(self):
+
         self.object = get_object_or_404(ModelSet, pk=self.kwargs.get('id'))
         return {
             'set': self.object,
@@ -263,7 +283,24 @@ class DynamicModelSetDeleteView(LoginRequiredMixin, DynamicModelMixin, DeleteVie
         SetMembership.objects.filter(
             set=self.get_object(), content_type__model=self.dynamic_model.__name__.lower()
         ).delete()
+        ModelSet.objects.filter(id=self.kwargs.get('id')).delete()
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
         return reverse('database:set_crud', kwargs={'model': self.dynamic_model_name})
+
+
+class CreatePreferenceView(LoginRequiredMixin, FormView):
+    template_name = 'crud/create_preference.html'
+    form_class = CreatePreferenceForm
+    success_url = '/crud/preferences'
+
+    def form_valid(self, form):
+        Preference.objects.create(
+            object_1_id=form.data['object_1'][0],
+            object_1_content_type=form.cleaned_data['object_1_type'],
+            object_2_id=form.data['object_2'][0],
+            object_2_content_type=form.cleaned_data['object_2_type'],
+            weight=form.cleaned_data['weight']
+        ).save()
+        return HttpResponseRedirect(self.get_success_url())

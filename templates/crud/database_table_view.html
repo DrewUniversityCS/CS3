@@ -1,0 +1,74 @@
+{% load tags %}
+<div class="flex flex-col w-full h-full mx-auto">
+    <div class="py-12 text-xl text-center text-gray-800">
+        Database Items
+    </div>
+    <table class="w-full bg-white rounded shadow-md table-auto min-w-max">
+        <thead>
+        <tr class="flex justify-around w-full text-gray-600 uppercase bg-gray-200">
+            <th class="px-6 py-3 text-left">Object</th>
+            <th class="px-6 py-3 text-center">Actions</th>
+        </tr>
+        </thead>
+        <tbody class="flex flex-col items-center justify-start w-full overflow-y-scroll text-sm font-light text-gray-600"
+               style="height: 50vh;">
+        {% if all_objects %}
+            {% for object in all_objects %}
+                <tr class="flex w-full border-b border-gray-200 hover:bg-gray-100">
+                    <td class="w-1/2 px-6 py-3 text-left whitespace-nowrap">
+                        {{ object }}
+                    </td>
+                    <td class="w-1/2 py-3 text-xl text-center pl-7">
+                        {% if url_name == 'set_crud' %}
+                            <a href="{% url 'database:set_crud_inspect' dynamic_model_name object.id %}"><i
+                                    class="mr-2 transform fa fa-eye hover:text-blue-500 hover:scale-125"
+                                    aria-hidden="true"></i></a>
+                            <a href="{% url 'database:set_crud_update' dynamic_model_name object.id %}"><i
+                                    class="mr-2 transform fa fa-edit hover:text-yellow-500 hover:scale-125"
+                                    aria-hidden="true"></i></a>
+                            <a href="{% url 'database:set_crud_delete' dynamic_model_name object.id %}"><i
+                                    class="mr-2 transform fa fa-trash hover:text-red-500 hover:scale-125"
+                                    aria-hidden="true"></i></a>
+                            <a href="{% url 'dataingest:download_csv' dynamic_model_name object.id %}"><i
+                                    class="mr-2 transform fa fa-download hover:text-green-500 hover:scale-125"
+                                    aria-hidden="true"></i></a>
+                        {% elif dynamic_model_name == 'model-set' %}
+                            <a href="{% url 'database:set_crud_inspect' object.obj_type|obj_to_dynamic_model_name object.id %}"><i
+                                    class="mr-2 transform fa fa-eye hover:text-blue-500 hover:scale-125"
+                                    aria-hidden="true"></i></a>
+                            <a href="{% url 'database:set_crud_update' object.obj_type|obj_to_dynamic_model_name object.id %}"><i
+                                    class="mr-2 transform fa fa-edit hover:text-yellow-500 hover:scale-125"
+                                    aria-hidden="true"></i></a>
+                            <a href="{% url 'database:set_crud_delete' object.obj_type|obj_to_dynamic_model_name object.id %}"><i
+                                    class="mr-2 transform fa fa-trash hover:text-red-500 hover:scale-125"
+                                    aria-hidden="true"></i></a>
+                            <a href="{% url 'dataingest:download_csv' object.obj_type|obj_to_dynamic_model_name object.id %}"><i
+                                    class="mr-2 transform fa fa-download hover:text-green-500 hover:scale-125"
+                                    aria-hidden="true"></i></a>
+                        {% else %}
+                            <a href="{% url 'database:crud_inspect' dynamic_model_name object.id %}"><i
+                                    class="mr-2 transform fa fa-eye hover:text-blue-500 hover:scale-125"
+                                    aria-hidden="true"></i></a>
+                            <a href="{% url 'database:crud_update' dynamic_model_name object.id %}"><i
+                                    class="mr-2 transform fa fa-edit hover:text-yellow-500 hover:scale-125"
+                                    aria-hidden="true"></i></a>
+                            <a href="{% url 'database:crud_delete' dynamic_model_name object.id %}"><i
+                                    class="mr-2 transform fa fa-trash hover:text-red-500 hover:scale-125"
+                                    aria-hidden="true"></i></a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr class="w-full h-full text-4xl bg-red-300 border-b border-gray-200 bg-no-data">
+                <td class="text-center text-white h-42">
+                <th class="w-full text-white" colspan="2">
+                    <b>NO DATA</b>
+                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                </th>
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+</div>

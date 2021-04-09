@@ -1,9 +1,11 @@
 from django.urls import path
 
-from dataingest import views
+from dataingest.views import UploadCSVFileView, DownloadCSVFileView, download_as_csv
 
 urlpatterns = [
-    path("upload/", views.upload, name="upload")
+    path("dataingest/upload/", UploadCSVFileView.as_view(), name="upload_csv"),
+    path("dataingest/download/<slug:model>/<slug:id>", DownloadCSVFileView.as_view(), name="download_csv"),
+    path("dataingest/download_csv/", download_as_csv, name="download_as_csv")
 ]
 
 app_name = 'dataingest'

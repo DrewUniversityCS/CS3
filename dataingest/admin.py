@@ -1,8 +1,6 @@
 from django.contrib import admin
 
-from .models import CSV
-
-models = [CSV]
+models = []
 
 for model in models:
-    admin.site.register(CSV)
+    admin.site.register(model)

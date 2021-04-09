@@ -3,15 +3,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 from django.db import transaction
 from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
-
-# Create your views here.
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import FormView
 
-from datacollection.forms import PreferencesFormForm, PreferenceFormEntryForm
 from database.models.user_models import Student
+from datacollection.forms import PreferencesFormForm, PreferenceFormEntryForm
 from datacollection.models import PreferenceForm, PreferenceFormEntry
 
 
@@ -51,9 +49,9 @@ class OpenPreferenceSetView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         preference_form = form.save()
-        email_ids = Student.objects.filter(sets__set=preference_form.set).values_list('user__email', flat=True)
+        email_ids = Student.objects.filter(sets__set=preference_form.student_set).values_list('user__email', flat=True)
         send_mail('Preference Form',
-                  f'Fill Course preferences for {preference_form.set} here:\n\nhttp://{settings.DOMAIN}{preference_form.form_link}\n\nTeam CS3',
+                  f'Fill Course preferences for {preference_form.name} here:\n\nhttp://{settings.DOMAIN}{preference_form.form_link}\n\nTeam CS3',
                   settings.FROM_EMAIL, email_ids, fail_silently=False)
         return super().form_valid(form)
 

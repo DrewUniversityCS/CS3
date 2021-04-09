@@ -1,28 +1,23 @@
 import os
-from pathlib import Path
 
 # GENERAL
 # ------------------------------------------------------------------------------
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts\
 INTERNAL_IPS = ['127.0.0.1']
-ALLOWED_HOSTS = ["localhost",
-                 "0.0.0.0",
-                 "127.0.0.1",
-                 "http://cs3-drew.herokuapp.com",
-                 "https://cs3-drew.herokuapp.com",
-                 "cs3-drew.herokuapp.com"]
+ALLOWED_HOSTS = ['*']
 # APPS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
@@ -33,6 +28,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'tailwind',
     'crispy_tailwind',
+    'django_tables2',
 
     # Local
     'theme',
@@ -89,16 +85,6 @@ TEMPLATES = [
     },
 ]
 
-# DATABASES
-# ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
 # PASSWORDS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
@@ -134,16 +120,15 @@ USE_TZ = True
 # STATIC
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-root
-STATIC_ROOT = str(BASE_DIR.joinpath('staticfiles'))
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = [
-    str(BASE_DIR.joinpath('static')),
-    str(BASE_DIR.joinpath('theme', 'static'))
+    os.path.join(BASE_DIR, 'static')
 ]
 # http://whitenoise.evans.io/en/stable/django.html#add-compression-and-caching-support
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 # EMAIL
 # ------------------------------------------------------------------------------
@@ -153,7 +138,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 FROM_EMAIL = 'CS3 <malminawi7@gmail.com>'
 
 EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
+EMAIL_HOST_USER = 'apikey'  # this is exactly the value 'apikey'
 EMAIL_HOST_PASSWORD = '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'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
@@ -185,3 +170,5 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 
 DOMAIN = 'localhost:8000'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
