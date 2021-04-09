@@ -146,13 +146,13 @@ class CrudView(LoginRequiredMixin, DynamicModelMixin, FormView):
         context = super().get_context_data(**kwargs)
 
         render_form = True
-        if self.dynamic_model_name == 'preferences':
+        if self.dynamic_model_name == 'preferences' or self.dynamic_model_name == 'model-set':
             render_form = False
 
         context.update({
             'render_form': render_form,
             'all_objects': self.dynamic_model.objects.all(),
-            'dynamic_model_name': self.dynamic_model_name
+            'dynamic_model_name': self.dynamic_model_name,
         })
         return context
 
