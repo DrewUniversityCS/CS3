@@ -30,7 +30,7 @@
         </button>
         <div x-bind:style="expanded == true ? 'height: 100%; padding-top: 1.5rem; padding-bottom: 2.5rem;' : 'height: 0px'"
              class="w-3/4 mx-auto overflow-hidden">
-            <div class="mx-auto text-left text-gray-700 pb-12">
+            <div class="pb-12 mx-auto text-left text-gray-700">
                 <form action="{% url 'datacollection:preference_set_form_open' %}" method="POST">
                     {% csrf_token %}
                     {{ open_new_preference_form|crispy }}
