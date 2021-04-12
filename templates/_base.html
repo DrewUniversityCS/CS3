@@ -8,13 +8,19 @@
     <title>{% block title %}CS3{% endblock title %}</title>
     <meta name="description" content="Course scheduling and registration.">
     <meta name="author" content="">
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/cs3_logo.svg' %}">
+    <link rel="shortcut icon" type="image/svg" href="{% static 'images/cs3_logo.svg' %}">
     {% block styles %}
+        <link
+                rel="stylesheet"
+                href="{% static 'styles.css' %}"
+                type="text/css"
+        />
         <link
                 rel="stylesheet"
                 href="{% static 'css/styles.css' %}"
                 type="text/css"
         />
+
         <link
                 rel="stylesheet"
                 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -30,10 +36,13 @@
     {% endblock javascript %}
 </head>
 
+<style>
+    .btn-indigo {
+        @apply py-2 px-4 bg-indigo-500 text-white font-semibold rounded-lg shadow-md hover: bg-indigo-700 focus: outline-none focus: ring-2 focus: ring-indigo-400 focus: ring-opacity-75;
+    }
+</style>
 
 <body>
-
-
 {% block nav %}
     <main role="main">
         {% include "./components/navbar.html" %}
