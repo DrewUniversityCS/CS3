@@ -25,7 +25,7 @@
         <p class="py-4 text-xl font-bold bg-white">
             Student Data Collection
         </p>
-        <button type="button" class="px-3 py-2 mb-4 font-medium bg-gray-200 rounded" @click="expanded = !expanded">
+        <button type="button" class="btn-basic mb-4" @click="expanded = !expanded">
             Open
         </button>
         <div x-bind:style="expanded == true ? 'height: 100%; padding-top: 1.5rem; padding-bottom: 2.5rem;' : 'height: 0px'"
@@ -34,8 +34,8 @@
                 <form action="{% url 'datacollection:preference_set_form_open' %}" method="POST">
                     {% csrf_token %}
                     {{ open_new_preference_form|crispy }}
-                    <button class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Open
+                    <button class="btn-interaction w-80 mt-6">
+                        Send Form
                     </button>
                 </form>
             </div>
@@ -65,7 +65,7 @@
                                             <form action="{% url 'datacollection:preference_set_form_open_close' preference_form.id 'close' %}"
                                                   method="POST">
                                                 {% csrf_token %}
-                                                <button class="h-10 px-5 m-2 text-red-100 transition-colors duration-150 bg-red-700 rounded-lg focus:shadow-outline hover:bg-red-800">
+                                                <button class="btn-cancel">
                                                     Close
                                                 </button>
                                             </form>
@@ -73,7 +73,7 @@
                                             <form action="{% url 'datacollection:preference_set_form_open_close' preference_form.id 'open' %}"
                                                   method="POST">
                                                 {% csrf_token %}
-                                                <button class="h-10 px-5 m-2 text-green-100 transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800">
+                                                <button class="btn-submit">
                                                     Open
                                                 </button>
                                             </form>
