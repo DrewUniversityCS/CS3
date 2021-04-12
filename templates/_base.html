@@ -9,6 +9,17 @@
     <meta name="description" content="Course scheduling and registration.">
     <meta name="author" content="">
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/cs3_logo.svg' %}">
+    {% block styles %}
+        <link
+                rel="stylesheet"
+                href="{% static 'css/styles.css' %}"
+                type="text/css"
+        />
+        <link
+                rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        >
+    {% endblock %}
     {% block javascript %}
         <!-- 3rd party JavaScript -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -16,23 +27,13 @@
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
         <!-- Project JS -->
         <script src="{% static 'js/base.js' %}"></script>
-        <script src="{% static 'js/custom-chart.js' %}"></script>
-
     {% endblock javascript %}
 </head>
 
-<link
-        rel="stylesheet"
-        href="{% static 'css/styles.css' %}"
-        type="text/css"
-/>
 
-<link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
->
+<body>
 
-<body style="background: #c0defd">
+
 {% block nav %}
     <main role="main">
         {% include "./components/navbar.html" %}
