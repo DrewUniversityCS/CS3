@@ -21,14 +21,14 @@
                             {% for field, value in instance.fields.items %}
                                 {% if not value.items %}
                                     <tr class="border-b">
-                                        <th class="px-4 py-3">{{ field|parse_var }}</th>
-                                        <th class="px-4 py-3 font-normal">{{ value }}</th>
+                                        <th class="px-4 py-3">{{ field|parse_var|clean_preference_field_name }}</th>
+                                        <th class="px-4 py-3 font-normal">{{ value|to_human_readable }}</th>
                                     </tr>
                                 {% else %}
                                     {% for key, item in value.items %}
                                         <tr class="border-b">
                                             <th class="px-4 py-3">{{ key|parse_var }}</th>
-                                            <th class="px-4 py-3  font-normal">{{ item }}</th>
+                                            <th class="px-4 py-3  font-normal">{{ item|to_human_readable }}</th>
                                         </tr>
                                     {% endfor %}
                                 {% endif %}

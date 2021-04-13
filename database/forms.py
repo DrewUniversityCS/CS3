@@ -35,7 +35,8 @@ label_dict = {
     "start_minutes": "Starting Minutes",
     "end_hour": "Ending Hour",
     "end_minutes": "Ending Minutes",
-    "obj_type": "Object Type"
+    "obj_type": "Object Type",
+    "obj_1_type": "Member A Type"
 }
 
 
