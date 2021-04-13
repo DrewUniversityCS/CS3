@@ -9,10 +9,10 @@
         <form method="post" class="max-w-lg p-12 mx-auto overflow-hidden bg-white rounded-lg shadow-lg">
             {% csrf_token %}
             {{ form|crispy }}
-            <button class="block px-10 py-3 text-xs tracking-widest text-center text-white uppercase bg-indigo-600 rounded shadow hover:bg-indigo-700 focus:shadow-outline focus:outline-none"
+            <button class="btn-interaction"
                     type="submit">Log in
             </button>
-            <a class="text-base font-semibold text-gray-500" href="{% url 'account_reset_password' %}">Forgot
+            <a class="pl-2 text-base font-semibold text-gray-500" href="{% url 'account_reset_password' %}">Forgot
                 Password?</a>
         </form>
 

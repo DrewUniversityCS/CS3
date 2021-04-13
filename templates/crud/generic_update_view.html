@@ -5,8 +5,8 @@
 
 {% block content %}
     <div class="pt-12 text-center">
-        <div class="w-1/2 pt-8 mx-auto bg-white rounded-lg">
-            <div class="w-2/3 mx-auto text-center">
+        <div class="w-1/2 py-8 mx-auto bg-white rounded-lg">
+            <div class="w-2/3 mx-auto text-center mt-8">
                 <form method="post">
                     {% csrf_token %}
                     <div class="text-lg">Editing the following object</div>
@@ -15,11 +15,11 @@
                         {{ form|crispy }}
                     </div>
                     <button type="submit"
-                            class="px-8 py-3 mt-4 mb-8 mr-8 text-xs tracking-widest text-center text-white uppercase bg-green-600 rounded shadow hover:bg-green-400 focus:shadow-outline focus:outline-none">
+                            class="btn-submit mt-6">
                         Save
                     </button>
                     <a href="javascript:history.back()"
-                       class="px-8 py-3 mt-4 text-xs tracking-widest text-center text-white uppercase bg-red-600 rounded shadow hover:bg-red-400 focus:shadow-outline focus:outline-none">Cancel</a>
+                       class="btn-cancel">Cancel</a>
                 </form>
             </div>
         </div>

@@ -41,7 +41,7 @@
             {% csrf_token %}
 
             {{ form.non_field_errors }}
-            <div class="my-6 text-xl fieldWrapper w-full">
+            <div class="w-full my-6 text-xl fieldWrapper">
                 {{ form.object_1_type.errors }}
                 <label for="{{ form.object_1_type.id_for_label }}">First Member Type:</label>
                 <div class="block px-4 py-2 mt-4 leading-normal text-gray-700 bg-white border border-gray-300 rounded-lg">
@@ -79,7 +79,7 @@
             </div>
 
             <button type="submit"
-                    class="px-8 py-3 mt-8 text-sm tracking-widest text-center text-white uppercase bg-green-600 rounded shadow hover:bg-green-400 focus:shadow-outline focus:outline-none">
+                    class="btn-submit">
                 Create Preference
             </button>
         </form>

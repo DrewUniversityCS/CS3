@@ -93,3 +93,19 @@ class Department(models.Model):
 
     def natural_key(self):
         return self.name
+
+
+class Registration(models.Model):
+    """
+    Relationship to signify a students registration for a course section (not necessarily successful)
+    """
+    section = models.ForeignKey("database.Section", on_delete=models.CASCADE)
+    student = models.ForeignKey("database.Student", on_delete=models.CASCADE)
+    approval = models.BooleanField(default=False)
+    approving_teacher = models.ForeignKey("database.Teacher", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.student.user.get_full_name() + " registration for " + self.section.__str__()
+
+    class Meta:
+        verbose_name_plural = "registrations"

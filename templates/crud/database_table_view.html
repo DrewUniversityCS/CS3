@@ -1,3 +1,4 @@
+{% load tags %}
 <div class="flex flex-col w-full h-full mx-auto">
     <div class="py-12 text-xl text-center text-gray-800">
         Database Items
@@ -29,6 +30,19 @@
                                     class="mr-2 transform fa fa-trash hover:text-red-500 hover:scale-125"
                                     aria-hidden="true"></i></a>
                             <a href="{% url 'dataingest:download_csv' dynamic_model_name object.id %}"><i
+                                    class="mr-2 transform fa fa-download hover:text-green-500 hover:scale-125"
+                                    aria-hidden="true"></i></a>
+                        {% elif dynamic_model_name == 'model-set' %}
+                            <a href="{% url 'database:set_crud_inspect' object.obj_type|obj_to_dynamic_model_name object.id %}"><i
+                                    class="mr-2 transform fa fa-eye hover:text-blue-500 hover:scale-125"
+                                    aria-hidden="true"></i></a>
+                            <a href="{% url 'database:set_crud_update' object.obj_type|obj_to_dynamic_model_name object.id %}"><i
+                                    class="mr-2 transform fa fa-edit hover:text-yellow-500 hover:scale-125"
+                                    aria-hidden="true"></i></a>
+                            <a href="{% url 'database:set_crud_delete' object.obj_type|obj_to_dynamic_model_name object.id %}"><i
+                                    class="mr-2 transform fa fa-trash hover:text-red-500 hover:scale-125"
+                                    aria-hidden="true"></i></a>
+                            <a href="{% url 'dataingest:download_csv' object.obj_type|obj_to_dynamic_model_name object.id %}"><i
                                     class="mr-2 transform fa fa-download hover:text-green-500 hover:scale-125"
                                     aria-hidden="true"></i></a>
                         {% else %}

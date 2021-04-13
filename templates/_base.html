@@ -8,44 +8,30 @@
     <title>{% block title %}CS3{% endblock title %}</title>
     <meta name="description" content="Course scheduling and registration.">
     <meta name="author" content="">
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/cs3_logo.svg' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <style>
-        .teal_color {
-            color: #00c4a8;
-        }
+    <link rel="shortcut icon" type="image/svg" href="{% static 'images/cs3_logo.svg' %}">
+    {% block styles %}
+        <link
+                rel="stylesheet"
+                href="{% static 'css/styles.css' %}"
+                type="text/css"
+        />
 
-        .bg-teal_color {
-            background: #00c4a8;
-        }
-
-        .blue_color {
-            color: #86bffc;
-        }
-
-        .bg-blue_color {
-            background: #86bffc;
-        }
-
-        .skyBlue_color {
-            color: #b9d9fe;
-        }
-
-        .bg-skyBlue_color {
-            background: #b9d9fe;
-        }
-    </style>
+        <link
+                rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        >
+    {% endblock %}
+    {% block javascript %}
+        <!-- 3rd party JavaScript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0" defer></script>
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+        <!-- Project JS -->
+        <script src="{% static 'js/base.js' %}"></script>
+    {% endblock javascript %}
 </head>
 
-<link
-        rel="stylesheet"
-        href="{% static 'css/styles.css' %}"
-        type="text/css"
-/>
-
-<body style="background: #c0defd">
+<body>
 {% block nav %}
     <main role="main">
         {% include "./components/navbar.html" %}
@@ -59,16 +45,6 @@
 </div>
 
 {% include "./components/footer.html" %}
-
-{% block javascript %}
-    <!-- 3rd party JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-
-    <!-- Project JS -->
-    <script src="{% static 'js/base.js' %}"></script>
-    <script src="{% static 'js/custom-chart.js' %}"></script>
-
-{% endblock javascript %}
 
 </body>
 </html>

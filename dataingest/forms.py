@@ -2,6 +2,7 @@ from io import StringIO
 
 from django.core.exceptions import ValidationError
 from django.forms import Form, ChoiceField, FileField
+from django.utils.safestring import mark_safe
 
 
 def validate_csv_columns(col_names, category):
@@ -49,6 +50,12 @@ class UploadCSVFileForm(Form):
         cleaned_data = super().clean()
         file = cleaned_data['file']
         category = cleaned_data['category']
+
+        req_fields_cases = {'course': 'department, name, number',
+                            'student': 'student_id, class_standing, first_name, last_name, email',
+                            'preference': 'object_1_content_type, object_1, object_2_content_type, object_2'}
+        required_fields = req_fields_cases.get(category)
+
         if file:
             data_set = file.read().decode('UTF-8')
             r = StringIO(data_set)
@@ -57,6 +64,9 @@ class UploadCSVFileForm(Form):
             columns_are_valid = validate_csv_columns(col_names, category)
 
             if not columns_are_valid:
-                raise ValidationError("File doesn't have the necessary fields")
+                raise ValidationError(mark_safe("File doesn't have the necessary fields. You gave: " + col_names +
+                                                "<br />For " + category +
+                                                " these are the column names you need to have:"
+                                                + "<br />" + required_fields))
 
         return cleaned_data

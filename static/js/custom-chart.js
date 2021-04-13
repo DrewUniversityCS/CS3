@@ -2,7 +2,7 @@ function createChart(ids, dataLables, dataPoints) {
 
     const check = document.getElementById(ids).style.height || '0px';
 
-    if (document.getElementById(ids).style.height === '0px' || check==='0px') {
+    if (document.getElementById(ids).style.height === '0px' || check === '0px') {
         document.getElementById(ids).style.height = "fit-content";
         var ctx = document.getElementById(ids).getContext('2d');
         var chart = new Chart(ctx, {

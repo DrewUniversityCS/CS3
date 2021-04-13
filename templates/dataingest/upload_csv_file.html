@@ -9,7 +9,7 @@
                 <form method="post" action="." enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form | crispy }}
-                    <button type="submit" class="px-3 py-2 mt-6 bg-blue-400 rounded shadow hover:bg-blue-500">
+                    <button type="submit" class="btn-interaction mt-6">
                         Upload File
                     </button>
                 </form>
