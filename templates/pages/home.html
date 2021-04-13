@@ -3,6 +3,8 @@
 {% load static %}
 {% load tags %}
 
+<script src="{% static 'js/custom-chart.js' %}"></script>
+
 {% block title %}Home page{% endblock title %}
 
 {% block content %}
@@ -20,13 +22,13 @@
                             Sheets files, or download application data for later use.</p>
                         <div class="flex gap-6 my-4">
                             <a href="{% url 'dataingest:upload_csv' %}">
-                                <button class="px-3 py-2 font-medium bg-gray-200 rounded">
+                                <button class="btn-basic">
                                     <i class="mr-2 fa fa-upload" aria-hidden="true"></i>
                                     Upload New File
                                 </button>
                             </a>
                             <a href="/crud/model-set">
-                                <button class="px-3 py-2 font-medium bg-gray-200 rounded">
+                                <button class="btn-basic">
                                     <i class="mr-2 fa fa-tasks" aria-hidden="true"></i>
                                     Manage Data
                                 </button>
@@ -46,7 +48,7 @@
                             into the database, then manage and query it.</p>
                         <div class="flex gap-6 my-4">
                             <a href="{% url 'pages:crud' %}">
-                                <button class="px-3 py-1 font-medium bg-gray-200 rounded w-60">
+                                <button class="btn-basic">
                                     <i class="py-2 mr-2 fa fa-database" aria-hidden="true"></i>
                                     Open Database Interface
                                 </button>
@@ -66,7 +68,7 @@
                             them for constraint integrity.</p>
                         <div class="flex gap-6 my-4">
                             <a href="{% url 'pages:generate-schedule' %}">
-                                <button class="px-3 py-1 font-medium bg-gray-200 rounded w-60">
+                                <button class="btn-basic">
                                     <i class="py-2 mr-2 fa fa-play" aria-hidden="true"></i>
                                     Begin Scheduling Process
                                 </button>
