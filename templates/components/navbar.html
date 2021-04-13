@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="w-full text-gray-600 bg-green-400">
+<div class="w-full text-gray-600 bg-teal">
     <div x-data="{ open: false }"
          class="flex flex-col px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
         <div class="flex flex-row items-center justify-between p-4">
@@ -42,7 +42,7 @@
                          x-transition:leave-start="transform opacity-100 scale-100"
                          x-transition:leave-end="transform opacity-0 scale-95"
                          class="absolute right-0 z-10 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
-                        <div class="px-2 py-2 bg-blue-300 rounded-md shadow-2xl">
+                        <div class="px-2 py-2 bg-teal-light rounded-md shadow-2xl">
                             <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
                                href="{% url 'pages:generate-schedule' %}">Create Schedule</a>
                             <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"

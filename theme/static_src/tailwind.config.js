@@ -21,6 +21,15 @@ module.exports = {
                 'spin-1': 'spin 3s linear infinite',
                 'spin-2': 'spin 4s linear infinite',
                 'spin-3': 'spin 5s linear infinite',
+            },
+            colors: {
+                teal: {
+                    darkest: '#006657',
+                    dark: '#00a38b',
+                    DEFAULT: '#00c4a8',
+                    light: '#00E0BF',
+                    lightest: '#0AFFDA',
+                }
             }
         },
     },
