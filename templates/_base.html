@@ -46,5 +46,15 @@
 
 {% include "./components/footer.html" %}
 
+{% block javascript %}
+    <!-- 3rd party JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <!-- Project JS -->
+    <script src="{% static 'js/base.js' %}"></script>
+    <script src="{% static 'js/custom-chart.js' %}"></script>
+
+{% endblock javascript %}
 </body>
 </html>
