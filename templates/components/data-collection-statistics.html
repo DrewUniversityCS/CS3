@@ -22,21 +22,24 @@
 
 <div class="w-3/4 mx-auto mb-10">
     <div class="justify-center py-1 mx-auto bg-white shadow-lg md:w-4/5 md:px-3 rounded-3xl" x-data="{expanded:false}">
-        <p class="py-4 text-xl font-bold bg-white">
+        <p class="py-4 text-xl font-bold">
             Student Data Collection
         </p>
-        <button type="button" class="mb-4 btn-basic" @click="expanded = !expanded">
-            Open
-        </button>
-        <div class="mx-auto overflow-hidden">
-            <div x-bind:style="expanded == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''"
+        <a x-bind:href="expanded == true ? '#' : '#collection-body'">
+            <button type="button" class="mb-4 btn-basic" @click="expanded = !expanded">
+                Open
+            </button>
+        </a>
+
+        <div class="mx-auto overflow-hidden" id="collection-body">
+            <div x-bind:style="expanded == true ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''"
                  x-ref="container1"
                  class="relative overflow-hidden transition-all duration-700 max-h-0">
                 <div class="w-3/4 pb-12 mx-auto text-left text-gray-700">
                     <form action="{% url 'datacollection:preference_set_form_open' %}" method="POST">
                         {% csrf_token %}
                         {{ open_new_preference_form|crispy }}
-                        <button class="mt-6 btn-interaction w-80">
+                        <button class="mt-6 btn-interaction">
                             Send Form
                         </button>
                     </form>
