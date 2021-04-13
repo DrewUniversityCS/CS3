@@ -25,18 +25,18 @@
         <p class="py-4 text-xl font-bold bg-white">
             Student Data Collection
         </p>
-        <button type="button" class="btn-basic mb-4" @click="expanded = !expanded">
+        <button type="button" class="mb-4 btn-basic" @click="expanded = !expanded">
             Open
         </button>
         <div class="mx-auto overflow-hidden">
             <div x-bind:style="expanded == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''"
                  x-ref="container1"
-                 class="relative overflow-hidden transition-all max-h-0 duration-700">
-                <div class="pb-12 mx-auto text-left text-gray-700 w-3/4">
+                 class="relative overflow-hidden transition-all duration-700 max-h-0">
+                <div class="w-3/4 pb-12 mx-auto text-left text-gray-700">
                     <form action="{% url 'datacollection:preference_set_form_open' %}" method="POST">
                         {% csrf_token %}
                         {{ open_new_preference_form|crispy }}
-                        <button class="btn-interaction w-80 mt-6">
+                        <button class="mt-6 btn-interaction w-80">
                             Send Form
                         </button>
                     </form>
