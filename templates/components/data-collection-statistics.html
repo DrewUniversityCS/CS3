@@ -28,22 +28,24 @@
         <button type="button" class="btn-basic mb-4" @click="expanded = !expanded">
             Open
         </button>
-        <div x-bind:style="expanded == true ? 'height: 100%; padding-top: 1.5rem; padding-bottom: 2.5rem;' : 'height: 0px'"
-             class="w-3/4 mx-auto overflow-hidden">
-            <div class="pb-12 mx-auto text-left text-gray-700">
-                <form action="{% url 'datacollection:preference_set_form_open' %}" method="POST">
-                    {% csrf_token %}
-                    {{ open_new_preference_form|crispy }}
-                    <button class="btn-interaction w-80 mt-6">
-                        Send Form
-                    </button>
-                </form>
-            </div>
-            {% for preference_form in all_preference_forms %}
-                {% if preference_form.is_active %}
-                    <div class="my-6">
-                        <div class="p-3 m-3 mx-auto bg-gray-100 rounded shadow-lg">
-                            <div class="relative flex flex-col justify-between pb-1 md:flex-row">
+        <div class="mx-auto overflow-hidden">
+            <div x-bind:style="expanded == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''"
+                 x-ref="container1"
+                 class="relative overflow-hidden transition-all max-h-0 duration-700">
+                <div class="pb-12 mx-auto text-left text-gray-700 w-3/4">
+                    <form action="{% url 'datacollection:preference_set_form_open' %}" method="POST">
+                        {% csrf_token %}
+                        {{ open_new_preference_form|crispy }}
+                        <button class="btn-interaction w-80 mt-6">
+                            Send Form
+                        </button>
+                    </form>
+                </div>
+                {% for preference_form in all_preference_forms %}
+                    {% if preference_form.is_active %}
+                        <div class="my-6">
+                            <div class="p-3 m-3 mx-auto bg-gray-100 rounded shadow-lg">
+                                <div class="relative flex flex-col justify-between pb-1 md:flex-row">
                         <span class="absolute top-0 right-0 text-2xl transform rotate-45 cursor-pointer">
                             <form action="{% url 'datacollection:preference_set_form_open_close' preference_form.id 'remove' %}"
                                   method="POST">
@@ -52,77 +54,78 @@
                                 </form>
 
                         </span>
-                                <div class="w-full m-auto md:w-1/3">
-                                    <p class="px-2 py-4 text-2xl font-bold text-center">
-                                        <a
-                                                href="{{ preference_form.form_link }}">{{ preference_form.name.capitalize }}
-                                            |
-                                            <span class="text-gray-600">{{ preference_form.course_set }}</span>
-                                            |
-                                            <span class="text-gray-600">{{ preference_form.student_set }}</span>
-                                        </a>
-                                        {% if preference_form.is_taking_responses %}
-                                            <form action="{% url 'datacollection:preference_set_form_open_close' preference_form.id 'close' %}"
-                                                  method="POST">
-                                                {% csrf_token %}
-                                                <button class="btn-cancel">
-                                                    Close
-                                                </button>
-                                            </form>
-                                        {% else %}
-                                            <form action="{% url 'datacollection:preference_set_form_open_close' preference_form.id 'open' %}"
-                                                  method="POST">
-                                                {% csrf_token %}
-                                                <button class="btn-submit">
-                                                    Open
-                                                </button>
-                                            </form>
-                                        {% endif %}
-                                    </p>
+                                    <div class="w-full m-auto md:w-1/3">
+                                        <p class="px-2 py-4 text-2xl font-bold text-center">
+                                            <a
+                                                    href="{{ preference_form.form_link }}">{{ preference_form.name.capitalize }}
+                                                |
+                                                <span class="text-gray-600">{{ preference_form.course_set }}</span>
+                                                |
+                                                <span class="text-gray-600">{{ preference_form.student_set }}</span>
+                                            </a>
+                                            {% if preference_form.is_taking_responses %}
+                                                <form action="{% url 'datacollection:preference_set_form_open_close' preference_form.id 'close' %}"
+                                                      method="POST">
+                                                    {% csrf_token %}
+                                                    <button class="btn-cancel">
+                                                        Close
+                                                    </button>
+                                                </form>
+                                            {% else %}
+                                                <form action="{% url 'datacollection:preference_set_form_open_close' preference_form.id 'open' %}"
+                                                      method="POST">
+                                                    {% csrf_token %}
+                                                    <button class="btn-submit">
+                                                        Open
+                                                    </button>
+                                                </form>
+                                            {% endif %}
+                                        </p>
 
-                                </div>
-                                <div>
-                                    <div class="flex flex-wrap justify-center text-center">
-                                        <div class="px-4 py-1">
-                                            <p class="p-6 text-2xl font-medium">{{ preference_form.response_entries.0 }}</p>
-                                            <p class="text-xl text-gray-500">Responses</p>
-                                            <p class="text-base text-green-400">{{ preference_form.response_entries.1 }}%
-                                                <i
-                                                        class="ml-2 fa fa-thumbs-up"></i></p>
-                                        </div>
-                                        <div class="px-4 py-1">
-                                            <p class="p-6 text-2xl font-medium">{{ preference_form.no_response_entries.0 }}</p>
-                                            <p class="text-xl text-gray-500">No Response</p>
-                                            <p class="text-base text-red-400">{{ preference_form.no_response_entries.1 }}%
-                                                <i
-                                                        class="ml-2 fa fa-ban"></i></p>
-                                        </div>
-                                        <div class="px-4 py-1">
-                                            <p class="p-6 text-2xl font-medium">{{ preference_form.total_students }}</p>
-                                            <p class="text-xl text-gray-500">Total</p>
+                                    </div>
+                                    <div>
+                                        <div class="flex flex-wrap justify-center text-center">
+                                            <div class="px-4 py-1">
+                                                <p class="p-6 text-2xl font-medium">{{ preference_form.response_entries.0 }}</p>
+                                                <p class="text-xl text-gray-500">Responses</p>
+                                                <p class="text-base text-green-400">{{ preference_form.response_entries.1 }}%
+                                                    <i
+                                                            class="ml-2 fa fa-thumbs-up"></i></p>
+                                            </div>
+                                            <div class="px-4 py-1">
+                                                <p class="p-6 text-2xl font-medium">{{ preference_form.no_response_entries.0 }}</p>
+                                                <p class="text-xl text-gray-500">No Response</p>
+                                                <p class="text-base text-red-400">{{ preference_form.no_response_entries.1 }}%
+                                                    <i
+                                                            class="ml-2 fa fa-ban"></i></p>
+                                            </div>
+                                            <div class="px-4 py-1">
+                                                <p class="p-6 text-2xl font-medium">{{ preference_form.total_students }}</p>
+                                                <p class="text-xl text-gray-500">Total</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            {% get_course_stats preference_form as stat_list %}
+                                {% get_course_stats preference_form as stat_list %}
 
-                            <button class="w-full h-10 text-white outline-none focus:outline-none"
-                                    onclick="createChart('{{ preference_form.id }}',[
-                                            {% for stat in stat_list %}'{{ stat.course }}',{% endfor %}
-                                            ],[
-                                            {% for stat in stat_list %}{{ stat.count }},{% endfor %}
-                                            ])">
-                                <span class="text-gray-800">Stats</span> <i
-                                    class="text-gray-800 fa fa-chevron-circle-down"></i>
-                            </button>
-                            <div>
-                                <!-- id dynamic hogi -->
-                                <canvas id="{{ preference_form.id }}"></canvas>
+                                <button class="w-full h-10 text-white outline-none focus:outline-none"
+                                        onclick="createChart('{{ preference_form.id }}',[
+                                                {% for stat in stat_list %}'{{ stat.course }}',{% endfor %}
+                                                ],[
+                                                {% for stat in stat_list %}{{ stat.count }},{% endfor %}
+                                                ])">
+                                    <span class="text-gray-800">Stats</span> <i
+                                        class="text-gray-800 fa fa-chevron-circle-down"></i>
+                                </button>
+                                <div>
+                                    <!-- id dynamic hogi -->
+                                    <canvas id="{{ preference_form.id }}"></canvas>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {% endif %}
-            {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>
