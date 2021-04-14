@@ -1,14 +1,12 @@
-from collections import defaultdict
-
 from allauth.account.forms import SignupForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView, FormView
 
-from database.models.schedule_models import Section, Timeblock
 from datacollection.forms import PreferencesFormForm
 from datacollection.models import PreferenceForm
+from scheduleview.forms import CheckScheduleForm
 
 
 class HomePageView(LoginRequiredMixin, TemplateView):
@@ -45,8 +43,6 @@ class CheckScheduleView(LoginRequiredMixin, TemplateView):
         })
         return context_data
 
-
-
     def form_valid(self, form):
         return HttpResponseRedirect(
             reverse('pages:schedule-view', kwargs={'schedule_id': form.cleaned_data['schedule'].id}))
@@ -64,4 +60,3 @@ class InviteView(LoginRequiredMixin, FormView):
     def form_valid(self, form):
         form.save(self.request)
         return super().form_valid(form)
-
