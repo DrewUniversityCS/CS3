@@ -2,15 +2,12 @@ from collections import defaultdict
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
-
-# Create your views here.
 from django.urls import reverse
 from django.views.generic import FormView, TemplateView
 
 from database.models.schedule_models import Section, Timeblock
 from database.models.structural_models import Preference
-from scheduleview.forms import CheckScheduleForm
+from schedule.forms import CheckScheduleForm
 
 
 class ScheduleRedirectView(LoginRequiredMixin, FormView):
@@ -20,7 +17,7 @@ class ScheduleRedirectView(LoginRequiredMixin, FormView):
         print(form.cleaned_data['preference_set'].id)
         return HttpResponseRedirect(
             reverse(
-                'scheduleview:schedule-view',
+                'schedule:schedule-table-view',
                 kwargs={
                     'schedule_id': form.cleaned_data['schedule'].id,
                     'preference_set_id': form.cleaned_data['preference_set'].id
@@ -41,7 +38,7 @@ class CheckScheduleView(LoginRequiredMixin, TemplateView):
 
 
 class ScheduleView(LoginRequiredMixin, TemplateView):
-    template_name = "pages/final_schedule.html"
+    template_name = "pages/schedule_table_view.html"
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)

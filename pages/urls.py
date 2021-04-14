@@ -13,7 +13,6 @@ urlpatterns = [
     path('generate-schedule', page_views.GenerateScheduleView.as_view(), name='generate-schedule'),
     path('crud', page_views.CrudView.as_view(), name='crud'),
     path('student-form', page_views.StudentFormSuccessView.as_view(), name='student-form-success'),
-
 ]
 
 app_name = 'pages'

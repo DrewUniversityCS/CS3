@@ -41,7 +41,7 @@ def to_human_readable(value):
         return [choice[1] for choice in SEASONS if value in choice][0]
     elif value in [FRESHMAN, SOPHOMORE, JUNIOR, SENIOR, GRADUATE]:
         return [choice[1] for choice in YEAR_IN_SCHOOL_CHOICES if value in choice][0]
-    elif value[0] == '(':
+    elif str(value) and value[0] == '(':
         if value == "('accounts', 'baseuser')":
             return "Teacher"
         elif value == "('database', 'timeblock')":
