@@ -82,6 +82,7 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
                     if preference_courses == section_courses:
                         color1 = sections_dict[section1.id].get('color')
                         color2 = sections_dict[section2.id].get('color')
+                        print(preference)
                         if preference.weight:
                             if section1.timeblock == section2.timeblock:
                                 # If two courses with a positive preference are at the same time, highlight both green.
