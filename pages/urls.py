@@ -14,8 +14,7 @@ urlpatterns = [
     path('check-schedule', page_views.CheckScheduleView.as_view(), name='check-schedule'),
     path('crud', page_views.CrudView.as_view(), name='crud'),
     path('student-form', page_views.StudentFormSuccessView.as_view(), name='student-form-success'),
-    path('schedule/<slug:schedule_id>', page_views.ScheduleView.as_view(), name='schedule-view'),
-    path('schedule-redirect', page_views.ScheduleRedirectView.as_view(), name='schedule-redirect'),
+
 ]
 
 app_name = 'pages'
