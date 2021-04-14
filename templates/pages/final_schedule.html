@@ -39,10 +39,10 @@
             <tr class="font-bold text-center uppercase">
                 <td class="w_td"></td>
                 <td>Monday</td>
-                <td>tuesday</td>
-                <td>wednesday</td>
-                <td>thurasday</td>
-                <td>friday</td>
+                <td>Tuesday</td>
+                <td>Wednesday</td>
+                <td>Thursday</td>
+                <td>Friday</td>
             </tr>
             {% for time_block in time_blocks %}
                 <tr>
@@ -51,17 +51,15 @@
                         <td>
                             {% for section in timeblock_day_dict|get_item:time_block.id|get_item:day %}
                                 <p
-                                    title="{{ sections|get_item:section.id|get_item:'hints'|join:',' }}"
-                                    class="{{ sections|get_item:section.id|get_item:'color' }}"
+                                        title="{{ sections|get_item:section.id|get_item:'hints'|join:',' }}"
+                                        class="{{ sections|get_item:section.id|get_item:'color' }}"
                                 >
                                     {{ section }}
                                 </p>
                             {% endfor %}
                         </td>
                     {% endfor %}
-
                 </tr>
-
             {% endfor %}
             </thead>
         </table>
