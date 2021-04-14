@@ -5,8 +5,8 @@
          class="flex flex-col px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
         <div class="flex flex-row items-center justify-between p-4">
             <a href="/" class="mr-14">
-                <img src="{% static 'images/cs3_text_logo.png' %}"
-                     class="w-32">
+                <img src="{% static 'images/cs3_text_logo.svg' %}"
+                     class="w-28 md:w-40">
             </a>
             <button class="rounded-lg md:hidden focus:outline-none focus:shadow-outline" @click="open = !open">
                 <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
@@ -27,7 +27,7 @@
                 <div @click.away="open = false" class="relative" x-data="{ open: false }">
                     <button @click="open = !open"
                             class="flex flex-row items-center w-full px-4 py-2 mt-2 text-lg font-semibold text-left bg-transparent rounded-lg md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline">
-                        <span>Admin</span>
+                        <span>Menu</span>
                         <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}"
                              class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1">
                             <path fill-rule="evenodd"
@@ -42,22 +42,20 @@
                          x-transition:leave-start="transform opacity-100 scale-100"
                          x-transition:leave-end="transform opacity-0 scale-95"
                          class="absolute right-0 z-10 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
-                        <div class="px-2 py-2 bg-teal-light rounded-md shadow-2xl">
-                            <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
-                               href="{% url 'pages:generate-schedule' %}">Create Schedule</a>
-                            <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
-                               href="{% url 'scheduleview:check-schedule' %}">Check Schedule</a>
+                        <div class="px-2 py-2 rounded-md shadow-2xl bg-teal-light">
                             <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
                                href="{% url 'pages:crud' %}">Database</a>
                             <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
-                               href="{% url 'pages:invite' %}">Invite</a>
+                               href="{% url 'pages:check-schedule' %}">Scheduling</a>
                             <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
                                href="{% url 'dataingest:upload_csv' %}">Upload CSV</a>
+                            <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                               href="{% url 'pages:invite' %}">Invite Admin</a>
+                            <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-red-500 focus:text-red-100 focus:outline-none focus:shadow-outline"
+                               href="{% url 'account_logout' %}">Log out</a>
                         </div>
                     </div>
                 </div>
-                <a class="px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 md:ml-4 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
-                   href="{% url 'account_logout' %}">Log out</a>
             {% else %}
                 <a class="px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 md:ml-4 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
                    href="{% url 'account_login' %}">Log In</a>

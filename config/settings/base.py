@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'database',
     'dataingest',
     'datacollection',
+    'documentation',
     'scheduleview'
 ]
 

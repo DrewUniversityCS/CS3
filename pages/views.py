@@ -35,23 +35,6 @@ class GenerateScheduleView(LoginRequiredMixin, TemplateView):
     template_name = 'pages/generate_schedule.html'
 
 
-class CheckScheduleView(LoginRequiredMixin, TemplateView):
-    template_name = 'pages/check_schedule.html'
-
-    def get_context_data(self, **kwargs):
-        context_data = super().get_context_data(**kwargs)
-        context_data.update({
-            'check_schedule_form': CheckScheduleForm()
-        })
-        return context_data
-
-
-
-    def form_valid(self, form):
-        return HttpResponseRedirect(
-            reverse('pages:schedule-view', kwargs={'schedule_id': form.cleaned_data['schedule'].id}))
-
-
 class CrudView(LoginRequiredMixin, TemplateView):
     template_name = 'pages/crud.html'
 
