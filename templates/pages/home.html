@@ -8,73 +8,73 @@
 {% block content %}
     <div class="font-sans text-center">
         {% if user.is_authenticated %}
-            <div class="flex flex-wrap justify-center gap-6 my-10">
-                <div class="w-3/4 bg-white shadow-lg rounded-2xl md:w-1/4">
-                    <div class="flex text-3xl text-center bg-red-500" style="height: 250px;">
-                        <img src="{% static 'icons/table.svg' %}" class="m-auto"
-                             style="height: 150px; width: 150px;">
-                    </div>
-                    <div class="p-4">
-                        <p class="pb-3 text-2xl font-bold">Data Sheets</p>
-                        <p style="min-height: 90px;" class="text-xl">Upload Excel or Google
-                            Sheets files, or download application data for later use.</p>
-                        <div class="flex gap-6 my-4">
-                            <a href="{% url 'dataingest:upload_csv' %}">
-                                <button class="px-3 py-2 font-medium bg-gray-200 rounded">
-                                    <i class="mr-2 fa fa-upload" aria-hidden="true"></i>
-                                    Upload New File
-                                </button>
-                            </a>
-                            <a href="/crud/model-set">
-                                <button class="px-3 py-2 font-medium bg-gray-200 rounded">
-                                    <i class="mr-2 fa fa-tasks" aria-hidden="true"></i>
-                                    Manage Data
-                                </button>
-                            </a>
-                        </div>
-                    </div>
+        <div class="flex flex-wrap justify-center gap-6 my-10">
+            <div class="w-3/4 bg-white shadow-lg rounded-2xl md:w-1/4">
+                <div class="flex text-3xl text-center bg-red-500" style="height: 250px;">
+                    <img src="{% static 'icons/table.svg' %}" class="m-auto"
+                         style="height: 150px; width: 150px;">
                 </div>
-
-                <div class="w-3/4 bg-white shadow-lg rounded-2xl md:w-1/4">
-                    <div class="flex text-3xl text-center bg-blue-500" style="height: 250px;">
-                        <img src="{% static 'icons/manage_data_icon.svg' %}" class="m-auto"
-                             style="height: 150px; width: 150px;">
-                    </div>
-                    <div class="p-4">
-                        <p class="pb-3 text-2xl font-bold">Database</p>
-                        <p style="min-height: 90px;" class="text-xl">Input data
-                            into the database, then manage and query it.</p>
-                        <div class="flex gap-6 my-4">
-                            <a href="{% url 'pages:crud' %}">
-                                <button class="px-3 py-1 font-medium bg-gray-200 rounded w-60">
-                                    <i class="py-2 mr-2 fa fa-database" aria-hidden="true"></i>
-                                    Open Database Interface
-                                </button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="w-3/4 bg-white shadow-lg rounded-2xl md:w-1/4">
-                    <div class="flex justify-center text-3xl text-center bg-green-500" style="height: 250px;">
-                        <img src="{% static 'icons/generate_schedule_icon.svg' %}" class="m-auto"
-                             style="height: 150px; width: 150px;">
-                    </div>
-                    <div class="p-4">
-                        <p class="pb-3 text-2xl font-bold">Schedules</p>
-                        <p style="min-height: 90px;" class="text-xl">Create and edit course schedules, as well as check
-                            them for constraint integrity.</p>
-                        <div class="flex gap-6 my-4">
-                            <a href="{% url 'pages:generate-schedule' %}">
-                                <button class="px-3 py-1 font-medium bg-gray-200 rounded w-60">
-                                    <i class="py-2 mr-2 fa fa-play" aria-hidden="true"></i>
-                                    Begin Scheduling Process
-                                </button>
-                            </a>
-                        </div>
+                <div class="p-4">
+                    <p class="pb-3 text-2xl font-bold">Data Sheets</p>
+                    <p style="min-height: 90px;" class="text-xl">Upload Excel or Google
+                        Sheets files, or download application data for later use.</p>
+                    <div class="flex gap-6 my-4">
+                        <a href="{% url 'dataingest:upload_csv' %}">
+                            <button class="px-3 py-2 font-medium bg-gray-200 rounded">
+                                <i class="mr-2 fa fa-upload" aria-hidden="true"></i>
+                                Upload New File
+                            </button>
+                        </a>
+                        <a href="/crud/model-set">
+                            <button class="px-3 py-2 font-medium bg-gray-200 rounded">
+                                <i class="mr-2 fa fa-tasks" aria-hidden="true"></i>
+                                Manage Data
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>
+
+            <div class="w-3/4 bg-white shadow-lg rounded-2xl md:w-1/4">
+                <div class="flex text-3xl text-center bg-blue-500" style="height: 250px;">
+                    <img src="{% static 'icons/manage_data_icon.svg' %}" class="m-auto"
+                         style="height: 150px; width: 150px;">
+                </div>
+                <div class="p-4">
+                    <p class="pb-3 text-2xl font-bold">Database</p>
+                    <p style="min-height: 90px;" class="text-xl">Input data
+                        into the database, then manage and query it.</p>
+                    <div class="flex gap-6 my-4">
+                        <a href="{% url 'pages:crud' %}">
+                            <button class="px-3 py-1 font-medium bg-gray-200 rounded w-60">
+                                <i class="py-2 mr-2 fa fa-database" aria-hidden="true"></i>
+                                Open Database Interface
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-3/4 bg-white shadow-lg rounded-2xl md:w-1/4">
+                <div class="flex justify-center text-3xl text-center bg-green-500" style="height: 250px;">
+                    <img src="{% static 'icons/generate_schedule_icon.svg' %}" class="m-auto"
+                         style="height: 150px; width: 150px;">
+                </div>
+                <div class="p-4">
+                    <p class="pb-3 text-2xl font-bold">Schedules</p>
+                    <p style="min-height: 90px;" class="text-xl">Create and edit course schedules, as well as check
+                        them for constraint integrity.</p>
+                    <div class="flex gap-6 my-4">
+                        <a href="{% url 'pages:generate-schedule' %}">
+                            <button class="px-3 py-1 font-medium bg-gray-200 rounded w-60">
+                                <i class="py-2 mr-2 fa fa-play" aria-hidden="true"></i>
+                                Begin Scheduling Process
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
             {% include 'components/data-collection-statistics.html' %}
         {% else %}
             <div class="pt-48">

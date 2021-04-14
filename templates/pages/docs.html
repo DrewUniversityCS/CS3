@@ -3,22 +3,18 @@
 {% block title %}Docs page{% endblock %}
 
 {% block content %}
-    <div class="h-screen font-sans">
-        <div class="pt-48">
-            <p class="text-4xl font-bold leading-7 text-purple-600 pb-12">Docs Page</p>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{% url 'referencing:home-ref' %}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{% url 'referencing:db-ref' %}">Database</a></li>
-                    <li class="breadcrumb-item"><a href="{% url 'referencing:admin-ref' %}">Admin</a></li>
-                </ol>
-            </nav>
-            <ul>
-                <li><a href="{% url 'referencing:home-ref' %}">Home</a> </li>
-                <li><a href="{% url 'referencing:db-ref' %}">Database</a> </li>
-                <li><a href="{% url 'referencing:admin-ref' %}">Admin</a> </li>
-
+<div class="flex flex-wrap justify-center gap-6">
+    <div class="w-3/4 bg-white shadow-lg rounded-2xl md:w-3/4">
+        <div class="p-4">
+            <p class="pb-3 text-7xl font-bold text-purple-600">Reference Guide</p>
+            <ul class="pt-12 list-disc list-inside bg-rose-200 list-inside md:list-inside text-3xl">
+                <li class="hover:underline"><a href="{% url 'documentation:home-documentation' %}">Home</a></li>
+                <li class="hover:underline"><a href="{% url 'documentation:database-documentation' %}">Database</a></li>
+                <li class="hover:underline"><a href="{% url 'documentation:admin-documentation' %}">Admin</a></li>
             </ul>
+            <div class="flex gap-6">
+            </div>
         </div>
     </div>
+</div>
 {% endblock content %}

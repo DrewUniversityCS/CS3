@@ -17,6 +17,7 @@ cryptography = "==3.3.2"
 crispy-tailwind = "*"
 mysqlclient = "*"
 pymysql = "*"
+django_tables2 = "*"
 
 [requires]
 python_version = "3.9"
