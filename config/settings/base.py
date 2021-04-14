@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'dataingest',
     'datacollection',
     'documentation',
-    'scheduleview'
+    'schedule'
 ]
 
 TAILWIND_APP_NAME = 'theme'
