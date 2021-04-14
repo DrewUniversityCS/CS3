@@ -1,5 +1,5 @@
 {% extends '_base.html' %}
-{% load parse_var %}
+{% load tags %}
 
 {% block title %}Calendar{% endblock title %}
 
@@ -33,7 +33,7 @@
             color: green;
         }
     </style>
-    <div>
+    <div class="px-8">
         <table width="100%" border="1" style="border-collapse: collapse;" id="calTable">
             <thead>
             <tr class="font-bold text-center uppercase">
