@@ -37,11 +37,11 @@ INSTALLED_APPS = [
     'database',
     'dataingest',
     'datacollection',
-    'documentation'
+    'documentation',
+    'scheduleview'
 ]
 
 TAILWIND_APP_NAME = 'theme'
-NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 CRISPY_TEMPLATE_PACK = "tailwind"
 

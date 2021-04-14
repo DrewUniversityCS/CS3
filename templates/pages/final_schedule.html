@@ -1,5 +1,5 @@
 {% extends '_base.html' %}
-{% load tags %}
+{% load parse_var %}
 
 {% block title %}Calendar{% endblock title %}
 
@@ -24,6 +24,14 @@
         .w_td {
             width: 130px;
         }
+
+        .red {
+            color: red;
+        }
+
+        .green {
+            color: green;
+        }
     </style>
     <div>
         <table width="100%" border="1" style="border-collapse: collapse;" id="calTable">
@@ -40,9 +48,14 @@
                 <tr>
                     <td class="w_td">{{ time_block }}</td>
                     {% for day in day_list %}
-                        <td class="filltd">
+                        <td>
                             {% for section in timeblock_day_dict|get_item:time_block.id|get_item:day %}
-                                <p>{{ section }}</p>
+                                <p
+                                    title="{{ sections|get_item:section.id|get_item:'hints'|join:',' }}"
+                                    class="{{ sections|get_item:section.id|get_item:'color' }}"
+                                >
+                                    {{ section }}
+                                </p>
                             {% endfor %}
                         </td>
                     {% endfor %}
