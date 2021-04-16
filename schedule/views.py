@@ -14,7 +14,6 @@ class ScheduleRedirectView(LoginRequiredMixin, FormView):
     form_class = CheckScheduleForm
 
     def form_valid(self, form):
-        print(form.cleaned_data['preference_set'].id)
         return HttpResponseRedirect(
             reverse(
                 'schedule:schedule-table-view',
