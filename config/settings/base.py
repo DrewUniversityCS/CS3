@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'database',
     'dataingest',
     'datacollection',
-    'documentation'
+    'documentation',
+    'schedule'
 ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -136,11 +137,11 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-FROM_EMAIL = 'CS3 <malminawi7@gmail.com>'
+FROM_EMAIL = 'CS3 <mahmoud.alminawi@gmail.com>'
 
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey'  # this is exactly the value 'apikey'
-EMAIL_HOST_PASSWORD = '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'
+EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_KEY')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
