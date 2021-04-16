@@ -4,14 +4,19 @@
 {% block title %}Create Sections in Bulk{% endblock title %}
 
 {% block content %}
-    <div class="min-h-screen w-full text-center">
-        <form method="post" class="w-96 mx-auto">
+    <div class="w-full min-h-screen text-center">
+        <form method="post" class="mx-auto w-96">
             {% csrf_token %}
             {{ form|crispy }}
-            <button type="submit"
-                    class="btn-submit mt-6">
-                Create Sections
-            </button>
+            <div class="mt-12">
+                <button type="submit"
+                        class="btn-submit">
+                    Create Sections
+                </button>
+                <a href="{% url 'pages:crud' %}" class="ml-8 btn-cancel">
+                    Go Back
+                </a>
+            </div>
         </form>
     </div>
 {% endblock content %}
