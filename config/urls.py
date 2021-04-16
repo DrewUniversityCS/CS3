@@ -10,6 +10,8 @@ urlpatterns = [
     path('', include('database.urls', namespace='database')),
     path('', include('dataingest.urls', namespace='dataingest')),
     path('', include('datacollection.urls', namespace='datacollection')),
+    path('', include('documentation.urls', namespace='documentation')),
+    path('', include('schedule.urls', namespace='scheduleview'))
 ]
 
 if settings.DEBUG:

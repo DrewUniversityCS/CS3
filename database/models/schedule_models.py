@@ -69,6 +69,9 @@ class Schedule(models.Model):
     def __str__(self):
         return self.name
 
+    def natural_key(self):
+        return self.__str__()
+
 
 class WeekdaySet(models.Model):
     """

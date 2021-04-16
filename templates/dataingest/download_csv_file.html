@@ -13,22 +13,22 @@
                 <div class="py-8 text-xl"><b>{{ object }}</b></div>
                 <div>
                     {% for instance in field_data %}
-                        <table class="w-5/6 m-5 mx-auto text-gray-800 bg-gray-400 rounded-lg shadow-lg">
-                            <tr class="text-center border-b border-gray-300">
+                        <table class="m-5 mx-auto">
+                            <tr class="border-b">
                                 <th class="px-4 py-3">Field</th>
                                 <th class="px-4 py-3">Value</th>
                             </tr>
                             {% for field, value in instance.fields.items %}
                                 {% if not value.items %}
-                                    <tr class="bg-gray-100 border-b border-gray-400">
-                                        <th class="px-4 py-3">{{ field|parse_var }}</th>
-                                        <th class="px-4 py-3">{{ value }}</th>
+                                    <tr class="border-b">
+                                        <th class="px-4 py-3">{{ field|parse_var|clean_preference_field_name }}</th>
+                                        <th class="px-4 py-3 font-normal">{{ value|to_human_readable }}</th>
                                     </tr>
                                 {% else %}
                                     {% for key, item in value.items %}
-                                        <tr class="bg-gray-100 border-b border-gray-400">
+                                        <tr class="border-b">
                                             <th class="px-4 py-3">{{ key|parse_var }}</th>
-                                            <th class="px-4 py-3">{{ item }}</th>
+                                            <th class="px-4 py-3  font-normal">{{ item|to_human_readable }}</th>
                                         </tr>
                                     {% endfor %}
                                 {% endif %}
