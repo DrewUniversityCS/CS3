@@ -7,14 +7,13 @@ from django.views.generic import FormView, TemplateView
 
 from database.models.schedule_models import Section, Timeblock
 from database.models.structural_models import Preference
-from schedule.forms import CheckScheduleForm
+from schedule.forms import CheckScheduleForm, ScheduleSectionEditForm
 
 
 class ScheduleRedirectView(LoginRequiredMixin, FormView):
     form_class = CheckScheduleForm
 
     def form_valid(self, form):
-        print(form.cleaned_data['preference_set'].id)
         return HttpResponseRedirect(
             reverse(
                 'schedule:schedule-table-view',
@@ -70,8 +69,10 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
             section_time_block_dict[section.timeblock.id].append(section)
             sections_dict[section.id] = {
                 'section': section,
+                'section_edit_form': ScheduleSectionEditForm(instance=section),
                 'color': '',
-                'hints': []
+                'positive_points': [],
+                'negative_points': []
             }
 
         for idx, section1 in enumerate(sections):
@@ -82,6 +83,7 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
                     if preference_courses == section_courses:
                         color1 = sections_dict[section1.id].get('color')
                         color2 = sections_dict[section2.id].get('color')
+                        print(preference)
                         if preference.weight:
                             if section1.timeblock == section2.timeblock:
                                 # If two courses with a positive preference are at the same time, highlight both green.
@@ -89,25 +91,31 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
                                     sections_dict[section1.id]['color'] = 'green'
                                 if color2 != 'red':
                                     sections_dict[section2.id]['color'] = 'green'
+                                sections_dict[section1.id]['positive_points'].append(
+                                    'courses with a positive preference are at the same time'
+                                )
+                                sections_dict[section2.id]['positive_points'].append(
+                                    'courses with a positive preference are at the same time'
+                                )
                             else:
                                 # If two courses with a positive preference are at different times, highlight both red.
                                 sections_dict[section1.id]['color'] = 'red'
-                                sections_dict[section1.id]['hints'].append(
+                                sections_dict[section1.id]['negative_points'].append(
                                     'courses with a positive preference are at different times'
                                 )
                                 sections_dict[section2.id]['color'] = 'red'
-                                sections_dict[section2.id]['hints'].append(
+                                sections_dict[section2.id]['negative_points'].append(
                                     'courses with a positive preference are at different times'
                                 )
                         else:
                             # If two courses with a negative preference are at the same time, highlight both red.
                             if section1.timeblock == section2.timeblock:
                                 sections_dict[section1.id]['color'] = 'red'
-                                sections_dict[section1.id]['hints'].append(
+                                sections_dict[section1.id]['negative_points'].append(
                                     'courses with a negative preference are at the same time'
                                 )
                                 sections_dict[section2.id]['color'] = 'red'
-                                sections_dict[section2.id]['hints'].append(
+                                sections_dict[section2.id]['negative_points'].append(
                                     'courses with a negative preference are at the same time'
                                 )
 
@@ -125,9 +133,10 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
             'time_blocks': time_blocks,
             'timeblock_day_dict': timeblock_day_dict,
             'day_list': ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'],
-            'sections': sections_dict
+            'sections': sections_dict,
+            'schedule_id': kwargs.get('schedule_id'),
+            'preference_set_id': kwargs.get('preference_set_id')
         })
-        print(sections_dict)
 
         return context_data
 
@@ -162,18 +171,21 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
                         # green.
                         if color != 'red':
                             sections_dict[section.id]['color'] = 'green'
+                        sections_dict[section.id]['positive_points'].append(
+                            'preference is positive, and the course is at the specified timeblock'
+                        )
                     else:
                         # If the preference is positive, and the course is not at the specified timeblock, highlight
                         # it red.
                         sections_dict[section.id]['color'] = 'red'
-                        sections_dict[section.id]['hints'].append(
+                        sections_dict[section.id]['negative_points'].append(
                             'the course is not at the specified timeblock'
                         )
                 else:
                     # If the preference is negative, and the course is at the specified timeblock, highlight it red.
                     if section.timeblock == preference.object_2:
                         sections_dict[section.id]['color'] = 'red'
-                        sections_dict[section.id]['hints'].append(
+                        sections_dict[section.id]['negative_points'].append(
                             'preference is negative, and the course is at the specified timeblock'
                         )
 
@@ -187,11 +199,14 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
                         # it green.
                         if color != 'red':
                             sections_dict[section.id]['color'] = 'green'
+                        sections_dict[section.id]['positive_points'].append(
+                            'preference is positive, and the course is taught by the specified teacher'
+                        )
                     else:
                         # If the preference is positive, and the course is not taught by the specified teacher,
                         # highlight it red.
                         sections_dict[section.id]['color'] = 'red'
-                        sections_dict[section.id]['hints'].append(
+                        sections_dict[section.id]['negative_points'].append(
                             'the course is not taught by the specified teacher'
                         )
                 else:
@@ -199,7 +214,7 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
                     # red.
                     if section.primary_instructor == preference.object_1:
                         sections_dict[section.id]['color'] = 'red'
-                        sections_dict[section.id]['hints'].append(
+                        sections_dict[section.id]['negative_points'].append(
                             'the preference is negative, and the course is taught by the specified teacher'
                         )
 
@@ -213,11 +228,14 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
                         # specified timeblock, highlight the section green.
                         if color != 'red':
                             sections_dict[section.id]['color'] = 'green'
+                        sections_dict[section.id]['positive_points'].append(
+                            'The specified teacher is teaching a class during the specified timeblock'
+                        )
                     else:
                         # If the preference is positive, and the specified teacher is not teaching a class during the
                         # specified timeblock, highlight it red.
                         sections_dict[section.id]['color'] = 'red'
-                        sections_dict[section.id]['hints'].append(
+                        sections_dict[section.id]['negative_points'].append(
                             'specified teacher is not teaching a class during the specified timeblock'
                         )
                 else:
@@ -225,7 +243,25 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
                     # specified timeblock, highlight the section red.
                     if section.timeblock == preference.object_2:
                         sections_dict[section.id]['color'] = 'red'
-                        sections_dict[section.id]['hints'].append(
+                        sections_dict[section.id]['negative_points'].append(
                             'preference is negative, and the specified teacher is teaching a class during the '
                             'specified timeblock '
                         )
+
+
+class ScheduleSectionEditView(LoginRequiredMixin, FormView):
+
+    def get_form(self, form_class=None):
+        return ScheduleSectionEditForm(
+            instance=Section.objects.get(id=self.kwargs['section_id']), **self.get_form_kwargs()
+        )
+
+    def form_valid(self, form):
+        form.save()
+        return HttpResponseRedirect(reverse(
+            'schedule:schedule-table-view',
+            kwargs={
+                'schedule_id': self.kwargs['schedule_id'],
+                'preference_set_id': self.kwargs['preference_set_id']
+            }
+        ))
