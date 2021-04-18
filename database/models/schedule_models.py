@@ -20,6 +20,9 @@ class Course(models.Model):
     comments = models.TextField(blank=True, null=True)
     offered_annually = models.BooleanField(default=True)
 
+    default_timeblock = models.ForeignKey("database.Timeblock", on_delete=models.CASCADE, null=True, blank=True)
+    default_primary_instructor = models.ForeignKey("database.Teacher", on_delete=models.CASCADE, null=True, blank=True)
+
     sets = GenericRelation(SetMembership, related_query_name='course')
 
     def __str__(self):
@@ -49,7 +52,8 @@ class Section(models.Model):
         def make_section_id():
             return get_random_string(4, allowed_chars=string.ascii_uppercase + string.digits)
 
-        section = cls(course=course, schedule=schedule, section_id=make_section_id())
+        section = cls(course=course, schedule=schedule, section_id=make_section_id(),
+                      timeblock=course.default_timeblock, primary_instructor=course.default_primary_instructor)
 
         return section
 

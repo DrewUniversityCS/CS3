@@ -9,6 +9,11 @@
     {% if render_form %}
         <div class="grid grid-cols-1 gap-2 pb-24 lg:grid-cols-2">
             <div class="flex flex-col w-2/3 h-full mx-auto">
+                <div class="absolute left-12">
+                    <a href="{% url 'pages:crud' %}" class="btn-cancel">
+                        Back
+                    </a>
+                </div>
                 <div class="py-12 text-xl text-center text-gray-800">
                     Input Form
                 </div>
@@ -16,7 +21,7 @@
                     {% csrf_token %}
                     {{ form|crispy }}
                     <button type="submit"
-                            class="btn-submit mt-6">
+                            class="mt-6 btn-submit">
                         Save
                     </button>
                 </form>
@@ -27,6 +32,11 @@
         </div>
     {% else %}
         <div class="grid-cols-1 mx-auto md:w-11/12">
+            <div class="absolute left-12">
+                <a href="{% url 'pages:crud' %}" class="btn-cancel">
+                    Back
+                </a>
+            </div>
             {% include "./database_table_view.html" %}
         </div>
     {% endif %}
