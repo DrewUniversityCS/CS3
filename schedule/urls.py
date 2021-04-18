@@ -7,6 +7,10 @@ urlpatterns = [
     path('schedule/<slug:schedule_id>/<slug:preference_set_id>', schedule.views.ScheduleView.as_view(),
          name='schedule-table-view'),
     path('schedule-redirect', schedule.views.ScheduleRedirectView.as_view(), name='schedule-redirect'),
+    path(
+        'schedule/<slug:schedule_id>/<slug:preference_set_id>/<slug:section_id>',
+        schedule.views.ScheduleSectionEditView.as_view(), name='schedule-section-edit'
+    ),
 ]
 
 app_name = 'schedule'

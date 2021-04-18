@@ -134,6 +134,12 @@ class Timeblock(models.Model):
     end_minutes = models.IntegerField(choices=POSSIBLE_MINUTES)
 
     def __str__(self):
+        def pad(val):
+            if len(val) == 1:
+                return "0" + val
+            else:
+                return val
+
         return self.block_id + " " + "(" + str(self.weekdays) + ")" \
-               + " " + str(self.start_hour) + ":" + str(self.start_minutes) + \
-               " - " + str(self.end_hour) + ":" + str(self.end_minutes)
+               + " " + pad(str(self.start_hour)) + ":" + pad(str(self.start_minutes)) + \
+               " - " + pad(str(self.end_hour)) + ":" + pad(str(self.end_minutes))
