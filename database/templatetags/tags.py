@@ -114,13 +114,13 @@ def obj_to_dynamic_model_name(value):
 
 
 @register.simple_tag()
-def get_course_stats(form):
+def get_course_stats(form, total):
     stats_list = []
     courses = Course.objects.filter(sets__set=form.course_set)
     for course in courses:
         stats_list.append({
             'course': course,
-            'count': form.entries.filter(courses=course).count()
+            'count': form.entries.filter(courses=course).count()/(total*1.00)*100
         })
 
     return stats_list
