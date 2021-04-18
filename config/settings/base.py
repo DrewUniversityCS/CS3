@@ -141,7 +141,8 @@ FROM_EMAIL = 'CS3 <mahmoud.alminawi@gmail.com>'
 
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey'  # this is exactly the value 'apikey'
-EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_KEY')
+EMAIL_HOST_PASSWORD = "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"
+    #os.environ.get('SENDGRID_KEY')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
