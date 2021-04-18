@@ -1,4 +1,4 @@
-<img src="https://github.com/DrewUniversityCS/CS3/blob/main/static/images/cs3_text_logo.png" width="240" height="180">  
+<img src="https://github.com/DrewUniversityCS/CS3/blob/main/static/images/cs3_text_logo.svg" width="240" height="180">  
 
 # CS3: ComputerScience CapStone CourseScheduler
 

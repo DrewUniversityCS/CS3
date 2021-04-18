@@ -4,11 +4,40 @@
 {% block title %}Calendar{% endblock title %}
 
 {% block content %}
+    <style>
+        #calTable td {
+            height: 9.5vh;
+            text-align: center;
+            border-color: #c8c7c7;
+            border-width: 1px;
+        }
+
+        #calTable {
+            border-color: #c8c7c7;
+            min-width: 685px;
+        }
+
+        .filltd {
+            background: linear-gradient(45deg, #91b3ee, #9c99ef);
+        }
+
+        .w_td {
+            width: 130px;
+        }
+
+        .red {
+            color: red;
+        }
+
+        .green {
+            color: green;
+        }
+    </style>
     <div class="px-8">
-        <table class="w-full table-auto">
+        <table width="100%" border="1" style="border-collapse: collapse;" id="calTable">
             <thead>
-            <tr class="w-full h-20 font-bold text-center text-gray-600 uppercase bg-gray-400">
-                <td class="w-1/6 text-white bg-gray-500">Time</td>
+            <tr class="font-bold text-center uppercase">
+                <td class="w_td"></td>
                 <td>Monday</td>
                 <td>Tuesday</td>
                 <td>Wednesday</td>
@@ -16,55 +45,17 @@
                 <td>Friday</td>
             </tr>
             {% for time_block in time_blocks %}
-                <tr class="">
-                    <td class="p-2 bg-gray-400 border-b border-white">
-                        <div class="">
-                            <div class="inline-block w-1/6 m-4 text-center bg-white rounded-lg">
-                                {{ time_block|get_timeblock_letter }}
-                            </div>
-                            <div class="inline-block">
-                                {{ time_block|parse_time }}
-                            </div>
-                        </div>
-                    </td>
+                <tr>
+                    <td class="w_td">{{ time_block }}</td>
                     {% for day in day_list %}
-                        <td class="h-16 bg-gray-300">
+                        <td>
                             {% for section in timeblock_day_dict|get_item:time_block.id|get_item:day %}
-                                <div
+                                <p
                                         title="{{ sections|get_item:section.id|get_item:'hints'|join:',' }}"
-                                        class="bg-gray-400 bg-{{ sections|get_item:section.id|get_item:'color' }}-400 m-2 p-3 rounded-md"
+                                        class="{{ sections|get_item:section.id|get_item:'color' }}"
                                 >
                                     {{ section }}
-                                    <div @click.away="open = false" class="relative" x-data="{ open: false }">
-                                        <button @click="open = !open"
-                                                class="flex flex-row items-center p-1 m-1 text-lg font-semibold text-left bg-gray-400 rounded-md hover:text-gray-200 focus:text-gray-100 focus:outline-none focus:shadow-outline">
-                                            <span>Edit</span>
-                                            <svg fill="currentColor" viewBox="0 0 20 20"
-                                                 :class="{'rotate-180': open, 'rotate-0': !open}"
-                                                 class="inline w-4 h-4 transition-transform duration-200 transform">
-                                                <path fill-rule="evenodd"
-                                                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                      clip-rule="evenodd"></path>
-                                            </svg>
-                                        </button>
-                                        <div x-show="open" x-transition:enter="transition ease-out duration-100"
-                                             x-transition:enter-start="transform opacity-0 scale-95"
-                                             x-transition:enter-end="transform opacity-100 scale-100"
-                                             x-transition:leave="transition ease-in duration-75"
-                                             x-transition:leave-start="transform opacity-100 scale-100"
-                                             x-transition:leave-end="transform opacity-0 scale-95"
-                                             class="absolute right-0 w-full origin-top-right rounded-md shadow-lg">
-                                            <div class="px-2 py-2 bg-gray-400 rounded-md shadow-2xl">
-                                                <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
-                                                   href="">Timeblock</a>
-                                                <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
-                                                   href="">Primary Teacher</a>
-                                                <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
-                                                   href="">Secondary Teacher</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </p>
                             {% endfor %}
                         </td>
                     {% endfor %}
@@ -72,7 +63,7 @@
             {% endfor %}
             </thead>
         </table>
-        <button class="px-6 py-4 m-4 font-bold text-center uppercase border-2 border-black">Save as CSV</button>
+        <button class="font-bold text-center uppercase px-6 py-4 border-2 border-black m-4">Generate PDF</button>
     </div>
 
 {% endblock %}
