@@ -1,5 +1,5 @@
-import csv
-
+from csv import DictReader
+from io import StringIO
 from database.models.schedule_models import Course
 from database.models.structural_models import Preference
 from database.models.user_models import Student
@@ -10,8 +10,9 @@ required_student_fields = ['student_id', 'class_standing', 'first_name', 'last_n
 required_preference_fields = ['object_1_content_type', 'object_1', 'object_2_content_type', 'object_2']
 
 
-def create_courses(reader):
+def create_courses(file):
     shipback = []
+    reader = DictReader(StringIO(file.read().decode('utf-8'))) # DOES NOT WORK
     for row in reader:
         print(row)
         shipback.append(Course.objects.get_or_create(

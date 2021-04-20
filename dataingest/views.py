@@ -20,14 +20,14 @@ class UploadCSVFileView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         category = form.data['category']
-        file_reader = self.request.FILES['file']
+        file = self.request.FILES['file']
         objects = []
         if category == 'course':
-            objects = create_courses(file_reader)
+            objects = create_courses(file)
         elif category == 'student':
-            objects = create_students(file_reader)
+            objects = create_students(file)
         elif category == 'preference':
-            objects = create_preferences(file_reader)
+            objects = create_preferences(file)
 
         self.request.session['objects'] = serialize('json', objects)
 
