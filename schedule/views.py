@@ -135,7 +135,8 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
             'day_list': ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'],
             'sections': sections_dict,
             'schedule_id': kwargs.get('schedule_id'),
-            'preference_set_id': kwargs.get('preference_set_id')
+            'preference_set_id': kwargs.get('preference_set_id'),
+            'sections_queryset': sections
         })
 
         return context_data
