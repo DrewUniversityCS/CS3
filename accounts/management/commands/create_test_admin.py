@@ -12,7 +12,8 @@ class Command(BaseCommand):
         self._create_test_admin()
 
     def _create_test_admin(self):
-        BaseUser.objects.create_superuser('admin', 'admin@gmail.com', '123')
-        BaseUser.objects.filter(is_superuser=True).update(
-            first_name='Super', last_name='User'
-        )
+        if not BaseUser.objects.get(email='admin@gmail.com'):
+            BaseUser.objects.create_superuser('admin', 'admin@gmail.com', '123')
+            BaseUser.objects.filter(is_superuser=True).update(
+                first_name='Super', last_name='User'
+            )
