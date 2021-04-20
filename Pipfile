@@ -18,6 +18,7 @@ crispy-tailwind = "*"
 mysqlclient = "*"
 pymysql = "*"
 django_tables2 = "*"
+django_heroku = "*"
 
 [requires]
 python_version = "3.9"
