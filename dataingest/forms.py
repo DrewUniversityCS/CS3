@@ -4,38 +4,31 @@ from django.core.exceptions import ValidationError
 from django.forms import Form, ChoiceField, FileField
 from django.utils.safestring import mark_safe
 
+required_course_fields = ['department', 'name', 'number']
+required_student_fields = ['student_id', 'class_standing', 'first_name', 'last_name', 'email']
+required_preference_fields = ['object_1_content_type', 'object_1', 'object_2_content_type', 'object_2']
+
 
 def validate_csv_columns(col_names, category):
     if category == 'course':
-        required_course_fields = ['department', 'name', 'number']
-
         for field in required_course_fields:
             if field not in col_names:
-                # TODO: Are any of the field synonyms in the col_names?
-                print(field)
                 return False
         return True
 
     elif category == 'student':
-        required_student_fields = ['student_id', 'class_standing', 'first_name', 'last_name', 'email']
-
         for field in required_student_fields:
             if field not in col_names:
-                print(field)
                 return False
         return True
 
     elif category == 'preference':
-        required_preference_fields = ['object_1_content_type', 'object_1', 'object_2_content_type', 'object_2']
-
         for field in required_preference_fields:
             if field not in col_names:
-                print(field)
                 return False
         return True
 
-    else:
-        return False
+    return False
 
 
 class UploadCSVFileForm(Form):
@@ -50,12 +43,9 @@ class UploadCSVFileForm(Form):
         cleaned_data = super().clean()
         file = cleaned_data['file']
         category = cleaned_data['category']
-        course_array = ['department', 'name', 'number']
-        student_array = ['student_id', 'class_standing', 'first_name', 'last_name', 'email']
-        preference_array = ['object_1_content_type', 'object_1', 'object_2_content_type', 'object_2']
-        req_fields_cases = {'course': course_array,
-                            'student': student_array,
-                            'preference': preference_array}
+        req_fields_cases = {'course': required_course_fields,
+                            'student': required_student_fields,
+                            'preference': required_preference_fields}
 
         required_fields = req_fields_cases.get(category)
 
@@ -75,7 +65,7 @@ class UploadCSVFileForm(Form):
 
                 elif required_fields[i] not in col_names:
                     wrong_cat_cols.append(required_fields[i])
-                    wrong_cat_cols_index.append(i+1)
+                    wrong_cat_cols_index.append(i + 1)
                     i = i + 1
 
             string_ints = [str(int) for int in wrong_cat_cols_index]
