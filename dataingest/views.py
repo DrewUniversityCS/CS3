@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import redirect
 from django.views.generic import FormView
 
+from accounts.models import BaseUser
 from database.forms import EmptyForm
 from database.models.structural_models import SetMembership, ModelSet
 from database.views import DynamicModelMixin
@@ -25,7 +26,8 @@ class UploadCSVFileView(LoginRequiredMixin, FormView):
         if category == 'course':
             objects = create_courses(file)
         elif category == 'student':
-            objects = create_students(file)
+            users, objects = create_students(file)  # objects is students
+            self.request.session['users'] = serialize('json', users)
         elif category == 'preference':
             objects = create_preferences(file)
 
@@ -42,6 +44,20 @@ class UploadCSVFileSuccessView(LoginRequiredMixin, FormView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         objects = []
+
+        # if there are user objects to handle
+        users = self.request.session.get('users')
+        if users is not None:
+            self.request.session['users'] = None
+            for obj in deserialize("json", users):
+                obj.object.save()   # we are forced to temporarily save the user objects
+                """
+                I'm not yet sure how to deal with the situation where
+                the user leaves the confirmation page without interacting with the form, so I am putting down a flag
+                to signify that there are "rogue users" in the database - my thought is, this could be checked somewhere
+                and these users purged if needed.
+                """
+                self.request.session['rogue_users_flag'] = True
         for obj in deserialize("json", self.request.session.get('objects')):
             objects.append(obj.object)
 
@@ -51,9 +67,14 @@ class UploadCSVFileSuccessView(LoginRequiredMixin, FormView):
     def form_valid(self, form):
         if 'confirm' in self.request.POST:
             for obj in deserialize("json", self.request.session.get('objects')):
-                if obj.object.user is not None:
-                    obj.object.user.save()
                 obj.object.save()
+        else:
+            for obj in deserialize("json", self.request.session.get('objects')):
+                try:
+                    uid = obj.object.user.id
+                    BaseUser.objects.filter(id=uid).delete()
+                except AttributeError:
+                    pass
 
         return redirect(self.success_url)
 

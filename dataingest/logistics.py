@@ -29,10 +29,12 @@ def create_courses(file):
 
 
 def create_students(file):
-    shipback = []
+    users_shipback = []
+    students_shipback = []
     r = DictReader(codecs.iterdecode(file, 'utf-8'))
     for row in r:
-        user_object = BaseUser(  # DOESN"T WORK YET
+        user_object = BaseUser(
+            id=BaseUser.objects.order_by('id').first().id + 1,  # next available id
             username=row["email"].split("@")[0],
             email=row["email"],
             password=BaseUser.objects.make_random_password(),
@@ -40,13 +42,16 @@ def create_students(file):
             last_name=row["last_name"]
         )
 
-        shipback.append(Student(
+        student_object = Student(
             student_id=row["student_id"],
             class_standing=row["class_standing"],
             user=user_object,
             user_id=user_object.id
-        ))
-    return shipback
+        )
+
+        users_shipback.append(user_object)
+        students_shipback.append(student_object)
+    return users_shipback, students_shipback
 
 
 def create_preferences(file):
