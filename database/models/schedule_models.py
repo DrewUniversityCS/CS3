@@ -9,6 +9,7 @@ from django.utils.crypto import get_random_string
 from database.enums import SEASONS, POSSIBLE_HOURS, POSSIBLE_MINUTES
 from database.models.structural_models import SetMembership
 from database.validators import year_validator
+from database.validators import max_integer_validator
 
 class Course(models.Model):
     """
@@ -17,7 +18,7 @@ class Course(models.Model):
     """
     department = models.ForeignKey("database.Department", on_delete=models.CASCADE, related_name="courses offered+")
     name = models.CharField(max_length=256, blank=False, null=False)
-    number = models.IntegerField(blank=False, null=False)
+    number = models.IntegerField(blank=False, null=False, validators=[max_integer_validator])
     credit_hours = models.IntegerField(default=4)
     comments = models.TextField(blank=True, null=True)
     offered_annually = models.BooleanField(default=True)

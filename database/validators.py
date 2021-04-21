@@ -24,3 +24,6 @@ def year_validator(year):
     if year>(timezone.now().year+100) or year<(timezone.now().year-100):
         raise ValidationError("Year out of range. Please select a more appropriate range.")
 
+def max_integer_validator(num):
+    if len(str(num))>7:
+        raise ValidationError("Course number must be less than 7 digits long.")
