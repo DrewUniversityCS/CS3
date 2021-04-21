@@ -6,6 +6,7 @@ from database.models.structural_models import SetMembership
 from database.validators import student_id_validator
 
 
+
 class Student(models.Model):
     """
     The student data model.
@@ -34,7 +35,7 @@ class Teacher(models.Model):
     The teacher / instructor data model.
     """
     user = models.ForeignKey("accounts.BaseUser", on_delete=models.CASCADE, blank=False, null=False)
-    department = models.ForeignKey("database.Department", on_delete=models.CASCADE, null=True, blank=True)
+    department = models.ForeignKey("database.Department", on_delete=models.CASCADE, null=True, blank=False)
 
     def __str__(self):
         if self.department is None:

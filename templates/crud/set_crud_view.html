@@ -7,6 +7,11 @@
 {% block content %}
     <div class="grid items-center grid-cols-1 gap-2 pb-24 lg:grid-cols-2">
         <div class="flex flex-col w-2/3 h-full mx-auto">
+            <div class="absolute left-12">
+                <a href="{% url 'pages:crud' %}" class="btn-cancel">
+                    Back
+                </a>
+            </div>
             <div class="py-12 text-xl text-center text-gray-800">
                 Input Form
             </div>
