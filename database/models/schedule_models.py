@@ -1,12 +1,14 @@
 import string
 
+import django.utils.timezone as timezone
+
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.utils.crypto import get_random_string
 
 from database.enums import SEASONS, POSSIBLE_HOURS, POSSIBLE_MINUTES
 from database.models.structural_models import SetMembership
-
+from database.validators import year_validator
 
 class Course(models.Model):
     """
@@ -66,8 +68,8 @@ class Schedule(models.Model):
     """
     A structural model representing a week's schedule of classes.
     """
-    name = models.CharField(max_length=256, blank=True)
-    year = models.IntegerField(null=False, blank=False)
+    name = models.CharField(max_length=256, blank=False)
+    year = models.IntegerField(default = timezone.now().year, null=False, blank=False, validators=[year_validator])
     season = models.CharField(choices=SEASONS, max_length=50)
 
     def __str__(self):
