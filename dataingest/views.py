@@ -51,6 +51,8 @@ class UploadCSVFileSuccessView(LoginRequiredMixin, FormView):
     def form_valid(self, form):
         if 'confirm' in self.request.POST:
             for obj in deserialize("json", self.request.session.get('objects')):
+                if obj.object.user is not None:
+                    obj.object.user.save()
                 obj.object.save()
 
         return redirect(self.success_url)
