@@ -11,7 +11,6 @@ from database.models.schedule_models import Schedule, Course
 from database.models.structural_models import ModelSet, SetMembership
 from database.models.user_models import Teacher, Student
 
-
 widget_dict = {
     "comments": Textarea(attrs={'rows': 5, 'cols': 20}),
     "registrations": CheckboxSelectMultiple()
@@ -64,13 +63,13 @@ def make_user_form(dynamic_model):
             email = cleaned_data.get("email")
             if any(i.isdigit() for i in first_name):
                 raise ValidationError("First Name must contain only characters.")
-            if any(i.isdigit() for i in last_name):
+            elif any(i.isdigit() for i in last_name):
                 raise ValidationError("Last Name must contain only characters.")
-            if BaseUser.objects.filter(username=email).exists():
+            elif BaseUser.objects.filter(username=email).exists():
                 raise ValidationError("Email is already registered. Please use a different email.")
-            if BaseUser.objects.filter(email=email).exists():
+            elif BaseUser.objects.filter(email=email).exists():
                 raise ValidationError("Email is already registered. Please use a different email.")
-            if BaseUser.objects.filter(username=email.split('@')[0]).exists():
+            elif BaseUser.objects.filter(username=email.split('@')[0]).exists():
                 raise ValidationError("Email is already registered. Please use a different email.")
             return cleaned_data
 

@@ -35,7 +35,7 @@ class Teacher(models.Model):
     The teacher / instructor data model.
     """
     user = models.ForeignKey("accounts.BaseUser", on_delete=models.CASCADE, blank=False, null=False)
-    department = models.ForeignKey("database.Department", on_delete=models.CASCADE, null=True, blank=False)
+    department = models.ForeignKey("database.Department", on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         if self.department is None:
