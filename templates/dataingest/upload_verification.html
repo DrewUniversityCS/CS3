@@ -1,27 +1,21 @@
 {% extends '_base.html' %}
+{% load tailwind_filters %}
 
-{% block title %}Confirm Sections Creation{% endblock title %}
+{% block title %}Confirm Csv Upload{% endblock title %}
 
 {% block content %}
     <div class="w-full min-h-screen text-center">
         <table class="w-5/6 mx-auto bg-white rounded shadow-md table-auto">
             <thead>
             <tr class="w-full text-gray-600 uppercase bg-gray-300">
-                <th class="px-6 py-3" colspan="2">Sections To Create</th>
-            </tr>
-            <tr class="w-full text-center text-gray-600 uppercase bg-gray-200">
-                <th class="px-6 py-3">Course</th>
-                <th class="px-6 py-3">Section ID</th>
+                <th class="px-6 py-3" colspan="2">Please Confirm You Would Like To Create The Following Objects:</th>
             </tr>
             </thead>
             <tbody class="w-full overflow-y-scroll text-sm font-light text-gray-600">
-            {% for section in sections %}
+            {% for object in objects %}
                 <tr class="justify-around w-full h-24 border-b border-gray-200 hover:bg-gray-100">
                     <td class="w-1/2">
-                        {{ section.course }}
-                    </td>
-                    <td class="w-1/2">
-                        {{ section.section_id }}
+                        {{ object }}
                     </td>
                 </tr>
             {% endfor %}

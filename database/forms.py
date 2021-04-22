@@ -11,10 +11,8 @@ from database.models.schedule_models import Schedule, Course
 from database.models.structural_models import ModelSet, SetMembership
 from database.models.user_models import Teacher, Student
 
-widget_dict = {
-    "comments": Textarea(attrs={'rows': 5, 'cols': 20}),
-    "registrations": CheckboxSelectMultiple()
-}
+
+tailwind_dropdown = Select(attrs={'class': 'w-full inset-y-0 right-0 flex items-center text-gray-700'})
 
 label_dict = {
     "student_id": "Student ID Number",
@@ -142,6 +140,7 @@ def make_user_form(dynamic_model):
                 'registrations',
                 'overseeing_department'
             ]
+            labels = label_dict
 
     return UserForm
 
@@ -157,7 +156,6 @@ def get_dynamic_model_form(dynamic_model):
                 model = dynamic_model
                 exclude = ['overlap_preferences', 'room_preferences', 'time_preferences']
                 fields = "__all__"
-                widgets = widget_dict
                 labels = label_dict
     else:
         return make_user_form(dynamic_model)
@@ -210,9 +208,6 @@ class CreateBulkSectionsForm(Form):
 
 class EmptyForm(Form):
     placeholder_field = CharField(widget=HiddenInput(), required=False)
-
-
-tailwind_dropdown = Select(attrs={'class': 'w-full inset-y-0 right-0 flex items-center text-gray-700'})
 
 
 class CreatePreferenceForm(Form):
