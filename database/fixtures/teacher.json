@@ -129,24 +129,6 @@
   },
   {
     "model": "accounts.baseuser",
-    "pk": 1,
-    "fields": {
-      "password": "pbkdf2_sha256$260000$nvn0nLTW1SseIzCNB9VHmm$MRIQTX3EcHLFlXKhTWWEATH+ARCBWClqmt5MJ2rE/WQ=",
-      "last_login": "2021-04-22T22:11:32.828Z",
-      "is_superuser": true,
-      "username": "admin",
-      "first_name": "Super",
-      "last_name": "User",
-      "email": "admin@gmail.com",
-      "is_staff": true,
-      "is_active": true,
-      "date_joined": "2021-04-22T22:11:05.938Z",
-      "groups": [],
-      "user_permissions": []
-    }
-  },
-  {
-    "model": "accounts.baseuser",
     "pk": 2,
     "fields": {
       "password": "TuX9zk23F5",
