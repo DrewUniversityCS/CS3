@@ -1,3 +1,4 @@
+{% load tailwind_tags %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -10,11 +11,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" type="image/svg" href="{% static 'images/cs3_logo.svg' %}">
     {% block styles %}
-        <link
-                rel="stylesheet"
-                href="{% static 'css/styles.css' %}"
-                type="text/css"
-        />
+        {% tailwind_css %}
 
         <link
                 rel="stylesheet"
