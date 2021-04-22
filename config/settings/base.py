@@ -27,7 +27,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'debug_toolbar',
     'tailwind',
-    'crispy_tailwind',
     'django_tables2',
 
     # Local
@@ -43,8 +42,7 @@ INSTALLED_APPS = [
 
 TAILWIND_APP_NAME = 'theme'
 NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
-CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
-CRISPY_TEMPLATE_PACK = "tailwind"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # MIDDLEWARE
 # ------------------------------------------------------------------------------
