@@ -1,11 +1,36 @@
 {% extends '_base.html' %}
+{% load static %}
 {% load tags %}
 {% load tailwind_filters %}
 
 {% block title %}Calendar{% endblock title %}
 
+{% block extra_styles %}
+    <style>
+        input:checked ~ .dot {
+          transform: translateX(100%);
+          background-color: #48bb78;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
     <div class="px-8">
+        <div class="flex w-full mb-12 gap-6 flex-wrap">
+            {% for section in sections_queryset %}
+                 <label for="{{ section.id }}" class="flex items-center cursor-pointer">
+                    <div class="relative">
+                      <input class="sr-only js_session_filter" type="checkbox" id="{{ section.id }}"  checked>
+                      <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+                      <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+                    </div>
+                    <div class="ml-1 text-gray-700 font-medium">
+                      {{ section }}
+                    </div>
+                </label>
+            {% endfor %}
+        </div>
+
         <table class="w-full table-auto">
             <thead>
             <tr class="w-full h-20 font-bold text-center text-gray-600 uppercase bg-gray-400">
@@ -32,7 +57,7 @@
                         <td class="h-16 bg-gray-300">
                             {% for section in timeblock_day_dict|get_item:time_block.id|get_item:day %}
                                 <div
-                                        class="bg-gray-400 bg-{{ sections|get_item:section.id|get_item:'color' }}-400 m-2 p-3 rounded-md"
+                                        class="bg-gray-400 bg-{{ sections|get_item:section.id|get_item:'color' }}-400 m-2 p-3 rounded-md js_section_{{ section.id }}"
                                 >
                                     {{ section }}
                                     <div class="flex gap-4">
@@ -111,4 +136,8 @@
         <button class="px-6 py-4 m-4 font-bold text-center uppercase border-2 border-black">Save as CSV</button>
     </div>
 
+{% endblock %}
+
+{% block extra_js %}
+        <script src="{% static 'js/schedule-filter.js' %}"></script>
 {% endblock %}

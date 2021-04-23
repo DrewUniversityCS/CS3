@@ -135,7 +135,8 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
             'day_list': ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'],
             'sections': sections_dict,
             'schedule_id': kwargs.get('schedule_id'),
-            'preference_set_id': kwargs.get('preference_set_id')
+            'preference_set_id': kwargs.get('preference_set_id'),
+            'sections_queryset': sections
         })
 
         return context_data
@@ -194,7 +195,7 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
             if preference.object_2 == section.course:
                 color = sections_dict[section.id].get('color')
                 if preference.weight:
-                    if section.primary_instructor == preference.object_1:
+                    if section.primary_instructor.user == preference.object_1:
                         # If the preference is positive, and the course is taught by the specified teacher, highlight
                         # it green.
                         if color != 'red':
@@ -212,7 +213,7 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
                 else:
                     # If the preference is negative, and the course is taught by the specified teacher, highlight it
                     # red.
-                    if section.primary_instructor == preference.object_1:
+                    if section.primary_instructor.user == preference.object_1:
                         sections_dict[section.id]['color'] = 'red'
                         sections_dict[section.id]['negative_points'].append(
                             'the preference is negative, and the course is taught by the specified teacher'
@@ -220,7 +221,7 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
 
     def check_user_timeblock_preference(self, section, preferences, sections_dict):
         for preference in preferences:
-            if preference.object_1 == section.primary_instructor:
+            if preference.object_1 == section.primary_instructor.user:
                 color = sections_dict[section.id].get('color')
                 if preference.weight:
                     if section.timeblock == preference.object_2:

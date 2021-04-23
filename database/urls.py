@@ -19,7 +19,7 @@ urlpatterns = [
     path('set-inspect/<slug:model>/<slug:id>/', DynamicModelSetInspectView.as_view(), name='set_crud_inspect'),
     path('set-delete/<slug:model>/<slug:id>/', DynamicModelSetDeleteView.as_view(), name='set_crud_delete'),
     path('set-update/<slug:model>/<slug:id>/', DynamicModelSetUpdateView.as_view(), name='set_crud_update'),
-
+       
     # AJAX views
     path('ajax/load-dropdown-options/', load_dropdown_options, name='ajax_load_dropdown_options')
 ]

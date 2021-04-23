@@ -54,6 +54,23 @@ def make_user_form(dynamic_model):
         last_name = CharField(max_length=256)
         email = EmailField()
 
+        def clean(self):
+            cleaned_data = super().clean()
+            last_name = cleaned_data.get("last_name")
+            first_name = cleaned_data.get("first_name")
+            email = cleaned_data.get("email")
+            if any(i.isdigit() for i in first_name):
+                raise ValidationError("First Name must contain only characters.")
+            elif any(i.isdigit() for i in last_name):
+                raise ValidationError("Last Name must contain only characters.")
+            elif BaseUser.objects.filter(username=email).exists():
+                raise ValidationError("Email is already registered. Please use a different email.")
+            elif BaseUser.objects.filter(email=email).exists():
+                raise ValidationError("Email is already registered. Please use a different email.")
+            elif BaseUser.objects.filter(username=email.split('@')[0]).exists():
+                raise ValidationError("Email is already registered. Please use a different email.")
+            return cleaned_data
+
         def save(self, **kwargs):
             cleaned_data = self.cleaned_data
             """

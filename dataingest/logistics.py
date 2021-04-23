@@ -6,8 +6,7 @@ from django.contrib.contenttypes.models import ContentType
 from accounts.models import BaseUser
 from database.models.schedule_models import Course, Timeblock
 from database.models.structural_models import Preference, Department
-from database.models.user_models import Student
-
+from database.models.user_models import Student, Teacher
 
 required_course_fields = ['department', 'name', 'number']
 required_student_fields = ['student_id', 'class_standing', 'first_name', 'last_name', 'email']
@@ -19,13 +18,26 @@ def create_courses(file):
     r = DictReader(codecs.iterdecode(file, 'utf-8'))
     for row in r:
         department = Department.objects.get(name=row['department'])
+        teacher_data = row['default_primary_instructor'].strip("'").strip(' ')
+        if teacher_data != '' and teacher_data != ' ' and teacher_data is not None:
+            first_name, last_name = teacher_data.split(' ')
+            teacher = Teacher.objects.get(user__first_name=first_name, user__last_name=last_name)
+        else:
+            teacher = None
+
+        time = row['default_timeblock']
+        if time == '' or time == ' ' or time is None:
+            time = 1
+
         shipback.append(Course(
             department=department,
             name=row['name'],
             number=int(row['number']),
             credit_hours=int(row['credit_hours']),
             comments=row['comments'],
-            offered_annually=bool(row['offered_annually'])
+            offered_annually=bool(row['offered_annually']),
+            default_primary_instructor=teacher,
+            default_timeblock_id=time
         ))
     return shipback
 
@@ -36,7 +48,7 @@ def create_students(file):
     r = DictReader(codecs.iterdecode(file, 'utf-8'))
     for row in r:
         user_object = BaseUser(
-            id=BaseUser.objects.order_by('id').first().id + 1,  # next available id
+            id=BaseUser.objects.order_by('-id').first().id + 1,  # next available id
             username=row["email"].split("@")[0],
             email=row["email"],
             password=BaseUser.objects.make_random_password(),
