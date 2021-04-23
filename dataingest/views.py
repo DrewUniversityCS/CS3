@@ -43,7 +43,6 @@ class UploadCSVFileSuccessView(LoginRequiredMixin, FormView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         objects = []
-
         # if there are user objects to handle
         users = self.request.session.get('users')
         if users is not None:

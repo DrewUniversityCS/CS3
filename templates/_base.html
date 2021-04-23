@@ -21,6 +21,9 @@
                 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
         >
     {% endblock %}
+
+    {% block extra_styles %}
+    {% endblock %}
     {% block javascript %}
         <!-- 3rd party JavaScript -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0" defer></script>
@@ -29,6 +32,7 @@
         <!-- Project JS -->
         <script src="{% static 'js/base.js' %}"></script>
     {% endblock javascript %}
+
 </head>
 
 <style>
@@ -55,4 +59,8 @@
 
 {% include "./components/footer.html" %}
 </body>
+
+{% block extra_js %}
+
+{% endblock %}
 </html>
