@@ -3,7 +3,7 @@ from crispy_forms.layout import Layout, Submit
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.db.models import Exists, OuterRef
-from django.forms import ModelForm, CheckboxSelectMultiple, Textarea, CharField, \
+from django.forms import ModelForm, CheckboxSelectMultiple, CharField, \
     EmailField, ModelChoiceField, Form, ModelMultipleChoiceField, HiddenInput, Select, BooleanField
 
 from accounts.models import BaseUser
@@ -171,7 +171,8 @@ def get_dynamic_model_choice_set_form(dynamic_model, crud_type):
             new_set_name = CharField(max_length=256, required=False)
 
         choices = ModelMultipleChoiceField(
-            queryset=dynamic_model.objects.all(), widget=CheckboxSelectMultiple,
+            queryset=dynamic_model.objects.all(),
+            widget=CheckboxSelectMultiple(),
             label=f'{dynamic_model.__name__}s'
         )
 

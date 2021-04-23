@@ -17,9 +17,13 @@
             </div>
             <form method="post">
                 {% csrf_token %}
-                {{ form | crispy }}
+                {{ form.set | as_crispy_field }}
+                {{ form.new_set_name | as_crispy_field }}
+                <div class="block p-2 mb-2 overflow-y-scroll text-sm font-bold text-gray-700 bg-white border-gray-300 max-h-72">
+                    {{ form.choices }}
+                </div>
                 <button type="submit"
-                        class="btn-submit mt-6">
+                        class="mt-6 btn-submit">
                     Save
                 </button>
             </form>
