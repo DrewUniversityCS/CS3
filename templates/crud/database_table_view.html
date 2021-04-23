@@ -1,3 +1,4 @@
+{% load static %}
 {% load tags %}
 
 <style>
@@ -9,53 +10,25 @@
             background: none;
         }
     }
-
     .highlight {
         animation: highlight 2s;
     }
 </style>
 
-<script>
-    jQuery.expr[':'].contains = function (a, i, m) {
-        return jQuery(a).text().toUpperCase()
-            .indexOf(m[3].toUpperCase()) >= 0;
-    }; // we are replacing the native jQuery contains filter with a case-insensitive alternative
-    // from: https://stackoverflow.com/questions/8746882/jquery-contains-selector-uppercase-and-lower-case-issue
-
-    function scrollToRow(value) {
-        var row = $('#data-table tr:contains(' + value.trim() + ')');
-        if (row.length > 0) {
-            sf = $('#search-failure')
-            if (!sf.hasClass("invisible")) {
-                sf.addClass("invisible");
-            }
-            row.addClass("highlight");
-            setTimeout(function () {
-                row.removeClass("highlight");
-            }, 2000);
-            row[0].scrollIntoView({ // row[0] gets the element rather than the query
-                behavior: 'smooth',
-                block: 'center'
-            });
-        } else {
-            $('#search-failure').removeClass('invisible')
-        }
-
-    }
-</script>
+<script src="{% static 'js/search.js' %}"></script>
 
 <div class="flex flex-col">
     <div class="py-12 text-xl text-center text-gray-800">
         Database Items
     </div>
     <div class="flex rounded-lg mb-8">
-        <input id="look-up-val" class="p-2 focus:outline-none" type="text" placeholder="Look Up...">
+        <input id="look-up-val-tb" class="p-2 focus:outline-none" type="text" placeholder="Look Up...">
         <button class="bg-white w-auto flex justify-end items-center text-blue-500 p-2 hover:text-blue-400"
-                onclick="scrollToRow(document.getElementById('look-up-val').value)"
+                onclick="scrollToRow(document.getElementById('look-up-val-tb').value, 'table')"
         >
             <i class="fa fa-search"></i>
         </button>
-        <div id="search-failure" class="text-red-500 p-2 w-full invisible">
+        <div id="search-failure-tb" class="text-red-500 p-2 w-full invisible">
             No matching entries found.
         </div>
     </div>
