@@ -19,6 +19,9 @@
                 {% csrf_token %}
                 {{ form.set | as_crispy_field }}
                 {{ form.new_set_name | as_crispy_field }}
+                <div class="text-gray-700 font-bold mb-2">
+                    {{ form.choices.label }}
+                </div>
                 <div class="block p-2 mb-2 overflow-y-scroll text-sm font-bold text-gray-700 bg-white border-gray-300 max-h-72">
                     {{ form.choices }}
                 </div>
