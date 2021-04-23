@@ -113,6 +113,18 @@ def obj_to_dynamic_model_name(value):
     return value
 
 
+@register.filter
+@stringfilter
+def set_type_to_color(param):
+    if param == 'database | course':
+        return 'green-500'
+    elif param == 'database | student':
+        return 'blue-500'
+    elif param == 'database | preference':
+        return 'red-500'
+    return param
+
+
 @register.simple_tag()
 def get_course_stats(form, total):
     stats_list = []
