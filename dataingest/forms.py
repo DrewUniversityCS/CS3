@@ -4,9 +4,7 @@ from django.core.exceptions import ValidationError
 from django.forms import Form, ChoiceField, FileField
 from django.utils.safestring import mark_safe
 
-required_course_fields = ['department', 'name', 'number']
-required_student_fields = ['student_id', 'class_standing', 'first_name', 'last_name', 'email']
-required_preference_fields = ['object_1_content_type', 'object_1', 'object_2_content_type', 'object_2']
+from dataingest.logistics import required_course_fields, required_student_fields, required_preference_fields
 
 
 def validate_csv_columns(col_names, category):

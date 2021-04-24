@@ -1,8 +1,8 @@
 {% extends '_base.html' %}
+{% load tailwind_filters %}
 {% load static %}
 
 {% block title %}CRUD - {{ dynamic_model_name }}{% endblock %}
-{% load tailwind_filters %}
 
 
 {% block content %}
@@ -33,9 +33,15 @@
     {% else %}
         <div class="grid-cols-1 mx-auto md:w-11/12">
             <div class="absolute left-12">
-                <a href="{% url 'pages:crud' %}" class="btn-cancel">
-                    Back
-                </a>
+                {% if dynamic_model_name == "preferences" %}
+                    <a href="{% url 'database:create_preference' %}" class="btn-cancel">
+                        Back
+                    </a>
+                {% else %}
+                    <a href="{% url 'pages:crud' %}" class="btn-cancel">
+                        Back
+                    </a>
+                {% endif %}
             </div>
             {% include "./database_table_view.html" %}
         </div>
