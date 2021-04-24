@@ -14,4 +14,4 @@ class ScheduleSectionEditForm(CrispyModelForm):
     class Meta:
         model = Section
         fields = ('timeblock', 'primary_instructor', 'other_instructor',)
-        labels = label_dict
+        # labels = label_dict

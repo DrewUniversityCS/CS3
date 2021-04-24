@@ -82,7 +82,7 @@
                                                  class="absolute right-0 origin-top-right rounded-md shadow-lg bg-white p-4 w-72 z-50">
                                                 <form action="{% url 'schedule:schedule-section-edit' schedule_id preference_set_id section.id %}" method="POST">
                                                     {% csrf_token %}
-                                                    {{ sections|get_item:section.id|get_item:'section_edit_form' | crispy }}
+{#                                                    {{ sections|get_item:section.id|get_item:'section_edit_form' | crispy }}#}
                                                     <button class="mt-6 btn-interaction">
                                                         Update
                                                     </button>
