@@ -120,7 +120,7 @@ def get_course_stats(form, total):
     for course in courses:
         stats_list.append({
             'course': course,
-            'count': form.entries.filter(courses=course).count()/(total*1.00)*100
+            'count': int(form.entries.filter(courses=course).count()/(total*1.00)*100)
         })
 
     return stats_list
@@ -128,4 +128,9 @@ def get_course_stats(form, total):
 
 @register.filter
 def get_item(dictionary, key):
+    return dictionary.get(key)
+
+
+@register.simple_tag()
+def get_item_assign(dictionary, key):
     return dictionary.get(key)
