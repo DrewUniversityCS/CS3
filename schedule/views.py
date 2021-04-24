@@ -69,7 +69,6 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
             section_time_block_dict[section.timeblock.id].append(section)
             sections_dict[section.id] = {
                 'section': section,
-                'section_edit_form': ScheduleSectionEditForm(instance=section),
                 'color': '',
                 'positive_points': [],
                 'negative_points': []
@@ -136,8 +135,9 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
             'sections': sections_dict,
             'schedule_id': kwargs.get('schedule_id'),
             'preference_set_id': kwargs.get('preference_set_id'),
-            'sections_queryset': sections
+            'sections_queryset': sections,
         })
+        print(context_data)
 
         return context_data
 
@@ -251,6 +251,7 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
 
 
 class ScheduleSectionEditView(LoginRequiredMixin, FormView):
+    template_name = 'pages/section_edit_form.html'
 
     def get_form(self, form_class=None):
         return ScheduleSectionEditForm(

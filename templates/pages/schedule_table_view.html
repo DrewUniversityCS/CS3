@@ -1,7 +1,6 @@
 {% extends '_base.html' %}
 {% load static %}
 {% load tags %}
-{% load crispy_forms_tags %}
 
 {% block title %}Calendar{% endblock title %}
 
@@ -55,7 +54,8 @@
                     </td>
                     {% for day in day_list %}
                         <td class="h-16 bg-gray-300">
-                            {% for section in timeblock_day_dict|get_item:time_block.id|get_item:day %}
+                            {% get_item_assign timeblock_day_dict|get_item:time_block.id day as section_day_list %}
+                            {% for section in section_day_list %}
                                 <div
                                         class="bg-gray-400 bg-{{ sections|get_item:section.id|get_item:'color' }}-400 m-2 p-3 rounded-md js_section_{{ section.id }}"
                                 >
@@ -82,7 +82,7 @@
                                                  class="absolute right-0 origin-top-right rounded-md shadow-lg bg-white p-4 w-72 z-50">
                                                 <form action="{% url 'schedule:schedule-section-edit' schedule_id preference_set_id section.id %}" method="POST">
                                                     {% csrf_token %}
-{#                                                    {{ sections|get_item:section.id|get_item:'section_edit_form' | crispy }}#}
+                                                    <div class="js_edit_section_{{ section.id }}"></div>
                                                     <button class="mt-6 btn-interaction">
                                                         Update
                                                     </button>
@@ -109,14 +109,16 @@
                                              x-transition:leave-end="transform opacity-0 scale-95"
                                              class="absolute right-0 origin-top-right rounded-md shadow-lg bg-white p-4 w-72 z-50">
                                             <ol class="list-disc p-2">
-                                                {% for point in sections|get_item:section.id|get_item:'positive_points' %}
+                                                {% get_item_assign sections|get_item:section.id 'positive_points' as positive_points %}
+                                                {% for point in positive_points %}
                                                     <li class="text-green-800">{{ point }}</li>
                                                 {% empty %}
                                                     <li>This section do not follow any preferences.</li>
                                                 {% endfor %}
                                             </ol>
                                             <ol class="list-disc p-2">
-                                                {% for point in sections|get_item:section.id|get_item:'negative_points' %}
+                                                {% get_item_assign sections|get_item:section.id 'negative_points' as negative_points %}
+                                                {% for point in negative_points %}
                                                     <li class="text-red-800">{{ point }}</li>
                                                 {% empty %}
                                                     <li>This section do not conflict any preferences</li>
@@ -135,9 +137,21 @@
         </table>
         <button class="px-6 py-4 m-4 font-bold text-center uppercase border-2 border-black">Save as CSV</button>
     </div>
-
+    <script type="text/javascript">
+        console.log('sdsad')
+        {% for section in sections_queryset %}
+            fetch('{% url 'schedule:schedule-section-edit' schedule_id preference_set_id section.id %}')
+                .then(response => response.text())
+                .then(data => {
+                    console.log('sdsd', data)
+                    document.querySelectorAll('.js_edit_section_{{ section.id }}').forEach(item => {
+                        item.innerHTML = data;
+                    })
+                });
+        {% endfor %}
+    </script>
 {% endblock %}
 
 {% block extra_js %}
-        <script src="{% static 'js/schedule-filter.js' %}"></script>
+    <script src="{% static 'js/schedule-filter.js' %}"></script>
 {% endblock %}
