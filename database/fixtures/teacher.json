@@ -1,0 +1,418 @@
+[
+  {
+    "model": "database.teacher",
+    "pk": 1,
+    "fields": {
+      "user": 2,
+      "department": 1
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 2,
+    "fields": {
+      "user": 3,
+      "department": 1
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 3,
+    "fields": {
+      "user": 4,
+      "department": 1
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 4,
+    "fields": {
+      "user": 5,
+      "department": 1
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 5,
+    "fields": {
+      "user": 6,
+      "department": 1
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 6,
+    "fields": {
+      "user": 7,
+      "department": 4
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 7,
+    "fields": {
+      "user": 8,
+      "department": 4
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 8,
+    "fields": {
+      "user": 9,
+      "department": 4
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 9,
+    "fields": {
+      "user": 10,
+      "department": 4
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 10,
+    "fields": {
+      "user": 11,
+      "department": 2
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 11,
+    "fields": {
+      "user": 12,
+      "department": 2
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 12,
+    "fields": {
+      "user": 13,
+      "department": 2
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 13,
+    "fields": {
+      "user": 14,
+      "department": 2
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 14,
+    "fields": {
+      "user": 15,
+      "department": 2
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 15,
+    "fields": {
+      "user": 16,
+      "department": 2
+    }
+  },
+  {
+    "model": "database.teacher",
+    "pk": 16,
+    "fields": {
+      "user": 17,
+      "department": 6
+    }
+  },
+  {
+    "model": "accounts.baseuser",
+    "pk": 2,
+    "fields": {
+      "password": "TuX9zk23F5",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "bburd",
+      "first_name": "Barry",
+      "last_name": "Burd",
+      "email": "bburd@drew.edu",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-04-22T22:11:55.881Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.baseuser",
+    "pk": 3,
+    "fields": {
+      "password": "phhHBKu47J",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "tperez",
+      "first_name": "Tiago",
+      "last_name": "Perez",
+      "email": "tperez@drew.edu",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-04-22T22:14:52.982Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.baseuser",
+    "pk": 4,
+    "fields": {
+      "password": "tRPr9xUmjC",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "zmeng",
+      "first_name": "Ziyuan",
+      "last_name": "Meng",
+      "email": "zmeng@drew.edu",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-04-22T22:15:35.512Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.baseuser",
+    "pk": 5,
+    "fields": {
+      "password": "tz25G8jWzW",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "ehill1",
+      "first_name": "Emily",
+      "last_name": "Hill",
+      "email": "ehill1@drew.edu",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-04-22T22:15:54.511Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.baseuser",
+    "pk": 6,
+    "fields": {
+      "password": "3URrFUmtaf",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "dliporace",
+      "first_name": "Diane",
+      "last_name": "Liporace",
+      "email": "dliporace@drew.edu",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-04-22T22:16:18.372Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.baseuser",
+    "pk": 7,
+    "fields": {
+      "password": "EVYhUTNRj7",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "jlee31",
+      "first_name": "Jeongkyu",
+      "last_name": "Lee",
+      "email": "jlee31@drew.edu",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-04-22T22:17:02.043Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.baseuser",
+    "pk": 8,
+    "fields": {
+      "password": "eQbFLFWVWd",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "nonulak",
+      "first_name": "Nipa",
+      "last_name": "Onulak",
+      "email": "nonulak@drew.edu",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-04-22T22:17:27.360Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.baseuser",
+    "pk": 9,
+    "fields": {
+      "password": "kQB3MedgxF",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "feruysal",
+      "first_name": "Ferdi",
+      "last_name": "Eruysal",
+      "email": "feruysal@drew.edu",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-04-22T22:17:56.234Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.baseuser",
+    "pk": 10,
+    "fields": {
+      "password": "jFdLFRzsxq",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "esmall1",
+      "first_name": "Ellie",
+      "last_name": "Small",
+      "email": "esmall1@drew.edu",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-04-22T22:18:21.694Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.baseuser",
+    "pk": 11,
+    "fields": {
+      "password": "ZrjwA8XYBu",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "skass",
+      "first_name": "Steven",
+      "last_name": "Kass",
+      "email": "skass@drew.edu",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-04-22T22:18:42.136Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.baseuser",
+    "pk": 12,
+    "fields": {
+      "password": "2g8kZWBdrK",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "arabbliu",
+      "first_name": "Amy",
+      "last_name": "Rabb-Liu",
+      "email": "arabbliu@drew.edu",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-04-22T22:19:24.115Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.baseuser",
+    "pk": 13,
+    "fields": {
+      "password": "aebH7G9EWr",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "sharris2",
+      "first_name": "Seth",
+      "last_name": "Harris",
+      "email": "sharris2@drew.edu",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-04-22T22:19:48.429Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.baseuser",
+    "pk": 14,
+    "fields": {
+      "password": "5tS3dEkrFb",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "ssurace",
+      "first_name": "Steven",
+      "last_name": "Surace",
+      "email": "ssurace@drew.edu",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-04-22T22:20:16.300Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.baseuser",
+    "pk": 15,
+    "fields": {
+      "password": "PDRJvSFcdF",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "capelian",
+      "first_name": "Christopher",
+      "last_name": "Apelian",
+      "email": "capelian@drew.edu",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-04-22T22:20:45.290Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.baseuser",
+    "pk": 16,
+    "fields": {
+      "password": "5gV7BT4jEZ",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "sabramow",
+      "first_name": "Sarah",
+      "last_name": "Abramowitz",
+      "email": "sabramow@drew.edu",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-04-22T22:21:10.371Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.baseuser",
+    "pk": 17,
+    "fields": {
+      "password": "qwR64Tew66",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "ylu1",
+      "first_name": "Yi",
+      "last_name": "Lu",
+      "email": "ylu1@drew.edu",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-04-22T22:21:40.677Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]
