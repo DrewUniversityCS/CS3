@@ -65,16 +65,28 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
                     user_timeblock_preference.append(preference)
 
         sections_dict = {}
+        sections_without_timeblock = []
 
         section_time_block_dict = defaultdict(list)
         for section in sections:
-            section_time_block_dict[section.timeblock.id].append(section)
+            if section.timeblock:
+                section_time_block_dict[section.timeblock.id].append(section)
+            else:
+                sections_without_timeblock.append(section)
             sections_dict[section.id] = {
                 'section': section,
                 'color': '',
                 'positive_points': [],
                 'negative_points': []
             }
+
+        i = 0
+        new_list = []
+        while i < len(sections_without_timeblock):
+            new_list.append(sections_without_timeblock[i:i + 5])
+            i += 5
+
+        sections_without_timeblock = new_list
 
         for idx, section1 in enumerate(sections):
             for section2 in sections[idx:]:
@@ -84,7 +96,6 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
                     if preference_courses == section_courses:
                         color1 = sections_dict[section1.id].get('color')
                         color2 = sections_dict[section2.id].get('color')
-                        print(preference)
                         if preference.weight:
                             if section1.timeblock == section2.timeblock:
                                 # If two courses with a positive preference are at the same time, highlight both green.
@@ -120,9 +131,14 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
                                     'courses with a negative preference are at the same time'
                                 )
 
-            check_course_timeblock_preference(section1, course_timeblock_preference, sections_dict)
-            check_user_course_preference(section1, user_course_preference, sections_dict)
-            check_user_timeblock_preference(section1, user_timeblock_preference, sections_dict)
+            if section1.primary_instructor:
+                check_user_course_preference(section1, user_course_preference, sections_dict)
+
+            if section1.timeblock:
+                check_course_timeblock_preference(section1, course_timeblock_preference, sections_dict)
+
+            if section1.timeblock and section1.primary_instructor:
+                check_user_timeblock_preference(section1, user_timeblock_preference, sections_dict)
 
         timeblock_day_dict = defaultdict(dict)
         time_blocks = Timeblock.objects.all()
@@ -137,7 +153,8 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
             'sections': sections_dict,
             'schedule_id': kwargs.get('schedule_id'),
             'preference_set_id': kwargs.get('preference_set_id'),
-            'sections_queryset': sections
+            'sections_queryset': sections,
+            'sections_without_timeblock': sections_without_timeblock
         })
 
         return context_data
