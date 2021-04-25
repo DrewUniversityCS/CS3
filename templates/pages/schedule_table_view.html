@@ -121,19 +121,18 @@
                                             </svg>
                                         </button>
                                         <div x-show="open" x-transition:enter="transition ease-out duration-100"
-                                                 x-transition:enter-start="transform opacity-0 scale-95"
-                                                 x-transition:enter-end="transform opacity-100 scale-100"
-                                                 x-transition:leave="transition ease-in duration-75"
-                                                 x-transition:leave-start="transform opacity-100 scale-100"
-                                                 x-transition:leave-end="transform opacity-0 scale-95"
-                                                 class="absolute right-0 origin-top-right rounded-md shadow-lg bg-white p-4 w-72 z-50">
-                                                <form action="{% url 'schedule:schedule-section-edit' schedule_id preference_set_id section.id %}" method="POST">
+                                             x-transition:enter-start="transform opacity-0 scale-95"
+                                             x-transition:enter-end="transform opacity-100 scale-100"
+                                             x-transition:leave="transition ease-in duration-75"
+                                             x-transition:leave-start="transform opacity-100 scale-100"
+                                             x-transition:leave-end="transform opacity-0 scale-95"
+                                             class="absolute right-0 origin-top-right rounded-md shadow-lg bg-white p-4 w-72 z-50">
                                             <ol class="list-disc p-2">
                                                 {% get_item_assign sections|get_item:section.id 'positive_points' as positive_points %}
                                                 {% for point in positive_points %}
                                                     <li class="text-green-800">{{ point }}</li>
                                                 {% empty %}
-                                                    <li>This section does not follow any preferences.</li>
+                                                    <li>This section does not follow any preferences</li>
                                                 {% endfor %}
                                             </ol>
                                             <ol class="list-disc p-2">
@@ -219,18 +218,18 @@
                                             </svg>
                                         </button>
                                         <div x-show="open" x-transition:enter="transition ease-out duration-100"
-                                                  x-transition:enter-start="transform opacity-0 scale-95"
-                                                  x-transition:enter-end="transform opacity-100 scale-100"
-                                                  x-transition:leave="transition ease-in duration-75"
-                                                  x-transition:leave-start="transform opacity-100 scale-100"
-                                                  x-transition:leave-end="transform opacity-0 scale-95"
-                                                  class="absolute right-0 z-50 p-4 origin-top-right bg-white rounded-md shadow-lg w-72">
+                                             x-transition:enter-start="transform opacity-0 scale-95"
+                                             x-transition:enter-end="transform opacity-100 scale-100"
+                                             x-transition:leave="transition ease-in duration-75"
+                                             x-transition:leave-start="transform opacity-100 scale-100"
+                                             x-transition:leave-end="transform opacity-0 scale-95"
+                                             class="absolute right-0 origin-top-right rounded-md shadow-lg bg-white p-4 w-72 z-50">
                                             <ol class="list-disc p-2">
                                                 {% get_item_assign sections|get_item:section.id 'positive_points' as positive_points %}
                                                 {% for point in positive_points %}
                                                     <li class="text-green-800">{{ point }}</li>
                                                 {% empty %}
-                                                    <li>This section does not follow any preferences.</li>
+                                                    <li>This section does not follow any preferences</li>
                                                 {% endfor %}
                                             </ol>
                                             <ol class="list-disc p-2">
