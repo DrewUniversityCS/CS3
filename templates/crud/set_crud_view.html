@@ -4,6 +4,23 @@
 
 {% block title %}Set CRUD - {{ dynamic_model_name }}{% endblock %}
 
+<style>
+    @keyframes highlight {
+        0% {
+            background: #ffff99;
+        }
+        100% {
+            background: none;
+        }
+    }
+
+    .highlight {
+        animation: highlight 2s;
+    }
+</style>
+
+<script src="{% static 'js/search.js' %}"></script>
+
 {% block content %}
     <div class="grid items-center grid-cols-1 gap-2 pb-24 lg:grid-cols-2">
         <div class="flex flex-col w-2/3 h-full mx-auto">
@@ -17,9 +34,28 @@
             </div>
             <form method="post">
                 {% csrf_token %}
-                {{ form | crispy }}
+                {{ form.set | as_crispy_field }}
+                {{ form.new_set_name | as_crispy_field }}
+                <div class="text-gray-700 font-bold mb-2">
+                    {{ form.choices.label }}
+                </div>
+                <div class="flex rounded-lg mb-8">
+                    <input id="look-up-val-ch" class="p-2 focus:outline-none" type="text" placeholder="Look Up...">
+                    <button class="bg-white w-auto flex justify-end items-center text-blue-500 p-2 hover:text-blue-400"
+                            onclick="scrollToRow(document.getElementById('look-up-val-ch').value, 'choices')"
+                            type="button"
+                    >
+                        <i class="fa fa-search"></i>
+                    </button>
+                    <div id="search-failure-ch" class="text-red-500 p-2 w-full invisible">
+                        No matching entries found.
+                    </div>
+                </div>
+                <div id="choices" class="block p-2 mb-2 overflow-y-scroll text-sm font-bold text-gray-700 bg-white border-gray-300 max-h-72">
+                    {{ form.choices }}
+                </div>
                 <button type="submit"
-                        class="btn-submit mt-6">
+                        class="mt-6 btn-submit">
                     Save
                 </button>
             </form>

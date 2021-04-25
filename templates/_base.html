@@ -22,11 +22,8 @@
         >
     {% endblock %}
 
-    {% block extra_styles %}
-    {% endblock %}
     {% block javascript %}
         <!-- 3rd party JavaScript -->
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0" defer></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
         <!-- Project JS -->
@@ -34,6 +31,9 @@
     {% endblock javascript %}
 
 </head>
+
+{% block extra_styles %}
+{% endblock %}
 
 <style>
     @import url(http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900);

@@ -4,35 +4,35 @@
 {% load tags %}
 
 {% block content %}
-    <div class="pt-12 text-center px-4">
+    <div class="text-center px-4">
         <div class="max-w-4xl py-12 mx-auto bg-white rounded-lg">
             <form method="post" class="pb-12 text-left">
                 {% csrf_token %}
                 <div class="text-lg text-center">Inspecting the following object</div>
                 <div class="py-8 text-xl text-center"><b>{{ object }}</b></div>
-                <div>
+                <div class="w-full max-h-96 overflow-y-scroll px-10">
                     {% for instance in field_data %}
-                        <table class="m-5 mx-auto">
-                            <tr class="border-b">
-                                <th class="px-4 py-3">Field</th>
-                                <th class="px-4 py-3">Value</th>
-                            </tr>
-                            {% for field, value in instance.fields.items %}
-                                {% if not value.items %}
-                                    <tr class="border-b">
-                                        <th class="px-4 py-3">{{ field|parse_var|clean_preference_field_name }}</th>
-                                        <th class="px-4 py-3 font-normal">{{ value|to_human_readable }}</th>
-                                    </tr>
-                                {% else %}
-                                    {% for key, item in value.items %}
-                                        <tr class="border-b">
-                                            <th class="px-4 py-3">{{ key|parse_var }}</th>
-                                            <th class="px-4 py-3  font-normal">{{ item|to_human_readable }}</th>
+                            <table class="mx-auto w-full mt-6">
+                                <tr class="border bg-blue-300">
+                                    <th class="px-4 py-3">Field</th>
+                                    <th class="px-4 py-3">Value</th>
+                                </tr>
+                                {% for field, value in instance.fields.items %}
+                                    {% if not value.items %}
+                                        <tr class="border">
+                                            <th class="px-4 py-3">{{ field|parse_var|clean_preference_field_name }}</th>
+                                            <th class="px-4 py-3 font-normal">{{ value|to_human_readable }}</th>
                                         </tr>
-                                    {% endfor %}
-                                {% endif %}
-                            {% endfor %}
-                        </table>
+                                    {% else %}
+                                        {% for key, item in value.items %}
+                                            <tr class="border">
+                                                <th class="px-4 py-3">{{ key|parse_var }}</th>
+                                                <th class="px-4 py-3 font-normal">{{ item|to_human_readable }}</th>
+                                            </tr>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            </table>
                     {% endfor %}
                 </div>
             </form>
@@ -40,6 +40,5 @@
                class="btn-cancel mt-6">Go
                 Back</a>
         </div>
-
     </div>
 {% endblock content %}
