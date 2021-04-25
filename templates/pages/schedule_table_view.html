@@ -28,20 +28,6 @@
 
 {% block content %}
     <div class="px-8">
-        <div class="flex flex-wrap w-full gap-6 mb-12">
-            {% for section in sections_queryset %}
-                <label for="{{ section.id }}" class="flex items-center cursor-pointer">
-                    <div class="relative">
-                        <input class="sr-only js_session_filter" type="checkbox" id="{{ section.id }}" checked>
-                        <div class="block h-8 bg-gray-600 rounded-full w-14"></div>
-                        <div class="absolute w-6 h-6 transition bg-white rounded-full dot left-1 top-1"></div>
-                    </div>
-                    <div class="ml-1 font-medium text-gray-700">
-                        {{ section }}
-                    </div>
-                </label>
-            {% endfor %}
-        </div>
 
         <table class="w-full table-auto">
             <thead>
@@ -76,6 +62,7 @@
                                     <div class="flex gap-4">
                                         <div @click.away="open = false" class="relative" x-data="{ open: false }">
                                             <button @click="open = !open"
+                                                    onclick="loadEditForm('{% url "schedule:schedule-section-edit" schedule_id preference_set_id section.id %}', '.js_edit_section_{{ section.id }}')"
                                                     class="flex flex-row items-center p-1 m-1 text-lg font-semibold text-left bg-gray-400 rounded-md hover:text-gray-200 focus:text-gray-100 focus:outline-none focus:shadow-outline">
                                                 <span>Edit</span>
                                                 <svg fill="currentColor" viewBox="0 0 20 20"
@@ -96,7 +83,8 @@
                                                 <form action="{% url 'schedule:schedule-section-edit' schedule_id preference_set_id section.id %}"
                                                       method="POST">
                                                     {% csrf_token %}
-                                                    <div class="js_edit_section_{{ section.id }}"></div>
+                                                    <div class="js_edit_section_{{ section.id }}"><img src="https://raw.githubusercontent.com/Codelessly/FlutterLoadingGIFs/master/packages/cupertino_activity_indicator.gif"
+                                                                                                       alt="Loading..." width="25px" height="25px" class="inline">&nbsp;&nbsp;Loading...</div>
                                                     <button class="mt-6 btn-interaction">
                                                         Update
                                                     </button>

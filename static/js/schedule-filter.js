@@ -5,3 +5,4 @@ document.querySelectorAll('.js_session_filter').forEach(item => {
     })
   })
 })
+
