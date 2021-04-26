@@ -4,6 +4,15 @@
 
 Capstone project by Aaron, David, Luke and Mahmoud
 ----
+## Large Scale Overview
+
+System Design:
+
+![System Design Diagram](https://github.com/DrewUniversityCS/CS3/blob/main/documentation_diagrams/SystemDesign.png)
+
+Database Relational Schema:
+
+![Database Relational Schema](https://github.com/DrewUniversityCS/CS3/blob/main/documentation_diagrams/relational_schema_final.png)
 
 ## 📖 Installation
 The app can be installed via Pip or Pipenv depending upon your setup.
@@ -21,7 +30,7 @@ $ python manage.py runserver
 ## Setup
 
 ```
-# Run migrations, install fixtures and create test admin (email: admin@gmail.com pwd: 123)
+# Prepare the database (the command will run all the migrations and create an admin with the following credentials: email: admin@gmail.com pwd: 123)
 $ python manage.py prepdb
 
 # Run a command to install all necessary dependencies for tailwind css
