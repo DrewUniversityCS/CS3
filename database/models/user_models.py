@@ -6,7 +6,6 @@ from database.models.structural_models import SetMembership
 from database.validators import student_id_validator
 
 
-
 class Student(models.Model):
     """
     The student data model.
