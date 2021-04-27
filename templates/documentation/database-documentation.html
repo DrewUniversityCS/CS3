@@ -9,7 +9,8 @@
     </div>
     <div class="flex justify-center">
         <div class="mr-8">
-            <div class="bg-white w-9/12 mx-auto border border-gray-200" x-data="{selected:null}">
+            <div class="bg-white w-9/12 mx-auto border border-gray-200"
+                 x-data="{selected:window.location.hash.replace('#select','')}">
                 <ul class="shadow-box">
                     <li class="relative border-b border-gray-200">
                         <button type="button" class="w-full px-8 py-6 text-left"
@@ -22,8 +23,10 @@
                         <div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
                              x-ref="container1"
                              x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
+
                             <div class="grid grid-cols-2 text-left items-center">
                                 <div class="p-6">
+
                                     <p class>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                                         tempor
                                         incididunt ut
@@ -31,6 +34,7 @@
                                         exercitation
                                         ullamco
                                         laboris nisi ut aliquip ex ea commodo consequat.
+
                                     </p>
                                     <div class="cursor-default"
                                          @click="selected !== 1 ? selected = 1 : selected = null">
@@ -53,7 +57,7 @@
                         </div>
                     </li>
                     <li class="relative border-b border-gray-200">
-                        <button type="button" class="w-full px-8 py-6 text-left"
+                        <button type="button" id="select2" class="w-full px-8 py-6 text-left"
                                 @click="selected !== 2 ? selected = 2 : selected = null">
                             <div class="text-2xl flex items-center justify-between">
                                 <span>Lorem ipsum dolor sit amet</span>
@@ -66,11 +70,13 @@
                             <div class="p-6 text-left">
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                                     incididunt ut
-                                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                    exercitation
                                     ullamco
                                     laboris nisi ut aliquip ex ea commodo consequat.
                                 </p>
-                                <div class="cursor-default" @click="selected !== 2 ? selected = 2 : selected = null">
+                                <div class="cursor-default" id="example"
+                                     @click="selected !== 2 ? selected = 2 : selected = null">
                                         <span>
                                             [
                                         </span>
