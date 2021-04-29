@@ -11,6 +11,6 @@ DATABASES = {
         'HOST': '/cloudsql/rapid-league-302721:us-east1:my-sql-db',
         'USER': 'django',
         'PASSWORD': 'cs3',
-        'NAME': 'django_data'
+        'NAME': 'django_data_2'
     }
 }
