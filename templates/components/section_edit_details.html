@@ -3,7 +3,7 @@
     <div @click.away="open = false" class="relative" x-data="{ open: false }">
         <button @click="open = !open"
                 onclick="loadEditForm('{% url "schedule:schedule-section-edit" schedule_id preference_set_id section.id %}', '.js_edit_section_{{ section.id }}')"
-                class="flex flex-row items-center py-1 px-4 m-1 text-lg font-semibold text-left bg-gray-300 rounded-md hover:text-gray-800 focus:text-gray-100 focus:outline-none focus:shadow-outline hover:shadow-md">
+                class="flex flex-row items-center p-1 m-1 text-lg font-semibold text-left bg-gray-400 rounded-md hover:text-gray-200 focus:text-gray-100 focus:outline-none focus:shadow-outline">
             <span>Edit</span>
             <svg fill="currentColor" viewBox="0 0 20 20"
                  :class="{'rotate-180': open, 'rotate-0': !open}"
@@ -35,7 +35,7 @@
     </div>
     <div @click.away="open = false" class="relative" x-data="{ open: false }">
         <button @click="open = !open"
-                class="flex flex-row items-center py-1 px-4 m-1 text-lg font-semibold text-left bg-gray-300 rounded-md hover:text-gray-800 focus:text-gray-100 focus:outline-none focus:shadow-outline hover:shadow-md">
+                class="flex flex-row items-center p-1 m-1 text-lg font-semibold text-left bg-gray-400 rounded-md hover:text-gray-200 focus:text-gray-100 focus:outline-none focus:shadow-outline">
             <span>Detail</span>
             <svg fill="currentColor" viewBox="0 0 20 20"
                  :class="{'rotate-180': open, 'rotate-0': !open}"
