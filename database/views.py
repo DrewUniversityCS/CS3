@@ -222,7 +222,6 @@ class DynamicModelSetUpdateView(LoginRequiredMixin, DynamicModelMixin, FormView)
         return get_dynamic_model_choice_set_form(self.dynamic_model, "update")
 
     def get_initial(self):
-
         self.object = get_object_or_404(ModelSet, pk=self.kwargs.get('id'))
         return {
             'set': self.object,
