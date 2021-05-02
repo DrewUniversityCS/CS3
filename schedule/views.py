@@ -1,13 +1,15 @@
+import json
+
 from collections import defaultdict
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.views.generic import FormView, TemplateView
+from django.views.generic import FormView, TemplateView, CreateView
 
-from database.models.schedule_models import Section, Timeblock
+from database.models.schedule_models import Section, Timeblock, SectionNote
 from database.models.structural_models import Preference
-from schedule.forms import CheckScheduleForm, ScheduleSectionEditForm
+from schedule.forms import CheckScheduleForm, ScheduleSectionEditForm, SectionNoteForm
 from schedule.functions import check_course_timeblock_preference, check_user_timeblock_preference, \
     check_user_course_preference
 
@@ -198,3 +200,49 @@ class ScheduleSectionEditView(LoginRequiredMixin, FormView):
                 'preference_set_id': self.kwargs['preference_set_id']
             }
         ))
+
+
+class SectionNoteListView(LoginRequiredMixin, TemplateView):
+    template_name = 'components/section_notes.html'
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data.update({
+            'notes': SectionNote.objects.filter(
+                section__id=self.kwargs['section_id'],
+                color=self.kwargs['color']
+            )
+        })
+        return context_data
+
+
+class SectionNoteFormView(LoginRequiredMixin, FormView):
+    template_name = 'pages/section_edit_form.html'
+    form_class = SectionNoteForm
+
+    def get_form_kwargs(self):
+        kwargs = {
+            'initial': self.get_initial(),
+            'prefix': self.get_prefix(),
+        }
+
+        if self.request.method in ('POST', 'PUT'):
+            kwargs.update({
+                'data': json.loads(self.request.body),
+                'files': self.request.FILES,
+            })
+        return kwargs
+
+    def form_valid(self, form):
+        note = form.save(commit=False)
+        note.section = Section.objects.get(id=self.kwargs['section_id'])
+        note.save()
+        return HttpResponseRedirect(reverse(
+            'schedule:section-notes-list',
+            kwargs={
+                'section_id': self.kwargs['section_id'],
+                'color': form.cleaned_data['color']
+            }
+        ))
+
+
