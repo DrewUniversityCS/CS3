@@ -17,7 +17,7 @@ DATABASES = {
         'PORT': '3306',
         'USER': 'django',
         'PASSWORD': 'cs3',
-        'NAME': 'django_data',
+        'NAME': 'django_data_2',
     }
 }
 

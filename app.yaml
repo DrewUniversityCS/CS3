@@ -27,5 +27,5 @@ resources:
   disk_size_gb: 10
 
 env_variables:
-  DJANGO_SETTINGS_MODULE: "config.settings.prod"
+  DJANGO_SETTINGS_MODULE: "config.settings.gcloud_prod"
   DJANGO_SECRET_KEY: "42)%4yx)aa@a=+_c(fn&kf3g19xax+=+a&key4i=!98zyim=8j"
