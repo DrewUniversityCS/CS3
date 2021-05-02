@@ -1,0 +1,19 @@
+<div @click.away="open = false" class="relative" x-data="{ open: false }">
+    {% url "schedule:section-notes-list" section.id color_type as section_note_list_url %}
+    <button @click="open = !open"
+            onclick="loadSectionNoteCreateForm('{{ section_note_list_url }}', '.js_note_{{ color_type }}_section_{{ section.id }}')"
+            class="flex flex-row items-center m-1 text-lg font-semibold text-left bg-gray-300 rounded-md hover:text-gray-800 focus:text-gray-100 focus:outline-none focus:shadow-outline hover:shadow-md h-8 w-8 rounded-full my-auto bg-{% if color_type == 1 %}red{% elif color_type == 2 %}green{% elif color_type == 3 %}blue{% endif %}-600">
+    </button>
+    <div x-show="open" x-transition:enter="transition ease-out duration-100"
+         x-transition:enter-start="transform opacity-0 scale-95"
+         x-transition:enter-end="transform opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-75"
+         x-transition:leave-start="transform opacity-100 scale-100"
+         x-transition:leave-end="transform opacity-0 scale-95"
+         class="absolute right-0 origin-top-right rounded-md shadow-lg bg-white p-4 w-72 z-50">
+        <div class="js_note_{{ color_type }}_section_{{ section.id }}"><img
+                src="https://raw.githubusercontent.com/Codelessly/FlutterLoadingGIFs/master/packages/cupertino_activity_indicator.gif"
+                alt="Loading..." width="25px" height="25px" class="inline">&nbsp;&nbsp;Loading...
+        </div>
+    </div>
+</div>

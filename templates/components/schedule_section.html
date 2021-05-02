@@ -3,12 +3,13 @@
 <div
         class="bg-gray-400 bg-{{ sections|get_item:section.id|get_item:'color' }}-400 m-2 p-3 rounded-md js_section_{{ section.id }}"
 >
-    <div class="flex">
-        <div>
+    <div class="">
+        <div class="pb-2">
             {{ section }}
             {% include "components/section_edit_details.html" %}
         </div>
-        <div class="flex flex-col">
+
+        <div class="flex border-t border-gray-100 pt-2 items-center justify-between">
             <div @click.away="open = false" class="relative" x-data="{ open: false }">
                 {% url "schedule:section-note-create" section.id as section_note_create_form %}
                 <button @click="open = !open"
@@ -30,7 +31,9 @@
                                 alt="Loading..." width="25px" height="25px" class="inline">&nbsp;&nbsp;Loading...
                         </div>
                         <button type="submit" class="mt-6 btn-interaction">
-                            Create
+                            <span class="js_create_note">Create</span> <span class="js_creating_note" hidden><img
+                                src="https://raw.githubusercontent.com/Codelessly/FlutterLoadingGIFs/master/packages/cupertino_activity_indicator.gif"
+                                alt="Loading..." width="25px" height="25px" class="inline">&nbsp;&nbsp;Creating...</span>
                         </button>
                     </form>
                 </div>
