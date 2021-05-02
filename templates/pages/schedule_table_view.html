@@ -46,10 +46,10 @@
             </div>
         </div>
 
-        <table class="w-full table-auto">
+        <table class="w-full table-auto bg-gray-300">
             <thead>
             <tr class="w-full h-20 font-bold text-center text-gray-600 uppercase bg-gray-400">
-                <td class="w-1/6 text-white bg-gray-500">Time</td>
+                <td class="w-1/4 text-white bg-gray-500">Time</td>
                 <td>Monday</td>
                 <td>Tuesday</td>
                 <td>Wednesday</td>
@@ -57,10 +57,10 @@
                 <td>Friday</td>
             </tr>
             {% for time_block in time_blocks %}
-                <tr class="">
+                <tr class="h-28">
                     <td class="p-2 bg-gray-400 border-b border-white">
                         <div class="">
-                            <div class="inline-block w-1/6 m-4 text-center bg-white rounded-lg">
+                            <div class="inline-block w-1/4 m-4 text-center bg-white rounded-lg">
                                 {{ time_block|get_timeblock_letter }}
                             </div>
                             <div class="inline-block">
@@ -72,30 +72,19 @@
                         <td class="h-16 bg-gray-300">
                             {% get_item_assign timeblock_day_dict|get_item:time_block.id day as section_day_list %}
                             {% for section in section_day_list %}
-                                <div
-                                        class="bg-gray-400 bg-{{ sections|get_item:section.id|get_item:'color' }}-400 m-2 p-3 rounded-md js_section_{{ section.id }}"
-                                >
-                                    {{ section }}
-                                    {% include "components/section_edit_details.html" %}
-                                </div>
+                                {% include "components/schedule_section.html" %}
                             {% endfor %}
                         </td>
                     {% endfor %}
                 </tr>
             {% endfor %}
-            </thead>
-        </table>
-
-        <table class="w-full table-auto">
-            <thead>
-
             {% for section_sub_list in sections_without_timeblock %}
-                <tr class="">
+                <tr class="h-28">
                     {% if forloop.counter == 1 %}
                         <td class="p-2 bg-gray-400 border-b border-white w-1/6"
                             rowspan="{{ sections_without_timeblock|length }}">
                             <div class="">
-                                <div class="inline-block">
+                                <div class="inline-block flex justify-center">
                                     Sections Without Timeblock
                                 </div>
                             </div>
@@ -103,12 +92,7 @@
                     {% endif %}
                     {% for section in section_sub_list %}
                         <td class="h-16 bg-gray-300">
-                            <div
-                                    class="bg-gray-400 bg-{{ sections|get_item:section.id|get_item:'color' }}-400 m-2 p-3 rounded-md js_section_{{ section.id }}"
-                            >
-                                {{ section }}
-                                {% include "components/section_edit_details.html" %}
-                            </div>
+                            {% include "components/schedule_section.html" %}
                         </td>
                     {% endfor %}
                 </tr>
