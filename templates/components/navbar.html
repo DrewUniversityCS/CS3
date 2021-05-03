@@ -42,17 +42,27 @@
                          x-transition:leave-start="transform opacity-100 scale-100"
                          x-transition:leave-end="transform opacity-0 scale-95"
                          class="absolute right-0 z-10 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
-                        <div class="px-2 py-2 rounded-md shadow-2xl bg-teal-light">
-                            <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
-                               href="{% url 'pages:crud' %}">Database</a>
-                            <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
-                               href="{% url 'schedule:check-schedule' %}">Scheduling</a>
-                            <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
-                               href="{% url 'dataingest:upload_csv' %}">Upload CSV</a>
-                            <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
-                               href="{% url 'pages:invite' %}">Invite Admin</a>
-                            <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg md:mt-0 hover:text-red-500 focus:text-red-100 focus:outline-none focus:shadow-outline"
-                               href="{% url 'account_logout' %}">Log out</a>
+                        <div class="px-2 py-2 rounded-md shadow-2xl bg-teal-light divide-y border-2 border-teal-dark">
+                            <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                               href="{% url 'pages:crud' %}">
+                                Database<i class="pl-2 fa fa-database" aria-hidden="true"></i>
+                            </a>
+                            <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                               href="{% url 'schedule:check-schedule' %}">
+                                Scheduling<i class="pl-2 fa fa-calendar" aria-hidden="true"></i>
+                            </a>
+                            <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                               href="{% url 'dataingest:upload_csv' %}">
+                                Upload CSV<i class="pl-2 fa fa-file-csv" aria-hidden="true"></i>
+                            </a>
+                            <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent md:mt-0 hover:text-gray-100 focus:text-gray-100 focus:outline-none focus:shadow-outline"
+                               href="{% url 'pages:invite' %}">
+                                Invite Admin<i class="pl-2 fa fa-user-plus" aria-hidden="true"></i>
+                            </a>
+                            <a class="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent md:mt-0 hover:text-red-500 focus:text-red-100 focus:outline-none focus:shadow-outline"
+                               href="{% url 'account_logout' %}">
+                                Log out<i class="pl-2 fa fa-sign-out-alt" aria-hidden="true"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
