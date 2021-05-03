@@ -20,6 +20,7 @@
                         <button type="button" class="w-full h-24 hover:bg-gray-100" @click="expanded = !expanded">
                             {{ object.fields.name }}
                             {{ object.fields.user.first_name }} {{ object.fields.user.last_name }}
+                            {{ object|pref_str }}
                         </button>
                         <div class="mx-auto" id="data">
                             <div x-bind:style="expanded == true ? 'max-height: ' + $refs.container1.scrollHeight + 'px; overflow:hidden;' : 'overflow:hidden;'"
