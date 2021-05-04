@@ -1,0 +1,46 @@
+{% load tags %}
+
+<div
+        class="bg-gray-400 bg-{{ sections|get_item:section.id|get_item:'color' }}-400 m-2 p-3 rounded-md js_section_{{ section.id }}"
+>
+    <div class="">
+        <div class="pb-2">
+            {{ section }}
+            {% include "components/section_edit_details.html" %}
+        </div>
+
+        <div class="flex border-t border-gray-100 pt-2 items-center justify-between">
+            <div @click.away="open = false" class="relative" x-data="{ open: false }">
+                {% url "schedule:section-note-create" section.id as section_note_create_form %}
+                <button @click="open = !open"
+                        onclick="loadSectionNoteCreateForm('{{ section_note_create_form }}', '.js_note_create_section_{{ section.id }}')"
+                        class="flex flex-row items-center py-1 px-4 m-1 text-lg font-semibold text-left bg-gray-300 rounded-md hover:text-gray-800 focus:text-gray-100 focus:outline-none focus:shadow-outline hover:shadow-md">
+                    <span>+</span>
+                </button>
+                <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                     x-transition:enter-start="transform opacity-0 scale-95"
+                     x-transition:enter-end="transform opacity-100 scale-100"
+                     x-transition:leave="transition ease-in duration-75"
+                     x-transition:leave-start="transform opacity-100 scale-100"
+                     x-transition:leave-end="transform opacity-0 scale-95"
+                     class="absolute right-0 origin-top-right rounded-md shadow-lg bg-white p-4 w-72 z-50">
+                    <form onsubmit="CreateSectionNote(event, '{{ section_note_create_form }}', '.js_note_<<color_type>>_section_{{ section.id }}')">
+                        {% csrf_token %}
+                        <div class="js_note_create_section_{{ section.id }}"><img
+                                src="https://raw.githubusercontent.com/Codelessly/FlutterLoadingGIFs/master/packages/cupertino_activity_indicator.gif"
+                                alt="Loading..." width="25px" height="25px" class="inline">&nbsp;&nbsp;Loading...
+                        </div>
+                        <button type="submit" class="mt-6 btn-interaction">
+                            <span class="js_create_note">Create</span> <span class="js_creating_note" hidden><img
+                                src="https://raw.githubusercontent.com/Codelessly/FlutterLoadingGIFs/master/packages/cupertino_activity_indicator.gif"
+                                alt="Loading..." width="25px" height="25px" class="inline">&nbsp;&nbsp;Creating...</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            {% include 'components/note_list.html' with color_type=1 %} {# 1: Red #}
+            {% include 'components/note_list.html' with color_type=2 %} {# 1: Green #}
+            {% include 'components/note_list.html' with color_type=3 %} {# 1: Blue #}
+        </div>
+    </div>
+</div>

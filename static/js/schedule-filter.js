@@ -7,9 +7,7 @@ document.querySelectorAll('.js_session_filter').forEach(item => {
 })
 
 function loadEditForm(url, selector) {
-    console.log('Being Called')
     var formDivs = document.querySelectorAll(selector)
-    console.log(formDivs[0].firstChild.tagName)
     if (formDivs[0].firstChild.tagName == 'IMG' ) {
         fetch(url).then(response => response.text()).then(data => {
             formDivs.forEach(item => {
@@ -34,4 +32,43 @@ function filterSectionCheckBoxes() {
             li[i].style.display = "none";
         }
     }
+}
+
+function loadSectionNoteCreateForm(url, selector) {
+    var formDivs = document.querySelectorAll(selector)
+    console.log(formDivs);
+    if (formDivs[0].firstChild.tagName == 'IMG' ) {
+        fetch(url).then(response => response.text()).then(data => {
+            formDivs.forEach(item => {
+                item.innerHTML = data;
+            })
+        });
+    }
+}
+
+function CreateSectionNote(event, url, color_note_list_selector) {
+    event.preventDefault();
+    var elements = event.target.elements;
+    var obj ={};
+    for(var i = 0 ; i < elements.length ; i++){
+        var item = elements.item(i);
+        obj[item.name] = item.value;
+    }
+    console.log(document.getElementsByName('csrfmiddlewaretoken')[0].value)
+    fetch(url, {
+        method: 'post',
+        body: JSON.stringify(obj),
+        headers: new Headers({"X-CSRFToken": document.getElementsByName('csrfmiddlewaretoken')[0].value, 'content-type': 'application/json'}),
+    })
+    .then(res=> res.text())
+    .then(restext => {
+            event.target.parentNode.style.display = 'none';
+            console.log(restext);
+            var formDivs = document.querySelectorAll(color_note_list_selector.replace('<<color_type>>', obj['color']))
+            formDivs.forEach(item => {
+                item.innerHTML = restext;
+            })
+            event.target.reset();
+        }
+    );
 }

@@ -11,6 +11,12 @@ urlpatterns = [
         'schedule/<slug:schedule_id>/<slug:preference_set_id>/<slug:section_id>',
         schedule.views.ScheduleSectionEditView.as_view(), name='schedule-section-edit'
     ),
+    path(
+        'notes/<slug:section_id>/<slug:color>', schedule.views.SectionNoteListView.as_view(), name='section-notes-list'
+    ),
+    path(
+        'create-note/<slug:section_id>', schedule.views.SectionNoteFormView.as_view(), name='section-note-create'
+    ),
 ]
 
 app_name = 'schedule'

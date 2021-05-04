@@ -65,6 +65,25 @@ class Section(models.Model):
                + " Section " + self.section_id
 
 
+class SectionNote(models.Model):
+    COLOR_RED = 1
+    COLOR_GREEN = 2
+    COLOR_BLUE = 3
+
+    COLOR_CHOICES = [
+        (COLOR_RED, 'Red'),
+        (COLOR_GREEN, 'Green'),
+        (COLOR_BLUE, 'Blue'),
+    ]
+
+    section = models.ForeignKey(Section, on_delete=models.CASCADE, related_name='notes')
+    note = models.TextField()
+    color = models.SmallIntegerField(choices=COLOR_CHOICES)
+
+    def __str__(self):
+        return f'{self.section}-{self.get_color_display()}-{(self.note[:20] + "..") if len(self.note) > 20 else self.note}'
+
+
 class Schedule(models.Model):
     """
     A structural model representing a week's schedule of classes.
