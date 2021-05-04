@@ -129,7 +129,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 # http://whitenoise.evans.io/en/stable/django.html#add-compression-and-caching-support
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # EMAIL
 # ------------------------------------------------------------------------------
