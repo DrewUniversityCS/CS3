@@ -1,3 +1,4 @@
+{% load static %}
 <footer class="relative bg-teal">
     <div class="container pb-4 align-center mx-auto">
         <div class="flex flex-wrap pt-4">
@@ -39,18 +40,5 @@
     </div>
 </footer>
 
-<script type="text/javascript">
-function doClick() {
-       var url = "";
-       var url1 = "";
-
-       if(String(document.location.href).includes("/crud/students/")){
-         var url1 = "{% url 'documentation:database-documentation' %}#select2";
-         document.location.href = url1;
-
-       } else {
-         var url = "{% url 'pages:docs' %}";
-         document.location.href = url;
-       }
-}
+<script src = "{% static 'js/searchDocs.js' %}">
 </script>

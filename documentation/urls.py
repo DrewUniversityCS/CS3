@@ -9,7 +9,6 @@ urlpatterns = [
     path('datasheet-documentation', page_views.datasheetDocView.as_view(), name='datasheet-documentation'),
     path('databaseUp-documentation', page_views.dbUpDocView.as_view(), name='databaseUp-documentation'),
     path('studentData-documentation', page_views.studentDataDocView.as_view(), name='studentData-documentation'),
-    path('helper-documentation', page_views.helperDocView.as_view(), name='helper-documentation'),
 ]
 
 app_name = 'documentation'

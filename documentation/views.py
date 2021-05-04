@@ -22,5 +22,4 @@ class dbUpDocView(LoginRequiredMixin, TemplateView):
 class studentDataDocView(LoginRequiredMixin, TemplateView):
     template_name = 'documentation/studentData-documentation.html'
 
-class helperDocView(LoginRequiredMixin, TemplateView):
-    template_name = 'documentation/helper-documentation.html'
+
