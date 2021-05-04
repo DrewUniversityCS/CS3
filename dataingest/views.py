@@ -59,7 +59,8 @@ class UploadCSVFileSuccessView(LoginRequiredMixin, FormView):
         for obj in deserialize("json", self.request.session.get('objects')):
             objects.append(obj.object)
 
-        context['objects'] = objects
+        context['objects'] = serialize("python", objects, use_natural_foreign_keys=True)
+
         return context
 
     def form_valid(self, form):

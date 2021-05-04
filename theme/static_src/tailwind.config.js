@@ -12,7 +12,7 @@ module.exports = {
      * Set mode to "jit" if you want to generate your styles on-demand as you author your templates;
      * Set mode to "aot" if you want to generate the stylesheet in advance and purge later (aka legacy mode).
      */
-    mode: "jit",
+    mode: "aot",
 
     purge: [
         /**
@@ -47,7 +47,8 @@ module.exports = {
             backgroundImage: theme => ({
                 'no-data': "url('/static/images/signal_heropattern.svg')",
                 'endlessclouds': "url('/static/images/endless-clouds_heropattern.svg')",
-                'foundation': "url('/static/images/aztec_heropattern.svg')"
+                'foundation': "url('/static/images/aztec_heropattern.svg')",
+                'arrows': "url('/static/images/charlie-brown_heropattern.svg')"
             }),
             animation: {
                 'spin-1': 'spin 3s linear infinite',

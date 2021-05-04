@@ -10,9 +10,9 @@
                 {% csrf_token %}
                 <div class="text-lg text-center">Inspecting the following object</div>
                 <div class="py-8 text-xl text-center"><b>{{ object }}</b></div>
-                <div class="w-full max-h-96 overflow-y-scroll px-10">
+                <div class="w-full max-h-96 overflow-y-scroll px-10 bg-arrows border-2 border-gray-300">
                     {% for instance in field_data %}
-                            <table class="mx-auto w-full mt-6">
+                            <table class="mx-auto w-full mt-6 bg-white">
                                 <tr class="border bg-blue-300">
                                     <th class="px-4 py-3">Field</th>
                                     <th class="px-4 py-3">Value</th>

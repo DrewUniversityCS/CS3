@@ -1,4 +1,5 @@
 {% extends '_base.html' %}
+{% load tags %}
 {% load tailwind_filters %}
 
 {% block title %}Confirm Csv Upload{% endblock title %}
@@ -13,9 +14,41 @@
             </thead>
             <tbody class="w-full overflow-y-scroll text-sm font-light text-gray-600">
             {% for object in objects %}
-                <tr class="justify-around w-full h-24 border-b border-gray-200 hover:bg-gray-100">
-                    <td class="w-1/2">
-                        {{ object }}
+                <tr x-data="{expanded:false}"
+                    class="justify-around w-full h-24 border-b border-gray-200">
+                    <td>
+                        <button type="button" class="w-full h-24 hover:bg-gray-100" @click="expanded = !expanded">
+                            {{ object.fields.name }}
+                            {{ object.fields.user.first_name }} {{ object.fields.user.last_name }}
+                            {{ object|pref_str }}
+                        </button>
+                        <div class="mx-auto" id="data">
+                            <div x-bind:style="expanded == true ? 'max-height: ' + $refs.container1.scrollHeight + 'px; overflow:hidden;' : 'overflow:hidden;'"
+                                 x-ref="container1"
+                                 class="relative transition-all duration-700 max-h-0 bg-gray-50">
+                                <table class="my-8 mx-auto bg-white">
+                                    <tr class="border bg-gray-300">
+                                        <th class="px-4 py-3">Field</th>
+                                        <th class="px-4 py-3">Value</th>
+                                    </tr>
+                                    {% for field, value in object.fields.items %}
+                                        {% if not value.items %}
+                                            <tr class="border">
+                                                <th class="px-4 py-3">{{ field|parse_var|clean_preference_field_name }}</th>
+                                                <th class="px-4 py-3 font-normal">{{ value|to_human_readable }}</th>
+                                            </tr>
+                                        {% else %}
+                                            {% for key, item in value.items %}
+                                                <tr class="border">
+                                                    <th class="px-4 py-3">{{ key|parse_var }}</th>
+                                                    <th class="px-4 py-3 font-normal">{{ item|to_human_readable }}</th>
+                                                </tr>
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             {% endfor %}
