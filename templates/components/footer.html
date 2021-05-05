@@ -12,6 +12,10 @@
                     <li class="mt-1">
                         <a href="{% url 'pages:docs' %}" class="text-gray-800 hover:text-gray-100">Docs</a>
                     </li>
+                    <li class="mt-1">
+                        <a href="/" onclick="doClick(); return false;"
+                           class="text-gray-800 hover:text-gray-100">Help Me</a>
+                    </li>
                 </ul>
             </div>
             <div class="w-full text-center md:w-1/2 md:text-center">
@@ -20,10 +24,6 @@
                     <li class="mt-1">
                         <a href="{% url 'account_change_password' %}" class="text-gray-800 hover:text-gray-100">Change
                             Password</a>
-                    </li>
-                    <li class="mt-1">
-                        <a href="https://google.com" onclick="doClick(); return false;"
-                           class="text-gray-800 hover:text-gray-100">Logout</a>
                     </li>
                     <li class="mt-1">
                         <a href="{% url 'account_logout' %}" class="text-gray-800 hover:text-gray-100">Logout</a>
