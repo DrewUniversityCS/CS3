@@ -19,7 +19,10 @@
                     <p class="py-6">Admin will be able to work with inputting data in these steps. There are 2 different
                         tracts to take inputting data into the database. If Admin would prefer to manually input data
                         one by one, follow these steps. If Admin would like to upload data through CSVs only and work
-                        with creating datasets, please refer to the Database documentation [here] for next steps.</p>
+                        with creating datasets, please refer to the Database documentation for next steps [<a
+                                class="hover:underline text-blue-500"
+                                href="{% url 'documentation:databaseUp-documentation' %}">here</a>]
+                    </p>
                     <br>
                 </div>
             </div>
@@ -38,13 +41,14 @@
                                 <span class="ico-plus"></span>
                             </div>
                         </button>
-                        <div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
+                        <div id="select1" class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
                              x-ref="container1"
                              x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
 
                             <div class="text-left items-center">
                                 <div class="p-6">
-
+                                    <img src="{% static 'images/dbm1.gif' %}"
+                                         width="100%" height="100%">
                                     <ul class="list-disc pl-8">
                                         <li class="py-1">
                                             Admin will be able to manually add students to the database
@@ -118,13 +122,14 @@
                                 <span class="ico-plus"></span>
                             </div>
                         </button>
-                        <div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
-                             x-ref="container1"
-                             x-bind:style="selected == 2 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
+                        <div id="select2" class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
+                             x-ref="container2"
+                             x-bind:style="selected == 2 ? 'max-height: ' + $refs.container2.scrollHeight + 'px' : ''">
 
                             <div class="text-left items-center">
                                 <div class="p-6">
-
+                                    <img src="{% static 'images/dbm2.gif' %}"
+                                         width="100%" height="100%">
                                     <ul class="list-disc pl-8">
                                         <li class="py-1">
                                             Admin will be to manually add teachers to the database
@@ -199,13 +204,14 @@
                                 <span class="ico-plus"></span>
                             </div>
                         </button>
-                        <div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
-                             x-ref="container1"
-                             x-bind:style="selected == 3 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
+                        <div id="select3" class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
+                             x-ref="container3"
+                             x-bind:style="selected == 3 ? 'max-height: ' + $refs.container3.scrollHeight + 'px' : ''">
 
                             <div class="text-left items-center">
                                 <div class="p-6">
-
+                                    <img src="{% static 'images/dbm3.gif' %}"
+                                         width="100%" height="100%">
                                     <ul class="list-disc pl-8">
                                         <li class="py-1">
                                             Admin will be able to create a schedule name that will be referenced in the
@@ -275,13 +281,14 @@
                                 <span class="ico-plus"></span>
                             </div>
                         </button>
-                        <div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
-                             x-ref="container1"
-                             x-bind:style="selected == 4 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
+                        <div id="select4" class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
+                             x-ref="container4"
+                             x-bind:style="selected == 4 ? 'max-height: ' + $refs.container4.scrollHeight + 'px' : ''">
 
                             <div class="text-left items-center">
                                 <div class="p-6">
-
+                                    <img src="{% static 'images/dbm4.gif' %}"
+                                         width="100%" height="100%">
                                     <ul class="list-disc pl-8">
                                         <li class="py-1">
                                             Admin will be able to create courses
@@ -355,13 +362,14 @@
                                 <span class="ico-plus"></span>
                             </div>
                         </button>
-                        <div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
-                             x-ref="container1"
-                             x-bind:style="selected == 5 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
+                        <div id="select5" class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
+                             x-ref="container5"
+                             x-bind:style="selected == 5 ? 'max-height: ' + $refs.container5.scrollHeight + 'px' : ''">
 
                             <div class="text-left items-center">
                                 <div class="p-6">
-
+                                    <img src="{% static 'images/dbm5.gif' %}"
+                                         width="100%" height="100%">
                                     <ul class="list-disc pl-8">
                                         <li class="py-1">
                                             Admin will be able to create sections for added courses in the database.
@@ -447,13 +455,14 @@
                                 <span class="ico-plus"></span>
                             </div>
                         </button>
-                        <div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
+                        <div id="select6" class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
                              x-ref="container6"
                              x-bind:style="selected == 6 ? 'max-height: ' + $refs.container6.scrollHeight + 'px' : ''">
 
-                            <div class="text-left items-center">
+                            <div class="items-center text-left ">
                                 <div class="p-6">
-
+                                    <img src="{% static 'images/dbm6.gif' %}"
+                                         class="mx-auto" width="25%" height="25%">
                                     <ul class="list-disc pl-8">
                                         <li class="py-1">
                                             Admin will be able to create user and course preferences to be tested
@@ -599,6 +608,8 @@
                                                 </li>
                                             </ul>
                                         </li>
+                                        <img src="{% static 'images/dbm6b.gif' %}"
+                                             class="mx-auto" width="100%" height="100%">
                                         <li class="py-1">
                                             To view saved preferences, from the Home view, click [Open Database
                                             Interface], hover over [Constraints] box, click [View Saved Preferences]
@@ -646,13 +657,14 @@
                                 <span class="ico-plus"></span>
                             </div>
                         </button>
-                        <div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
-                             x-ref="container1"
-                             x-bind:style="selected == 7 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
+                        <div id="select7" class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
+                             x-ref="container7"
+                             x-bind:style="selected == 7 ? 'max-height: ' + $refs.container7.scrollHeight + 'px' : ''">
 
                             <div class="text-left items-center">
                                 <div class="p-6">
-
+                                    <img src="{% static 'images/dbm7.gif' %}"
+                                         class="mx-auto" width="100%" height="100%">
                                     <ul class="list-disc pl-8">
                                         <li class="py-1">
                                             Admin will be able to aggregate a list of preferences to be included in the
@@ -668,7 +680,8 @@
                                             <ul class="list-disc pl-8">
                                                 <li class="py-1">
                                                     The unique preference set name will be referenced when creating a
-                                                    schedule.
+                                                    schedule [<a class="hover:underline text-blue-500"
+                                                                 href="{% url 'documentation:schedule-documentation' %}">here</a>]
                                                 </li>
                                             </ul>
                                         </li>

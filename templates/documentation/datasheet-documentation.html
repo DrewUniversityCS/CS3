@@ -20,7 +20,8 @@
                         Admin will be able to upload CSV files pertaining to 3 categories: Courses, Students, or
                         Preferences. Uploading a preset CSV will prevent admin from having to manually input respective
                         data one by one. If Admin does not have any CSV files to upload, please refer to the Database
-                        documentation [here] for next steps.
+                        documentation for next steps [<a class="hover:underline text-blue-500" href="{% url 'documentation:database-documentation' %}">here</a>]
+
                     </p>
                     <br>
                 </div>
@@ -29,7 +30,7 @@
     </div>
     <div class="flex justify-center">
         <div class="mr-8">
-            <div class="bg-white w-9/12 mx-auto border border-gray-200" x-data="{selected:null}">
+            <div class="bg-white w-9/12 mx-auto border border-gray-200" x-data="{selected:window.location.hash.replace('#select','')}">
                 <ul class="shadow-box">
                     <li class="relative border-b border-gray-200">
                         <button type="button" class="w-full px-8 py-6 text-left"
@@ -39,12 +40,14 @@
                                 <span class="ico-plus"></span>
                             </div>
                         </button>
-                        <div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
+                        <div id = "select1" class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
                              x-ref="container1"
                              x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
 
                             <div class="text-left items-center">
                                 <div class="p-6">
+                                    <img src="{% static 'images/ds1.gif' %}"
+                                         class="mx-auto" width="30%" height="30%">
                                     <ul class="list-disc pl-8">
                                         <li class="py-1">
                                             Admin will be able to upload a preset CSV of courses. This will prevent
@@ -84,9 +87,9 @@
                                 <span class="ico-plus"></span>
                             </div>
                         </button>
-                        <div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
-                             x-ref="container1"
-                             x-bind:style="selected == 2 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
+                        <div id = "select2" class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
+                             x-ref="container2"
+                             x-bind:style="selected == 2 ? 'max-height: ' + $refs.container2.scrollHeight + 'px' : ''">
 
                             <div class="text-left items-center">
                                 <div class="p-6">
@@ -129,9 +132,9 @@
                                 <span class="ico-plus"></span>
                             </div>
                         </button>
-                        <div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
-                             x-ref="container1"
-                             x-bind:style="selected == 3 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
+                        <div id = "select3" class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
+                             x-ref="container3"
+                             x-bind:style="selected == 3 ? 'max-height: ' + $refs.container3.scrollHeight + 'px' : ''">
 
                             <div class="text-left items-center">
                                 <div class="p-6">
@@ -174,12 +177,14 @@
                                 <span class="ico-plus"></span>
                             </div>
                         </button>
-                        <div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
-                             x-ref="container1"
-                             x-bind:style="selected == 4 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
+                        <div id = "select4" class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
+                             x-ref="container4"
+                             x-bind:style="selected == 4 ? 'max-height: ' + $refs.container4.scrollHeight + 'px' : ''">
 
                             <div class="text-left items-center">
                                 <div class="p-6">
+                                    <img src="{% static 'images/ds4.gif' %}"
+                                         class="mx-auto" width="100%" height="100%">
                                     <ul class="list-disc pl-8">
                                         <li class="py-1">
                                             Admin will be able to view uploaded or inputted data in the [Manage Data]

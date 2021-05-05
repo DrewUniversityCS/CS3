@@ -3,7 +3,7 @@
 {% block title %}Schedule Documentation{% endblock %}
 
 {% block content %}
-<div class="h-screen font-sans text-center">
+<div class="font-sans text-center">
     <div class="pt-12">
         <p class="text-4xl font-bold leading-7 text-purple-600 pb-12">Schedule Documentation</p>
     </div>
@@ -27,7 +27,7 @@
     </div>
     <div class="flex justify-center">
         <div class="mr-8">
-            <div class="bg-white w-9/12 mx-auto border border-gray-200" x-data="{selected:null}">
+            <div class="bg-white w-9/12 mx-auto border border-gray-200" x-data="{selected:window.location.hash.replace('#select','')}">
                 <ul class="shadow-box">
                     <li class="relative border-b border-gray-200">
                         <button type="button" class="w-full px-8 py-6 text-left"
@@ -37,12 +37,14 @@
                                 <span class="ico-plus"></span>
                             </div>
                         </button>
-                        <div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
+                        <div id = "select1" class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
                              x-ref="container1"
                              x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
 
                             <div class="text-left items-center">
                                 <div class="p-6">
+                                    <img src="{% static 'images/s1.gif' %}"
+                                         class="mx-auto" width="40%" height="40%">
                                     <ul class="list-disc pl-8">
                                         <li class="py-1">
                                             Admin will be able to create schedules using created sections, preferences,
@@ -91,23 +93,29 @@
                                 <span class="ico-plus"></span>
                             </div>
                         </button>
-                        <div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
-                             x-ref="container1"
-                             x-bind:style="selected == 2 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
+                        <div id = "select2" class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
+                             x-ref="container2"
+                             x-bind:style="selected == 2 ? 'max-height: ' + $refs.container2.scrollHeight + 'px' : ''">
 
                             <div class="text-left items-center">
                                 <div class="p-6">
+                                    <img src="{% static 'images/s2.gif' %}"
+                                         class="mx-auto" width="100%" height="100%">
                                     <ul class="list-disc pl-8">
                                         <li class="py-1">
                                             Admin will be able to view and edit schedule to account for constraint
                                             integrity. Admin will be able toggle classes on and off
                                         </li>
+                                        <img src="{% static 'images/s2b.gif' %}"
+                                         class="mx-auto" width="100%" height="100%">
                                         <li class="py-1">
                                             If a class time is scheduled in which there exists a violation of a
                                             preference or constraint, the cell will be marked in red. Admin has the
                                             ability to edit the timing of the course and change the class settings as
                                             needed
                                         </li>
+                                        <img src="{% static 'images/s2c.gif' %}"
+                                         class="mx-auto" width="100%" height="100%">
                                         <li class="py-1">
                                             To save view as CSV, click the button at the bottom of the screen
                                         </li>
