@@ -4,13 +4,10 @@
         <div class="flex flex-wrap pt-4">
             {% if user.is_authenticated %}
             <div class="w-full text-center md:w-1/2 md:text-center">
-                <h5 class="mb-6 font-bold uppercase">Help</h5>
+                <h5 class="mb-6 font-bold uppercase">Assistance</h5>
                 <ul class="mb-4">
                     <li class="mt-1">
-                        <a href="/" class="text-gray-800 hover:text-gray-100">Home</a>
-                    </li>
-                    <li class="mt-1">
-                        <a href="{% url 'pages:docs' %}" class="text-gray-800 hover:text-gray-100">Docs</a>
+                        <a href="{% url 'pages:docs' %}" class="text-gray-800 hover:text-gray-100">Documentation</a>
                     </li>
                     <li class="mt-1">
                         <a href="/" onclick="doClick(); return false;"
