@@ -44,8 +44,6 @@
                             <div class="text-left items-center">
                                 <div class="p-6">
                                     <ul class="list-disc pl-8">
-                                        <img src="{% static 'images/s1.gif' %}"
-                                         class="mx-auto" width="500" height="600">
                                         <li class="py-1">
                                             Admin will be able to create schedules using created sections, preferences,
                                             and sets.
@@ -69,18 +67,10 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                    <div class="cursor-default"
-                                         @click="selected !== 1 ? selected = 1 : selected = null">
-                                        <span>
-                                            [
-                                        </span>
-                                        <span class="hover:underline text-blue-500">
-                                            close
-                                        </span>
-                                        <span>
-                                            ]
-                                        </span>
-                                    </div>
+                                    <button class="items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                            @click="selected !== 1 ? selected = 1 : selected = null">
+                                        Close
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -100,38 +90,24 @@
                             <div class="text-left items-center">
                                 <div class="p-6">
                                     <ul class="list-disc pl-8">
-                                        <img src="{% static 'images/s2.gif' %}"
-                                         class="mx-auto" width="900" height="1000">
                                         <li class="py-1">
                                             Admin will be able to view and edit schedule to account for constraint
                                             integrity. Admin will be able toggle classes on and off
                                         </li>
-                                        <img src="{% static 'images/s2b.gif' %}"
-                                         class="mx-auto" width="900" height="1000">
                                         <li class="py-1">
                                             If a class time is scheduled in which there exists a violation of a
                                             preference or constraint, the cell will be marked in red. Admin has the
                                             ability to edit the timing of the course and change the class settings as
                                             needed
                                         </li>
-                                        <img src="{% static 'images/s2c.gif' %}"
-                                         class="mx-auto" width="900" height="1000">
                                         <li class="py-1">
                                             To save view as CSV, click the button at the bottom of the screen
                                         </li>
                                     </ul>
-                                    <div class="cursor-default"
-                                         @click="selected !== 2 ? selected = 2 : selected = null">
-                                        <span>
-                                            [
-                                        </span>
-                                        <span class="hover:underline text-blue-500">
-                                            close
-                                        </span>
-                                        <span>
-                                            ]
-                                        </span>
-                                    </div>
+                                    <button class="items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                            @click="selected !== 2 ? selected = 2 : selected = null">
+                                        Close
+                                    </button>
                                 </div>
                             </div>
                         </div>

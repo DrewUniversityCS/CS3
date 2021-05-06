@@ -30,7 +30,7 @@
     </div>
     <div class="flex justify-center">
         <div class="mr-8">
-            <div class="bg-white w-9/12 mx-auto border border-gray-200"
+            <div class="bg-white w-10/12 mx-auto border border-gray-200"
                  x-data="{selected:window.location.hash.replace('#select','')}">
                 <ul class="shadow-box">
                     <li class="relative border-b border-gray-200">
@@ -47,8 +47,6 @@
 
                             <div class="text-left items-center">
                                 <div class="p-6">
-                                    <img src="{% static 'images/dbm1.gif' %}"
-                                         class="mx-auto" width="800" height="900">
                                     <ul class="list-disc pl-8">
                                         <li class="py-1">
                                             Admin will be able to manually add students to the database
@@ -83,13 +81,19 @@
                                             appear in the table to the right
                                             <ul class="list-disc pl-8">
                                                 <li class="py-1">
-                                                    View student - click [eye]
+                                                    View student - click <a><i
+                                                        class="mr-2 transform fa fa-eye"
+                                                        aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
-                                                    Edit student - click [clipboard]
+                                                    Edit student - click <a><i
+                                    class="mr-2 transform fa fa-edit"
+                                    aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
-                                                    Delete student - click [trash can]
+                                                    Delete student - click <a><i
+                                    class="mr-2 transform fa fa-trash"
+                                    aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
                                                     To search for a student, Admin may use the search bar above the
@@ -98,18 +102,10 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                    <div class="cursor-default"
-                                         @click="selected !== 1 ? selected = 1 : selected = null">
-                                        <span>
-                                            [
-                                        </span>
-                                        <span class="hover:underline text-blue-500">
-                                            close
-                                        </span>
-                                        <span>
-                                            ]
-                                        </span>
-                                    </div>
+                                    <button class="items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                            @click="selected !== 1 ? selected = 1 : selected = null">
+                                        Close
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -128,8 +124,6 @@
 
                             <div class="text-left items-center">
                                 <div class="p-6">
-                                    <img src="{% static 'images/dbm2.gif' %}"
-                                         class = "mx-auto" width="800" height="900">
                                     <ul class="list-disc pl-8">
                                         <li class="py-1">
                                             Admin will be to manually add teachers to the database
@@ -165,13 +159,19 @@
                                             appear in the table to the right
                                             <ul class="list-disc pl-8">
                                                 <li class="py-1">
-                                                    View student - click [eye]
+                                                    View student - click <a><i
+                                                        class="mr-2 transform fa fa-eye"
+                                                        aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
-                                                    Edit student - click [clipboard]
+                                                    Edit student - click <a><i
+                                    class="mr-2 transform fa fa-edit"
+                                    aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
-                                                    Delete student - click [trash can]
+                                                    Delete student - click <a><i
+                                    class="mr-2 transform fa fa-trash"
+                                    aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
                                                     To search for a student, Admin may use the search bar above the
@@ -180,18 +180,10 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                    <div class="cursor-default"
-                                         @click="selected !== 2 ? selected = 2 : selected = null">
-                                        <span>
-                                            [
-                                        </span>
-                                        <span class="hover:underline text-blue-500">
-                                            close
-                                        </span>
-                                        <span>
-                                            ]
-                                        </span>
-                                    </div>
+                                    <button class="items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                            @click="selected !== 2 ? selected = 2 : selected = null">
+                                        Close
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -210,8 +202,6 @@
 
                             <div class="text-left items-center">
                                 <div class="p-6">
-                                    <img src="{% static 'images/dbm3.gif' %}"
-                                         class = "mx-auto" width="800" height="900">
                                     <ul class="list-disc pl-8">
                                         <li class="py-1">
                                             Admin will be able to create a schedule name that will be referenced in the
@@ -242,13 +232,19 @@
                                             appear in the table to the right
                                             <ul class="list-disc pl-8">
                                                 <li class="py-1">
-                                                    View schedule name - click [eye]
+                                                    View schedule name - click <a><i
+                                                        class="mr-2 transform fa fa-eye"
+                                                        aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
-                                                    Edit schedule name- click [clipboard]
+                                                    Edit schedule name- click <a><i
+                                    class="mr-2 transform fa fa-edit"
+                                    aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
-                                                    Delete schedule name - click [trash can]
+                                                    Delete schedule name - click <a><i
+                                    class="mr-2 transform fa fa-trash"
+                                    aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
                                                     To search for a schedule name, Admin may use the search bar above
@@ -257,18 +253,10 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                    <div class="cursor-default"
-                                         @click="selected !== 3 ? selected = 3 : selected = null">
-                                        <span>
-                                            [
-                                        </span>
-                                        <span class="hover:underline text-blue-500">
-                                            close
-                                        </span>
-                                        <span>
-                                            ]
-                                        </span>
-                                    </div>
+                                    <button class="items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                            @click="selected !== 3 ? selected = 3 : selected = null">
+                                        Close
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -287,8 +275,6 @@
 
                             <div class="text-left items-center">
                                 <div class="p-6">
-                                    <img src="{% static 'images/dbm4.gif' %}"
-                                         class = "mx-auto" width="800" height="900">
                                     <ul class="list-disc pl-8">
                                         <li class="py-1">
                                             Admin will be able to create courses
@@ -323,13 +309,19 @@
                                             will appear in the table to the right
                                             <ul class="list-disc pl-8">
                                                 <li class="py-1">
-                                                    View course - click [eye]
+                                                    View course - click <a><i
+                                                        class="mr-2 transform fa fa-eye"
+                                                        aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
-                                                    Edit course - click [clipboard]
+                                                    Edit course - click <a><i
+                                    class="mr-2 transform fa fa-edit"
+                                    aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
-                                                    Delete course - click [trash can]
+                                                    Delete course - click <a><i
+                                    class="mr-2 transform fa fa-trash"
+                                    aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
                                                     To search for a course, Admin may use the search bar above the table
@@ -338,18 +330,10 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                    <div class="cursor-default"
-                                         @click="selected !== 4 ? selected = 4 : selected = null">
-                                        <span>
-                                            [
-                                        </span>
-                                        <span class="hover:underline text-blue-500">
-                                            close
-                                        </span>
-                                        <span>
-                                            ]
-                                        </span>
-                                    </div>
+                                    <button class="items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                            @click="selected !== 4 ? selected = 4 : selected = null">
+                                        Close
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -368,8 +352,6 @@
 
                             <div class="text-left items-center">
                                 <div class="p-6">
-                                    <img src="{% static 'images/dbm5.gif' %}"
-                                         class = "mx-auto" width="800" height="900">
                                     <ul class="list-disc pl-8">
                                         <li class="py-1">
                                             Admin will be able to create sections for added courses in the database.
@@ -415,13 +397,19 @@
                                             will appear in the table to the right
                                             <ul class="list-disc pl-8">
                                                 <li class="py-1">
-                                                    View section - click [eye]
+                                                    View section - click <a><i
+                                                        class="mr-2 transform fa fa-eye"
+                                                        aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
-                                                    Edit section - click [clipboard]
+                                                    Edit section - click <a><i
+                                    class="mr-2 transform fa fa-edit"
+                                    aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
-                                                    Delete section - click [trash can]
+                                                    Delete section - click <a><i
+                                    class="mr-2 transform fa fa-trash"
+                                    aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
                                                     To search for a section, Admin may use the search bar above the
@@ -431,18 +419,10 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                    <div class="cursor-default"
-                                         @click="selected !== 5 ? selected = 5 : selected = null">
-                                        <span>
-                                            [
-                                        </span>
-                                        <span class="hover:underline text-blue-500">
-                                            close
-                                        </span>
-                                        <span>
-                                            ]
-                                        </span>
-                                    </div>
+                                    <button class="items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                            @click="selected !== 5 ? selected = 5 : selected = null">
+                                        Close
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -461,8 +441,6 @@
 
                             <div class="items-center text-left ">
                                 <div class="p-6">
-                                    <img src="{% static 'images/dbm6.gif' %}"
-                                         class="mx-auto" width="300" height="400">
                                     <ul class="list-disc pl-8">
                                         <li class="py-1">
                                             Admin will be able to create user and course preferences to be tested
@@ -608,8 +586,6 @@
                                                 </li>
                                             </ul>
                                         </li>
-                                        <img src="{% static 'images/dbm6b.gif' %}"
-                                             class="mx-auto" width="800" height="900">
                                         <li class="py-1">
                                             To view saved preferences, from the Home view, click [Open Database
                                             Interface], hover over [Constraints] box, click [View Saved Preferences]
@@ -618,13 +594,19 @@
                                             Created preferences will appear in the table
                                             <ul class="list-disc pl-8">
                                                 <li class="py-1">
-                                                    View preference - click [eye]
+                                                    View preference - click <a><i
+                                                        class="mr-2 transform fa fa-eye"
+                                                        aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
-                                                    Edit preference - click [clipboard]
+                                                    Edit preference - click <a><i
+                                    class="mr-2 transform fa fa-edit"
+                                    aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
-                                                    Delete preference - click [trash can]
+                                                    Delete preference - click <a><i
+                                    class="mr-2 transform fa fa-trash"
+                                    aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
                                                     To search for a section, Admin may use the search bar above the
@@ -633,18 +615,10 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                    <div class="cursor-default"
-                                         @click="selected !== 6 ? selected = 6 : selected = null">
-                                        <span>
-                                            [
-                                        </span>
-                                        <span class="hover:underline text-blue-500">
-                                            close
-                                        </span>
-                                        <span>
-                                            ]
-                                        </span>
-                                    </div>
+                                    <button class="items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                            @click="selected !== 6 ? selected = 6 : selected = null">
+                                        Close
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -663,8 +637,6 @@
 
                             <div class="text-left items-center">
                                 <div class="p-6">
-                                    <img src="{% static 'images/dbm7.gif' %}"
-                                         class="mx-auto" width="800" height="900">
                                     <ul class="list-disc pl-8">
                                         <li class="py-1">
                                             Admin will be able to aggregate a list of preferences to be included in the
@@ -693,16 +665,24 @@
                                             sections will appear in the table to the right
                                             <ul class="list-disc pl-8">
                                                 <li class="py-1">
-                                                    View preference sets - click [eye]
+                                                    View preference sets - click <a><i
+                                                        class="mr-2 transform fa fa-eye"
+                                                        aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
-                                                    Edit preference sets - click [clipboard]
+                                                    Edit preference sets - click <a><i
+                                    class="mr-2 transform fa fa-edit"
+                                    aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
-                                                    Delete preference sets - click [trash can]
+                                                    Delete preference sets - click <a><i
+                                    class="mr-2 transform fa fa-trash"
+                                    aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
-                                                    Download preference set - click [down arrow]
+                                                    Download preference set - click <a><i
+                                    class="mr-2 transform fa fa-download
+                                    aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
                                                     To search for a set, Admin may use the search bar above the table or
@@ -711,18 +691,10 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                    <div class="cursor-default"
-                                         @click="selected !== 7 ? selected = 7 : selected = null">
-                                        <span>
-                                            [
-                                        </span>
-                                        <span class="hover:underline text-blue-500">
-                                            close
-                                        </span>
-                                        <span>
-                                            ]
-                                        </span>
-                                    </div>
+                                    <button class="items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                            @click="selected !== 7 ? selected = 7 : selected = null">
+                                        Close
+                                    </button>
                                 </div>
                             </div>
                         </div>

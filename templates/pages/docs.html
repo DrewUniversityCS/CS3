@@ -1,5 +1,5 @@
 {% extends '_base.html' %}
-
+{% load static %}
 {% block title %}Docs page{% endblock %}
 
 {% block content %}
@@ -40,7 +40,9 @@
                     review the following overview of the sections to determine
                     where to start. Directions to navigate to required sections
                     will start from the home page. The following sections
-                    will be displayed on the home screen for the Admin.</p>
+                    will be displayed on the home screen for the Admin. To download the full documentation,
+                    click [<a class="text-blue-500 hover:underline" href="/static/documents/DocsPage.pdf" download="DocsPage.pdf">download</a>]
+                </p>
                 <br>
                 <h1 class="py-2 text-2xl">Data Sheets </h1>
                 <ul class="list-disc pl-8">

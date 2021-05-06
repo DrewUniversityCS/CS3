@@ -45,8 +45,6 @@
 
                             <div class="text-left items-center">
                                 <div class="p-6">
-                                    <img src="{% static 'images/dbu1.gif' %}"
-                                         class="mx-auto" width="400" height="500">
                                     <ul class="list-disc pl-8">
                                         <li class="py-1">
                                             Admin will be able to upload a preset CSV of courses. This will prevent
@@ -62,18 +60,10 @@
                                             corresponding file to its category
                                         </li>
                                     </ul>
-                                    <div class="cursor-default"
-                                         @click="selected !== 1 ? selected = 1 : selected = null">
-                                        <span>
-                                            [
-                                        </span>
-                                        <span class="hover:underline text-blue-500">
-                                            close
-                                        </span>
-                                        <span>
-                                            ]
-                                        </span>
-                                    </div>
+                                    <button class="items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                            @click="selected !== 1 ? selected = 1 : selected = null">
+                                        Close
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -107,18 +97,10 @@
                                             corresponding file to its category
                                         </li>
                                     </ul>
-                                    <div class="cursor-default"
-                                         @click="selected !== 2 ? selected = 2 : selected = null">
-                                        <span>
-                                            [
-                                        </span>
-                                        <span class="hover:underline text-blue-500">
-                                            close
-                                        </span>
-                                        <span>
-                                            ]
-                                        </span>
-                                    </div>
+                                    <button class="items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                            @click="selected !== 2 ? selected = 2 : selected = null">
+                                        Close
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -152,18 +134,10 @@
                                             corresponding file to its category
                                         </li>
                                     </ul>
-                                    <div class="cursor-default"
-                                         @click="selected !== 3 ? selected = 3 : selected = null">
-                                        <span>
-                                            [
-                                        </span>
-                                        <span class="hover:underline text-blue-500">
-                                            close
-                                        </span>
-                                        <span>
-                                            ]
-                                        </span>
-                                    </div>
+                                    <button class="items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                            @click="selected !== 3 ? selected = 3 : selected = null">
+                                        Close
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -182,8 +156,6 @@
 
                             <div class="text-left items-center">
                                 <div class="p-6">
-                                    <img src="{% static 'images/dbu4.gif' %}"
-                                         class="mx-auto" width="900" height="1000">
                                     <ul class="list-disc pl-8">
                                         <li class="py-1">
                                             Admin will be able to view uploaded or inputted data in the [Manage Data]
@@ -194,16 +166,24 @@
                                             [Category] column will describe the nature of the data.
                                             <ul class="list-disc pl-8">
                                                 <li class="py-1">
-                                                    View data - click [eye]
+                                                    View data - click <a><i
+                                                        class="mr-2 transform fa fa-eye"
+                                                        aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
-                                                    Edit data - click [clipboard]
+                                                    Edit data - click <a><i
+                                    class="mr-2 transform fa fa-edit"
+                                    aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
-                                                    Delete data - click [trash can]
+                                                    Delete data - click <a><i
+                                    class="mr-2 transform fa fa-trash"
+                                    aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
-                                                    Download data as CSV - click [down arrow]
+                                                    Download data as CSV - click <a><i
+                                    class="mr-2 transform fa fa-download
+                                    aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
                                                     Search for a file, Admin may use the search bar in the top left hand
@@ -217,18 +197,10 @@
                                             of the table.
                                         </li>
                                     </ul>
-                                    <div class="cursor-default"
-                                         @click="selected !== 4 ? selected = 4 : selected = null">
-                                        <span>
-                                            [
-                                        </span>
-                                        <span class="hover:underline text-blue-500">
-                                            close
-                                        </span>
-                                        <span>
-                                            ]
-                                        </span>
-                                    </div>
+                                    <button class="items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                            @click="selected !== 4 ? selected = 4 : selected = null">
+                                        Close
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -266,18 +238,10 @@
                                                 href="{% url 'documentation:database-documentation' %}#select6">here</a>]
                                         </li>
                                     </ul>
-                                    <div class="cursor-default"
-                                         @click="selected !== 5 ? selected = 5 : selected = null">
-                                        <span>
-                                            [
-                                        </span>
-                                        <span class="hover:underline text-blue-500">
-                                            close
-                                        </span>
-                                        <span>
-                                            ]
-                                        </span>
-                                    </div>
+                                    <button class="items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                            @click="selected !== 5 ? selected = 5 : selected = null">
+                                        Close
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -296,8 +260,6 @@
 
                             <div class="text-left items-center">
                                 <div class="p-6">
-                                    <img src="{% static 'images/dbm6.gif' %}"
-                                         class="mx-auto" width="300" height="400">
                                     <ul class="list-disc pl-8">
                                         <li class="py-1">
                                             Admin will be able to create a schedule name that will be referenced in
@@ -328,13 +290,19 @@
                                             schedule name will appear in the table to the right
                                             <ul class="list-disc pl-8">
                                                 <li class="py-1">
-                                                    View schedule name - click [eye]
+                                                    View schedule name - click <a><i
+                                                        class="mr-2 transform fa fa-eye"
+                                                        aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
-                                                    Edit schedule name - click [clipboard]
+                                                    Edit schedule name - click <a><i
+                                    class="mr-2 transform fa fa-edit"
+                                    aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
-                                                    Delete schedule name - click [trash can]
+                                                    Delete schedule name - click <a><i
+                                    class="mr-2 transform fa fa-trash"
+                                    aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
                                                     To search for a schedule name, Admin may use the search bar above
@@ -344,18 +312,10 @@
                                         </li>
 
                                     </ul>
-                                    <div class="cursor-default"
-                                         @click="selected !== 6 ? selected = 6 : selected = null">
-                                        <span>
-                                            [
-                                        </span>
-                                        <span class="hover:underline text-blue-500">
-                                            close
-                                        </span>
-                                        <span>
-                                            ]
-                                        </span>
-                                    </div>
+                                    <button class="items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                            @click="selected !== 6 ? selected = 6 : selected = null">
+                                        Close
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -374,8 +334,6 @@
 
                             <div class="text-left items-center">
                                 <div class="p-6">
-                                    <img src="{% static 'images/dbu7.gif' %}"
-                                         class="mx-auto" width="900" height="1000">
                                     <ul class="list-disc pl-8">
                                         <li class="py-1">
                                             Admin will be able to add courses within the database to a set of courses.
@@ -412,13 +370,19 @@
                                             sets will appear in the table to the right
                                             <ul class="list-disc pl-8">
                                                 <li class="py-1">
-                                                    View course set - click [eye]
+                                                    View course set - click <a><i
+                                                        class="mr-2 transform fa fa-eye"
+                                                        aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
-                                                    Edit course set - click [clipboard]
+                                                    Edit course set - click <a><i
+                                    class="mr-2 transform fa fa-edit"
+                                    aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
-                                                    Delete course set - click [trash can]
+                                                    Delete course set - click <a><i
+                                    class="mr-2 transform fa fa-trash"
+                                    aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
                                                     Download course set - click [downward arrow]
@@ -431,24 +395,16 @@
                                         </li>
 
                                     </ul>
-                                    <div class="cursor-default"
-                                         @click="selected !== 7 ? selected = 7 : selected = null">
-                                        <span>
-                                            [
-                                        </span>
-                                        <span class="hover:underline text-blue-500">
-                                            close
-                                        </span>
-                                        <span>
-                                            ]
-                                        </span>
-                                    </div>
+                                    <button class="items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                            @click="selected !== 7 ? selected = 7 : selected = null">
+                                        Close
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </li>
                     <li class="relative border-b border-gray-200">
-                        <button type="button" class="w-full px-8 py-6 text-left"
+                        <button type="button" id="help" class="w-full px-8 py-6 text-left"
                                 @click="selected !== 8 ? selected = 8 : selected = null">
                             <div class="text-2xl flex items-center justify-between">
                                 <span>Step 8. Create Sections </span>
@@ -458,11 +414,8 @@
                         <div id="select8" class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
                              x-ref="container8"
                              x-bind:style="selected == 8 ? 'max-height: ' + $refs.container8.scrollHeight + 'px' : ''">
-
                             <div class="text-left items-center">
                                 <div class="p-6">
-                                    <img src="{% static 'images/dbu8.gif' %}"
-                                         class="mx-auto" width="300" height="300">
                                     <ul class="list-disc pl-8">
                                         <li class="py-1">
                                             Admin will be able to create sections for added courses in the database in
@@ -502,18 +455,10 @@
                                             Save newly created sections in bulk by clicking the [Create Sections] Button
                                         </li>
                                     </ul>
-                                    <div class="cursor-default"
-                                         @click="selected !== 8 ? selected = 8 : selected = null">
-                                        <span>
-                                            [
-                                        </span>
-                                        <span class="hover:underline text-blue-500">
-                                            close
-                                        </span>
-                                        <span>
-                                            ]
-                                        </span>
-                                    </div>
+                                    <button class="items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                            @click="selected !== 8 ? selected = 8 : selected = null">
+                                        Close
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -532,8 +477,6 @@
 
                             <div class="text-left items-center">
                                 <div class="p-6">
-                                    <img src="{% static 'images/dbu9.gif' %}"
-                                         class="mx-auto" width="900" height="1000">
                                     <ul class="list-disc pl-8">
                                         <li class="py-1">
                                             Admin will be able to aggregate a list of preferences to be included in the
@@ -557,7 +500,9 @@
                                         </li>
                                         <li class="py-1">
                                             Create a unique set name under [New Set Name]. The unique preference set
-                                            name will be referenced when creating a schedule [<a class="hover:underline text-blue-500" href="{% url 'documentation:schedule-documentation' %}">here</a>]
+                                            name will be referenced when creating a schedule [<a
+                                                class="hover:underline text-blue-500"
+                                                href="{% url 'documentation:schedule-documentation' %}">here</a>]
                                         </li>
                                         <li class="py-1">
                                             Check off all relevant preferences to be added into the set
@@ -567,16 +512,24 @@
                                             sections will appear in the table to the right
                                             <ul class="list-disc pl-8">
                                                 <li class="py-1">
-                                                    View preference sets - click [eye]
+                                                    View preference sets - click <a><i
+                                                        class="mr-2 transform fa fa-eye"
+                                                        aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
-                                                    Edit preference sets - click [clipboard]
+                                                    Edit preference sets - click <a><i
+                                    class="mr-2 transform fa fa-edit"
+                                    aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
-                                                    Delete preference sets - click [trash can]
+                                                    Delete preference sets - click <a><i
+                                    class="mr-2 transform fa fa-trash"
+                                    aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
-                                                    Download preference set - click [down arrow]
+                                                    Download preference set - click <a><i
+                                    class="mr-2 transform fa fa-download
+                                    aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="py-1">
                                                     To search for a set, Admin may use the search bar above the table or
@@ -585,18 +538,10 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                    <div class="cursor-default"
-                                         @click="selected !== 9 ? selected = 9 : selected = null">
-                                        <span>
-                                            [
-                                        </span>
-                                        <span class="hover:underline text-blue-500">
-                                            close
-                                        </span>
-                                        <span>
-                                            ]
-                                        </span>
-                                    </div>
+                                    <button class="items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                            @click="selected !== 9 ? selected = 9 : selected = null">
+                                        Close
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -606,5 +551,6 @@
         </div>
     </div>
 </div>
+
 
 {% endblock content %}

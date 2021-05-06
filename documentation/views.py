@@ -7,19 +7,19 @@ from datacollection.forms import PreferencesFormForm
 from datacollection.models import PreferenceForm
 
 
-class scheduleDocView(LoginRequiredMixin, TemplateView):
+class ScheduleDocView(LoginRequiredMixin, TemplateView):
     template_name = 'documentation/schedule-documentation.html'
 
 class DBDocView(LoginRequiredMixin, TemplateView):
     template_name = 'documentation/database-documentation.html'
 
-class datasheetDocView(LoginRequiredMixin, TemplateView):
+class DatasheetDocView(LoginRequiredMixin, TemplateView):
     template_name = 'documentation/datasheet-documentation.html'
 
-class dbUpDocView(LoginRequiredMixin, TemplateView):
+class DbUpDocView(LoginRequiredMixin, TemplateView):
     template_name = 'documentation/databaseUp-documentation.html'
 
-class studentDataDocView(LoginRequiredMixin, TemplateView):
+class StudentDataDocView(LoginRequiredMixin, TemplateView):
     template_name = 'documentation/studentData-documentation.html'
 
 

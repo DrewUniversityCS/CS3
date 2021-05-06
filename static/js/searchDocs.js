@@ -24,7 +24,7 @@ function doClick() {
        } else if(String(document.location.href).includes("/set-crud/courses")){
          document.location.href = "../../databaseUp-documentation#select7";
        } else if(String(document.location.href).includes("/set-crud/students")){
-         document.location.href = "../../databaseUp-documentation";
+         document.location.href = "../../studentData-documentation";
        } else if(String(document.location.href).includes("/set-crud/preferences")){
          document.location.href = "../../databaseUp-documentation#select9";
        } else if(String(document.location.href).includes("/check-schedule")){
