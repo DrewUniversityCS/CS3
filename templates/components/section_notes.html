@@ -1,0 +1,16 @@
+{% if notes %}
+    {% if color_type == '1' %}
+        <div class="flex"><div class="h-4 w-4 rounded-full my-auto bg-red-600"></div>&nbsp;Red Notes:</div>
+    {% elif color_type == '2' %}
+        <div class="flex"><div class="h-4 w-4 rounded-full my-auto bg-green-600"></div>&nbsp;Green Notes:</div>
+    {% elif color_type == '3' %}
+        <div class="flex"><div class="h-4 w-4 rounded-full my-auto bg-blue-600"></div>&nbsp;Blue Notes:</div>
+    {% endif %}
+{% endif %}
+<ul class="list-decimal list-inside">
+    {% for note in notes %}
+        <li>{{ note.note }}</li>
+    {% empty %}
+        No Notes Yet!
+    {% endfor %}
+</ul>

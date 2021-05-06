@@ -11,7 +11,6 @@ from database.models.schedule_models import Schedule, Course
 from database.models.structural_models import ModelSet, SetMembership
 from database.models.user_models import Teacher, Student
 
-
 tailwind_dropdown = Select(attrs={'class': 'w-full inset-y-0 right-0 flex items-center text-gray-700'})
 
 label_dict = {
@@ -59,16 +58,18 @@ def make_user_form(dynamic_model):
             last_name = cleaned_data.get("last_name")
             first_name = cleaned_data.get("first_name")
             email = cleaned_data.get("email")
+
             if any(i.isdigit() for i in first_name):
                 raise ValidationError("First Name must contain only characters.")
             elif any(i.isdigit() for i in last_name):
                 raise ValidationError("Last Name must contain only characters.")
-            elif BaseUser.objects.filter(username=email).exists():
-                raise ValidationError("Email is already registered. Please use a different email.")
-            elif BaseUser.objects.filter(email=email).exists():
-                raise ValidationError("Email is already registered. Please use a different email.")
-            elif BaseUser.objects.filter(username=email.split('@')[0]).exists():
-                raise ValidationError("Email is already registered. Please use a different email.")
+            if not self.instance.id:
+                if BaseUser.objects.filter(username=email).exists():
+                    raise ValidationError("Email is already registered. Please use a different email.")
+                elif BaseUser.objects.filter(email=email).exists():
+                    raise ValidationError("Email is already registered. Please use a different email.")
+                elif BaseUser.objects.filter(username=email.split('@')[0]).exists():
+                    raise ValidationError("Email is already registered. Please use a different email.")
             return cleaned_data
 
         def save(self, **kwargs):

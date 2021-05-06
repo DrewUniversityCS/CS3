@@ -1,15 +1,15 @@
 import string
 
 import django.utils.timezone as timezone
-
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.utils.crypto import get_random_string
 
 from database.enums import SEASONS, POSSIBLE_HOURS, POSSIBLE_MINUTES
 from database.models.structural_models import SetMembership
-from database.validators import year_validator
 from database.validators import max_integer_validator
+from database.validators import year_validator
+
 
 class Course(models.Model):
     """
@@ -65,12 +65,31 @@ class Section(models.Model):
                + " Section " + self.section_id
 
 
+class SectionNote(models.Model):
+    COLOR_RED = 1
+    COLOR_GREEN = 2
+    COLOR_BLUE = 3
+
+    COLOR_CHOICES = [
+        (COLOR_RED, 'Red'),
+        (COLOR_GREEN, 'Green'),
+        (COLOR_BLUE, 'Blue'),
+    ]
+
+    section = models.ForeignKey(Section, on_delete=models.CASCADE, related_name='notes')
+    note = models.TextField()
+    color = models.SmallIntegerField(choices=COLOR_CHOICES)
+
+    def __str__(self):
+        return f'{self.section}-{self.get_color_display()}-{(self.note[:20] + "..") if len(self.note) > 20 else self.note}'
+
+
 class Schedule(models.Model):
     """
     A structural model representing a week's schedule of classes.
     """
     name = models.CharField(max_length=256, blank=False)
-    year = models.IntegerField(default = timezone.now().year, null=False, blank=False, validators=[year_validator])
+    year = models.IntegerField(default=timezone.now().year, null=False, blank=False, validators=[year_validator])
     season = models.CharField(choices=SEASONS, max_length=50)
 
     def __str__(self):

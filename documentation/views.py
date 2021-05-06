@@ -1,10 +1,5 @@
-from allauth.account.forms import SignupForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
-from django.views.generic import TemplateView, FormView
-
-from datacollection.forms import PreferencesFormForm
-from datacollection.models import PreferenceForm
+from django.views.generic import TemplateView
 
 
 class ScheduleDocView(LoginRequiredMixin, TemplateView):

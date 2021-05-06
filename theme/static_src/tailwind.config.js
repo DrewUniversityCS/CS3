@@ -47,7 +47,8 @@ module.exports = {
             backgroundImage: theme => ({
                 'no-data': "url('/static/images/signal_heropattern.svg')",
                 'endlessclouds': "url('/static/images/endless-clouds_heropattern.svg')",
-                'foundation': "url('/static/images/aztec_heropattern.svg')"
+                'foundation': "url('/static/images/aztec_heropattern.svg')",
+                'arrows': "url('/static/images/charlie-brown_heropattern.svg')"
             }),
             animation: {
                 'spin-1': 'spin 3s linear infinite',

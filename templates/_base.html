@@ -1,3 +1,4 @@
+{% load tailwind_tags %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -9,16 +10,11 @@
     <meta name="description" content="Course scheduling and registration.">
     <meta name="author" content="">
     <link rel="shortcut icon" type="image/svg" href="{% static 'images/cs3_logo.svg' %}">
+    {% tailwind_css %}
     {% block styles %}
         <link
                 rel="stylesheet"
-                href="{% static 'css/styles.css' %}"
-                type="text/css"
-        />
-
-        <link
-                rel="stylesheet"
-                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         >
     {% endblock %}
 
@@ -32,12 +28,17 @@
 
 </head>
 
-<style>
-    @import url(http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900);
+{% block extra_styles %}
+{% endblock %}
 
+<style>
     html {
         scroll-behavior: smooth;
         font-family: "Roboto", sans-serif;
+    }
+    /* horrible horrible hack to resolve conflicting styling between django-tailwind and crispy-tailwind */
+    .fill-current {
+        visibility: hidden;
     }
 </style>
 
@@ -50,7 +51,7 @@
 
 <div class="min-h-screen py-12 bg-gray-200 bg-endlessclouds">
     {% block content %}
-        <p>Default content...</p>
+        <p class="mb-3">Default content...</p>
     {% endblock content %}
 </div>
 

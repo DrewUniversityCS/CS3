@@ -1,11 +1,36 @@
 from django import template
+from django.core.serializers import deserialize
 from django.template.defaultfilters import stringfilter
 
 from database.enums import FALL, WINTER, SPRING, SUMMER, SEASONS, YEAR_IN_SCHOOL_CHOICES, FRESHMAN, SOPHOMORE, SENIOR, \
     JUNIOR, GRADUATE
-from database.models.schedule_models import Course
+from database.models.schedule_models import Course, Timeblock
+from database.models.user_models import Teacher
 
 register = template.Library()
+
+
+@register.filter
+def pref_str(obj):
+    if obj['model'] != 'database.preference':
+        return ''
+    else:
+        obj = obj['fields']
+        if obj['object_1_content_type'] == ('database', 'course'):
+            obj_1 = Course.objects.get(id=obj['object_1_id'])
+        else:
+            obj_1 = Teacher.objects.get(id=obj['object_1_id'])
+
+        if obj['object_2_content_type'] == ('database', 'course'):
+            obj_2 = Course.objects.get(id=obj['object_2_id'])
+        else:
+            obj_2 = Timeblock.objects.get(id=obj['object_2_id'])
+
+        weight_sentiment = " - Negative"
+        if obj['weight']:
+            weight_sentiment = " - Positive"
+
+        return str(obj_1) + " & " + str(obj_2) + weight_sentiment
 
 
 @register.filter
@@ -132,7 +157,7 @@ def get_course_stats(form, total):
     for course in courses:
         stats_list.append({
             'course': course,
-            'count': form.entries.filter(courses=course).count()/(total*1.00)*100
+            'count': int(form.entries.filter(courses=course).count()/(total*1.00)*100)
         })
 
     return stats_list
@@ -140,4 +165,9 @@ def get_course_stats(form, total):
 
 @register.filter
 def get_item(dictionary, key):
+    return dictionary.get(key)
+
+
+@register.simple_tag()
+def get_item_assign(dictionary, key):
     return dictionary.get(key)

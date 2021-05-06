@@ -1,11 +1,74 @@
-<img src="https://github.com/DrewUniversityCS/CS3/blob/main/static/images/cs3_text_logo.svg" width="240" height="180">  
+<br />
+<p align="center">
+  <a href="https://github.com/DrewUniversityCS/CS3">
+    <img src="https://github.com/DrewUniversityCS/CS3/blob/main/static/images/cs3_text_logo.svg" alt="Logo" width="249" height="180">
+  </a>
+</p> 
 
-# CS3: ComputerScience CapStone CourseScheduler
+# CS3: Computer Science CapStone Course Scheduler
+### Capstone project by Aaron, David, Luke and Mahmoud
 
-Capstone project by Aaron, David, Luke and Mahmoud
-----
+<details open="open">
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#problem-statement">Problem Statement</a></li>
+      </ul>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+       <ul>
+        <li><a href="#large-scale-overview">Large Scale Overview</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+      <ul>
+        <li><a href="#coding-style">Coding Style</a></li>
+      </ul>
+    </li>
+    <li><a href="#license">License</a></li>
+  </ol>
+</details>
 
-## 📖 Installation
+## Problem Statement
+
+CS3 was originally built for the head of Drew University's Math & CS department, Sarah Abramowitz, to facilitate the process of scheduling college courses and managing the data generated in the process. The application provides a robust interface for managing scheduling data, rendering it in a clear fashion and storing it offline in the csv format.
+
+## Built With
+
+### Backend
+- Django
+- Django-allauth
+- Whitenoise
+- Gunicorn
+- Heroku and GCP for deployment
+
+### Frontend
+- Crispy Forms
+- TailwindCSS
+- FontAwesome
+- HeroPatterns
+- HeroIcons
+- django_tailwind for easy django integration for tailwind
+- crispy_tailwind for applying tailwind styles to crispy forms
+
+## Large Scale Overview
+
+System Design:
+
+![System Design Diagram](https://github.com/DrewUniversityCS/CS3/blob/main/documentation_diagrams/SystemDesign.png)
+
+Database Relational Schema:
+
+![Database Relational Schema](https://github.com/DrewUniversityCS/CS3/blob/main/documentation_diagrams/relational_schema_final.png)
+
+## Installation
 The app can be installed via Pip or Pipenv depending upon your setup.
 
 ### Pipenv
@@ -18,10 +81,10 @@ $ python manage.py runserver
 # Load the site at http://127.0.0.1:8000
 ```
 
-## Setup
+### Setup
 
 ```
-# Run migrations, install fixtures and create test admin (email: admin@gmail.com pwd: 123)
+# Prepare the database (the command will run all the migrations and create an admin with the following credentials: email: admin@gmail.com pwd: 123)
 $ python manage.py prepdb
 
 # Run a command to install all necessary dependencies for tailwind css
@@ -35,8 +98,6 @@ $ python manage.py runserver
 
 # Load the site at http://127.0.0.1:8000
 ```
-
-----
 
 ## Coding style
 
@@ -82,22 +143,7 @@ Refer to the [Google HTML/CSS Style Guide](https://google.github.io/styleguide/h
 
 Check out the [Google JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html).
 
-----
-
 ## License
 
 [The MIT License](LICENSE)
 
-<!-- ## Next Steps
-
-- Use [PostgreSQL locally via Docker](https://wsvincent.com/django-docker-postgresql/)
-- Use [django-environ](https://github.com/joke2k/django-environ) for environment variables
-- Update [EMAIL_BACKEND](https://docs.djangoproject.com/en/3.0/topics/email/#module-django.core.mail) to configure an SMTP backend
-- Make the [admin more secure](https://opensource.com/article/18/1/10-tips-making-django-admin-more-secure)
-
-## Adding Social Authentication
-
-- [Configuring Google](https://wsvincent.com/django-allauth-tutorial-custom-user-model/#google-credentials)
-- [Configuring Facebook](http://www.sarahhagstrom.com/2013/09/the-missing-django-allauth-tutorial/#Create_and_configure_a_Facebook_app)
-- [Configuring Github](https://wsvincent.com/django-allauth-tutorial/)
-- `django-allauth` supports [many, many other providers in the official docs](https://django-allauth.readthedocs.io/en/latest/providers.html) -->
