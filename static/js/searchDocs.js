@@ -1,39 +1,32 @@
-function doClick() {
-       if(String(document.location.href).includes("/dataingest/upload")){
-         document.location.href = "../../datasheet-documentation";
-       } else if(String(document.location.href).includes("/crud/model-set")){
-         document.location.href = "../../datasheet-documentation#select4";
-       } else if(String(document.location.href).includes("#collection-body")){
-         document.location.href = "../studentData-documentation";
-       } else if(String(document.location.href).includes("/crud/students")){
-         document.location.href = "../../database-documentation#select1";
-       } else if(String(document.location.href).includes("/crud/teachers")){
-         document.location.href = "../../database-documentation#select2";
-       } else if(String(document.location.href).includes("/crud/schedules")){
-         document.location.href = "../../database-documentation#select3";
-       } else if(String(document.location.href).includes("/crud/courses")){
-         document.location.href = "../../database-documentation#select4";
-       } else if(String(document.location.href).includes("/crud/sections")){
-         document.location.href = "../../database-documentation#select5";
-       } else if(String(document.location.href).includes("/crud/create-bulk-sections")){
-         document.location.href = "../../databaseUp-documentation#select8";
-       }else if(String(document.location.href).includes("/crud/create-preference")){
-         document.location.href = "../../database-documentation#select6";
-       } else if(String(document.location.href).includes("/crud/preferences")){
-         document.location.href = "../../database-documentation#select6";
-       } else if(String(document.location.href).includes("/set-crud/courses")){
-         document.location.href = "../../databaseUp-documentation#select7";
-       } else if(String(document.location.href).includes("/set-crud/students")){
-         document.location.href = "../../studentData-documentation";
-       } else if(String(document.location.href).includes("/set-crud/preferences")){
-         document.location.href = "../../databaseUp-documentation#select9";
-       } else if(String(document.location.href).includes("/check-schedule")){
-         document.location.href = "schedule-documentation#select1";
-       } else if(String(document.location.href).match(/.*schedule\/.*\/.*/)){
-         document.location.href = "../../schedule-documentation#select2";
-       }
-       else {
-         document.location.href = "";
-         document.location.href = "/docs";
-       }
+function helpRedirect() {
+    let localPath = window.location.pathname + window.location.search;
+    const linkDictionary = {
+        "/dataingest/upload/": "/datasheet-documentation",
+        "/crud/model-set/": "/datasheet-documentation#select4",
+
+        "/crud": "/database-documentation",
+        "/crud/students/": "/database-documentation#select1",
+        "/crud/teachers/": "/database-documentation#select2",
+        "/crud/schedules/": "/database-documentation#select3",
+        "/crud/courses/": "/database-documentation#select4",
+        "/crud/sections/": "/database-documentation#select5",
+        "/crud/create-preference/": "/database-documentation#select6",
+        "/crud/preferences/": "/database-documentation#select6",
+
+        "/set-crud/courses/": "/databaseUp-documentation#select7",
+        "/crud/create-bulk-sections/": "/databaseUp-documentation#select8",
+        "/set-crud/preferences/": "/databaseUp-documentation#select9",
+
+        "/set-crud/students/": "/studentData-documentation",
+
+        "/check-schedule": "/schedule-documentation#select1",
+        "/schedule": "/schedule-documentation#select2",
+        "/": "/docs"
+    }
+    let newHref = linkDictionary[localPath];
+    if (newHref === undefined) {
+        newHref = "/docs";
+    }
+    window.location.href = "../../../../../../";
+    window.location.href = newHref;
 }
