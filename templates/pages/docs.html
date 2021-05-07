@@ -3,89 +3,77 @@
 {% block title %}Docs page{% endblock %}
 
 {% block content %}
-<div class="flex flex-wrap justify-center gap-6">
-    <div class="w-3/4 bg-white shadow-lg rounded-2xl md:w-3/4">
-        <div class="p-4">
-            <p class="pb-3 text-5xl font-bold text-purple-600">Reference Links</p>
-            <ul class="pt-12 list-disc list-inside bg-rose-200 list-inside md:list-inside text-3xl">
-                <li class="hover:underline"><a href="{% url 'documentation:datasheet-documentation' %}">Data Sheets</a>
-                </li>
-                <li class="hover:underline"><a href="{% url 'documentation:database-documentation' %}">Database Manual
-                    Input</a></li>
-                <li class="hover:underline"><a href="{% url 'documentation:databaseUp-documentation' %}">Database Upload
-                    Input</a></li>
-                <li class="hover:underline"><a href="{% url 'documentation:schedule-documentation' %}">Schedules</a></li>
-                <li class="hover:underline"><a href="{% url 'documentation:studentData-documentation' %}">Student
-                    Data Collection</a></li>
-            </ul>
-            <div class="flex gap-6">
-            </div>
-        </div>
-    </div>
-    <div class="text-lg w-3/4 bg-white shadow-lg rounded-2xl md:w-3/4">
-        <div class="container w-full flex flex-wrap mx-auto px-2">
-            <div class="w-full p-8 lg:mt-0 text-black leading-normal bg-white">
-                <!--Title-->
-                <div>
-                    <h1 class="break-normal text-black pt-6 pb-2 text-5xl">Overview</h1>
-                    <hr class="border-b border-grey-light">
+    <div class="flex flex-wrap justify-center gap-6">
+        <div class="w-3/4 text-lg bg-white shadow-lg rounded-2xl md:w-3/4">
+            {% include 'components/documentation_navbar.html' %}
+            <div class="container flex flex-wrap w-full px-2 mx-auto">
+                <div class="w-full p-5 leading-normal text-black bg-white lg:mt-0">
+                    <div>
+                        <h1 class="pt-2 pb-2 text-5xl text-black break-normal">Overview</h1>
+                        <hr class="border-b border-grey-light">
+                    </div>
+                    <p class="py-6">The purpose of this tool is to assist Administrators in creating
+                        course schedules for future school semesters. The following
+                        documentation page will help Admins to navigate and maximize
+                        the tool’s capabilities. Admins will be able to gather student,
+                        course, and teacher preference data. The collected data will
+                        be used to create a course schedule to mitigate preference and
+                        time constraints as well as conflicts. To get started, please
+                        review the following overview of the sections to determine
+                        where to start. Directions to navigate to required sections
+                        will start from the home page. The following sections
+                        will be displayed on the home screen for the Admin. To download the full documentation,
+                        click [<a class="text-blue-500 hover:underline" href="/static/documents/DocsPage.pdf"
+                                  download="DocsPage.pdf">download</a>]
+                    </p>
+                    <br>
+                    <h1 class="py-2 text-2xl">Data Sheets </h1>
+                    <ul class="pl-8 list-disc">
+                        <li class="py-1">Admin will be able to upload CSV files pertaining to 3 categories: Courses,
+                            Students, or Preferences. Uploading a preset CSV will prevent admin from having to manually
+                            input respective data one by one.
+                        </li>
+                        <li class="py-1">Admin will also be able to view previously created datasets within the tool
+                        </li>
+                        <li class="py-1">Refer to this section to get started on uploading CSV data</li>
+                    </ul>
+                    <br>
+                    <h1 class="py-2 text-2xl">Database </h1>
+                    <ul class="pl-8 list-disc">
+                        <li class="py-1">Admin will be able to use data from uploaded CSVs or inputted data to create
+                            courses, course sections, teacher preferences, and input new students and teachers.
+                        </li>
+                        <li class="py-1">Admin will be able to create sets out of the section and preference data to
+                            create
+                            a schedule.
+                        </li>
+                        <li class="py-1">Refer to this section to get started on working with data for the schedule.
+                        </li>
+                    </ul>
+                    <br>
+                    <h1 class="py-2 text-2xl">Schedules </h1>
+                    <ul class="pl-8 list-disc">
+                        <li class="py-1">Admin will be able to create a schedule view from uploaded CSVs or inputted
+                            data.
+                        </li>
+                        <li class="py-1">Admin will be able to check and edit schedules for constraint integrity.</li>
+                        <li class="py-1">Refer to this section to get started on creating the schedule.</li>
+
+                    </ul>
+                    <br>
+                    <h1 class="py-2 text-2xl">Student Data Collection</h1>
+                    <ul class="pl-8 list-disc">
+                        <li class="py-1">Admin will be able to gather student data about the courses they are planning
+                            on
+                            taking for the respective semester.
+                        </li>
+                        <li class="py-1">Refer to this section to collect student data preferences to be considered in
+                            schedule creation.
+                        </li>
+
+                    </ul>
                 </div>
-                <p class="py-6">The purpose of this tool is to assist Administrators in creating
-                    course schedules for future school semesters. The following
-                    documentation page will help Admins to navigate and maximize
-                    the tool’s capabilities. Admins will be able to gather student,
-                    course, and teacher preference data. The collected data will
-                    be used to create a course schedule to mitigate preference and
-                    time constraints as well as conflicts. To get started, please
-                    review the following overview of the sections to determine
-                    where to start. Directions to navigate to required sections
-                    will start from the home page. The following sections
-                    will be displayed on the home screen for the Admin. To download the full documentation,
-                    click [<a class="text-blue-500 hover:underline" href="/static/documents/DocsPage.pdf" download="DocsPage.pdf">download</a>]
-                </p>
-                <br>
-                <h1 class="py-2 text-2xl">Data Sheets </h1>
-                <ul class="list-disc pl-8">
-                    <li class="py-1">Admin will be able to upload CSV files pertaining to 3 categories: Courses,
-                        Students, or Preferences. Uploading a preset CSV will prevent admin from having to manually
-                        input respective data one by one.
-                    </li>
-                    <li class="py-1">Admin will also be able to view previously created datasets within the tool</li>
-                    <li class="py-1">Refer to this section to get started on uploading CSV data</li>
-                </ul>
-                <br>
-                <h1 class="py-2 text-2xl">Database </h1>
-                <ul class="list-disc pl-8">
-                    <li class="py-1">Admin will be able to use data from uploaded CSVs or inputted data to create
-                        courses, course sections, teacher preferences, and input new students and teachers.
-                    </li>
-                    <li class="py-1">Admin will be able to create sets out of the section and preference data to create
-                        a schedule.
-                    </li>
-                    <li class="py-1">Refer to this section to get started on working with data for the schedule.</li>
-                </ul>
-                <br>
-                <h1 class="py-2 text-2xl">Schedules </h1>
-                <ul class="list-disc pl-8">
-                    <li class="py-1">Admin will be able to create a schedule view from uploaded CSVs or inputted data.
-                    </li>
-                    <li class="py-1">Admin will be able to check and edit schedules for constraint integrity.</li>
-                    <li class="py-1">Refer to this section to get started on creating the schedule.</li>
-
-                </ul>
-                <br>
-                <h1 class="py-2 text-2xl">Student Data Collection</h1>
-                <ul class="list-disc pl-8">
-                    <li class="py-1">Admin will be able to gather student data about the courses they are planning on
-                        taking for the respective semester.
-                    </li>
-                    <li class="py-1">Refer to this section to collect student data preferences to be considered in
-                        schedule creation.
-                    </li>
-
-                </ul>
             </div>
         </div>
     </div>
-</div>
 {% endblock content %}
