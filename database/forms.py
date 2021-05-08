@@ -155,7 +155,6 @@ def get_dynamic_model_form(dynamic_model):
         class DynamicModelForm(CrispyModelForm):
             class Meta:
                 model = dynamic_model
-                exclude = ['overlap_preferences', 'room_preferences', 'time_preferences']
                 fields = "__all__"
                 labels = label_dict
     else:

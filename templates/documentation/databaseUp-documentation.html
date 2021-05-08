@@ -1,0 +1,635 @@
+{% extends '_base.html' %}
+{% load static %}
+{% block title %}Database Upload Input Documentation{% endblock %}
+
+{% block content %}
+    <div class="font-sans text-center">
+        <div class="flex flex-wrap justify-center pb-6 text-left">
+            <div class="w-3/4 text-lg bg-white shadow-lg rounded-2xl md:w-3/4">
+                {% include 'components/documentation_navbar.html' %}
+                <div class="container flex flex-wrap w-full px-2 mx-auto">
+                    <div class="w-full p-8 leading-normal text-black bg-white lg:mt-0">
+                        <!--Title-->
+                        <div>
+                            <h1 class="pt-6 pb-2 text-5xl text-black break-normal">Database Upload Input</h1>
+                            <hr class="border-b border-grey-light">
+                        </div>
+                        <p class="py-6">
+                            Admin will be able to upload data through CSVs and work
+                            with creating datasets. Admin can switch back and forth between manually inputting and
+                            uploading
+                            data
+                        </p>
+                        <br>
+                    </div>
+                </div>
+                <div class="flex justify-center pb-24">
+                    <div class="mr-8">
+                        <div class="w-9/12 mx-auto bg-white border border-gray-200"
+                             x-data="{selected:window.location.hash.replace('#select','')}">
+                            <ul class="shadow-box">
+                                <li class="relative border-b border-gray-200">
+                                    <button type="button" class="w-full px-8 py-6 text-left"
+                                            @click="selected !== 1 ? selected = 1 : selected = null">
+                                        <span class="flex items-center justify-between text-2xl">
+                                            <span>Step 1. Upload Courses CSV </span>
+                                            <span class="ico-plus"></span>
+                                        </span>
+                                    </button>
+                                    <div id="select1"
+                                         class="relative overflow-hidden transition-all duration-700 max-h-0"
+                                         style=""
+                                         x-ref="container1"
+                                         x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
+
+                                        <div class="items-center text-left">
+                                            <div class="p-6">
+                                                <ul class="pl-8 list-disc">
+                                                    <li class="py-1">
+                                                        Admin will be able to upload a preset CSV of courses. This will
+                                                        prevent
+                                                        admin from having to manually input respective data one by one.
+                                                        Admin
+                                                        will
+                                                        see an error message if CSV is in the incorrect format. Follow
+                                                        the
+                                                        instructions given in the message and reupload file
+                                                    </li>
+                                                    <li class="py-1">
+                                                        To upload a new file, click [Upload New File]
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Select corresponding category. Click on [Choose File] and select
+                                                        the
+                                                        corresponding file to its category
+                                                    </li>
+                                                </ul>
+                                                <button class="btn-cancel"
+                                                        @click="selected !== 1 ? selected = 1 : selected = null">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="relative border-b border-gray-200">
+                                    <button type="button" class="w-full px-8 py-6 text-left"
+                                            @click="selected !== 2 ? selected = 2 : selected = null">
+                                        <div class="flex items-center justify-between text-2xl">
+                                            <span>Step 2. Upload Students CSV </span>
+                                            <span class="ico-plus"></span>
+                                        </div>
+                                    </button>
+                                    <div id="select2"
+                                         class="relative overflow-hidden transition-all duration-700 max-h-0"
+                                         style=""
+                                         x-ref="container2"
+                                         x-bind:style="selected == 2 ? 'max-height: ' + $refs.container2.scrollHeight + 'px' : ''">
+
+                                        <div class="items-center text-left">
+                                            <div class="p-6">
+                                                <ul class="pl-8 list-disc">
+                                                    <li class="py-1">
+                                                        Admin will be able to upload a preset CSV of students. This will
+                                                        prevent
+                                                        admin from having to manually input respective data one by one.
+                                                        Admin
+                                                        will
+                                                        see an error message if CSV is in the incorrect format. Follow
+                                                        the
+                                                        instructions given in the message and reupload file
+                                                    </li>
+                                                    <li class="py-1">
+                                                        To upload a new file, click [Upload New File]
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Select corresponding category. Click on [Choose File] and select
+                                                        the
+                                                        corresponding file to its category
+                                                    </li>
+                                                </ul>
+                                                <button class="btn-cancel"
+                                                        @click="selected !== 2 ? selected = 2 : selected = null">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="relative border-b border-gray-200">
+                                    <button type="button" class="w-full px-8 py-6 text-left"
+                                            @click="selected !== 3 ? selected = 3 : selected = null">
+                                        <div class="flex items-center justify-between text-2xl">
+                                            <span>Step 3. Upload Preferences CSV </span>
+                                            <span class="ico-plus"></span>
+                                        </div>
+                                    </button>
+                                    <div id="select3"
+                                         class="relative overflow-hidden transition-all duration-700 max-h-0"
+                                         style=""
+                                         x-ref="container3"
+                                         x-bind:style="selected == 3 ? 'max-height: ' + $refs.container3.scrollHeight + 'px' : ''">
+
+                                        <div class="items-center text-left">
+                                            <div class="p-6">
+                                                <ul class="pl-8 list-disc">
+                                                    <li class="py-1">
+                                                        Admin will be able to upload a preset CSV of preferences. This
+                                                        will
+                                                        prevent
+                                                        admin from having to manually input respective data one by one.
+                                                        Admin
+                                                        will
+                                                        see an error message if CSV is in the incorrect format. Follow
+                                                        the
+                                                        instructions given in the message and reupload file
+                                                    </li>
+                                                    <li class="py-1">
+                                                        To upload a new file, click [Upload New File]
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Select corresponding category. Click on [Choose File] and select
+                                                        the
+                                                        corresponding file to its category
+                                                    </li>
+                                                </ul>
+                                                <button class="btn-cancel"
+                                                        @click="selected !== 3 ? selected = 3 : selected = null">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="relative border-b border-gray-200">
+                                    <button type="button" class="w-full px-8 py-6 text-left"
+                                            @click="selected !== 4 ? selected = 4 : selected = null">
+                                        <div class="flex items-center justify-between text-2xl">
+                                            <span>Step 4. Manage Data</span>
+                                            <span class="ico-plus"></span>
+                                        </div>
+                                    </button>
+                                    <div id="select4"
+                                         class="relative overflow-hidden transition-all duration-700 max-h-0"
+                                         style=""
+                                         x-ref="container4"
+                                         x-bind:style="selected == 4 ? 'max-height: ' + $refs.container4.scrollHeight + 'px' : ''">
+
+                                        <div class="items-center text-left">
+                                            <div class="p-6">
+                                                <ul class="pl-8 list-disc">
+                                                    <li class="py-1">
+                                                        Admin will be able to view uploaded or inputted data in the
+                                                        [Manage
+                                                        Data]
+                                                        section.
+                                                    </li>
+                                                    <li class="py-1">
+                                                        This section will also contain data created within the tool as
+                                                        well. The
+                                                        [Category] column will describe the nature of the data.
+                                                        <ul class="pl-8 list-disc">
+                                                            <li class="py-1">
+                                                                View data - click <a><i
+                                                                    class="mr-2 transform fa fa-eye"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Edit data - click <a><i
+                                                                    class="mr-2 transform fa fa-edit"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Delete data - click <a><i
+                                                                    class="mr-2 transform fa fa-trash"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Download data as CSV - click <a><i
+                                                                    class="mr-2 transform fa fa-download
+                                    aria-hidden=" true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Search for a file, Admin may use the search bar in the
+                                                                top left
+                                                                hand
+                                                                corner or scroll through the table.
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Note: Name course, teacher, student, and preference sets to be
+                                                        able to
+                                                        discern the sets. Most recently created datasets will appear at
+                                                        the
+                                                        bottom
+                                                        of the table.
+                                                    </li>
+                                                </ul>
+                                                <button class="btn-cancel"
+                                                        @click="selected !== 4 ? selected = 4 : selected = null">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="relative border-b border-gray-200">
+                                    <button type="button" class="w-full px-8 py-6 text-left"
+                                            @click="selected !== 5 ? selected = 5 : selected = null">
+                                        <div class="flex items-center justify-between text-2xl">
+                                            <span>Step 5. Manually Input Course, Student, Preference Data  </span>
+                                            <span class="ico-plus"></span>
+                                        </div>
+                                    </button>
+                                    <div id="select5"
+                                         class="relative overflow-hidden transition-all duration-700 max-h-0"
+                                         style=""
+                                         x-ref="container5"
+                                         x-bind:style="selected == 5 ? 'max-height: ' + $refs.container5.scrollHeight + 'px' : ''">
+
+                                        <div class="items-center text-left">
+                                            <div class="p-6">
+                                                <ul class="pl-8 list-disc">
+                                                    <li class="py-1">
+                                                        Admin will be able to manually input data that is not recorded
+                                                        in
+                                                        respective
+                                                        CSV files or new updated data
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Steps to manually input courses [<a
+                                                            class="text-blue-500 hover:underline"
+                                                            href="{% url 'documentation:database-documentation' %}#select4">here</a>]
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Steps to manually input students [<a
+                                                            class="text-blue-500 hover:underline"
+                                                            href="{% url 'documentation:database-documentation' %}#select1">here</a>]
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Steps to manually input preferences [<a
+                                                            class="text-blue-500 hover:underline"
+                                                            href="{% url 'documentation:database-documentation' %}#select6">here</a>]
+                                                    </li>
+                                                </ul>
+                                                <button class="btn-cancel"
+                                                        @click="selected !== 5 ? selected = 5 : selected = null">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="relative border-b border-gray-200">
+                                    <button type="button" class="w-full px-8 py-6 text-left"
+                                            @click="selected !== 6 ? selected = 6 : selected = null">
+                                        <div class="flex items-center justify-between text-2xl">
+                                            <span>Step 6. Create a Schedule Name</span>
+                                            <span class="ico-plus"></span>
+                                        </div>
+                                    </button>
+                                    <div id="select6"
+                                         class="relative overflow-hidden transition-all duration-700 max-h-0"
+                                         style=""
+                                         x-ref="container6"
+                                         x-bind:style="selected == 6 ? 'max-height: ' + $refs.container6.scrollHeight + 'px' : ''">
+
+                                        <div class="items-center text-left">
+                                            <div class="p-6">
+                                                <ul class="pl-8 list-disc">
+                                                    <li class="py-1">
+                                                        Admin will be able to create a schedule name that will be
+                                                        referenced in
+                                                        later steps in the schedule making process
+                                                    </li>
+                                                    <li class="py-1">
+                                                        To create a schedule name:
+                                                        <ul class="pl-8 list-disc">
+                                                            <li class="py-1">
+                                                                Click [Open Database Interface]
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Hover over [Scheduling] box
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Click [Schedules]
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Create a unique schedule name for its respective semester
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Select [Year] and [Season] of the schedule
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Click [Save] to store the schedule name in the database - newly
+                                                        created
+                                                        schedule name will appear in the table to the right
+                                                        <ul class="pl-8 list-disc">
+                                                            <li class="py-1">
+                                                                View schedule name - click <a><i
+                                                                    class="mr-2 transform fa fa-eye"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Edit schedule name - click <a><i
+                                                                    class="mr-2 transform fa fa-edit"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Delete schedule name - click <a><i
+                                                                    class="mr-2 transform fa fa-trash"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                To search for a schedule name, Admin may use the search
+                                                                bar
+                                                                above
+                                                                the table or scroll through the table
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+
+                                                </ul>
+                                                <button class="btn-cancel"
+                                                        @click="selected !== 6 ? selected = 6 : selected = null">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="relative border-b border-gray-200">
+                                    <button type="button" class="w-full px-8 py-6 text-left"
+                                            @click="selected !== 7 ? selected = 7 : selected = null">
+                                        <div class="flex items-center justify-between text-2xl">
+                                            <span>Step 7. Create Course Sets </span>
+                                            <span class="ico-plus"></span>
+                                        </div>
+                                    </button>
+                                    <div id="select7"
+                                         class="relative overflow-hidden transition-all duration-700 max-h-0"
+                                         style=""
+                                         x-ref="container7"
+                                         x-bind:style="selected == 7 ? 'max-height: ' + $refs.container7.scrollHeight + 'px' : ''">
+
+                                        <div class="items-center text-left">
+                                            <div class="p-6">
+                                                <ul class="pl-8 list-disc">
+                                                    <li class="py-1">
+                                                        Admin will be able to add courses within the database to a set
+                                                        of
+                                                        courses.
+                                                        These sets will be used to create course sections in bulk to
+                                                        prevent
+                                                        having
+                                                        to manually enter each course section for the semester
+                                                    </li>
+                                                    <li class="py-1">
+                                                        To create course sets:
+                                                        <ul class="pl-8 list-disc">
+                                                            <li class="py-1">
+                                                                Click [Open Database Interface]
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Hover over [Sets] box
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Select [Courses]
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Create a unique [New Set Name]
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Admin will be able to add courses to the set by checking off the
+                                                        corresponding courses
+                                                    </li>
+                                                    <li class="py-1">
+                                                        If the list is too long or hard to search for respective course,
+                                                        admin
+                                                        will
+                                                        be able to search for the course using the search bar right
+                                                        above the
+                                                        list
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Click [Save] to store the course sets in the database - newly
+                                                        created
+                                                        course
+                                                        sets will appear in the table to the right
+                                                        <ul class="pl-8 list-disc">
+                                                            <li class="py-1">
+                                                                View course set - click <a><i
+                                                                    class="mr-2 transform fa fa-eye"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Edit course set - click <a><i
+                                                                    class="mr-2 transform fa fa-edit"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Delete course set - click <a><i
+                                                                    class="mr-2 transform fa fa-trash"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Download course set - click [downward arrow]
+                                                            </li>
+                                                            <li class="py-1">
+                                                                To search for a course set, Admin may use the search bar
+                                                                above
+                                                                the
+                                                                table or scroll through the table
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+
+                                                </ul>
+                                                <button class="btn-cancel"
+                                                        @click="selected !== 7 ? selected = 7 : selected = null">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="relative border-b border-gray-200">
+                                    <button type="button" id="help" class="w-full px-8 py-6 text-left"
+                                            @click="selected !== 8 ? selected = 8 : selected = null">
+                                        <div class="flex items-center justify-between text-2xl">
+                                            <span>Step 8. Create Sections </span>
+                                            <span class="ico-plus"></span>
+                                        </div>
+                                    </button>
+                                    <div id="select8"
+                                         class="relative overflow-hidden transition-all duration-700 max-h-0"
+                                         style=""
+                                         x-ref="container8"
+                                         x-bind:style="selected == 8 ? 'max-height: ' + $refs.container8.scrollHeight + 'px' : ''">
+                                        <div class="items-center text-left">
+                                            <div class="p-6">
+                                                <ul class="pl-8 list-disc">
+                                                    <li class="py-1">
+                                                        Admin will be able to create sections for added courses in the
+                                                        database
+                                                        in
+                                                        bulk. Some classes have multiple sections per semester. This
+                                                        section
+                                                        will
+                                                        allow Admin to account for that and add respective teachers to
+                                                        courses.
+                                                        Sections created in this form can be used when creating the
+                                                        schedule
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Steps to manually create sections [<a
+                                                            class="text-blue-500 hover:underline"
+                                                            href="{% url 'documentation:database-documentation' %}#select5">here</a>]
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Note - Admin will be able to manually create sections as well as
+                                                        create
+                                                        sections in bulk
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Otherwise - Create Sections in Bulk
+                                                        <ul class="pl-8 list-disc">
+                                                            <li class="py-1">
+                                                                Click [Open Database Interface]
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Hover over [Scheduling] box
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Select [Create Sections in Bulk]
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Choose respective schedule name created in Step 6
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Choose respective course set created in Step 7
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Save newly created sections in bulk by clicking the [Create
+                                                        Sections]
+                                                        Button
+                                                    </li>
+                                                </ul>
+                                                <button class="btn-cancel"
+                                                        @click="selected !== 8 ? selected = 8 : selected = null">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="relative border-b border-gray-200">
+                                    <button type="button" class="w-full px-8 py-6 text-left"
+                                            @click="selected !== 9 ? selected = 9 : selected = null">
+                                        <div class="flex items-center justify-between text-2xl">
+                                            <span>Step 9. Create Preference Sets  </span>
+                                            <span class="ico-plus"></span>
+                                        </div>
+                                    </button>
+                                    <div id="select9"
+                                         class="relative overflow-hidden transition-all duration-700 max-h-0"
+                                         style=""
+                                         x-ref="container8"
+                                         x-bind:style="selected == 9 ? 'max-height: ' + $refs.container8.scrollHeight + 'px' : ''">
+
+                                        <div class="items-center text-left">
+                                            <div class="p-6">
+                                                <ul class="pl-8 list-disc">
+                                                    <li class="py-1">
+                                                        Admin will be able to aggregate a list of preferences to be
+                                                        included in
+                                                        the
+                                                        creation of a schedule. If the Admin does not include the list
+                                                        of
+                                                        preferences in the set, preferences will not be included in the
+                                                        checking
+                                                        the
+                                                        integrity of the schedule
+                                                    </li>
+                                                    <li class="py-1">
+                                                        For preference sets:
+                                                        <ul class="pl-8 list-disc">
+                                                            <li class="py-1">
+                                                                Click [Open Database Interface]
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Hover over [Sets] box
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Select [Preferences]
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Create a unique set name under [New Set Name]. The unique
+                                                        preference set
+                                                        name will be referenced when creating a schedule [<a
+                                                            class="text-blue-500 hover:underline"
+                                                            href="{% url 'documentation:schedule-documentation' %}">here</a>]
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Check off all relevant preferences to be added into the set
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Click [Save] to store the preference sets in the database -
+                                                        newly
+                                                        created
+                                                        sections will appear in the table to the right
+                                                        <ul class="pl-8 list-disc">
+                                                            <li class="py-1">
+                                                                View preference sets - click <a><i
+                                                                    class="mr-2 transform fa fa-eye"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Edit preference sets - click <a><i
+                                                                    class="mr-2 transform fa fa-edit"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Delete preference sets - click <a><i
+                                                                    class="mr-2 transform fa fa-trash"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Download preference set - click <a><i
+                                                                    class="mr-2 transform fa fa-download
+                                    aria-hidden=" true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                To search for a set, Admin may use the search bar above
+                                                                the
+                                                                table or
+                                                                scroll through the table
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                                <button class="btn-cancel"
+                                                        @click="selected !== 9 ? selected = 9 : selected = null">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

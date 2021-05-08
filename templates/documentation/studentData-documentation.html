@@ -1,0 +1,75 @@
+{% extends '_base.html' %}
+{% load static %}
+{% block title %}Student Data Collection{% endblock %}
+
+{% block content %}
+    <div class="font-sans text-center">
+        <div class="flex flex-wrap justify-center pb-6 text-left">
+            <div class="w-3/4 text-lg bg-white shadow-lg rounded-2xl md:w-3/4">
+                {% include 'components/documentation_navbar.html' %}
+                <div class="container flex flex-wrap w-full px-2 mx-auto">
+                    <div class="w-full p-8 leading-normal text-black bg-white lg:mt-0">
+                        <!--Title-->
+                        <div>
+                            <h1 class="pt-6 pb-2 text-5xl text-black break-normal">Student Data Collection</h1>
+                            <hr class="border-b border-grey-light">
+                        </div>
+                        <p class="py-6">
+                        <ul class="pl-8 list-disc">
+                            <li class="py-1">
+                                Admin will be able to gather student data about the courses they are planning on taking
+                                for
+                                the respective semester
+                            </li>
+                            <li class="py-1">
+                                Refer to this section to collect student data preferences to be considered in schedule
+                                creation
+                            </li>
+                            <li class="py-1">
+                                Data will be collected in the database once the students respond to the emailed form
+                            </li>
+                            <li class="py-1">
+                                To create a course set, click [Open Database Interface], hover over [Sets] box,
+                                select[courses]. This will allow Admin to aggregate select courses that will be offered
+                                for
+                                the following semester
+                                <ul class="pl-8 list-disc">
+                                    <li class="py-1">
+                                        To add courses to the database, please refer to the documentation for creating a
+                                        course [<a class="text-blue-500 hover:underline"
+                                                   href="{% url 'documentation:database-documentation' %}#select4">here</a>]
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="py-1">
+                                To create a student set, click [Open Database Interface], hover over [Sets] box, select
+                                [students]. This will allow Admin to aggregate select students that will be taking
+                                classes
+                                the following semester
+                                <ul class="pl-8 list-disc">
+                                    <li class="py-1">
+                                        To add students to the database, please refer to the documentation for creating
+                                        a
+                                        student [<a class="text-blue-500 hover:underline"
+                                                    href="{% url 'documentation:database-documentation' %}#select1">here</a>]
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="py-1">
+                                To send out the offered courses to selected students, click [Send Form]. An email with
+                                the
+                                form will be sent out to the students
+                            </li>
+                            <li class="py-1">
+                                Admin will be able to view response rate of course preferences at the bottom of the
+                                field
+                            </li>
+                        </ul>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

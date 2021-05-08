@@ -1,0 +1,133 @@
+{% extends '_base.html' %}
+{% load static %}
+{% block title %}Schedule Documentation{% endblock %}
+
+{% block content %}
+    <div class="font-sans text-center">
+        <div class="flex flex-wrap justify-center pb-6 text-left">
+            <div class="w-3/4 text-lg bg-white shadow-lg rounded-2xl md:w-3/4">
+                {% include 'components/documentation_navbar.html' %}
+                <div class="container flex flex-wrap w-full px-2 mx-auto">
+                    <div class="w-full p-8 leading-normal text-black bg-white lg:mt-0">
+                        <!--Title-->
+                        <div>
+                            <h1 class="pt-6 pb-2 text-5xl text-black break-normal">Schedule Documentation</h1>
+                            <hr class="border-b border-grey-light">
+                        </div>
+                        <p class="py-6">
+                            Admin will be able to create a schedule view from uploaded CSVs or inputted data.
+                            Admin will be able to check and edit schedules for constraint integrity
+                        </p>
+                        <br>
+                    </div>
+                </div>
+                <div class="flex justify-center pb-24">
+                    <div class="mr-8">
+                        <div class="w-9/12 mx-auto bg-white border border-gray-200"
+                             x-data="{selected:window.location.hash.replace('#select','')}">
+                            <ul class="shadow-box">
+                                <li class="relative border-b border-gray-200">
+                                    <button type="button" class="w-full px-8 py-6 text-left"
+                                            @click="selected !== 1 ? selected = 1 : selected = null">
+                                        <div class="flex items-center justify-between text-2xl">
+                                            <span>Step 1. Create Schedule </span>
+                                            <span class="ico-plus"></span>
+                                        </div>
+                                    </button>
+                                    <div id="select1"
+                                         class="relative overflow-hidden transition-all duration-700 max-h-0"
+                                         style=""
+                                         x-ref="container1"
+                                         x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
+
+                                        <div class="items-center text-left">
+                                            <div class="p-6">
+                                                <ul class="pl-8 list-disc">
+                                                    <li class="py-1">
+                                                        Admin will be able to create schedules using created sections,
+                                                        preferences,
+                                                        and sets.
+                                                    </li>
+                                                    <li class="py-1">
+                                                        To navigate to the schedule maker:
+                                                        <ul class="pl-8 list-disc">
+                                                            <li class="py-1">
+                                                                Click [Begin Scheduling Process]
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Choose schedule from dropdown. These schedule names were
+                                                                created
+                                                                in
+                                                                Step 3 for manual input and Step 6 in using imported
+                                                                data
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Choose the constraint set in dropdown
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Click [Run]
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                                <button class="btn-cancel"
+                                                        @click="selected !== 1 ? selected = 1 : selected = null">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="relative border-b border-gray-200">
+                                    <button type="button" class="w-full px-8 py-6 text-left"
+                                            @click="selected !== 2 ? selected = 2 : selected = null">
+                                        <div class="flex items-center justify-between text-2xl">
+                                            <span>Step 2. View and Edit Schedule  </span>
+                                            <span class="ico-plus"></span>
+                                        </div>
+                                    </button>
+                                    <div id="select2"
+                                         class="relative overflow-hidden transition-all duration-700 max-h-0"
+                                         style=""
+                                         x-ref="container2"
+                                         x-bind:style="selected == 2 ? 'max-height: ' + $refs.container2.scrollHeight + 'px' : ''">
+
+                                        <div class="items-center text-left">
+                                            <div class="p-6">
+                                                <ul class="pl-8 list-disc">
+                                                    <li class="py-1">
+                                                        Admin will be able to view and edit schedule to account for
+                                                        constraint
+                                                        integrity. Admin will be able toggle classes on and off
+                                                    </li>
+                                                    <li class="py-1">
+                                                        If a class time is scheduled in which there exists a violation
+                                                        of a
+                                                        preference or constraint, the cell will be marked in red. Admin
+                                                        has the
+                                                        ability to edit the timing of the course and change the class
+                                                        settings
+                                                        as
+                                                        needed
+                                                    </li>
+                                                    <li class="py-1">
+                                                        To save view as CSV, click the button at the bottom of the
+                                                        screen
+                                                    </li>
+                                                </ul>
+                                                <button class="btn-cancel"
+                                                        @click="selected !== 2 ? selected = 2 : selected = null">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

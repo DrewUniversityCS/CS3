@@ -1,0 +1,26 @@
+<div class="p-6 bg-teal rounded-t-2xl">
+    <div class="text-white text-2xl pb-4">
+        Navigation
+    </div>
+    <ul class="flex text-xl mb-3 text-gray-500">
+        <li class="mr-6 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:text-white">
+            <a href="{% url 'documentation:datasheet-documentation' %}">Data
+                Sheets</a>
+        </li>
+        <li class="mr-6 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:text-white">
+            <a href="{% url 'documentation:database-documentation' %}">Database
+                Manual
+                Input</a></li>
+        <li class="mr-6 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:text-white">
+            <a href="{% url 'documentation:databaseUp-documentation' %}">Database
+                Uploads</a></li>
+        <li class="mr-6 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:text-white">
+            <a
+                    href="{% url 'documentation:schedule-documentation' %}">Schedules</a>
+        </li>
+        <li class="mr-6 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:text-white">
+            <a href="{% url 'documentation:studentData-documentation' %}">Student
+                Data Collection</a></li>
+    </ul>
+    <hr class="border-b border-grey-light">
+</div>
