@@ -4,16 +4,14 @@
 
 {% block content %}
     <div class="font-sans text-center">
-        <div class="pt-12">
-            <p class="pb-12 text-4xl font-bold leading-7 text-purple-600">Database Manual Input Documentation</p>
-        </div>
         <div class="flex flex-wrap justify-center pb-6 text-left">
             <div class="w-3/4 text-lg bg-white shadow-lg rounded-2xl md:w-3/4">
+                {% include 'components/documentation_navbar.html' %}
                 <div class="container flex flex-wrap w-full px-2 mx-auto">
                     <div class="w-full p-8 leading-normal text-black bg-white lg:mt-0">
                         <!--Title-->
                         <div>
-                            <h1 class="pt-6 pb-2 text-5xl text-black break-normal">Overview</h1>
+                            <h1 class="pt-6 pb-2 text-5xl text-black break-normal">Database Manual Input</h1>
                             <hr class="border-b border-grey-light">
                         </div>
                         <p class="py-6">Admin will be able to work with inputting data in these steps. There are 2
@@ -29,707 +27,763 @@
                         <br>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="flex justify-center">
-            <div class="mr-8">
-                <div class="w-10/12 mx-auto bg-white border border-gray-200"
-                     x-data="{selected:window.location.hash.replace('#select','')}">
-                    <ul class="shadow-box">
-                        <li class="relative border-b border-gray-200">
-                            <button type="button" class="w-full px-8 py-6 text-left"
-                                    @click="selected !== 1 ? selected = 1 : selected = null">
-                                <div class="flex items-center justify-between text-2xl">
-                                    <span>Step 1. Manually Add Students to Database </span>
-                                    <span class="ico-plus"></span>
-                                </div>
-                            </button>
-                            <div id="select1" class="relative overflow-hidden transition-all duration-1000 max-h-0"
-                                 style=""
-                                 x-ref="container1"
-                                 x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
+                <div class="flex justify-center pb-24">
+                    <div class="mr-8">
+                        <div class="w-10/12 mx-auto bg-white border border-gray-200"
+                             x-data="{selected:window.location.hash.replace('#select','')}">
+                            <ul class="shadow-box">
+                                <li class="relative border-b border-gray-200">
+                                    <button type="button" class="w-full px-8 py-6 text-left"
+                                            @click="selected !== 1 ? selected = 1 : selected = null">
+                                        <div class="flex items-center justify-between text-2xl">
+                                            <span>Step 1. Manually Add Students to Database </span>
+                                            <span class="ico-plus"></span>
+                                        </div>
+                                    </button>
+                                    <div id="select1"
+                                         class="relative overflow-hidden transition-all duration-1000 max-h-0"
+                                         style=""
+                                         x-ref="container1"
+                                         x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
 
-                                <div class="items-center text-left">
-                                    <div class="p-6">
-                                        <ul class="pl-8 list-disc">
-                                            <li class="py-1">
-                                                Admin will be able to manually add students to the database
-                                            </li>
-                                            <li class="py-1">
-                                                To add a student:
+                                        <div class="items-center text-left">
+                                            <div class="p-6">
                                                 <ul class="pl-8 list-disc">
                                                     <li class="py-1">
-                                                        Click [Open Database Interface]
+                                                        Admin will be able to manually add students to the database
                                                     </li>
                                                     <li class="py-1">
-                                                        Hover over [Users] box
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Click [Students].
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="py-1">
-                                                Input respective data in required fields
-                                                <ul class="pl-8 list-disc">
-                                                    <li class="py-1">
-                                                        [Student ID Number] requires 7 digits
-                                                    </li>
-                                                    <li class="py-1">
-                                                        [Email] must refer to University delegated email
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="py-1">
-                                                Click [Save] to store data in the database - newly created student will
-                                                appear in the table to the right
-                                                <ul class="pl-8 list-disc">
-                                                    <li class="py-1">
-                                                        View student - click <a><i
-                                                            class="mr-2 transform fa fa-eye"
-                                                            aria-hidden="true"></i></a>
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Edit student - click <a><i
-                                                            class="mr-2 transform fa fa-edit"
-                                                            aria-hidden="true"></i></a>
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Delete student - click <a><i
-                                                            class="mr-2 transform fa fa-trash"
-                                                            aria-hidden="true"></i></a>
-                                                    </li>
-                                                    <li class="py-1">
-                                                        To search for a student, Admin may use the search bar above the
-                                                        table or scroll through the table
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                        <button class="items-center px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700"
-                                                @click="selected !== 1 ? selected = 1 : selected = null">
-                                            Close
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="relative border-b border-gray-200">
-                            <button type="button" class="w-full px-8 py-6 text-left"
-                                    @click="selected !== 2 ? selected = 2 : selected = null">
-                                <div class="flex items-center justify-between text-2xl">
-                                    <span>Step 2. Manually Add Teacher to Database </span>
-                                    <span class="ico-plus"></span>
-                                </div>
-                            </button>
-                            <div id="select2" class="relative overflow-hidden transition-all duration-700 max-h-0"
-                                 style=""
-                                 x-ref="container2"
-                                 x-bind:style="selected == 2 ? 'max-height: ' + $refs.container2.scrollHeight + 'px' : ''">
-
-                                <div class="items-center text-left">
-                                    <div class="p-6">
-                                        <ul class="pl-8 list-disc">
-                                            <li class="py-1">
-                                                Admin will be to manually add teachers to the database
-                                            </li>
-                                            <li class="py-1">
-                                                To add a teacher:
-                                                <ul class="pl-8 list-disc">
-                                                    <li class="py-1">
-                                                        Click [Open Database Interface]
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Hover over [Users] box
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Click [Teachers]
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="py-1">
-                                                Input respective data in required fields
-                                                <ul class="pl-8 list-disc">
-                                                    <li class="py-1">
-                                                        [Department] may be left blank. Admin will be able to update
-                                                        this
-                                                        field at a later time
-                                                    </li>
-                                                    <li class="py-1">
-                                                        [Email] must refer to University delegated email
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="py-1">
-                                                Click [Save] to store data in the database - newly created student will
-                                                appear in the table to the right
-                                                <ul class="pl-8 list-disc">
-                                                    <li class="py-1">
-                                                        View student - click <a><i
-                                                            class="mr-2 transform fa fa-eye"
-                                                            aria-hidden="true"></i></a>
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Edit student - click <a><i
-                                                            class="mr-2 transform fa fa-edit"
-                                                            aria-hidden="true"></i></a>
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Delete student - click <a><i
-                                                            class="mr-2 transform fa fa-trash"
-                                                            aria-hidden="true"></i></a>
-                                                    </li>
-                                                    <li class="py-1">
-                                                        To search for a student, Admin may use the search bar above the
-                                                        table or scroll through the table
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                        <button class="items-center px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700"
-                                                @click="selected !== 2 ? selected = 2 : selected = null">
-                                            Close
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="relative border-b border-gray-200">
-                            <button type="button" class="w-full px-8 py-6 text-left"
-                                    @click="selected !== 3 ? selected = 3 : selected = null">
-                                <div class="flex items-center justify-between text-2xl">
-                                    <span>Step 3. Create a Schedule Name  </span>
-                                    <span class="ico-plus"></span>
-                                </div>
-                            </button>
-                            <div id="select3" class="relative overflow-hidden transition-all duration-700 max-h-0"
-                                 style=""
-                                 x-ref="container3"
-                                 x-bind:style="selected == 3 ? 'max-height: ' + $refs.container3.scrollHeight + 'px' : ''">
-
-                                <div class="items-center text-left">
-                                    <div class="p-6">
-                                        <ul class="pl-8 list-disc">
-                                            <li class="py-1">
-                                                Admin will be able to create a schedule name that will be referenced in
-                                                the
-                                                final steps in the schedule making process.
-                                            </li>
-                                            <li class="py-1">
-                                                To create a schedule name:
-                                                <ul class="pl-8 list-disc">
-                                                    <li class="py-1">
-                                                        Click [Open Database Interface]
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Hover over [Scheduling] box
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Click [Schedules]
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="py-1">
-                                                Create a unique schedule name for its respective semester
-                                            </li>
-                                            <li class="py-1">
-                                                Select [Year] and [Season] of the schedule
-                                            </li>
-                                            <li class="py-1">
-                                                Click [Save] to store data in the database - newly created student will
-                                                appear in the table to the right
-                                                <ul class="pl-8 list-disc">
-                                                    <li class="py-1">
-                                                        View schedule name - click <a><i
-                                                            class="mr-2 transform fa fa-eye"
-                                                            aria-hidden="true"></i></a>
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Edit schedule name- click <a><i
-                                                            class="mr-2 transform fa fa-edit"
-                                                            aria-hidden="true"></i></a>
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Delete schedule name - click <a><i
-                                                            class="mr-2 transform fa fa-trash"
-                                                            aria-hidden="true"></i></a>
-                                                    </li>
-                                                    <li class="py-1">
-                                                        To search for a schedule name, Admin may use the search bar
-                                                        above
-                                                        the table or scroll through the table.
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                        <button class="items-center px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700"
-                                                @click="selected !== 3 ? selected = 3 : selected = null">
-                                            Close
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="relative border-b border-gray-200">
-                            <button type="button" class="w-full px-8 py-6 text-left"
-                                    @click="selected !== 4 ? selected = 4 : selected = null">
-                                <div class="flex items-center justify-between text-2xl">
-                                    <span>Step 4. Manually Create Courses  </span>
-                                    <span class="ico-plus"></span>
-                                </div>
-                            </button>
-                            <div id="select4" class="relative overflow-hidden transition-all duration-700 max-h-0"
-                                 style=""
-                                 x-ref="container4"
-                                 x-bind:style="selected == 4 ? 'max-height: ' + $refs.container4.scrollHeight + 'px' : ''">
-
-                                <div class="items-center text-left">
-                                    <div class="p-6">
-                                        <ul class="pl-8 list-disc">
-                                            <li class="py-1">
-                                                Admin will be able to create courses
-                                            </li>
-                                            <li class="py-1">
-                                                To create a course:
-                                                <ul class="pl-8 list-disc">
-                                                    <li class="py-1">
-                                                        Click [Open Database Interface]
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Hover over [Scheduling] box
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Click [Course]
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="py-1">
-                                                Input information in required fields marked with (*)
-                                            </li>
-                                            <li class="py-1">
-                                                Choose timeblock of course under [Default Timeblock] field. Course times
-                                                are
-                                                shown in the dropdown menu.
-                                            </li>
-                                            <li class="py-1">
-                                                [Default Primary Instructor] field contains a list of teachers created
-                                                in
-                                                Step 2
-                                            </li>
-                                            <li class="py-1">
-                                                Click [Save] to store the course in the database - newly created courses
-                                                will appear in the table to the right
-                                                <ul class="pl-8 list-disc">
-                                                    <li class="py-1">
-                                                        View course - click <a><i
-                                                            class="mr-2 transform fa fa-eye"
-                                                            aria-hidden="true"></i></a>
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Edit course - click <a><i
-                                                            class="mr-2 transform fa fa-edit"
-                                                            aria-hidden="true"></i></a>
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Delete course - click <a><i
-                                                            class="mr-2 transform fa fa-trash"
-                                                            aria-hidden="true"></i></a>
-                                                    </li>
-                                                    <li class="py-1">
-                                                        To search for a course, Admin may use the search bar above the
-                                                        table
-                                                        or scroll through the table.
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                        <button class="items-center px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700"
-                                                @click="selected !== 4 ? selected = 4 : selected = null">
-                                            Close
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="relative border-b border-gray-200">
-                            <button type="button" class="w-full px-8 py-6 text-left"
-                                    @click="selected !== 5 ? selected = 5 : selected = null">
-                                <div class="flex items-center justify-between text-2xl">
-                                    <span>Step 5. Manually Create Sections  </span>
-                                    <span class="ico-plus"></span>
-                                </div>
-                            </button>
-                            <div id="select5" class="relative overflow-hidden transition-all duration-700 max-h-0"
-                                 style=""
-                                 x-ref="container5"
-                                 x-bind:style="selected == 5 ? 'max-height: ' + $refs.container5.scrollHeight + 'px' : ''">
-
-                                <div class="items-center text-left">
-                                    <div class="p-6">
-                                        <ul class="pl-8 list-disc">
-                                            <li class="py-1">
-                                                Admin will be able to create sections for added courses in the database.
-                                                Some classes have multiple sections per semester. This section will
-                                                allow
-                                                Admin to account for that and add respective teachers to courses.
-                                            </li>
-                                            <li class="py-1">
-                                                To create a section:
-                                                <ul class="pl-8 list-disc">
-                                                    <li class="py-1">
-                                                        Click [Open Database Interface]
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Hover over [Scheduling] box
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Click [Sections]
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="py-1">
-                                                Note: Courses created in Step 4 are not considered for a schedule until
-                                                a
-                                                section has been created for them in this step.
-                                            </li>
-                                            <li class="py-1">
-                                                Input information in required fields marked with (*)
-                                            </li>
-                                            <li class="py-1">
-                                                [Course] field will contain a list of courses added to the database in
-                                                Step
-                                                4.
-                                            </li>
-                                            <li class="py-1">
-                                                Choose timeblock of course under [Default Timeblock] field. Course times
-                                                are
-                                                shown in the dropdown menu.
-                                            </li>
-                                            <li class="py-1">
-                                                [Schedule] field will contain a list of schedule names created in Step
-                                                3.
-                                                When a schedule name is selected, the course section will be added to
-                                                the
-                                                schedule’s list of sections/courses
-                                            </li>
-                                            <li class="py-1">
-                                                Click [Save] to store the course in the database - newly created courses
-                                                will appear in the table to the right
-                                                <ul class="pl-8 list-disc">
-                                                    <li class="py-1">
-                                                        View section - click <a><i
-                                                            class="mr-2 transform fa fa-eye"
-                                                            aria-hidden="true"></i></a>
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Edit section - click <a><i
-                                                            class="mr-2 transform fa fa-edit"
-                                                            aria-hidden="true"></i></a>
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Delete section - click <a><i
-                                                            class="mr-2 transform fa fa-trash"
-                                                            aria-hidden="true"></i></a>
-                                                    </li>
-                                                    <li class="py-1">
-                                                        To search for a section, Admin may use the search bar above the
-                                                        table
-                                                        or scroll through the table.
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                        <button class="items-center px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700"
-                                                @click="selected !== 5 ? selected = 5 : selected = null">
-                                            Close
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="relative border-b border-gray-200">
-                            <button type="button" class="w-full px-8 py-6 text-left"
-                                    @click="selected !== 6 ? selected = 6 : selected = null">
-                                <div class="flex items-center justify-between text-2xl">
-                                    <span>Step 6. Manually Create Preferences  </span>
-                                    <span class="ico-plus"></span>
-                                </div>
-                            </button>
-                            <div id="select6" class="relative overflow-hidden transition-all duration-700 max-h-0"
-                                 style=""
-                                 x-ref="container6"
-                                 x-bind:style="selected == 6 ? 'max-height: ' + $refs.container6.scrollHeight + 'px' : ''">
-
-                                <div class="items-center text-left">
-                                    <div class="p-6">
-                                        <ul class="pl-8 list-disc">
-                                            <li class="py-1">
-                                                Admin will be able to create user and course preferences to be tested
-                                                against the created schedule to ensure the most optimal schedule and
-                                                avoid
-                                                conflicts.
-                                            </li>
-                                            <li class="py-1">
-                                                Teachers and students will submit their preferences to the Admin.
-                                            </li>
-                                            <li class="py-1">
-                                                The Admin will be able to log these preferences in this section
-                                            </li>
-                                            <li class="py-1">
-                                                To create a preference:
-                                                <ul class="pl-8 list-disc">
-                                                    <li class="py-1">
-                                                        Click [Open Database Interface]
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Hover over [Constraints] box
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Click [Create Preference]
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="py-1">
-                                                Create a constraint for what time a teacher wants to teach their classes
-                                                <ul class="pl-8 list-disc">
-                                                    <li class="py-1">
-                                                        Click [accounts | user] under [First Member Type]
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Select a preference member under [First Preference Member]
+                                                        To add a student:
                                                         <ul class="pl-8 list-disc">
                                                             <li class="py-1">
-                                                                List contains students and teachers. Select a teacher
+                                                                Click [Open Database Interface]
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Hover over [Users] box
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Click [Students].
                                                             </li>
                                                         </ul>
                                                     </li>
                                                     <li class="py-1">
-                                                        Click [database | timeblock] under [Second Member Type]
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Select timeblock teacher would prefer to teach under [Second
-                                                        Preference Member]
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Click [Weight is Positive] checkbox if preference is desired
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Click [Submit] to save preference in database
-                                                    </li>
-                                                </ul>
-                                            </li>
-
-                                            <li class="py-1">
-                                                Create a constraint for what courses a teacher wants to teach
-                                                <ul class="pl-8 list-disc">
-                                                    <li class="py-1">
-                                                        Click [accounts | user] under [First Member Type]
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Select a preference member under [First Preference Member]
+                                                        Input respective data in required fields
                                                         <ul class="pl-8 list-disc">
                                                             <li class="py-1">
-                                                                List contains students and teachers. Select a teacher
+                                                                [Student ID Number] requires 7 digits
+                                                            </li>
+                                                            <li class="py-1">
+                                                                [Email] must refer to University delegated email
                                                             </li>
                                                         </ul>
                                                     </li>
                                                     <li class="py-1">
-                                                        Click [database | course] under [Second Member Type]
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Select course teacher would prefer to teach under [Second
-                                                        Preference
-                                                        Member]
-
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Click [Weight is Positive] checkbox if preference is desired
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Click [Submit] to save preference in database
-                                                    </li>
-                                                </ul>
-                                            </li>
-
-                                            <li class="py-1">
-                                                Create a constraint for what class a student wants to take
-                                                <ul class="pl-8 list-disc">
-                                                    <li class="py-1">
-                                                        Click [accounts | user] under [First Member Type]
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Select a preference member under [First Preference Member]
+                                                        Click [Save] to store data in the database - newly created
+                                                        student will
+                                                        appear in the table to the right
                                                         <ul class="pl-8 list-disc">
                                                             <li class="py-1">
-                                                                List contains students and teachers. Select a student
+                                                                View student - click <a><i
+                                                                    class="mr-2 transform fa fa-eye"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Edit student - click <a><i
+                                                                    class="mr-2 transform fa fa-edit"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Delete student - click <a><i
+                                                                    class="mr-2 transform fa fa-trash"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                To search for a student, Admin may use the search bar
+                                                                above the
+                                                                table or scroll through the table
                                                             </li>
                                                         </ul>
                                                     </li>
-                                                    <li class="py-1">
-                                                        Click [database | course] under [Second Member Type]
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Select course student would prefer to take under [Second
-                                                        Preference
-                                                        Member]
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Click [Weight is Positive] checkbox if preference is desired
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Click [Submit] to save preference in database
-                                                    </li>
                                                 </ul>
-                                            </li>
-
-                                            <li class="py-1">
-                                                Create a constraint for what time a class would prefer to be held
-                                                <ul class="pl-8 list-disc">
-                                                    <li class="py-1">
-                                                        Click [database | course] under [First Member Type]
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Select course under [First Preference Member]
-                                                        <ul class="pl-8 list-disc">
-                                                            <li class="py-1">
-                                                                List will contain a list of added courses from Step 4
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Click [database | timeblock] under [Second Member Type]
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Select preferred course time under [Second Preference Member]
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Click [Weight is Positive] checkbox if preference is desired
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Click [Submit] to save preference in database
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="py-1">
-                                                To view saved preferences, from the Home view, click [Open Database
-                                                Interface], hover over [Constraints] box, click [View Saved Preferences]
-                                            </li>
-                                            <li class="py-1">
-                                                Created preferences will appear in the table
-                                                <ul class="pl-8 list-disc">
-                                                    <li class="py-1">
-                                                        View preference - click <a><i
-                                                            class="mr-2 transform fa fa-eye"
-                                                            aria-hidden="true"></i></a>
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Edit preference - click <a><i
-                                                            class="mr-2 transform fa fa-edit"
-                                                            aria-hidden="true"></i></a>
-                                                    </li>
-                                                    <li class="py-1">
-                                                        Delete preference - click <a><i
-                                                            class="mr-2 transform fa fa-trash"
-                                                            aria-hidden="true"></i></a>
-                                                    </li>
-                                                    <li class="py-1">
-                                                        To search for a section, Admin may use the search bar above the
-                                                        table or scroll through the table.
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                        <button class="items-center px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700"
-                                                @click="selected !== 6 ? selected = 6 : selected = null">
-                                            Close
-                                        </button>
+                                                <button class="btn-cancel"
+                                                        @click="selected !== 1 ? selected = 1 : selected = null">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="relative border-b border-gray-200">
-                            <button type="button" class="w-full px-8 py-6 text-left"
-                                    @click="selected !== 7 ? selected = 7 : selected = null">
-                                <div class="flex items-center justify-between text-2xl">
-                                    <span>Step 7. Create Preference Sets   </span>
-                                    <span class="ico-plus"></span>
-                                </div>
-                            </button>
-                            <div id="select7"
-                                 class="relative overflow-hidden transition-all duration-700 max-h-0"
-                                 style=""
-                                 x-ref="container7"
-                                 x-bind:style="selected == 7 ? 'max-height: ' + $refs.container7.scrollHeight + 'px' : ''">
+                                </li>
+                                <li class="relative border-b border-gray-200">
+                                    <button type="button" class="w-full px-8 py-6 text-left"
+                                            @click="selected !== 2 ? selected = 2 : selected = null">
+                                        <div class="flex items-center justify-between text-2xl">
+                                            <span>Step 2. Manually Add Teacher to Database </span>
+                                            <span class="ico-plus"></span>
+                                        </div>
+                                    </button>
+                                    <div id="select2"
+                                         class="relative overflow-hidden transition-all duration-700 max-h-0"
+                                         style=""
+                                         x-ref="container2"
+                                         x-bind:style="selected == 2 ? 'max-height: ' + $refs.container2.scrollHeight + 'px' : ''">
 
-                                <div class="items-center text-left">
-                                    <div class="p-6">
-                                        <ul class="pl-8 list-disc">
-                                            <li class="py-1">
-                                                Admin will be able to aggregate a list of preferences to be included in
-                                                the
-                                                creation of a schedule
-                                            </li>
-                                            <li class="py-1">
-                                                If the Admin does not include the list of preferences in the set,
-                                                preferences will not be included in the checking the integrity of the
-                                                schedule
-                                            </li>
-                                            <li class="py-1">
-                                                Create a unique set name under [New Set Name]
+                                        <div class="items-center text-left">
+                                            <div class="p-6">
                                                 <ul class="pl-8 list-disc">
                                                     <li class="py-1">
-                                                        The unique preference set name will be referenced when creating
+                                                        Admin will be to manually add teachers to the database
+                                                    </li>
+                                                    <li class="py-1">
+                                                        To add a teacher:
+                                                        <ul class="pl-8 list-disc">
+                                                            <li class="py-1">
+                                                                Click [Open Database Interface]
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Hover over [Users] box
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Click [Teachers]
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Input respective data in required fields
+                                                        <ul class="pl-8 list-disc">
+                                                            <li class="py-1">
+                                                                [Department] may be left blank. Admin will be able to
+                                                                update
+                                                                this
+                                                                field at a later time
+                                                            </li>
+                                                            <li class="py-1">
+                                                                [Email] must refer to University delegated email
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Click [Save] to store data in the database - newly created
+                                                        student will
+                                                        appear in the table to the right
+                                                        <ul class="pl-8 list-disc">
+                                                            <li class="py-1">
+                                                                View student - click <a><i
+                                                                    class="mr-2 transform fa fa-eye"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Edit student - click <a><i
+                                                                    class="mr-2 transform fa fa-edit"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Delete student - click <a><i
+                                                                    class="mr-2 transform fa fa-trash"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                To search for a student, Admin may use the search bar
+                                                                above the
+                                                                table or scroll through the table
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                                <button class="btn-cancel"
+                                                        @click="selected !== 2 ? selected = 2 : selected = null">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="relative border-b border-gray-200">
+                                    <button type="button" class="w-full px-8 py-6 text-left"
+                                            @click="selected !== 3 ? selected = 3 : selected = null">
+                                        <div class="flex items-center justify-between text-2xl">
+                                            <span>Step 3. Create a Schedule Name  </span>
+                                            <span class="ico-plus"></span>
+                                        </div>
+                                    </button>
+                                    <div id="select3"
+                                         class="relative overflow-hidden transition-all duration-700 max-h-0"
+                                         style=""
+                                         x-ref="container3"
+                                         x-bind:style="selected == 3 ? 'max-height: ' + $refs.container3.scrollHeight + 'px' : ''">
+
+                                        <div class="items-center text-left">
+                                            <div class="p-6">
+                                                <ul class="pl-8 list-disc">
+                                                    <li class="py-1">
+                                                        Admin will be able to create a schedule name that will be
+                                                        referenced in
+                                                        the
+                                                        final steps in the schedule making process.
+                                                    </li>
+                                                    <li class="py-1">
+                                                        To create a schedule name:
+                                                        <ul class="pl-8 list-disc">
+                                                            <li class="py-1">
+                                                                Click [Open Database Interface]
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Hover over [Scheduling] box
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Click [Schedules]
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Create a unique schedule name for its respective semester
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Select [Year] and [Season] of the schedule
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Click [Save] to store data in the database - newly created
+                                                        student will
+                                                        appear in the table to the right
+                                                        <ul class="pl-8 list-disc">
+                                                            <li class="py-1">
+                                                                View schedule name - click <a><i
+                                                                    class="mr-2 transform fa fa-eye"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Edit schedule name- click <a><i
+                                                                    class="mr-2 transform fa fa-edit"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Delete schedule name - click <a><i
+                                                                    class="mr-2 transform fa fa-trash"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                To search for a schedule name, Admin may use the search
+                                                                bar
+                                                                above
+                                                                the table or scroll through the table.
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                                <button class="btn-cancel"
+                                                        @click="selected !== 3 ? selected = 3 : selected = null">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="relative border-b border-gray-200">
+                                    <button type="button" class="w-full px-8 py-6 text-left"
+                                            @click="selected !== 4 ? selected = 4 : selected = null">
+                                        <div class="flex items-center justify-between text-2xl">
+                                            <span>Step 4. Manually Create Courses  </span>
+                                            <span class="ico-plus"></span>
+                                        </div>
+                                    </button>
+                                    <div id="select4"
+                                         class="relative overflow-hidden transition-all duration-700 max-h-0"
+                                         style=""
+                                         x-ref="container4"
+                                         x-bind:style="selected == 4 ? 'max-height: ' + $refs.container4.scrollHeight + 'px' : ''">
+
+                                        <div class="items-center text-left">
+                                            <div class="p-6">
+                                                <ul class="pl-8 list-disc">
+                                                    <li class="py-1">
+                                                        Admin will be able to create courses
+                                                    </li>
+                                                    <li class="py-1">
+                                                        To create a course:
+                                                        <ul class="pl-8 list-disc">
+                                                            <li class="py-1">
+                                                                Click [Open Database Interface]
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Hover over [Scheduling] box
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Click [Course]
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Input information in required fields marked with (*)
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Choose timeblock of course under [Default Timeblock] field.
+                                                        Course times
+                                                        are
+                                                        shown in the dropdown menu.
+                                                    </li>
+                                                    <li class="py-1">
+                                                        [Default Primary Instructor] field contains a list of teachers
+                                                        created
+                                                        in
+                                                        Step 2
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Click [Save] to store the course in the database - newly created
+                                                        courses
+                                                        will appear in the table to the right
+                                                        <ul class="pl-8 list-disc">
+                                                            <li class="py-1">
+                                                                View course - click <a><i
+                                                                    class="mr-2 transform fa fa-eye"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Edit course - click <a><i
+                                                                    class="mr-2 transform fa fa-edit"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Delete course - click <a><i
+                                                                    class="mr-2 transform fa fa-trash"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                To search for a course, Admin may use the search bar
+                                                                above the
+                                                                table
+                                                                or scroll through the table.
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                                <button class="btn-cancel"
+                                                        @click="selected !== 4 ? selected = 4 : selected = null">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="relative border-b border-gray-200">
+                                    <button type="button" class="w-full px-8 py-6 text-left"
+                                            @click="selected !== 5 ? selected = 5 : selected = null">
+                                        <div class="flex items-center justify-between text-2xl">
+                                            <span>Step 5. Manually Create Sections  </span>
+                                            <span class="ico-plus"></span>
+                                        </div>
+                                    </button>
+                                    <div id="select5"
+                                         class="relative overflow-hidden transition-all duration-700 max-h-0"
+                                         style=""
+                                         x-ref="container5"
+                                         x-bind:style="selected == 5 ? 'max-height: ' + $refs.container5.scrollHeight + 'px' : ''">
+
+                                        <div class="items-center text-left">
+                                            <div class="p-6">
+                                                <ul class="pl-8 list-disc">
+                                                    <li class="py-1">
+                                                        Admin will be able to create sections for added courses in the
+                                                        database.
+                                                        Some classes have multiple sections per semester. This section
+                                                        will
+                                                        allow
+                                                        Admin to account for that and add respective teachers to
+                                                        courses.
+                                                    </li>
+                                                    <li class="py-1">
+                                                        To create a section:
+                                                        <ul class="pl-8 list-disc">
+                                                            <li class="py-1">
+                                                                Click [Open Database Interface]
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Hover over [Scheduling] box
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Click [Sections]
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Note: Courses created in Step 4 are not considered for a
+                                                        schedule until
                                                         a
-                                                        schedule [<a class="text-blue-500 hover:underline"
-                                                                     href="{% url 'documentation:schedule-documentation' %}">here</a>]
+                                                        section has been created for them in this step.
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Input information in required fields marked with (*)
+                                                    </li>
+                                                    <li class="py-1">
+                                                        [Course] field will contain a list of courses added to the
+                                                        database in
+                                                        Step
+                                                        4.
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Choose timeblock of course under [Default Timeblock] field.
+                                                        Course times
+                                                        are
+                                                        shown in the dropdown menu.
+                                                    </li>
+                                                    <li class="py-1">
+                                                        [Schedule] field will contain a list of schedule names created
+                                                        in Step
+                                                        3.
+                                                        When a schedule name is selected, the course section will be
+                                                        added to
+                                                        the
+                                                        schedule’s list of sections/courses
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Click [Save] to store the course in the database - newly created
+                                                        courses
+                                                        will appear in the table to the right
+                                                        <ul class="pl-8 list-disc">
+                                                            <li class="py-1">
+                                                                View section - click <a><i
+                                                                    class="mr-2 transform fa fa-eye"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Edit section - click <a><i
+                                                                    class="mr-2 transform fa fa-edit"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Delete section - click <a><i
+                                                                    class="mr-2 transform fa fa-trash"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                To search for a section, Admin may use the search bar
+                                                                above the
+                                                                table
+                                                                or scroll through the table.
+                                                            </li>
+                                                        </ul>
                                                     </li>
                                                 </ul>
-                                            </li>
-                                            <li class="py-1">
-                                                Check off all relevant preferences to be added into the set
-                                            </li>
-                                            <li class="py-1">
-                                                Click [Save] to store the preference sets in the database - newly
-                                                created
-                                                sections will appear in the table to the right
+                                                <button class="btn-cancel"
+                                                        @click="selected !== 5 ? selected = 5 : selected = null">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="relative border-b border-gray-200">
+                                    <button type="button" class="w-full px-8 py-6 text-left"
+                                            @click="selected !== 6 ? selected = 6 : selected = null">
+                                        <div class="flex items-center justify-between text-2xl">
+                                            <span>Step 6. Manually Create Preferences  </span>
+                                            <span class="ico-plus"></span>
+                                        </div>
+                                    </button>
+                                    <div id="select6"
+                                         class="relative overflow-hidden transition-all duration-700 max-h-0"
+                                         style=""
+                                         x-ref="container6"
+                                         x-bind:style="selected == 6 ? 'max-height: ' + $refs.container6.scrollHeight + 'px' : ''">
+
+                                        <div class="items-center text-left">
+                                            <div class="p-6">
                                                 <ul class="pl-8 list-disc">
                                                     <li class="py-1">
-                                                        View preference sets - click <a><i
-                                                            class="mr-2 transform fa fa-eye"
-                                                            aria-hidden="true"></i></a>
+                                                        Admin will be able to create user and course preferences to be
+                                                        tested
+                                                        against the created schedule to ensure the most optimal schedule
+                                                        and
+                                                        avoid
+                                                        conflicts.
                                                     </li>
                                                     <li class="py-1">
-                                                        Edit preference sets - click <a><i
-                                                            class="mr-2 transform fa fa-edit"
-                                                            aria-hidden="true"></i></a>
+                                                        Teachers and students will submit their preferences to the
+                                                        Admin.
                                                     </li>
                                                     <li class="py-1">
-                                                        Delete preference sets - click <a><i
-                                                            class="mr-2 transform fa fa-trash"
-                                                            aria-hidden="true"></i></a>
+                                                        The Admin will be able to log these preferences in this section
                                                     </li>
                                                     <li class="py-1">
-                                                        Download preference set - click <a><i
-                                                            class="mr-2 transform fa fa-download"
-                                                            aria-hidden="true"></i></a>
+                                                        To create a preference:
+                                                        <ul class="pl-8 list-disc">
+                                                            <li class="py-1">
+                                                                Click [Open Database Interface]
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Hover over [Constraints] box
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Click [Create Preference]
+                                                            </li>
+                                                        </ul>
                                                     </li>
                                                     <li class="py-1">
-                                                        To search for a set, Admin may use the search bar above the
-                                                        table or
-                                                        scroll through the table
+                                                        Create a constraint for what time a teacher wants to teach their
+                                                        classes
+                                                        <ul class="pl-8 list-disc">
+                                                            <li class="py-1">
+                                                                Click [accounts | user] under [First Member Type]
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Select a preference member under [First Preference
+                                                                Member]
+                                                                <ul class="pl-8 list-disc">
+                                                                    <li class="py-1">
+                                                                        List contains students and teachers. Select a
+                                                                        teacher
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Click [database | timeblock] under [Second Member Type]
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Select timeblock teacher would prefer to teach under
+                                                                [Second
+                                                                Preference Member]
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Click [Weight is Positive] checkbox if preference is
+                                                                desired
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Click [Submit] to save preference in database
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+
+                                                    <li class="py-1">
+                                                        Create a constraint for what courses a teacher wants to teach
+                                                        <ul class="pl-8 list-disc">
+                                                            <li class="py-1">
+                                                                Click [accounts | user] under [First Member Type]
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Select a preference member under [First Preference
+                                                                Member]
+                                                                <ul class="pl-8 list-disc">
+                                                                    <li class="py-1">
+                                                                        List contains students and teachers. Select a
+                                                                        teacher
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Click [database | course] under [Second Member Type]
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Select course teacher would prefer to teach under
+                                                                [Second
+                                                                Preference
+                                                                Member]
+
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Click [Weight is Positive] checkbox if preference is
+                                                                desired
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Click [Submit] to save preference in database
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+
+                                                    <li class="py-1">
+                                                        Create a constraint for what class a student wants to take
+                                                        <ul class="pl-8 list-disc">
+                                                            <li class="py-1">
+                                                                Click [accounts | user] under [First Member Type]
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Select a preference member under [First Preference
+                                                                Member]
+                                                                <ul class="pl-8 list-disc">
+                                                                    <li class="py-1">
+                                                                        List contains students and teachers. Select a
+                                                                        student
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Click [database | course] under [Second Member Type]
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Select course student would prefer to take under [Second
+                                                                Preference
+                                                                Member]
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Click [Weight is Positive] checkbox if preference is
+                                                                desired
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Click [Submit] to save preference in database
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+
+                                                    <li class="py-1">
+                                                        Create a constraint for what time a class would prefer to be
+                                                        held
+                                                        <ul class="pl-8 list-disc">
+                                                            <li class="py-1">
+                                                                Click [database | course] under [First Member Type]
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Select course under [First Preference Member]
+                                                                <ul class="pl-8 list-disc">
+                                                                    <li class="py-1">
+                                                                        List will contain a list of added courses from
+                                                                        Step 4
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Click [database | timeblock] under [Second Member Type]
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Select preferred course time under [Second Preference
+                                                                Member]
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Click [Weight is Positive] checkbox if preference is
+                                                                desired
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Click [Submit] to save preference in database
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="py-1">
+                                                        To view saved preferences, from the Home view, click [Open
+                                                        Database
+                                                        Interface], hover over [Constraints] box, click [View Saved
+                                                        Preferences]
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Created preferences will appear in the table
+                                                        <ul class="pl-8 list-disc">
+                                                            <li class="py-1">
+                                                                View preference - click <a><i
+                                                                    class="mr-2 transform fa fa-eye"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Edit preference - click <a><i
+                                                                    class="mr-2 transform fa fa-edit"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Delete preference - click <a><i
+                                                                    class="mr-2 transform fa fa-trash"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                To search for a section, Admin may use the search bar
+                                                                above the
+                                                                table or scroll through the table.
+                                                            </li>
+                                                        </ul>
                                                     </li>
                                                 </ul>
-                                            </li>
-                                        </ul>
-                                        <button class="items-center px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700"
-                                                @click="selected !== 7 ? selected = 7 : selected = null">
-                                            Close
-                                        </button>
+                                                <button class="btn-cancel"
+                                                        @click="selected !== 6 ? selected = 6 : selected = null">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                                </li>
+                                <li class="relative border-b border-gray-200">
+                                    <button type="button" class="w-full px-8 py-6 text-left"
+                                            @click="selected !== 7 ? selected = 7 : selected = null">
+                                        <div class="flex items-center justify-between text-2xl">
+                                            <span>Step 7. Create Preference Sets   </span>
+                                            <span class="ico-plus"></span>
+                                        </div>
+                                    </button>
+                                    <div id="select7"
+                                         class="relative overflow-hidden transition-all duration-700 max-h-0"
+                                         style=""
+                                         x-ref="container7"
+                                         x-bind:style="selected == 7 ? 'max-height: ' + $refs.container7.scrollHeight + 'px' : ''">
+
+                                        <div class="items-center text-left">
+                                            <div class="p-6">
+                                                <ul class="pl-8 list-disc">
+                                                    <li class="py-1">
+                                                        Admin will be able to aggregate a list of preferences to be
+                                                        included in
+                                                        the
+                                                        creation of a schedule
+                                                    </li>
+                                                    <li class="py-1">
+                                                        If the Admin does not include the list of preferences in the
+                                                        set,
+                                                        preferences will not be included in the checking the integrity
+                                                        of the
+                                                        schedule
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Create a unique set name under [New Set Name]
+                                                        <ul class="pl-8 list-disc">
+                                                            <li class="py-1">
+                                                                The unique preference set name will be referenced when
+                                                                creating
+                                                                a
+                                                                schedule [<a class="text-blue-500 hover:underline"
+                                                                             href="{% url 'documentation:schedule-documentation' %}">here</a>]
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Check off all relevant preferences to be added into the set
+                                                    </li>
+                                                    <li class="py-1">
+                                                        Click [Save] to store the preference sets in the database -
+                                                        newly
+                                                        created
+                                                        sections will appear in the table to the right
+                                                        <ul class="pl-8 list-disc">
+                                                            <li class="py-1">
+                                                                View preference sets - click <a><i
+                                                                    class="mr-2 transform fa fa-eye"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Edit preference sets - click <a><i
+                                                                    class="mr-2 transform fa fa-edit"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Delete preference sets - click <a><i
+                                                                    class="mr-2 transform fa fa-trash"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                Download preference set - click <a><i
+                                                                    class="mr-2 transform fa fa-download"
+                                                                    aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li class="py-1">
+                                                                To search for a set, Admin may use the search bar above
+                                                                the
+                                                                table or
+                                                                scroll through the table
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                                <button class="btn-cancel"
+                                                        @click="selected !== 7 ? selected = 7 : selected = null">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
