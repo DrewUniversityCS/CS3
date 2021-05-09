@@ -54,8 +54,13 @@ class CrispyModelForm(ModelForm):
 
 def make_user_form(dynamic_model):
     class UserForm(CrispyModelForm):
-        first_name = CharField(max_length=256, required=False)
-        last_name = CharField(max_length=256, required=False)
+
+        name_required = False
+        if dynamic_model == Teacher:
+            name_required = True
+
+        first_name = CharField(max_length=256, required=name_required)
+        last_name = CharField(max_length=256, required=name_required)
         if dynamic_model == Student:
             student_id = IntegerField(validators=[student_id_validator], required=False)
             class_standing = ChoiceField(choices=YEAR_IN_SCHOOL_CHOICES, required=False)
@@ -230,15 +235,16 @@ class EmptyForm(Form):
 
 
 class CreatePreferenceForm(Form):
-    preference_models = ['course', 'baseuser', 'section', 'timeblock']
+    preference_models = ['course', 'section', 'timeblock', 'baseuser']
 
     object_1_type = ModelChoiceField(
         queryset=ContentType.objects.filter(model__in=preference_models), label="Member A Type",
-        widget=tailwind_dropdown, initial='accounts | user')
+        widget=tailwind_dropdown, initial=ContentType.objects.get(app_label='database', model='course'))
     object_1 = ModelChoiceField(queryset=Course.objects.none(), widget=tailwind_dropdown)
     object_2_type = ModelChoiceField(queryset=ContentType.objects.filter(model__in=preference_models),
                                      label="Member B Type",
-                                     widget=tailwind_dropdown, initial='accounts | user')
+                                     widget=tailwind_dropdown,
+                                     initial=ContentType.objects.get(app_label='database', model='course'))
     object_2 = ModelChoiceField(queryset=Course.objects.none(),
                                 widget=tailwind_dropdown)
 
@@ -246,8 +252,8 @@ class CreatePreferenceForm(Form):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['object_1'].queryset = BaseUser.objects.all()
-        self.fields['object_2'].queryset = BaseUser.objects.all()
+        self.fields['object_1'].queryset = Course.objects.all()
+        self.fields['object_2'].queryset = Course.objects.all()
 
         if 'object_1_type' in self.data:
             try:
