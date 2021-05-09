@@ -1,7 +1,11 @@
 from django.contrib.auth.models import AbstractUser
+from django.db.models import CharField
 
 
 class BaseUser(AbstractUser):
+    first_name = CharField(null=True, blank=True, max_length=100)
+    last_name = CharField(null=True, blank=True, max_length=100)
+
     def __str__(self):
         if self.email == "":
             return self.username

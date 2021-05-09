@@ -4,12 +4,15 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.db.models import Exists, OuterRef
 from django.forms import ModelForm, CheckboxSelectMultiple, CharField, \
-    EmailField, ModelChoiceField, Form, ModelMultipleChoiceField, HiddenInput, Select, BooleanField
+    EmailField, ModelChoiceField, Form, ModelMultipleChoiceField, HiddenInput, Select, BooleanField, IntegerField, \
+    ChoiceField
 
 from accounts.models import BaseUser
+from database.enums import YEAR_IN_SCHOOL_CHOICES
 from database.models.schedule_models import Schedule, Course
 from database.models.structural_models import ModelSet, SetMembership
 from database.models.user_models import Teacher, Student
+from database.validators import student_id_validator
 
 tailwind_dropdown = Select(attrs={
     'class': 'bg-white focus:outline-none border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none '
@@ -51,22 +54,22 @@ class CrispyModelForm(ModelForm):
 
 def make_user_form(dynamic_model):
     class UserForm(CrispyModelForm):
-        if dynamic_model == Teacher:
-            first_name = CharField(max_length=256)
-            last_name = CharField(max_length=256)
+        first_name = CharField(max_length=256, required=False)
+        last_name = CharField(max_length=256, required=False)
+        if dynamic_model == Student:
+            student_id = IntegerField(validators=[student_id_validator], required=False)
+            class_standing = ChoiceField(choices=YEAR_IN_SCHOOL_CHOICES, required=False)
         email = EmailField()
 
         def clean(self):
             cleaned_data = super().clean()
-            if dynamic_model == Teacher:
-                last_name = cleaned_data.get("last_name")
-                first_name = cleaned_data.get("first_name")
+            last_name = cleaned_data.get("last_name")
+            first_name = cleaned_data.get("first_name")
             email = cleaned_data.get("email")
-            if dynamic_model == Teacher:
-                if any(i.isdigit() for i in first_name):
-                    raise ValidationError("First Name must contain only characters.")
-                elif any(i.isdigit() for i in last_name):
-                    raise ValidationError("Last Name must contain only characters.")
+            if any(i.isdigit() for i in first_name):
+                raise ValidationError("First Name must contain only characters.")
+            elif any(i.isdigit() for i in last_name):
+                raise ValidationError("Last Name must contain only characters.")
             if not self.instance.id:
                 if BaseUser.objects.filter(username=email).exists():
                     raise ValidationError("Email is already registered. Please use a different email.")
@@ -85,40 +88,41 @@ def make_user_form(dynamic_model):
                 if dynamic_model == Student:
                     student = Student.objects.filter(pk=self.instance.id)
                     user_object = BaseUser.objects.filter(pk=student[0].user_id)
+
                     user_object.update(
-                        username=cleaned_data["email"].split("@")[0],
-                        email=cleaned_data["email"],
-                        # first_name=cleaned_data["first_name"],
-                        # last_name=cleaned_data["last_name"]
+                        username=cleaned_data.get("email").split("@")[0],
+                        email=cleaned_data.get("email"),
+                        first_name=cleaned_data.get("first_name"),
+                        last_name=cleaned_data.get("last_name")
                     )
-                    # student.update(
-                    #     # student_id=cleaned_data["student_id"],
-                    #     # class_standing=cleaned_data["class_standing"],
-                    # )
+                    student.update(
+                        student_id=cleaned_data.get("student_id"),
+                        class_standing=cleaned_data.get("class_standing"),
+                    )
                 elif dynamic_model == Teacher:
                     teacher = Teacher.objects.filter(pk=self.instance.id)
                     user_object = BaseUser.objects.filter(pk=teacher[0].user_id)
                     user_object.update(
-                        username=cleaned_data["email"].split("@")[0],
-                        email=cleaned_data["email"],
-                        first_name=cleaned_data["first_name"],
-                        last_name=cleaned_data["last_name"]
+                        username=cleaned_data.get("email").split("@")[0],
+                        email=cleaned_data.get("email"),
+                        first_name=cleaned_data.get("first_name"),
+                        last_name=cleaned_data.get("last_name")
                     )
                     teacher.update(
-                        department=cleaned_data["department"]
+                        department=cleaned_data.get("department")
                     )
             else:
                 if dynamic_model == Student:
                     user_object = BaseUser(
-                        username=cleaned_data["email"].split("@")[0],
-                        email=cleaned_data["email"],
+                        username=cleaned_data.get("email").split("@")[0],
+                        email=cleaned_data.get("email"),
                         password=BaseUser.objects.make_random_password(),
-                        # first_name=cleaned_data["first_name"],
-                        # last_name=cleaned_data["last_name"]
+                        first_name=cleaned_data.get("first_name"),
+                        last_name=cleaned_data.get("last_name")
                     )
                     student = Student(
-                        # student_id=cleaned_data["student_id"],
-                        # class_standing=cleaned_data["class_standing"],
+                        student_id=cleaned_data.get("student_id"),
+                        class_standing=cleaned_data.get("class_standing"),
                         user=user_object,
                         user_id=user_object.id
                     )
@@ -126,16 +130,16 @@ def make_user_form(dynamic_model):
                     student.save()
                 else:
                     user_object = BaseUser(
-                        username=cleaned_data["email"].split("@")[0],
-                        email=cleaned_data["email"],
+                        username=cleaned_data.get("email").split("@")[0],
+                        email=cleaned_data.get("email"),
                         password=BaseUser.objects.make_random_password(),
-                        first_name=cleaned_data["first_name"],
-                        last_name=cleaned_data["last_name"]
+                        first_name=cleaned_data.get("first_name"),
+                        last_name=cleaned_data.get("last_name")
                     )
                     teacher = Teacher(
                         user=user_object,
                         user_id=user_object.id,
-                        department=cleaned_data["department"]
+                        department=cleaned_data.get("department")
                     )
                     user_object.save()
                     teacher.save()

@@ -11,8 +11,8 @@ class Student(models.Model):
     The student data model.
     """
     user = models.ForeignKey("accounts.BaseUser", on_delete=models.CASCADE, blank=False, null=False)
-    student_id = models.IntegerField(unique=True, validators=[student_id_validator], null=True)
-    class_standing = models.CharField(max_length=2, choices=YEAR_IN_SCHOOL_CHOICES, null=True)
+    student_id = models.IntegerField(unique=True, validators=[student_id_validator], null=True, blank=True)
+    class_standing = models.CharField(max_length=2, choices=YEAR_IN_SCHOOL_CHOICES, null=True, blank=True)
 
     sets = GenericRelation(SetMembership, related_query_name='student')
 
