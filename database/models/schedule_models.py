@@ -64,6 +64,9 @@ class Section(models.Model):
         return self.course.name + " " + self.course.department.abbreviation + "-" + str(self.course.number) \
                + " Section " + self.section_id
 
+    def natural_key(self):
+        return self.__str__()
+
 
 class SectionNote(models.Model):
     COLOR_RED = 1

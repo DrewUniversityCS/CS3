@@ -6,7 +6,7 @@ from django.views.generic import FormView
 
 from accounts.models import BaseUser
 from database.forms import EmptyForm
-from database.models.schedule_models import Course, Timeblock
+from database.models.schedule_models import Course, Timeblock, Section
 from database.models.structural_models import SetMembership, ModelSet
 from database.views import DynamicModelMixin
 from dataingest.forms import UploadCSVFileForm
@@ -139,14 +139,27 @@ def download_as_csv(request):
             elif dict['object_1_content_type'] == ['accounts', 'baseuser']:
                 object_1_natural_id = BaseUser.objects.get(id=dict['object_1_id']).email
                 dict['object_1_content_type'] = 'teacher'
+            elif dict['object_1_content_type'] == ['database', 'timeblock']:
+                object_1_natural_id = Timeblock.objects.get(id=dict['object_1_id']).block_id
+                dict['object_1_content_type'] = 'timeblock'
+            elif dict['object_1_content_type'] == ['database', 'section']:
+                object_1_natural_id = Section.objects.get(id=dict['object_1_id']).id
+                dict['object_1_content_type'] = 'section'
 
             object_2_natural_id = ''
             if dict['object_2_content_type'] == ['database', 'course']:
                 object_2_natural_id = Course.objects.get(id=dict['object_2_id']).name
                 dict['object_2_content_type'] = 'course'
+            elif dict['object_2_content_type'] == ['accounts', 'baseuser']:
+                print(dict['object_2_id'])
+                object_2_natural_id = BaseUser.objects.get(id=dict['object_2_id']).email
+                dict['object_2_content_type'] = 'teacher'
             elif dict['object_2_content_type'] == ['database', 'timeblock']:
                 object_2_natural_id = Timeblock.objects.get(id=dict['object_2_id']).block_id
                 dict['object_2_content_type'] = 'timeblock'
+            elif dict['object_2_content_type'] == ['database', 'section']:
+                object_2_natural_id = Section.objects.get(id=dict['object_2_id']).id
+                dict['object_2_content_type'] = 'section'
 
             del dict['object_1_id']
             del dict['object_2_id']
