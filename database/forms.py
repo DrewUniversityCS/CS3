@@ -239,12 +239,11 @@ class CreatePreferenceForm(Form):
 
     object_1_type = ModelChoiceField(
         queryset=ContentType.objects.filter(model__in=preference_models), label="Member A Type",
-        widget=tailwind_dropdown, initial=ContentType.objects.get(app_label='database', model='course'))
+        widget=tailwind_dropdown)
     object_1 = ModelChoiceField(queryset=Course.objects.none(), widget=tailwind_dropdown)
     object_2_type = ModelChoiceField(queryset=ContentType.objects.filter(model__in=preference_models),
                                      label="Member B Type",
-                                     widget=tailwind_dropdown,
-                                     initial=ContentType.objects.get(app_label='database', model='course'))
+                                     widget=tailwind_dropdown)
     object_2 = ModelChoiceField(queryset=Course.objects.none(),
                                 widget=tailwind_dropdown)
 
