@@ -38,11 +38,14 @@
     <div class="w-full min-h-screen text-center">
         <form method="post" class="w-1/2 p-8 mx-auto bg-white rounded-lg" id="preference-form"
               dropdown-data-url="{% url 'database:ajax_load_dropdown_options' %}">
+            <div class="mb-10 text-2xl font-bold text-center text-blue-600">
+                Preference Creation
+            </div>
             {% csrf_token %}
 
             {% if form.non_field_errors %}
                 <div class="px-6 py-4 mb-4 text-white bg-red-500 border-0 rounded">
-                   {{ form.non_field_errors }}<i class="fas fa-exclamation-triangle"></i>
+                    {{ form.non_field_errors }}<i class="fas fa-exclamation-triangle"></i>
                 </div>
             {% endif %}
 
