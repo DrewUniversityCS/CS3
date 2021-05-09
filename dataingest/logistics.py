@@ -82,7 +82,7 @@ def create_preferences(file):
         elif row['object_1_content_type'] == 'timeblock':
             obj_1_id = Timeblock.objects.get(block_id=row['object_1_natural_id']).id
         elif row['object_1_content_type'] == 'section':
-            obj_1_id = Section.objects.get(id=row['object_1_natural_id']).id
+            obj_1_id = Section.objects.get(section_id=row['object_1_natural_id']).id
 
         obj_2_id = -1
         if row['object_2_content_type'] == 'course':
@@ -93,7 +93,7 @@ def create_preferences(file):
         elif row['object_2_content_type'] == 'timeblock':
             obj_2_id = Timeblock.objects.get(block_id=row['object_2_natural_id']).id
         elif row['object_2_content_type'] == 'section':
-            obj_2_id = Section.objects.get(id=row['object_2_natural_id']).id
+            obj_2_id = Section.objects.get(section_id=row['object_2_natural_id']).id
 
         shipback.append(Preference(
             weight=row["weight"],

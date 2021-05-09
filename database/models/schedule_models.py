@@ -40,7 +40,7 @@ class Section(models.Model):
     An instantiated class offering. Has a particular time and space during which it happens.
     """
     course = models.ForeignKey("database.Course", on_delete=models.CASCADE, related_name="sections+")
-    section_id = models.CharField(max_length=4)
+    section_id = models.CharField(max_length=4, unique=True)
     primary_instructor = models.ForeignKey("database.Teacher", on_delete=models.CASCADE,
                                            related_name="sections taught+", null=True, blank=True)
     other_instructor = models.ForeignKey("database.Teacher", on_delete=models.CASCADE,
@@ -65,7 +65,7 @@ class Section(models.Model):
                + " Section " + self.section_id
 
     def natural_key(self):
-        return self.__str__()
+        return self.course.name + " " + self.section_id
 
 
 class SectionNote(models.Model):
