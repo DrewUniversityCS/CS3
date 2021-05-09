@@ -46,7 +46,7 @@ function loadSectionNoteCreateForm(url, selector) {
     }
 }
 
-function CreateSectionNote(event, url, color_note_list_selector) {
+function CreateSectionNote(event, url, color_note_list_selector, color_dot_list_selector) {
     event.preventDefault();
     var elements = event.target.elements;
     var obj ={};
@@ -64,10 +64,20 @@ function CreateSectionNote(event, url, color_note_list_selector) {
     .then(restext => {
             event.target.parentNode.style.display = 'none';
             console.log(restext);
-            var formDivs = document.querySelectorAll(color_note_list_selector.replace('<<color_type>>', obj['color']))
-            formDivs.forEach(item => {
-                item.innerHTML = restext;
-            })
+            var formDivs = document.getElementsByClassName(color_note_list_selector.replace('<<color_type>>', obj['color'].slice(1)))
+            // check if the divs exists, if not make them
+            debugger;
+            if (formDivs.length){
+                for(i=0; i<formDivs.length; i++) {
+                    formDivs[i].innerHTML = restext;
+                }
+            }
+            else{
+                var dotDivChilds = document.getElementsByClassName(color_dot_list_selector)
+                for(i=0; i<dotDivChilds.length; i++) {
+                    dotDivChilds[i].innerHTML = `${dotDivChilds[i].innerHTML}<div class="${color_note_list_selector.replace('<<color_type>>', obj['color'].slice(1))}">${restext}</div>`
+                }
+            }
             event.target.reset();
         }
     );

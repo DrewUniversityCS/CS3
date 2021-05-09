@@ -210,8 +210,9 @@ class SectionNoteListView(LoginRequiredMixin, TemplateView):
         context_data.update({
             'notes': SectionNote.objects.filter(
                 section__id=self.kwargs['section_id'],
-                color=self.kwargs['color']
-            )
+                color='#' + self.kwargs['color']
+            ),
+            'color_type': '#' + self.kwargs['color']
         })
         return context_data
 
@@ -241,7 +242,7 @@ class SectionNoteFormView(LoginRequiredMixin, FormView):
             'schedule:section-notes-list',
             kwargs={
                 'section_id': self.kwargs['section_id'],
-                'color': form.cleaned_data['color']
+                'color': form.cleaned_data['color'][1:]
             }
         ))
 
