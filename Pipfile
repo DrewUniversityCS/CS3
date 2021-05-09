@@ -19,6 +19,7 @@ mysqlclient = "*"
 pymysql = "*"
 django_tables2 = "*"
 django_heroku = "*"
+django-colorfield = "*"
 
 [requires]
 python_version = "3.9"
