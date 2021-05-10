@@ -1,16 +1,19 @@
-{% if notes %}
-    {% if color_type == '1' %}
-        <div class="flex"><div class="h-4 w-4 rounded-full my-auto bg-red-600"></div>&nbsp;Red Notes:</div>
-    {% elif color_type == '2' %}
-        <div class="flex"><div class="h-4 w-4 rounded-full my-auto bg-green-600"></div>&nbsp;Green Notes:</div>
-    {% elif color_type == '3' %}
-        <div class="flex"><div class="h-4 w-4 rounded-full my-auto bg-blue-600"></div>&nbsp;Blue Notes:</div>
-    {% endif %}
-{% endif %}
-<ul class="list-decimal list-inside">
-    {% for note in notes %}
-        <li>{{ note.note }}</li>
-    {% empty %}
-        No Notes Yet!
-    {% endfor %}
-</ul>
+<div @click.away="open = false" class="relative" x-data="{ open: false }">
+    <button @click="open = !open"
+            class="flex flex-row items-center m-1 text-lg font-semibold text-left bg-gray-300 rounded-md hover:text-gray-800 focus:text-gray-100 focus:outline-none focus:shadow-outline hover:shadow-md h-8 w-8 rounded-full my-auto" style="background-color: {{ color_type }}">
+    </button>
+    <div x-show="open" x-transition:enter="transition ease-out duration-100"
+         x-transition:enter-start="transform opacity-0 scale-95"
+         x-transition:enter-end="transform opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-75"
+         x-transition:leave-start="transform opacity-100 scale-100"
+         x-transition:leave-end="transform opacity-0 scale-95"
+         class="absolute right-0 origin-top-right rounded-md shadow-lg bg-white p-4 w-72 z-50">
+        <div class="flex"><div class="h-4 w-4 rounded-full my-auto" style="background-color: {{ color_type }}"></div>&nbsp;{{ notes.0.get_color_display }} Notes:</div>
+        <ul class="list-decimal list-inside">
+            {% for note in notes %}
+                <li>{{ note.note }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

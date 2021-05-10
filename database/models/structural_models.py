@@ -44,20 +44,10 @@ class Preference(models.Model):
     """
     weight = models.BooleanField()
 
-    """
-    Possible Preference Expressions:
-        - Course / Other Course
-            - Course overlaps and pre/co requisites are expressed this way.
-        - Course / User 
-            - Does a teacher / student want to teach / take the class.
-        - Course / Timeblock
-            - A course should / should not be offered during a timeblock.
-        - User (Teacher) / Timeblock
-            - The given user needs to / can't teach a class during the given timeblock.        
-    """
     limit = models.Q(app_label='database', model='course') | \
             models.Q(app_label='accounts', model='baseuser') | \
-            models.Q(app_label='database', model='timeblock')
+            models.Q(app_label='database', model='timeblock') | \
+            models.Q(app_label='database', model='section')
 
     object_1_content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True, blank=True,
                                               related_name="object_1_content_type", limit_choices_to=limit)

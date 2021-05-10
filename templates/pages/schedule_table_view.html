@@ -42,8 +42,7 @@
                     </label>
                 </li>
                 {% endfor %}
-                <button class="btn-cancel"
-                        @click="checked=!checked">
+                <button class="btn-cancel" id="js_clear_all_btn"                      >
                     Check/Uncheck All
                 </button>
             </ul>
@@ -109,5 +108,5 @@
 {% endblock %}
 
 {% block extra_js %}
-<script src="{% static 'js/schedule-filter.js' %}"></script>
+    <script src="{% static 'js/schedule-filter.js' %}" defer></script>
 {% endblock %}

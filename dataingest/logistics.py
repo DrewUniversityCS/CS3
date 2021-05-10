@@ -4,7 +4,7 @@ from csv import DictReader, writer
 from django.contrib.contenttypes.models import ContentType
 
 from accounts.models import BaseUser
-from database.models.schedule_models import Course, Timeblock
+from database.models.schedule_models import Course, Timeblock, Section
 from database.models.structural_models import Preference, Department
 from database.models.user_models import Student, Teacher
 
@@ -79,12 +79,21 @@ def create_preferences(file):
         elif row['object_1_content_type'] == 'teacher':
             obj_1_id = BaseUser.objects.get(email=row['object_1_natural_id']).id
             row['object_1_content_type'] = 'baseuser'  # so we get the appropriate content type later
+        elif row['object_1_content_type'] == 'timeblock':
+            obj_1_id = Timeblock.objects.get(block_id=row['object_1_natural_id']).id
+        elif row['object_1_content_type'] == 'section':
+            obj_1_id = Section.objects.get(section_id=row['object_1_natural_id']).id
 
         obj_2_id = -1
         if row['object_2_content_type'] == 'course':
             obj_2_id = Course.objects.get(name=row['object_2_natural_id']).id
+        elif row['object_2_content_type'] == 'teacher':
+            obj_2_id = BaseUser.objects.get(email=row['object_2_natural_id']).id
+            row['object_2_content_type'] = 'baseuser'  # so we get the appropriate content type later
         elif row['object_2_content_type'] == 'timeblock':
             obj_2_id = Timeblock.objects.get(block_id=row['object_2_natural_id']).id
+        elif row['object_2_content_type'] == 'section':
+            obj_2_id = Section.objects.get(section_id=row['object_2_natural_id']).id
 
         shipback.append(Preference(
             weight=row["weight"],
