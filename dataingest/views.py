@@ -143,7 +143,7 @@ def download_as_csv(request):
                 object_1_natural_id = Timeblock.objects.get(id=dict['object_1_id']).block_id
                 dict['object_1_content_type'] = 'timeblock'
             elif dict['object_1_content_type'] == ['database', 'section']:
-                object_1_natural_id = Section.objects.get(id=dict['object_1_id']).id
+                object_1_natural_id = Section.objects.get(id=dict['object_1_id']).section_id
                 dict['object_1_content_type'] = 'section'
 
             object_2_natural_id = ''
@@ -151,14 +151,13 @@ def download_as_csv(request):
                 object_2_natural_id = Course.objects.get(id=dict['object_2_id']).name
                 dict['object_2_content_type'] = 'course'
             elif dict['object_2_content_type'] == ['accounts', 'baseuser']:
-                print(dict['object_2_id'])
                 object_2_natural_id = BaseUser.objects.get(id=dict['object_2_id']).email
                 dict['object_2_content_type'] = 'teacher'
             elif dict['object_2_content_type'] == ['database', 'timeblock']:
                 object_2_natural_id = Timeblock.objects.get(id=dict['object_2_id']).block_id
                 dict['object_2_content_type'] = 'timeblock'
             elif dict['object_2_content_type'] == ['database', 'section']:
-                object_2_natural_id = Section.objects.get(id=dict['object_2_id']).id
+                object_2_natural_id = Section.objects.get(id=dict['object_2_id']).section_id
                 dict['object_2_content_type'] = 'section'
 
             del dict['object_1_id']

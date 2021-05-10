@@ -4,7 +4,10 @@
 
 {% block content %}
     <div class="w-full min-h-screen text-center">
-        <form method="post" class="mx-auto w-96">
+        <form method="post" class="p-8 mx-auto bg-white w-96 rounded-2xl">
+            <div class="py-4 mb-10 text-2xl font-bold text-blue-500">
+                Bulk Section Creation
+            </div>
             {% csrf_token %}
             {{ form|crispy }}
             <div class="mt-12">
