@@ -12,7 +12,7 @@ from database.models.schedule_models import Section, Timeblock, SectionNote
 from database.models.structural_models import Preference
 from schedule.forms import CheckScheduleForm, ScheduleSectionEditForm, SectionNoteForm
 from schedule.functions import check_section_timeblock_preference, check_user_timeblock_preference, \
-    check_user_course_preference
+    check_user_course_preference, check_user_section_preference
 
 
 class ScheduleRedirectView(LoginRequiredMixin, FormView):
@@ -53,6 +53,7 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
         course_course_preference = []
         section_timeblock_preference = []
         user_course_preference = []
+        user_section_preference = []
         user_timeblock_preference = []
 
         for preference in preferences:
@@ -67,6 +68,8 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
                     user_course_preference.append(preference)
                 elif preference.object_2_content_type.model == 'timeblock':
                     user_timeblock_preference.append(preference)
+                elif preference.object_2_content_type.model == 'section':
+                    user_section_preference.append(preference)
 
         sections_dict = {}
         sections_without_timeblock = []
@@ -137,6 +140,7 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
 
             if section1.primary_instructor:
                 check_user_course_preference(section1, user_course_preference, sections_dict)
+                check_user_section_preference(section1, user_section_preference, sections_dict)
 
             if section1.timeblock:
                 check_section_timeblock_preference(section1, section_timeblock_preference, sections_dict)
