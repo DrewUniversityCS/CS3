@@ -5,6 +5,7 @@ from collections import defaultdict
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.utils.http import urlencode
 from django.views.generic import FormView, TemplateView, CreateView
 
 from database.models.schedule_models import Section, Timeblock, SectionNote
@@ -193,13 +194,15 @@ class ScheduleSectionEditView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         form.save()
-        return HttpResponseRedirect(reverse(
-            'schedule:schedule-table-view',
-            kwargs={
-                'schedule_id': self.kwargs['schedule_id'],
-                'preference_set_id': self.kwargs['preference_set_id']
-            }
-        ))
+        return HttpResponseRedirect(
+            reverse(
+                'schedule:schedule-table-view',
+                kwargs={
+                    'schedule_id': self.kwargs['schedule_id'],
+                    'preference_set_id': self.kwargs['preference_set_id']
+                }
+            ) + f'?showsections={self.request.GET.get("showsections", "")}'
+        )
 
 
 class SectionNoteListView(LoginRequiredMixin, TemplateView):

@@ -1,10 +1,35 @@
+const params = new URLSearchParams(window.location.search)
+var showSections = params.get('showsections') ? params.get('showsections').split(',') : []
+
+for(var i=0; i<showSections.length; i++) {
+    if(showSections[i]) {
+        var sectionFilter = document.getElementById(showSections[i]);
+        sectionFilter.checked = false;
+        document.querySelectorAll(`.js_section_${showSections[i]}`).forEach(item => {
+            item.style.display = 'none';
+        })
+    }
+}
+
 document.querySelectorAll('.js_session_filter').forEach(item => {
   item.addEventListener('change', event => {
     document.querySelectorAll(`.js_section_${event.target.id}`).forEach(item => {
-        item.style.display = event.target.checked ? 'block' : 'none'
+        item.style.display = event.target.checked ? 'block' : 'none';
+        var sections = document.querySelectorAll('.js_session_filter');
+        var i;
+        var str=[];
+
+        for(i=0; i<sections.length; i++) {
+
+            if(!sections[i].checked){
+                str.push(sections[i].id)
+            }
+        }
+        history.pushState({}, '', '?showsections='+str.toString())
     })
   })
 })
+
 
 function loadEditForm(url, selector) {
     var formDivs = document.querySelectorAll(selector)
@@ -66,7 +91,7 @@ function CreateSectionNote(event, url, color_note_list_selector, color_dot_list_
             console.log(restext);
             var formDivs = document.getElementsByClassName(color_note_list_selector.replace('<<color_type>>', obj['color'].slice(1)))
             // check if the divs exists, if not make them
-            debugger;
+
             if (formDivs.length){
                 for(i=0; i<formDivs.length; i++) {
                     formDivs[i].innerHTML = restext;
@@ -81,4 +106,12 @@ function CreateSectionNote(event, url, color_note_list_selector, color_dot_list_
             event.target.reset();
         }
     );
+}
+
+function editSection(e) {
+    console.log(e);
+    e.preventDefault();
+    console.log(e.target.action+window.location.search)
+    e.target.action = e.target.action+window.location.search
+    e.target.submit()
 }
