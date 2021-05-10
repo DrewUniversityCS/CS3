@@ -59,30 +59,30 @@ def check_user_course_preference(section, preferences, sections_dict):
                     )
 
 
-def check_course_timeblock_preference(section, preferences, sections_dict):
+def check_section_timeblock_preference(section, preferences, sections_dict):
     for preference in preferences:
-        if preference.object_1 == section.course:
+        if preference.object_1 == section:
             color = sections_dict[section.id].get('color')
             if preference.weight:
                 if section.timeblock == preference.object_2:
-                    # If the preference is positive, and the course is at the specified timeblock, highlight it
+                    # If the preference is positive, and the section is at the specified timeblock, highlight it
                     # green.
                     if color != 'red':
                         sections_dict[section.id]['color'] = 'green'
                     sections_dict[section.id]['positive_points'].append(
-                        'preference is positive, and the course is at the specified timeblock'
+                        'Preference is positive, and the section is at the specified timeblock'
                     )
                 else:
-                    # If the preference is positive, and the course is not at the specified timeblock, highlight
+                    # If the preference is positive, and the section is not at the specified timeblock, highlight
                     # it red.
                     sections_dict[section.id]['color'] = 'red'
                     sections_dict[section.id]['negative_points'].append(
-                        'the course is not at the specified timeblock'
+                        'The section is not at the specified timeblock'
                     )
             else:
-                # If the preference is negative, and the course is at the specified timeblock, highlight it red.
+                # If the preference is negative, and the section is at the specified timeblock, highlight it red.
                 if section.timeblock == preference.object_2:
                     sections_dict[section.id]['color'] = 'red'
                     sections_dict[section.id]['negative_points'].append(
-                        'preference is negative, and the course is at the specified timeblock'
+                        'Preference is negative, and the section is at the specified timeblock'
                     )

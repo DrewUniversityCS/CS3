@@ -11,7 +11,7 @@ from django.views.generic import FormView, TemplateView, CreateView
 from database.models.schedule_models import Section, Timeblock, SectionNote
 from database.models.structural_models import Preference
 from schedule.forms import CheckScheduleForm, ScheduleSectionEditForm, SectionNoteForm
-from schedule.functions import check_course_timeblock_preference, check_user_timeblock_preference, \
+from schedule.functions import check_section_timeblock_preference, check_user_timeblock_preference, \
     check_user_course_preference
 
 
@@ -51,7 +51,7 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
         preferences = Preference.objects.filter(sets__set__id=kwargs.get('preference_set_id'))
 
         course_course_preference = []
-        course_timeblock_preference = []
+        section_timeblock_preference = []
         user_course_preference = []
         user_timeblock_preference = []
 
@@ -59,8 +59,9 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
             if preference.object_1_content_type.model == 'course':
                 if preference.object_2_content_type.model == 'course':
                     course_course_preference.append(preference)
-                elif preference.object_2_content_type.model == 'timeblock':
-                    course_timeblock_preference.append(preference)
+            if preference.object_1_content_type.model == 'section':
+                if preference.object_2_content_type.model == 'timeblock':
+                    section_timeblock_preference.append(preference)
             elif preference.object_1_content_type.model == 'baseuser':
                 if preference.object_2_content_type.model == 'course':
                     user_course_preference.append(preference)
@@ -138,7 +139,7 @@ class ScheduleView(LoginRequiredMixin, TemplateView):
                 check_user_course_preference(section1, user_course_preference, sections_dict)
 
             if section1.timeblock:
-                check_course_timeblock_preference(section1, course_timeblock_preference, sections_dict)
+                check_section_timeblock_preference(section1, section_timeblock_preference, sections_dict)
 
             if section1.timeblock and section1.primary_instructor:
                 check_user_timeblock_preference(section1, user_timeblock_preference, sections_dict)
