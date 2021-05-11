@@ -310,11 +310,17 @@ class CreatePreferenceView(LoginRequiredMixin, FormView):
     success_url = '/crud/preferences'
 
     def form_valid(self, form):
+        obj_1_id = form.cleaned_data['object_1'].id
+        obj_1_ct = form.cleaned_data['object_1_type']
+        obj_2_id = form.cleaned_data['object_2'].id
+        obj_2_ct = form.cleaned_data['object_2_type']
+        weight = form.cleaned_data['weight']
+
         Preference.objects.create(
-            object_1_id=form.data['object_1'][0],
-            object_1_content_type=form.cleaned_data['object_1_type'],
-            object_2_id=form.data['object_2'][0],
-            object_2_content_type=form.cleaned_data['object_2_type'],
-            weight=form.cleaned_data['weight']
+            object_1_id=obj_1_id,
+            object_1_content_type=obj_1_ct,
+            object_2_id=obj_2_id,
+            object_2_content_type=obj_2_ct,
+            weight=weight
         ).save()
         return HttpResponseRedirect(self.get_success_url())
