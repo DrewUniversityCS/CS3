@@ -18,10 +18,7 @@
 <script src="{% static 'js/search.js' %}"></script>
 
 <div class="flex flex-col">
-    <div class="py-12 text-xl text-center text-gray-800">
-        Database Items
-    </div>
-    <div class="flex rounded-lg mb-8">
+    <div class="flex rounded-lg bg-gray-200 mt-12">
         <input id="look-up-val-tb" class="p-2 focus:outline-none" type="text" placeholder="Look Up...">
         <button class="bg-white w-auto flex justify-end items-center text-blue-500 p-2 hover:text-blue-400"
                 onclick="scrollToRow(document.getElementById('look-up-val-tb').value, 'table')"
@@ -44,7 +41,7 @@
         </tr>
         </thead>
         <tbody class="flex flex-col items-center justify-start w-full overflow-y-scroll text-sm font-light text-gray-600"
-               style="height: 50vh;">
+               style="height: 60vh;">
         {% if all_objects %}
             {% if render_type %}
                 {% for object in all_objects %}

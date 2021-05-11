@@ -5,7 +5,7 @@
 {% block title %}Calendar{% endblock title %}
 {% block content %}
     <div class="px-8">
-        <div @click.away="open = false" class="relative" x-data="{ open: false }">
+        <div @click.away="open = false" class="relative" x-data="{ open: false,checked: true}">
             <button @click="open = !open"
                     class="flex flex-row items-center py-2 px-5 m-1 text-lg font-semibold text-right bg-gray-400 rounded-md hover:text-gray-200 focus:text-gray-100 focus:outline-none focus:shadow-outline ml-auto">
                 <span>Filter</span>
@@ -34,7 +34,7 @@
                             <label for="{{ section.id }}" class="flex items-center cursor-pointer">
                                 <div class="relative">
                                     <input class="js_session_filter form-checkbox h-4 w-4 text-gray-600" type="checkbox"
-                                           id="{{ section.id }}" checked>
+                                           id="{{ section.id }}" x-bind:checked="checked">
                                 </div>
                                 <div class="ml-1 text-gray-700 font-medium">
                                     {{ section }}
@@ -42,9 +42,13 @@
                             </label>
                         </li>
                     {% endfor %}
+                    <button class="btn-cancel" id="js_clear_all_btn">
+                        Check/Uncheck All
+                    </button>
                 </ul>
             </div>
         </div>
+
 
         <table class="w-full table-auto bg-gray-300">
             <thead>
@@ -104,5 +108,5 @@
 {% endblock %}
 
 {% block extra_js %}
-    <script src="{% static 'js/schedule-filter.js' %}"></script>
+    <script src="{% static 'js/schedule-filter.js' %}" defer></script>
 {% endblock %}

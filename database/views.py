@@ -116,13 +116,24 @@ class CrudUpdateView(LoginRequiredMixin, DynamicModelMixin, UpdateView):
         context = super(CrudUpdateView, self).get_context_data(**kwargs)
         if self.dynamic_model in [Student, Teacher]:
             user_object = BaseUser.objects.filter(pk=self.object.user_id)[0]
-            context['form'] = self.get_form_class()(
-                instance=self.object,
-                initial={
-                    'first_name': user_object.first_name,
-                    'last_name': user_object.last_name,
-                    'email': user_object.email
-                })
+            if self.dynamic_model == Student:
+                context['form'] = self.get_form_class()(
+                    instance=self.object,
+                    initial={
+                        'first_name': user_object.first_name,
+                        'last_name': user_object.last_name,
+                        'email': user_object.email,
+                        'student_id': self.object.student_id,
+                        'class_standing': self.object.class_standing
+                    })
+            else:
+                context['form'] = self.get_form_class()(
+                    instance=self.object,
+                    initial={
+                        'first_name': user_object.first_name,
+                        'last_name': user_object.last_name,
+                        'email': user_object.email
+                    })
         return context
 
     def get_form_class(self):

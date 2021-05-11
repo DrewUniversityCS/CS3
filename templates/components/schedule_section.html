@@ -1,7 +1,7 @@
 {% load tags %}
 
 <div
-        class="bg-gray-400 bg-{{ sections|get_item:section.id|get_item:'color' }}-400 m-2 p-3 rounded-md js_section_{{ section.id }}"
+        class="bg-gray-400 bg-{{ sections|get_item:section.id|get_item:'color' }}-500 m-2 p-3 rounded-md js_section_{{ section.id }}"
 >
     <div class="">
         <div class="pb-2">
@@ -9,7 +9,7 @@
             {% include "components/section_edit_details.html" %}
         </div>
 
-        <div class="flex border-t border-gray-100 pt-2 items-center justify-between">
+        <div class="flex border-t border-gray-100 pt-2 items-center justify-between .js_color_dot_{{ section.id }}">
             <div @click.away="open = false" class="relative" x-data="{ open: false }">
                 {% url "schedule:section-note-create" section.id as section_note_create_form %}
                 <button @click="open = !open"
@@ -24,7 +24,7 @@
                      x-transition:leave-start="transform opacity-100 scale-100"
                      x-transition:leave-end="transform opacity-0 scale-95"
                      class="absolute right-0 origin-top-right rounded-md shadow-lg bg-white p-4 w-72 z-50">
-                    <form onsubmit="CreateSectionNote(event, '{{ section_note_create_form }}', '.js_note_<<color_type>>_section_{{ section.id }}')">
+                    <form onsubmit="CreateSectionNote(event, '{{ section_note_create_form }}', '.js_note_<<color_type>>_section_{{ section.id }}', '.js_color_dot_{{ section.id }}')">
                         {% csrf_token %}
                         <div class="js_note_create_section_{{ section.id }}"><img
                                 src="https://raw.githubusercontent.com/Codelessly/FlutterLoadingGIFs/master/packages/cupertino_activity_indicator.gif"
@@ -38,9 +38,10 @@
                     </form>
                 </div>
             </div>
-            {% include 'components/note_list.html' with color_type=1 %} {# 1: Red #}
-            {% include 'components/note_list.html' with color_type=2 %} {# 1: Green #}
-            {% include 'components/note_list.html' with color_type=3 %} {# 1: Blue #}
+            {% regroup section.notes.all by color as color_list %}
+            {% for color in color_list %}
+                {% include 'components/note_list.html' with color_type=color.grouper notes=color.list %}
+            {% endfor %}
         </div>
     </div>
 </div>

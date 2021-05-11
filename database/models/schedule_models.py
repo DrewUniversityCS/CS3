@@ -40,7 +40,7 @@ class Section(models.Model):
     An instantiated class offering. Has a particular time and space during which it happens.
     """
     course = models.ForeignKey("database.Course", on_delete=models.CASCADE, related_name="sections+")
-    section_id = models.CharField(max_length=4)
+    section_id = models.CharField(max_length=4, unique=True)
     primary_instructor = models.ForeignKey("database.Teacher", on_delete=models.CASCADE,
                                            related_name="sections taught+", null=True, blank=True)
     other_instructor = models.ForeignKey("database.Teacher", on_delete=models.CASCADE,
@@ -64,21 +64,34 @@ class Section(models.Model):
         return self.course.name + " " + self.course.department.abbreviation + "-" + str(self.course.number) \
                + " Section " + self.section_id
 
+    def natural_key(self):
+        return self.course.name + " " + self.section_id
+
 
 class SectionNote(models.Model):
-    COLOR_RED = 1
-    COLOR_GREEN = 2
-    COLOR_BLUE = 3
 
     COLOR_CHOICES = [
-        (COLOR_RED, 'Red'),
-        (COLOR_GREEN, 'Green'),
-        (COLOR_BLUE, 'Blue'),
+        ('#FFFFFF', 'White'),
+        ('#C0C0C0', 'Silver'),
+        ('#808080', 'Gray'),
+        ('#000000', 'Black'),
+        ('#FF0000', 'Red'),
+        ('#800000', 'Maroon'),
+        ('#FFFF00', 'Yellow'),
+        ('#808000', 'Olive'),
+        ('#00FF00', 'Lime'),
+        ('#008000', 'Green'),
+        ('#00FFFF', 'Aqua'),
+        ('#008080', 'Teal'),
+        ('#0000FF', 'Blue'),
+        ('#000080', 'Navy'),
+        ('#FF00FF', 'Fuchsia'),
+        ('#800080', 'Purple'),
     ]
 
     section = models.ForeignKey(Section, on_delete=models.CASCADE, related_name='notes')
     note = models.TextField()
-    color = models.SmallIntegerField(choices=COLOR_CHOICES)
+    color = models.CharField(choices=COLOR_CHOICES, max_length=7)
 
     def __str__(self):
         return f'{self.section}-{self.get_color_display()}-{(self.note[:20] + "..") if len(self.note) > 20 else self.note}'

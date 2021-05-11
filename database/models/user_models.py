@@ -11,13 +11,13 @@ class Student(models.Model):
     The student data model.
     """
     user = models.ForeignKey("accounts.BaseUser", on_delete=models.CASCADE, blank=False, null=False)
-    student_id = models.IntegerField(unique=True, validators=[student_id_validator])
-    class_standing = models.CharField(max_length=2, choices=YEAR_IN_SCHOOL_CHOICES)
+    student_id = models.IntegerField(unique=True, validators=[student_id_validator], null=True, blank=True)
+    class_standing = models.CharField(max_length=2, choices=YEAR_IN_SCHOOL_CHOICES, null=True, blank=True)
 
     sets = GenericRelation(SetMembership, related_query_name='student')
 
     def __str__(self):
-        return self.user.get_full_name() + ', ' + self.class_standing + ' : ' + str(self.student_id)
+        return self.user.email
 
     def is_upperclassman(self):
         return self.class_standing in {YEAR_IN_SCHOOL_CHOICES.JUNIOR, YEAR_IN_SCHOOL_CHOICES.SENIOR}
